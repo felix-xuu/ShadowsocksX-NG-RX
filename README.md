@@ -1,6 +1,8 @@
 # ShadowsocksX-NG-RX
 
-Current version is 2.0.0
+This project just toy for self.
+
+`Current version is 2.0.0`
 
 ## Release Note
 
