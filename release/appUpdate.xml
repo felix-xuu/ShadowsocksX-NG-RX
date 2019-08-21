@@ -13,7 +13,7 @@
             <sparkle:releaseNotesLink xml:lang="zh_CN">https://raw.githubusercontent.com/felix-xuu/ShadowsocksX-NG-RX/master/release/release2.0.0-zh.html</sparkle:releaseNotesLink>
             <pubDate>Wed, 21 Aug 2019 19:05:37 +0800</pubDate>
             <enclosure url="https://github.com/felix-xuu/ShadowsocksX-NG-RX/releases/download/v2.0.0/ShadowsocksX-NG-RX.app.zip" sparkle:version="2.0.0"
-                length="11321465" type="application/octet-stream"/>
+                length="11321428" type="application/octet-stream"/>
         </item>
     </channel>
 </rss>
