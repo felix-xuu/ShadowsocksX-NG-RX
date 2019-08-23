@@ -83,8 +83,10 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
     }
     
     @IBAction func onOk(_ sender: NSButton) {
-        UserDefaults.standard.set(loadBalanceGroup, forKey: UserKeys.LoadbalanceGroup)
-        UserDefaults.standard.set(loadBalanceProfiles, forKey: UserKeys.LoadbalanceProfiles)
+        if loadBalanceGroup != nil {
+            UserDefaults.standard.set(ServerGroup.toDictionary(loadBalanceGroup!), forKey: UserKeys.LoadbalanceGroup)
+        }
+        UserDefaults.standard.set(ServerProfile.toDictionaries(loadBalanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
         if loadBalanceGroup == nil && UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
             UserDefaults.standard.set(false, forKey: UserKeys.EnableLoadbalance)
             StopHaproxy()
