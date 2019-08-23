@@ -58,6 +58,6 @@
 	<key>NSPrincipalClass</key>
 	<string>SWBApplication</string>
 	<key>SUFeedURL</key>
-	<string>https://raw.githubusercontent.com/felix-xuu/ShadowsocksX-NG-RX/master/release/appUpdate.xml</string>
+	<string>https://felix-xuu.github.io/ShadowsocksX-NG-RX/release/appUpdate.xml</string>
 </dict>
 </plist>
