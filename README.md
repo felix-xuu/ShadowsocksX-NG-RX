@@ -2,9 +2,13 @@
 
 This project just toy for self.
 
-`Current version is 2.0.0`
+`Current version is 2.0.1`
 
 ## Release Note
+
+### 2.0.1
+
+- Fix bug for save config
 
 ### 2.0.0
 
