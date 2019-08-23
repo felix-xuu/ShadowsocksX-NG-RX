@@ -3,17 +3,17 @@
     <channel>
         <title>ShadowsocksX-NG-RX Changelog</title>
         <link>
-        https://raw.githubusercontent.com/felix-xuu/ShadowsocksX-NG-RX/master/release/appUpdate.xml
+        https://felix-xuu.github.io/ShadowsocksX-NG-RX/release/appUpdate.xml
         </link>
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
             <title>Version 2.0.1</title>
-            <sparkle:releaseNotesLink>https://raw.githubusercontent.com/felix-xuu/ShadowsocksX-NG-RX/master/release/release2.0.1.html</sparkle:releaseNotesLink>
-            <sparkle:releaseNotesLink xml:lang="zh_CN">https://raw.githubusercontent.com/felix-xuu/ShadowsocksX-NG-RX/master/release/release2.0.1-zh.html</sparkle:releaseNotesLink>
-            <pubDate>Wed, 21 Aug 2019 19:05:37 +0800</pubDate>
+            <sparkle:releaseNotesLink>https://felix-xuu.github.io/ShadowsocksX-NG-RX/release/release2.0.1.html</sparkle:releaseNotesLink>
+            <sparkle:releaseNotesLink xml:lang="zh_CN">https://felix-xuu.github.io/ShadowsocksX-NG-RX/release/release2.0.1-zh.html</sparkle:releaseNotesLink>
+            <pubDate>Fri, 23 Aug 2019 13:35:48 +0800</pubDate>
             <enclosure url="https://github.com/felix-xuu/ShadowsocksX-NG-RX/releases/download/v2.0.1/ShadowsocksX-NG-RX.app.zip" sparkle:version="2.0.1"
-                length="11321401" type="application/octet-stream"/>
+                length="11321224" type="application/octet-stream"/>
         </item>
     </channel>
 </rss>
