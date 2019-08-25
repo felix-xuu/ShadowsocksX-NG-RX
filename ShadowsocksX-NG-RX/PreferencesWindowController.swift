@@ -242,13 +242,14 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
                     removedActiveProfile = true
                 }
             }
-            ServerGroupManager.serverGroups[toDeleteIndex - deleteCount].serverProfiles = []
-            ServerGroupManager.serverGroups.remove(at: toDeleteIndex - deleteCount)
-            groupsTableView.removeRows(at: IndexSet(integer: toDeleteIndex - deleteCount), withAnimation: .effectFade)
             if loadBalanceGroup != nil && loadBalanceGroup?.groupId == ServerGroupManager.serverGroups[toDeleteIndex - deleteCount].groupId {
                 loadBalanceGroup = nil
                 loadBalanceProfiles = []
+                loadBalanceProfilesChanged = true
             }
+            ServerGroupManager.serverGroups[toDeleteIndex - deleteCount].serverProfiles = []
+            ServerGroupManager.serverGroups.remove(at: toDeleteIndex - deleteCount)
+            groupsTableView.removeRows(at: IndexSet(integer: toDeleteIndex - deleteCount), withAnimation: .effectFade)
             deleteCount += 1
         }
         groupsTableView.endUpdates()
@@ -283,27 +284,43 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     @IBAction func ok(_ sender: NSButton) {
         if loadBalanceGroup != nil {
             UserDefaults.standard.set(ServerGroup.toDictionary(loadBalanceGroup!), forKey: UserKeys.LoadbalanceGroup)
+        } else {
+            UserDefaults.standard.removeObject(forKey: UserKeys.LoadbalanceGroup)
         }
         UserDefaults.standard.set(ServerProfile.toDictionaries(loadBalanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
-        if loadBalanceGroup == nil && UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
+        ServerGroupManager.save()
+        (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
+        
+        var updateMenu = false
+        if loadBalanceGroup == nil {
             UserDefaults.standard.set(false, forKey: UserKeys.EnableLoadbalance)
             StopHaproxy()
-            (NSApplication.shared.delegate as! AppDelegate).updateSSAndPrivoxyServices()
-            (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
-            (NSApplication.shared.delegate as! AppDelegate).updateCommonMenuItemState()
-        } else if loadBalanceGroup != nil && UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) && loadBalanceProfilesChanged {
-            LoadBalance.enableLoadBalance()
+            updateMenu = true
+        } else {
+            if loadBalanceProfiles.isEmpty {
+                loadBalanceGroup = nil
+                UserDefaults.standard.removeObject(forKey: UserKeys.LoadbalanceGroup)
+                UserDefaults.standard.set(false, forKey: UserKeys.EnableLoadbalance)
+                StopHaproxy()
+                updateMenu = true
+            } else if loadBalanceProfilesChanged {
+                LoadBalance.enableLoadBalance()
+            }
         }
-        ServerGroupManager.save()
         if removedActiveProfile {
             UserDefaults.standard.removeObject(forKey: UserKeys.ActiveServerProfile)
+            ServerProfileManager.activeProfile = nil
             removeSSLocalConfFile()
             StopSSLocal()
             StopPrivoxy()
+            (NSApplication.shared.delegate as! AppDelegate).updateSSAndPrivoxyServices()
+            updateMenu = true
+        }
+        if updateMenu {
             (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
+            (NSApplication.shared.delegate as! AppDelegate).updateCommonMenuItemState()
         }
         window?.performClose(self)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIFY_SERVER_PROFILES_CHANGED), object: nil)
     }
     
     @IBAction func cancel(_ sender: NSButton) {

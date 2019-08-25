@@ -151,8 +151,6 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
         SubscribeTableView.beginUpdates()
         for toDeleteIndex in SubscribeTableView.selectedRowIndexes {
             ServerGroupManager.serverGroups.removeAll(where: {$0.groupId == subscriptions[toDeleteIndex - deleteCount].groupId})
-            subscriptions.remove(at: toDeleteIndex - deleteCount)
-            SubscribeTableView.removeRows(at: IndexSet(integer: toDeleteIndex - deleteCount), withAnimation: .effectFade)
             if let p = ServerProfileManager.activeProfile {
                 if p.groupId == subscriptions[toDeleteIndex - deleteCount].groupId {
                     ServerProfileManager.activeProfile = nil
@@ -162,6 +160,8 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
                 loadBalanceGroup = nil
                 loadBalanceProfiles = []
             }
+            subscriptions.remove(at: toDeleteIndex - deleteCount)
+            SubscribeTableView.removeRows(at: IndexSet(integer: toDeleteIndex - deleteCount), withAnimation: .effectFade)
             deleteCount += 1
         }
         SubscribeTableView.scrollRowToVisible(index == 0 ? 0 : index - 1)
