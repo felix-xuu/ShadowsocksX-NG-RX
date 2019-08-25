@@ -1,8 +1,14 @@
 # ShadowsocksX-NG-RX
 
-Current version is 2.0.1
+Current version is 2.0.2
 
 ## Release Note
+
+### 2.0.2
+
+- Fix localization init
+- Some advance
+- Fix bugs
 
 ### 2.0.1
 
