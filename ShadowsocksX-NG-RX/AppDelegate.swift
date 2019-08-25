@@ -66,7 +66,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.AutoUpdateSubscribe: false,
             UserKeys.ShowSpeed: false,
             UserKeys.LaunchAtLogin: false,
-            UserKeys.Language: Locale.current.identifier,
+            UserKeys.Language: "en",
             UserKeys.EnableLoadbalance: false,
             UserKeys.LoadbalanceEnableAllNodes: true,
             ])

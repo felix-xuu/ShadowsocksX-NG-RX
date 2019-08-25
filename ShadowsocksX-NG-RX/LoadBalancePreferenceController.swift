@@ -40,9 +40,13 @@ class LoadBalancePreferenceController: NSWindowController, NSWindowDelegate, NST
         }
         if loadbalanceGroup == nil {
             subscriptionsBox.selectItem(at: 0)
+            loadbalanceGroup = subscriptions[0]
         }
         strategyBox.addItems(withObjectValues: LoadBalance.strategies.map({$0.1}))
-        strategyBox.selectItem(at: 0)
+        if loadbalanceStrategy == nil {
+            strategyBox.selectItem(at: 0)
+            loadbalanceStrategy = LoadBalance.strategies[0].0
+        }
         if UserDefaults.standard.bool(forKey: UserKeys.LoadbalanceEnableAllNodes) {
             allNodesButton.state = NSControl.StateValue(rawValue: 1)
             nodesTableView.isEnabled = false
@@ -101,7 +105,15 @@ class LoadBalancePreferenceController: NSWindowController, NSWindowDelegate, NST
         defaults.set(allNodesButton.state.rawValue == 1 ? true : false, forKey: UserKeys.LoadbalanceEnableAllNodes)
         defaults.set(loadbalanceStrategy, forKey: UserKeys.LoadbalanceStrategy)
         if defaults.bool(forKey: UserKeys.EnableLoadbalance) {
-            LoadBalance.enableLoadBalance()
+            if loadbalanceProfiles.isEmpty {
+                UserDefaults.standard.set(false, forKey: UserKeys.EnableLoadbalance)
+                StopHaproxy()
+                (NSApplication.shared.delegate as! AppDelegate).updateSSAndPrivoxyServices()
+                (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
+                (NSApplication.shared.delegate as! AppDelegate).updateCommonMenuItemState()
+            } else {
+                LoadBalance.enableLoadBalance()
+            }
         }
         window?.performClose(self)
     }

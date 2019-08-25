@@ -153,6 +153,11 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
             ServerGroupManager.serverGroups.removeAll(where: {$0.groupId == subscriptions[toDeleteIndex - deleteCount].groupId})
             subscriptions.remove(at: toDeleteIndex - deleteCount)
             SubscribeTableView.removeRows(at: IndexSet(integer: toDeleteIndex - deleteCount), withAnimation: .effectFade)
+            if let p = ServerProfileManager.activeProfile {
+                if p.groupId == subscriptions[toDeleteIndex - deleteCount].groupId {
+                    ServerProfileManager.activeProfile = nil
+                }
+            }
             if loadBalanceGroup != nil && subscriptions[toDeleteIndex - deleteCount].groupId == loadBalanceGroup?.groupId {
                 loadBalanceGroup = nil
                 loadBalanceProfiles = []

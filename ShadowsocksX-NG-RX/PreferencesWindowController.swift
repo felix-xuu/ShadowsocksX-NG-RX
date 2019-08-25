@@ -289,6 +289,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
             UserDefaults.standard.set(false, forKey: UserKeys.EnableLoadbalance)
             StopHaproxy()
             (NSApplication.shared.delegate as! AppDelegate).updateSSAndPrivoxyServices()
+            (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
             (NSApplication.shared.delegate as! AppDelegate).updateCommonMenuItemState()
         } else if loadBalanceGroup != nil && UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) && loadBalanceProfilesChanged {
             LoadBalance.enableLoadBalance()
