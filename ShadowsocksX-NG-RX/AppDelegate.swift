@@ -153,6 +153,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         updateLanguageMenuItemState()
         // update localized menu
         updateLocalizedMenu()
+        updateServerMenuItemState()
     }
     
     func updateLanguageMenuItemState() {
