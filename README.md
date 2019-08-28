@@ -1,8 +1,12 @@
 # ShadowsocksX-NG-RX
 
-Current version is 2.0.2
+Current version is 2.0.3
 
 ## Release Note
+
+### 2.0.3
+
+- Show count of selected nodes for load balance
 
 ### 2.0.2
 

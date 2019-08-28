@@ -625,7 +625,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             statusMenu!.insertItem(separator, at: 2)
             statusMenu!.insertItem(withTitle: "Active Group: ".localized + LoadBalance.getLoadBalanceGroup()!.groupName, action: nil, keyEquivalent: "", at: 3).setAccessibilityIdentifier("active")
             
-            statusMenu!.insertItem(withTitle: "Load Balance - ".localized + LoadBalance.strategies.first(where: {$0.0 == UserDefaults.standard.string(forKey: UserKeys.LoadbalanceStrategy)})!.1, action: nil, keyEquivalent: "", at: 4).setAccessibilityIdentifier("active")
+            let nodesSelected = String(UserDefaults.standard.bool(forKey: UserKeys.LoadbalanceEnableAllNodes) ? LoadBalance.getLoadBalanceGroup()!.serverProfiles.count : LoadBalance.getLoadBalanceProfiles().count)
+            statusMenu!.insertItem(withTitle: "Load Balance - ".localized + LoadBalance.strategies.first(where: {$0.0 == UserDefaults.standard.string(forKey: UserKeys.LoadbalanceStrategy)})!.1 + " (\(nodesSelected)" + " Nodes Selected".localized + ")", action: nil, keyEquivalent: "", at: 4).setAccessibilityIdentifier("active")
         } else if let profile = ServerProfileManager.activeProfile {
             for item in serversMenuItem.submenu!.items {
                 if item.accessibilityIdentifier() == "server" {

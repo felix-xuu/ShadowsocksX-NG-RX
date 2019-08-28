@@ -452,15 +452,31 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     
     func getDataAtRow(_ tableView: NSTableView, _ index: Int) -> (String, Bool) {
         let activeProfile = ServerProfileManager.activeProfile
+        var isActive = false
         if tableView == groupsTableView {
-            return (ServerGroupManager.serverGroups[index].groupName, ServerGroupManager.serverGroups[index].groupId == activeProfile?.groupId)
+            if UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
+                isActive = LoadBalance.getLoadBalanceGroup()!.groupId == ServerGroupManager.serverGroups[index].groupId
+            } else if activeProfile != nil {
+                isActive = ServerGroupManager.serverGroups[index].groupId == activeProfile!.groupId
+            }
+            return (ServerGroupManager.serverGroups[index].groupName, isActive)
         } else {
             let profiles = ServerGroupManager.serverGroups[groupsTableView.selectedRow].serverProfiles
             if profiles.isEmpty {
                 return ("", false)
             }
             let profile = profiles[profiles.count >= index ? index : 0]
-            let isActive = activeProfile == profile
+            if UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
+                if UserDefaults.standard.bool(forKey: UserKeys.LoadbalanceEnableAllNodes) {
+                    if LoadBalance.getLoadBalanceGroup()!.groupId == profile.groupId {
+                        isActive = true
+                    }
+                } else {
+                    isActive = LoadBalance.getLoadBalanceProfiles().filter({$0.getValidId() == profile.getValidId()}).count > 0
+                }
+            } else if activeProfile != nil {
+                isActive = activeProfile?.getValidId() == profile.getValidId()
+            }
             return (profile.remark.isEmpty ? profile.serverHost : profile.remark, isActive)
         }
     }

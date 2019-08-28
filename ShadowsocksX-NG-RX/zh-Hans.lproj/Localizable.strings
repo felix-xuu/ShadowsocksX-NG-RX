@@ -147,3 +147,4 @@
 "Warning" = "警告";
 "Config your load balance preference firstly please" = "请先设置负载均衡配置";
 "Load Balance - " = "负载均衡 - ";
+" Nodes Selected" = " 节点选中";
