@@ -42,7 +42,7 @@ class LoadBalancePreferenceController: NSWindowController, NSWindowDelegate, NST
             subscriptionsBox.selectItem(at: 0)
             loadbalanceGroup = subscriptions[0]
         }
-        strategyBox.addItems(withObjectValues: LoadBalance.strategies.map({$0.1}))
+        strategyBox.addItems(withObjectValues: LoadBalance.strategies.map({$0.1.localized}))
         if loadbalanceStrategy == nil {
             strategyBox.selectItem(at: 0)
             loadbalanceStrategy = LoadBalance.strategies[0].0

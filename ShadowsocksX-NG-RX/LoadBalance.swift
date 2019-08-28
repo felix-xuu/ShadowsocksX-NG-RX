@@ -9,7 +9,7 @@
 import Foundation
 
 class LoadBalance: NSObject {
-    static let strategies: [(String, String)] = [("roundrobin", "In turns".localized), ("random", "Random".localized), ("leastconn", "Least conns priority".localized), ("first", "First available".localized)]
+    static let strategies: [(String, String)] = [("roundrobin", "In turns"), ("random", "Random"), ("leastconn", "Least conns priority"), ("first", "First available")]
     
     static func getLoadBalanceGroup() -> ServerGroup? {
         if let group = UserDefaults.standard.object(forKey: UserKeys.LoadbalanceGroup) {
