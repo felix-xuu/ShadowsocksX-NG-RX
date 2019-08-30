@@ -2,9 +2,14 @@
 
 This project just toy for self.
 
-`Current version is 2.0.2`
+`Current version is 2.0.3`
 
 ## Release Note
+
+### 2.0.3
+
+- Show count of selected nodes for load balance
+- Remove invalid nodes when update feed
 
 ### 2.0.2
 
