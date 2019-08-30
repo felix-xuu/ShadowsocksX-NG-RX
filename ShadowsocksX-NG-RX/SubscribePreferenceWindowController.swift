@@ -107,6 +107,7 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
             }
             DispatchQueue.main.async {
                 ServerGroupManager.save()
+                LoadBalance.cleanLoadBalanceAfterUpdateFeed()
                 (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
                 (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
                 SubscribeManager.autoUpdateCount = -1

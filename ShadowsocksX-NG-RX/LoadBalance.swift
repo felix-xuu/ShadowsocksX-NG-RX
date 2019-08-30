@@ -37,4 +37,17 @@ class LoadBalance: NSObject {
         (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
         ReloadConfHaproxy()
     }
+    
+    static func cleanLoadBalanceAfterUpdateFeed() {
+        let group = getLoadBalanceGroup()
+        var balanceProfiles = getLoadBalanceProfiles()
+        if group == nil {
+            return
+        }
+        for item in balanceProfiles {
+            if group!.serverProfiles.filter({$0.hashVal == item.hashVal}).isEmpty {
+                balanceProfiles.removeAll(where: {$0.hashVal == item.hashVal})
+            }
+        }
+    }
 }

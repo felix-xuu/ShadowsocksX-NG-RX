@@ -26,6 +26,7 @@ class SubscribeManager:NSObject{
             }
             DispatchQueue.main.async {
                 ServerGroupManager.save()
+                LoadBalance.cleanLoadBalanceAfterUpdateFeed()
                 (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
                 (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
                 queryCount = -1
