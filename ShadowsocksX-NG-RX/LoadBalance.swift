@@ -39,15 +39,26 @@ class LoadBalance: NSObject {
     }
     
     static func cleanLoadBalanceAfterUpdateFeed() {
-        let group = getLoadBalanceGroup()
+        var group = getLoadBalanceGroup()
         var balanceProfiles = getLoadBalanceProfiles()
         if group == nil {
             return
+        }
+        for item in ServerGroupManager.getSubscriptions() {
+            if item.groupId == group!.groupId {
+                group = item
+                UserDefaults.standard.set(ServerGroup.toDictionary(group!), forKey: UserKeys.LoadbalanceGroup)
+            }
         }
         for item in balanceProfiles {
             if group!.serverProfiles.filter({$0.hashVal == item.hashVal}).isEmpty {
                 balanceProfiles.removeAll(where: {$0.hashVal == item.hashVal})
             }
+        }
+        UserDefaults.standard.set(ServerProfile.toDictionaries(balanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
+        if UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
+            writeHaproxyConfFile()
+            ReloadConfHaproxy()
         }
     }
 }
