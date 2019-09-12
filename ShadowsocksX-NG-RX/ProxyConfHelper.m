@@ -177,7 +177,7 @@ GCDWebServer *webServer = nil;
     ];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString * address = [defaults stringForKey:UserKeys.PacServer_ListenAddress];
-    int port = (short)[defaults integerForKey:UserKeys.PacServer_ListenPort];
+    int port = (int)[defaults integerForKey:UserKeys.PacServer_ListenPort];
 
     [webServer startWithOptions:@{@"BindToLocalhost":@YES, @"Port":@(port)} error:nil];
 

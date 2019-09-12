@@ -27,6 +27,11 @@ class SubscribeManager:NSObject{
             DispatchQueue.main.async {
                 ServerGroupManager.save()
                 LoadBalance.cleanLoadBalanceAfterUpdateFeed()
+                if let profile = ServerProfileManager.activeProfile {
+                    if ServerGroupManager.getServerGroupByGroupId(profile.groupId)?.serverProfiles.first(where: {$0.getValidId() == profile.getValidId()}) == nil {
+                        ServerProfileManager.setActiveProfile(nil)
+                    }
+                }
                 (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
                 (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
                 queryCount = -1

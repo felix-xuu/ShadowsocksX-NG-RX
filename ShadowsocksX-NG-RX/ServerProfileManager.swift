@@ -22,9 +22,13 @@ class ServerProfileManager: NSObject {
         NSLog("Server manager init")
     }
     
-    static func setActiveProfile(_ profile: ServerProfile) {
+    static func setActiveProfile(_ profile: ServerProfile?) {
         activeProfile = profile
-        UserDefaults.standard.set(ServerProfile.toDictionary(profile), forKey: UserKeys.ActiveServerProfile)
+        if profile == nil {
+            UserDefaults.standard.removeObject(forKey: UserKeys.ActiveServerProfile)
+        } else {
+            UserDefaults.standard.set(ServerProfile.toDictionary(profile!), forKey: UserKeys.ActiveServerProfile)
+        }
     }
     
     static func getActiveProfileId() -> String {
