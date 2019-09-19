@@ -291,7 +291,7 @@ func generateHaproxyLauchAgentPlist() {
         try! fileMgr.createDirectory(atPath: launchAgentDirPath, withIntermediateDirectories: true, attributes: nil)
     }
     
-    let arguments = [haproxyPath, "-q", "-dr", "-f", "haproxy.cfg"]
+    let arguments = [haproxyPath, "-dr", "-f", "haproxy.cfg"]
     
     // For a complete listing of the keys, see the launchd.plist manual page.
     let dict: NSMutableDictionary = [
