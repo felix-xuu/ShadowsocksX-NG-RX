@@ -8,7 +8,7 @@
 set -e
 
 cd `dirname "${BASH_SOURCE[0]}"`
-haproxyVersion=2.0.5
+haproxyVersion=2.0.6
 mkdir -p "$HOME/Library/Application Support/ShadowsocksX-NG-RX/haproxy-$haproxyVersion"
 cp -f haproxy "$HOME/Library/Application Support/ShadowsocksX-NG-RX/haproxy-$haproxyVersion/"
 rm -f "$HOME/Library/Application Support/ShadowsocksX-NG-RX/haproxy"
