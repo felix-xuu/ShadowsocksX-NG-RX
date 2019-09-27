@@ -231,16 +231,16 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Others" id="ieg-6m-MHd">
                         <items>
-                            <menuItem title="Show Logs" id="Jfy-sf-Fhl">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="showLogs:" target="Voe-Tx-rLC" id="5FZ-Xo-DGb"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Check for update" id="tfD-Hg-2QB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="checkForUpdates:" target="XvM-r9-8RE" id="pQR-ju-XW9"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Show Logs" id="Jfy-sf-Fhl">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showLogs:" target="Voe-Tx-rLC" id="5FZ-Xo-DGb"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="About" id="LgB-6g-Gba">
