@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     var statusItem: NSStatusItem!
     var keys: [String : String] = [:]
     let networkMonitor: NetWorkMonitor = NetWorkMonitor()
+    var modeKey = [String : String]()
     
     @IBOutlet var statusMenu: NSMenu!
     @IBOutlet var toggleRunningMenuItem: NSMenuItem!
@@ -122,6 +123,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                         if !subItem.isSeparatorItem {
                             subItem.setAccessibilityValueDescription(subItem.title)
                             keys[subItem.title] = subItem.title
+                            if item.accessibilityIdentifier() == "mode" {
+                                modeKey[subItem.accessibilityIdentifier()] = subItem.title
+                            }
                         }
                     }
                 }
@@ -262,8 +266,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     
     func initModeSelector() {
         for item in statusMenu.items {
-            if item.tag == 1 {
-                item.action = #selector(AppDelegate.changeMode)
+            if item.accessibilityIdentifier() == "mode" {
+                for sub in item.submenu!.items {
+                    sub.action = #selector(AppDelegate.changeMode)
+                }
             }
         }
     }
@@ -274,9 +280,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             return
         }
         let mode = sender.accessibilityIdentifier()
+        if mode == defaults.string(forKey: UserKeys.ShadowsocksXRunningMode) {
+            return
+        }
         defaults.setValue(mode, forKey: UserKeys.ShadowsocksXRunningMode)
         NSLog("Changed mode to: %@(%@)", sender.title, mode)
         updateModeMenuItemState()
+        for item in statusMenu.items {
+            if item.accessibilityIdentifier() == "mode" {
+                item.title = keys[item.accessibilityValueDescription()!]!.localized
+            }
+        }
         // change Menu bar
         let image = NSImage(named: "menu_icon_" + mode)
         image!.isTemplate = true
@@ -290,9 +304,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func updateModeMenuItemState() {
         let currentMode = UserDefaults.standard.string(forKey: UserKeys.ShadowsocksXRunningMode)
         for item in statusMenu.items {
-            if item.tag == 1 {
-                item.state = NSControl.StateValue(rawValue: currentMode == item.accessibilityIdentifier() ? 1 : 0)
-            }   
+            if item.accessibilityIdentifier() == "mode" {
+                for sub in item.submenu!.items {
+                    if currentMode == sub.accessibilityIdentifier() {
+                        sub.state = NSControl.StateValue(rawValue: 1)
+                        keys[item.accessibilityValueDescription()!] = sub.accessibilityValueDescription()!
+                        item.state = NSControl.StateValue(rawValue: 1)
+                    } else {
+                        sub.state = NSControl.StateValue(rawValue: 0)
+                    }
+                }
+            }
         }
     }
     

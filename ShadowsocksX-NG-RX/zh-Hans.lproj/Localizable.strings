@@ -3,6 +3,7 @@
 "ShadowsocksX: Off" = "ShadowsocksX：关闭";
 "Turn ShadowsocksX Off" = "关闭 ShadowsocksX";
 
+"Agent Mode" = "代理模式";
 "PAC Auto Mode" = "PAC自动模式";
 "ACL White List Mode" = "ACL白名单模式";
 "Global Mode" = "全局模式";
@@ -21,7 +22,7 @@
 "Export All Servers" = "导出全部服务器配置";
 "Import Server URLs From Pasteboard" = "从剪切板导入服务器配置";
 "Server Preference" = "服务器设置";
-"Ping Servers" = "服务器测速";
+"Ping Servers" = "服务器延迟测试";
 "Enable Load Balance" = "启用负载均衡";
 "Load Balance Preference" = "负载均衡设置";
 

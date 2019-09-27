@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -40,31 +41,38 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="LXP-yK-yQu"/>
-                <menuItem title="PAC Auto Mode" tag="1" id="r07-Gu-aEz">
+                <menuItem title="Agent Mode" id="Yq1-D7-9IC">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <accessibility identifier="pac"/>
+                    <menu key="submenu" title="Agent Mode" id="Cfd-1H-Rq5">
+                        <items>
+                            <menuItem title="PAC Auto Mode" id="r07-Gu-aEz">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <accessibility identifier="pac"/>
+                            </menuItem>
+                            <menuItem title="Global Mode" id="Mw3-Jm-eXA">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <accessibility identifier="global"/>
+                            </menuItem>
+                            <menuItem title="Manual Mode" id="8PR-gs-c5N">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <accessibility identifier="manual"/>
+                            </menuItem>
+                            <menuItem title="ACL White List Mode" id="RvZ-Zn-29U">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <accessibility identifier="whiteList"/>
+                            </menuItem>
+                            <menuItem title="ACL Auto Mode" id="sDG-YV-yuQ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <accessibility identifier="aclAuto"/>
+                            </menuItem>
+                            <menuItem title="ACL Block China IP Mode" id="lam-el-r4I">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <accessibility identifier="aclBlockChina"/>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <accessibility identifier="mode"/>
                 </menuItem>
-                <menuItem title="Global Mode" tag="1" id="Mw3-Jm-eXA">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <accessibility identifier="global"/>
-                </menuItem>
-                <menuItem title="Manual Mode" tag="1" id="8PR-gs-c5N">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <accessibility identifier="manual"/>
-                </menuItem>
-                <menuItem title="ACL White List Mode" tag="1" id="RvZ-Zn-29U">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <accessibility identifier="whiteList"/>
-                </menuItem>
-                <menuItem title="ACL Auto Mode" tag="1" id="sDG-YV-yuQ">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <accessibility identifier="aclAuto"/>
-                </menuItem>
-                <menuItem title="ACL Block China IP Mode" tag="1" id="lam-el-r4I">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <accessibility identifier="aclBlockChina"/>
-                </menuItem>
-                <menuItem isSeparatorItem="YES" id="WcX-Th-4eP"/>
                 <menuItem title="Servers" id="u5M-hQ-VSc">
                     <modifierMask key="keyEquivalentModifierMask" shift="YES"/>
                     <menu key="submenu" title="Servers" id="9Y1-db-3HK">
