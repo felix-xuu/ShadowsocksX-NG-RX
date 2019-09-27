@@ -211,12 +211,6 @@
                         <action selector="toggleLaunghAtLogin:" target="Voe-Tx-rLC" id="erk-ce-mO3"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Show Logs" id="Jfy-sf-Fhl">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="showLogs:" target="Voe-Tx-rLC" id="5FZ-Xo-DGb"/>
-                    </connections>
-                </menuItem>
                 <menuItem title="Language" id="XEZ-Dd-JP7">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Language" id="Nv5-Oh-8yh">
@@ -233,17 +227,30 @@
                     </menu>
                     <accessibility identifier="language"/>
                 </menuItem>
-                <menuItem title="Check for update" id="tfD-Hg-2QB">
+                <menuItem title="Others" id="63u-Go-UrF">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="checkForUpdates:" target="XvM-r9-8RE" id="pQR-ju-XW9"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="About" id="LgB-6g-Gba">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="showAbout:" target="Voe-Tx-rLC" id="ToP-D0-suY"/>
-                    </connections>
+                    <menu key="submenu" title="Others" id="ieg-6m-MHd">
+                        <items>
+                            <menuItem title="Show Logs" id="Jfy-sf-Fhl">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showLogs:" target="Voe-Tx-rLC" id="5FZ-Xo-DGb"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Check for update" id="tfD-Hg-2QB">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="checkForUpdates:" target="XvM-r9-8RE" id="pQR-ju-XW9"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="About" id="LgB-6g-Gba">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showAbout:" target="Voe-Tx-rLC" id="ToP-D0-suY"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="lSf-ni-kjo"/>
                 <menuItem title="Quit" keyEquivalent="q" id="vJS-JW-byz">
