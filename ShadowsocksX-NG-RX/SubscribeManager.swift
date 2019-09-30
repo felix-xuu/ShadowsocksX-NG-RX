@@ -41,11 +41,11 @@ class SubscribeManager:NSObject{
     
     static func updateServerFromSubscription(_ data: ServerGroup) {
         func updateServerHandler(resString: String) {
-            let decodeRes = decode64(resString)!
+            let decodeRes = decode64(str: resString)
             let urls = splitor(url: decodeRes)
             let maxN = (data.maxCount > urls.count) ? urls.count : (data.maxCount == -1) ? urls.count: data.maxCount
             for index in 0..<maxN {
-                if let profileDict = ParseAppURLSchemes(URL(string: urls[index])) {
+                if let profileDict = ParseAppURLSchemes(url: URL(string: urls[index])!) {
                     let profile = ServerProfile.fromDictionary(profileDict as [String : AnyObject])
                     profile.url = urls[index]
                     profile.hashVal = profile.md5()

@@ -17,11 +17,11 @@
 "Manual Update Subscriptions" = "Manual Update Subscriptions";
 "Show QR Code For Current Server" = "Show QR Code For Current Server";
 "Scan QR Code From Screen" = "Scan QR Code From Screen";
-"Show Example Configuration" = "Show Example Configuration";
-"Import Configuration" = "Import Configuration";
-"Export All Servers" = "Export All Servers";
+"Show Example Configuration" = "Show Example SS(R) Configuration";
+"Import Configuration" = "Import SS(R) Configuration";
+"Export All Servers" = "Export SS(R) Servers";
 "Import Server URLs From Pasteboard" = "Import Server URLs From Pasteboard";
-"Server Preference" = "Server Preference";
+"Server Preference" = "SS(R) Server Preference";
 "Ping Servers" = "Ping Servers";
 "Enable Load Balance" = "Enable Load Balance";
 "Load Balance Preference" = "Load Balance Preference";
@@ -35,7 +35,7 @@
 "Show Network Speed" = "Show Network Speed";
 "Advance Preference" = "Advance Preference";
 "Launch At Login" = "Launch At Login";
-"Show Logs" = "Show Logs";
+"Show Logs" = "Show SS Logs";
 "Language" = "Language";
 "Check for update" = "Check for update";
 "About" = "About";
@@ -150,3 +150,5 @@
 "Config your load balance preference firstly please" = "Config your load balance preference firstly please";
 "Load Balance - " = "Load Balance - ";
 " Nodes Selected" = " Nodes Selected";
+
+"Log not exist" = "Log not exist";

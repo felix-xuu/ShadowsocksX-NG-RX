@@ -17,11 +17,11 @@
 "Manual Update Subscriptions" = "手动更新订阅";
 "Show QR Code For Current Server" = "显示当前服务器二维码";
 "Scan QR Code From Screen" = "扫描屏幕上的二维码";
-"Show Example Configuration" = "显示示例服务器配置";
-"Import Configuration" = "导入服务器配置";
-"Export All Servers" = "导出全部服务器配置";
+"Show Example Configuration" = "显示示例 SS(R) 配置";
+"Import Configuration" = "导入 SS(R) 服务器配置";
+"Export All Servers" = "导出 SS(R) 服务器配置";
 "Import Server URLs From Pasteboard" = "从剪切板导入服务器配置";
-"Server Preference" = "服务器设置";
+"Server Preference" = "SS(R) 服务器设置";
 "Ping Servers" = "服务器延迟测试";
 "Enable Load Balance" = "启用负载均衡";
 "Load Balance Preference" = "负载均衡设置";
@@ -35,7 +35,7 @@
 "Show Network Speed" = "显示网速";
 "Advance Preference" = "高级设置";
 "Launch At Login" = "登录时自动启动";
-"Show Logs" = "显示日志";
+"Show Logs" = "显示 SS 日志";
 "Language" = "语言";
 "Check for update" = "检查更新";
 "About" = "关于";
@@ -150,3 +150,5 @@
 "Config your load balance preference firstly please" = "请先设置负载均衡配置";
 "Load Balance - " = "负载均衡 - ";
 " Nodes Selected" = " 节点选中";
+
+"Log not exist" = "日志不存在";

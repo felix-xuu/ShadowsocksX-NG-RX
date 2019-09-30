@@ -234,7 +234,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 group.groupName = "Default Group".localized
                 
                 for url in urls {
-                    let profielDict = ParseAppURLSchemes(url)//ParseSSURL(url)
+                    let profielDict = ParseAppURLSchemes(url: url)//ParseSSURL(url)
                     if let profielDict = profielDict {
                         let profile = ServerProfile.fromDictionary(profielDict as [String : AnyObject])
                         profile.groupId = group.groupId
@@ -531,7 +531,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     @IBAction func showLogs(_ sender: NSMenuItem) {
-        NSWorkspace.shared.openFile(NSHomeDirectory() + "/Library/Logs/ssr-local.log", withApplication: "Console")
+        let fileMgr = FileManager.default
+        let path = NSHomeDirectory() + "/Library/Logs/ssr-local.log"
+        if !fileMgr.fileExists(atPath: path) {
+            let alert = NSAlert.init()
+            alert.alertStyle = NSAlert.Style.warning
+            alert.addButton(withTitle: "OK".localized)
+            alert.messageText = "Warning".localized
+            alert.informativeText = "Log not exist".localized
+            NSApp.activate(ignoringOtherApps: true)
+            alert.runModal()
+            return
+        }
+        NSWorkspace.shared.openFile(path, withApplication: "Console")
     }
     
     @IBAction func showAbout(_ sender: NSMenuItem) {

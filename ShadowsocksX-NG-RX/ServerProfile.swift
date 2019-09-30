@@ -47,11 +47,11 @@ class ServerProfile: NSObject {
         profile.method = data["Method"] as! String
         profile.password = data["Password"] as! String
         
-        profile.remark = data["Remark"] as? String ?? ""
+        profile.remark = data["remarks"] as? String ?? ""
         profile.obfs = data["obfs"] as? String ?? ""
-        profile.obfsParam = data["obfsParam"] as? String ?? ""
+        profile.obfsParam = data["obfsparam"] as? String ?? ""
         profile.xProtocol = data["xProtocol"] as? String ?? ""
-        profile.xProtocolParam = data["xProtocolParam"] as? String ?? ""
+        profile.xProtocolParam = data["protoparam"] as? String ?? ""
         profile.url = data["url"] as? String ?? ""
         profile.groupId = data["groupId"] as? String ?? ""
         profile.group = data["group"] as? String ?? ""
@@ -66,11 +66,11 @@ class ServerProfile: NSObject {
         d["ServerPort"] = NSNumber(value: data.serverPort as UInt16)
         d["Method"] = data.method as AnyObject?
         d["Password"] = data.password as AnyObject?
-        d["Remark"] = data.remark as AnyObject?
+        d["remarks"] = data.remark as AnyObject?
         d["xProtocol"] = data.xProtocol as AnyObject?
-        d["xProtocolParam"] = data.xProtocolParam as AnyObject?
+        d["protoparam"] = data.xProtocolParam as AnyObject?
         d["obfs"] = data.obfs as AnyObject?
-        d["obfsParam"] = data.obfsParam as AnyObject?
+        d["obfsparam"] = data.obfsParam as AnyObject?
         d["url"] = data.url as AnyObject?
         d["groupId"] = data.groupId as AnyObject?
         d["group"] = data.group as AnyObject?
@@ -163,14 +163,14 @@ class ServerProfile: NSObject {
             let firstParts = "\(serverHost):\(serverPort):\(xProtocol):\(method):\(obfs):"
             let secondParts = "\(password)"
             // ssr:// + base64(abc.xyz:12345:auth_sha1_v2:rc4-md5:tls1.2_ticket_auth:{base64(password)}/?obfsparam={base64(混淆参数(网址))}&protoparam={base64(混淆协议)}&remarks={base64(节点名称)}&group={base64(分组名)})
-            let base64PasswordString = encode64(secondParts)
-            let base64obfsParamString = encode64(obfsParam)
-            let base64xProtocolParamString = encode64(xProtocolParam)
-            let base64RemarkString = encode64(remark)
-            let base64GroupString = encode64(group)
+            let base64PasswordString = encode64(str: secondParts)
+            let base64obfsParamString = encode64(str: obfsParam)
+            let base64xProtocolParamString = encode64(str: xProtocolParam)
+            let base64RemarkString = encode64(str: remark)
+            let base64GroupString = encode64(str: group)
             
-            var s = firstParts + base64PasswordString! + "/?" + "obfsparam=" + base64obfsParamString! + "&protoparam=" + base64xProtocolParamString! + "&remarks=" + base64RemarkString! + "&group=" + base64GroupString!
-            s = encode64(s)
+            var s = firstParts + base64PasswordString + "/?" + "obfsparam=" + base64obfsParamString + "&protoparam=" + base64xProtocolParamString + "&remarks=" + base64RemarkString + "&group=" + base64GroupString
+            s = encode64(str: s)
             return "ssr://\(s)"
         }
         return ""
