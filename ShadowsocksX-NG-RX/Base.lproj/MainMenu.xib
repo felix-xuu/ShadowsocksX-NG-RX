@@ -95,6 +95,19 @@
                                     <action selector="updateSubscribeAtLaunch:" target="Voe-Tx-rLC" id="mCZ-VF-av8"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Wyo-qr-9AY"/>
+                            <menuItem title="Enable Load Balance" id="Tkt-1D-Rpv">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="enableLoadbalance:" target="Voe-Tx-rLC" id="7QU-9t-fKe"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Load Balance Preference" id="CZ1-6S-0Fo">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="loadbalancePreference:" target="Voe-Tx-rLC" id="1Db-TM-d6t"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="iQu-7t-Evv"/>
                             <menuItem title="Show QR Code For Current Server" id="R6A-96-Zcb">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -108,6 +121,13 @@
                                     <action selector="scanQRCodeFromScreen:" target="Voe-Tx-rLC" id="zQZ-IT-H4a"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Import Server URLs From Pasteboard" id="7LY-N4-ofD">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="importProfileURLFromPasteboard:" target="Voe-Tx-rLC" id="2LD-Ua-ehP"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="hW7-qK-7dd"/>
                             <menuItem title="Show Example Configuration" id="pdy-JE-50Q">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -118,12 +138,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="importConfigFile:" target="Voe-Tx-rLC" id="ptm-YK-H93"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Import Server URLs From Pasteboard" id="7LY-N4-ofD">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="importProfileURLFromPasteboard:" target="Voe-Tx-rLC" id="2LD-Ua-ehP"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Export All Servers" id="6k0-gn-DQv">
@@ -184,18 +198,6 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="editAdvPreferences:" target="Voe-Tx-rLC" id="mEF-XS-HJE"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="Enable Load Balance" id="Tkt-1D-Rpv">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="enableLoadbalance:" target="Voe-Tx-rLC" id="7QU-9t-fKe"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="Load Balance Preference" id="CZ1-6S-0Fo">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="loadbalancePreference:" target="Voe-Tx-rLC" id="1Db-TM-d6t"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="DTJ-NF-Wxr"/>
