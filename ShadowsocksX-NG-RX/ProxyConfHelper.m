@@ -10,7 +10,7 @@
 #import "proxy_conf_helper_version.h"
 #import "ShadowsocksX_NG_RX-Swift.h"
 
-#define kShadowsocksHelper @"/Library/Application Support/ShadowsocksX-NG-RX/proxy_conf_helper"
+#define kShadowsocksHelper [NSHomeDirectory() stringByAppendingString:@"/Library/Application Support/ShadowsocksX-NG-RX/proxy_conf_helper"]
 
 @implementation ProxyConfHelper
 

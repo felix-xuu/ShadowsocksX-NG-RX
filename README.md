@@ -1,8 +1,13 @@
 # ShadowsocksX-NG-RX
 
-Current version is 2.0.4
+Current version is 2.0.5
 
 ## Release Note
+
+### 2.0.5
+
+- Resolve risk warning on catalina
+- Some optimizations
 
 ### 2.0.4
 
