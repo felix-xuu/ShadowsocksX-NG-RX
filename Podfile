@@ -8,6 +8,7 @@ target 'ShadowsocksX-NG-RX' do
   pod 'Alamofire'
   pod 'GCDWebServer'
   pod 'Sparkle'
+  pod 'SwiftyJSON'
 end
 
 target 'proxy_conf_helper' do

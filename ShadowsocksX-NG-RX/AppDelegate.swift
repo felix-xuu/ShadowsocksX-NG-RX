@@ -136,6 +136,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func initInstall() {
         InstallSSLocal()
         InstallPrivoxy()
+        InstallV2ray()
         ProxyConfHelper.install()
         InstallHaproxy()
     }
@@ -329,15 +330,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func updateSSAndPrivoxyServices() {
         if UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn) {
             if ServerProfileManager.activeProfile != nil && !UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
-                writeSSLocalConfFile((ServerProfileManager.activeProfile!.toJsonConfig()))
+                if ServerProfileManager.activeProfile!.URL().hasPrefix("vmess://") {
+                    writeV2rayConfFile(base64Str: encode64(str: ServerProfileManager.activeProfile!.URL()))
+                } else {
+                    writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
+                }
                 writePrivoxyConfFile()
             }
-            ReloadConfSSLocal()
-            ReloadConfPrivoxy()
+            if ServerProfileManager.activeProfile != nil {
+                if ServerProfileManager.activeProfile!.URL().hasPrefix("vmess://") {
+                    ReloadConfV2ray()
+                } else {
+                    ReloadConfSSLocal()
+                }
+                ReloadConfPrivoxy()
+            }
             SyncPac()
         } else {
             StopSSLocal()
             StopPrivoxy()
+            StopV2ray()
         }
     }
     
@@ -546,6 +558,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         NSWorkspace.shared.openFile(path, withApplication: "Console")
     }
     
+    @IBAction func showV2Logs(_ sender: NSMenuItem) {
+        let fileMgr = FileManager.default
+        let path = NSHomeDirectory() + "/Library/Logs/ssr-v2ray.log"
+        if !fileMgr.fileExists(atPath: path) {
+            let alert = NSAlert.init()
+            alert.alertStyle = NSAlert.Style.warning
+            alert.addButton(withTitle: "OK".localized)
+            alert.messageText = "Warning".localized
+            alert.informativeText = "Log not exist".localized
+            NSApp.activate(ignoringOtherApps: true)
+            alert.runModal()
+            return
+        }
+        NSWorkspace.shared.openFile(path, withApplication: "Console")
+    }
+    
     @IBAction func showAbout(_ sender: NSMenuItem) {
         NSApp.orderFrontStandardAboutPanel(sender);
         NSApp.activate(ignoringOtherApps: true)
@@ -572,7 +600,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 .map { URL(string: $0) }
                 .filter { $0 != nil }
                 .map { $0! }
-            urls = urls.filter { $0.absoluteString.hasPrefix("ss://") || $0.absoluteString.hasPrefix("ssr://") }
+            urls = urls.filter { $0.absoluteString.hasPrefix("ss://") || $0.absoluteString.hasPrefix("ssr://") || $0.absoluteString.hasPrefix("vmess://") }
             NotificationCenter.default.post(
                 name: Notification.Name(rawValue: NOTIFY_FOUND_SS_URL), object: nil
                 , userInfo: [

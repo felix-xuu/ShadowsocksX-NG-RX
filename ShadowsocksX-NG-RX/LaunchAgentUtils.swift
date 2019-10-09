@@ -7,15 +7,18 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 let SS_LOCAL_VERSION = "3.3.1"
 let PRIVOXY_VERSION = "3.0.28"
 let HAPROXY_VERSION = "2.0.5"
+let V2RAY_VERSION = "4.20.0"
 let APP_SUPPORT_DIR = "/Library/Application Support/ShadowsocksX-NG-RX/"
 let LAUNCH_AGENT_DIR = "/Library/LaunchAgents/"
 let LAUNCH_AGENT_CONF_SSLOCAL_NAME = "com.felix.xu.shadowsocksX-NG-RX.local.plist"
 let LAUNCH_AGENT_CONF_PRIVOXY_NAME = "com.felix.xu.shadowsocksX-NG-RX.http.plist"
 let LAUNCH_AGENT_CONF_HAPROXY_NAME = "com.felix.xu.shadowsocksX-NG-RX.loadbalance.plist"
+let LAUNCH_AGENT_CONF_V2RAY_NAME = "com.felix.xu.shadowsocksX-NG-RX.v2ray.plist"
 
 func getFileSHA1Sum(_ filepath: String) -> String {
     if let data = try? Data(contentsOf: URL(fileURLWithPath: filepath)) {
@@ -80,8 +83,8 @@ func generateSSLocalLauchAgentPlist() {
 
 func ReloadConfSSLocal() {
     let bundle = Bundle.main
-    let installerPath = bundle.path(forResource: "reload_conf_ss_local", ofType: "sh")
-    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [])
+    let installerPath = bundle.path(forResource: "reload_conf", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [LAUNCH_AGENT_CONF_SSLOCAL_NAME])
     task.waitUntilExit()
     if task.terminationStatus == 0 {
         NSLog("Reload ss-local succeeded.")
@@ -92,8 +95,8 @@ func ReloadConfSSLocal() {
 
 func StartSSLocal() {
     let bundle = Bundle.main
-    let installerPath = bundle.path(forResource: "start_ss_local", ofType: "sh")
-    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [])
+    let installerPath = bundle.path(forResource: "start", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [LAUNCH_AGENT_CONF_SSLOCAL_NAME])
     task.waitUntilExit()
     if task.terminationStatus == 0 {
         NSLog("Start ss-local succeeded.")
@@ -104,8 +107,8 @@ func StartSSLocal() {
 
 func StopSSLocal() {
     let bundle = Bundle.main
-    let installerPath = bundle.path(forResource: "stop_ss_local", ofType: "sh")
-    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [])
+    let installerPath = bundle.path(forResource: "stop", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [LAUNCH_AGENT_CONF_SSLOCAL_NAME])
     task.waitUntilExit()
     if task.terminationStatus == 0 {
         NSLog("Stop ss-local succeeded.")
@@ -119,8 +122,8 @@ func InstallSSLocal() {
     let homeDir = NSHomeDirectory()
     let appSupportDir = homeDir + APP_SUPPORT_DIR
     if !fileMgr.fileExists(atPath: appSupportDir + "ss-local-\(SS_LOCAL_VERSION)/ss-local") {
-        let installerPath = Bundle.main.path(forResource: "install_ss_local", ofType: "sh")
-        let task = Process.launchedProcess(launchPath: installerPath!, arguments: [])
+        let installerPath = Bundle.main.path(forResource: "install", ofType: "sh")
+        let task = Process.launchedProcess(launchPath: installerPath!, arguments: ["ss-local", SS_LOCAL_VERSION])
         task.waitUntilExit()
         if task.terminationStatus == 0 {
             NSLog("Install ss-local succeeded.")
@@ -192,8 +195,8 @@ func generatePrivoxyLauchAgentPlist() {
 
 func ReloadConfPrivoxy() {
     let bundle = Bundle.main
-    let installerPath = bundle.path(forResource: "reload_conf_privoxy", ofType: "sh")
-    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [])
+    let installerPath = bundle.path(forResource: "reload_conf", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [LAUNCH_AGENT_CONF_PRIVOXY_NAME])
     task.waitUntilExit()
     if task.terminationStatus == 0 {
         NSLog("Reload privoxy succeeded.")
@@ -204,8 +207,8 @@ func ReloadConfPrivoxy() {
 
 func StartPrivoxy() {
     let bundle = Bundle.main
-    let installerPath = bundle.path(forResource: "start_privoxy", ofType: "sh")
-    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [])
+    let installerPath = bundle.path(forResource: "start", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [LAUNCH_AGENT_CONF_PRIVOXY_NAME])
     task.waitUntilExit()
     if task.terminationStatus == 0 {
         NSLog("Start privoxy succeeded.")
@@ -216,8 +219,8 @@ func StartPrivoxy() {
 
 func StopPrivoxy() {
     let bundle = Bundle.main
-    let installerPath = bundle.path(forResource: "stop_privoxy", ofType: "sh")
-    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [])
+    let installerPath = bundle.path(forResource: "stop", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [LAUNCH_AGENT_CONF_PRIVOXY_NAME])
     task.waitUntilExit()
     if task.terminationStatus == 0 {
         NSLog("Stop privoxy succeeded.")
@@ -231,8 +234,8 @@ func InstallPrivoxy() {
     let homeDir = NSHomeDirectory()
     let appSupportDir = homeDir+APP_SUPPORT_DIR
     if !fileMgr.fileExists(atPath: appSupportDir + "privoxy-\(PRIVOXY_VERSION)/privoxy") {
-        let installerPath = Bundle.main.path(forResource: "install_privoxy", ofType: "sh")
-        let task = Process.launchedProcess(launchPath: installerPath!, arguments: [])
+        let installerPath = Bundle.main.path(forResource: "install", ofType: "sh")
+        let task = Process.launchedProcess(launchPath: installerPath!, arguments: ["privoxy", PRIVOXY_VERSION])
         task.waitUntilExit()
         if task.terminationStatus == 0 {
             NSLog("Install privoxy succeeded.")
@@ -307,8 +310,8 @@ func generateHaproxyLauchAgentPlist() {
 
 func ReloadConfHaproxy() {
     let bundle = Bundle.main
-    let installerPath = bundle.path(forResource: "reload_conf_haproxy", ofType: "sh")
-    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [])
+    let installerPath = bundle.path(forResource: "reload_conf", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [LAUNCH_AGENT_CONF_HAPROXY_NAME])
     task.waitUntilExit()
     if task.terminationStatus == 0 {
         NSLog("Reload haproxy succeeded.")
@@ -319,8 +322,8 @@ func ReloadConfHaproxy() {
 
 func StartHaproxy() {
     let bundle = Bundle.main
-    let installerPath = bundle.path(forResource: "start_haproxy", ofType: "sh")
-    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [])
+    let installerPath = bundle.path(forResource: "start", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [LAUNCH_AGENT_CONF_HAPROXY_NAME])
     task.waitUntilExit()
     if task.terminationStatus == 0 {
         NSLog("Start haproxy succeeded.")
@@ -331,8 +334,8 @@ func StartHaproxy() {
 
 func StopHaproxy() {
     let bundle = Bundle.main
-    let installerPath = bundle.path(forResource: "stop_haproxy", ofType: "sh")
-    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [])
+    let installerPath = bundle.path(forResource: "stop", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [LAUNCH_AGENT_CONF_HAPROXY_NAME])
     task.waitUntilExit()
     if task.terminationStatus == 0 {
         NSLog("Stop haproxy succeeded.")
@@ -346,8 +349,8 @@ func InstallHaproxy() {
     let homeDir = NSHomeDirectory()
     let appSupportDir = homeDir + APP_SUPPORT_DIR
     if !fileMgr.fileExists(atPath: appSupportDir + "haproxy-\(HAPROXY_VERSION)/haproxy") {
-        let installerPath = Bundle.main.path(forResource: "install_haproxy", ofType: "sh")
-        let task = Process.launchedProcess(launchPath: installerPath!, arguments: [])
+        let installerPath = Bundle.main.path(forResource: "install", ofType: "sh")
+        let task = Process.launchedProcess(launchPath: installerPath!, arguments: ["haproxy", HAPROXY_VERSION])
         task.waitUntilExit()
         if task.terminationStatus == 0 {
             NSLog("Install haproxy succeeded.")
@@ -383,6 +386,186 @@ func writeHaproxyConfFile() {
         
         let filepath = NSHomeDirectory() + APP_SUPPORT_DIR + "haproxy.cfg"
         try data?.write(to: URL(fileURLWithPath: filepath), options: .atomic)
+    } catch {
+        NSLog("Write haproxy file failed.")
+    }
+}
+
+func generateV2rayLauchAgentPlist() {
+    let haproxyPath = NSHomeDirectory() + APP_SUPPORT_DIR + "v2ray"
+    let logFilePath = NSHomeDirectory() + "/Library/Logs/ssr-v2ray.log"
+    let launchAgentDirPath = NSHomeDirectory() + LAUNCH_AGENT_DIR
+    let plistFilepath = launchAgentDirPath + LAUNCH_AGENT_CONF_V2RAY_NAME
+    
+    // Ensure launch agent directory is existed.
+    let fileMgr = FileManager.default
+    if !fileMgr.fileExists(atPath: launchAgentDirPath) {
+        try! fileMgr.createDirectory(atPath: launchAgentDirPath, withIntermediateDirectories: true, attributes: nil)
+    }
+    
+    let arguments = [haproxyPath, "-config", "v2ray.json"]
+    
+    // For a complete listing of the keys, see the launchd.plist manual page.
+    let dict: NSMutableDictionary = [
+        "Label": "com.felix.xu.shadowsocksX-NG-RX.v2ray",
+        "WorkingDirectory": NSHomeDirectory() + APP_SUPPORT_DIR,
+        "KeepAlive": true,
+        "StandardOutPath": logFilePath,
+        "StandardErrorPath": logFilePath,
+        "ProgramArguments": arguments
+    ]
+    dict.write(toFile: plistFilepath, atomically: true)
+}
+
+func ReloadConfV2ray() {
+    let bundle = Bundle.main
+    let installerPath = bundle.path(forResource: "reload_conf", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [LAUNCH_AGENT_CONF_V2RAY_NAME])
+    task.waitUntilExit()
+    if task.terminationStatus == 0 {
+        NSLog("Reload v2ray succeeded.")
+    } else {
+        NSLog("Reload v2ray failed.")
+    }
+}
+
+func StartV2ray() {
+    let bundle = Bundle.main
+    let installerPath = bundle.path(forResource: "start", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [LAUNCH_AGENT_CONF_V2RAY_NAME])
+    task.waitUntilExit()
+    if task.terminationStatus == 0 {
+        NSLog("Start v2ray succeeded.")
+    } else {
+        NSLog("Start v2ray failed.")
+    }
+}
+
+func StopV2ray() {
+    let bundle = Bundle.main
+    let installerPath = bundle.path(forResource: "stop", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [LAUNCH_AGENT_CONF_V2RAY_NAME])
+    task.waitUntilExit()
+    if task.terminationStatus == 0 {
+        NSLog("Stop v2ray succeeded.")
+    } else {
+        NSLog("Stop v2ray failed.")
+    }
+}
+
+func InstallV2ray() {
+    let fileMgr = FileManager.default
+    let homeDir = NSHomeDirectory()
+    let appSupportDir = homeDir + APP_SUPPORT_DIR
+    if !fileMgr.fileExists(atPath: appSupportDir + "v2ray-\(V2RAY_VERSION)/v2ray") {
+        let installerPath = Bundle.main.path(forResource: "install", ofType: "sh")
+        let task = Process.launchedProcess(launchPath: installerPath!, arguments: ["v2ray", V2RAY_VERSION])
+        task.waitUntilExit()
+        if task.terminationStatus == 0 {
+            NSLog("Install v2ray succeeded.")
+        } else {
+            NSLog("Install v2ray failed.")
+        }
+    }
+    generateV2rayLauchAgentPlist()
+}
+
+func writeV2rayConfFile(base64Str: String) {
+    do {
+        let defaults = UserDefaults.standard
+        let bundle = Bundle.main
+        let examplePath = bundle.path(forResource: "v2ray.json.example", ofType: nil)
+        let example = try Data(contentsOf: URL(fileURLWithPath: examplePath!))
+        var template = try JSON(data: example)
+        
+//        template["inbounds"][0].dictionaryObject!["port"] = defaults.integer(forKey: UserKeys.Socks5_ListenPort)
+        template["inbounds"][0].dictionaryObject!["listen"] = defaults.string(forKey: UserKeys.ListenAddress)
+        
+        let urls = splitor(url: decode64(str: base64Str))
+        if urls.count == 0 {
+            return
+        }
+
+        let json = JSON(parseJSON: decode64(str: String(urls[0][urls[0].index(urls[0].firstIndex(of: ":")!, offsetBy: 3)...])))
+        
+        var outbound = JSON()
+        let net = json["net"]
+        if net == "shadowsocks" {
+            var ss = JSON()
+            ss["email"] = JSON(json["ps"].stringValue + "@ss")
+            ss["address"] = json["add"]
+            ss["port"] = json["port"]
+            ss["method"] = json["aid"]
+            ss["password"] = json["id"]
+            outbound["protocol"] = "shadowsocks"
+            outbound["settings"] = JSON(["servers":[ss]])
+        } else {
+            outbound["protocol"] = "vmess"
+            outbound["mux"] = JSON(["enabled":true])
+            var vnexts = [JSON]()
+            for url in urls {
+                var vnext = JSON()
+                let t = JSON(parseJSON: decode64(str: String(url[url.index(url.firstIndex(of: ":")!, offsetBy: 3)...])))
+                vnext["address"] = t["add"]
+                vnext["port"] = t["port"]
+                var user = JSON()
+                user["id"] = t["id"]
+                user["alterId"] = JSON(t["aid"].intValue)
+                vnext["users"] = [user]
+                vnexts.append(vnext)
+            }
+            outbound["settings"] = JSON(["vnext":vnexts])
+            outbound["streamSettings"] = JSON(["network":json["net"]])
+            if json["tls"] == "tls" {
+                outbound["streamSettings"]["security"] = "tls"
+                outbound["streamSettings"]["tlsSettings"] = ["allowInsecure":true]
+            }
+            if net == "kcp" || net == "mkcp" {
+                var kcpSetting = JSON()
+                kcpSetting["uplinkCapacity"] = 10
+                kcpSetting["downlinkCapacity"] = 100
+                kcpSetting["congestion"] = true
+                kcpSetting["header"] = JSON(["type":json["type"]])
+                outbound["streamSettings"]["kcpSettings"] = kcpSetting
+            } else if net == "ws" {
+                var wsSetting = JSON()
+                wsSetting["path"] = json["path"]
+                wsSetting["headers"] = JSON(["Host":json["host"]])
+                outbound["streamSettings"]["wsSettings"] = wsSetting
+            } else if net == "h2" {
+                var h2Setting = JSON()
+                h2Setting["path"] = json["path"]
+                h2Setting["host"] = json["host"]
+                outbound["streamSettings"]["httpSettings"] = h2Setting
+            } else if net == "quic" {
+                var quic = JSON()
+                quic["header"] = JSON(["type":json["type"]])
+                quic["security"] = json["host"]
+                quic["key"] = json["path"]
+                outbound["streamSettings"]["quicSettings"] = quic
+            } else if net == "tcp" {
+                if json["type"] == "http" {
+                    let headerPath = bundle.path(forResource: "v2rayheaders", ofType: "json")
+                    let headerData = try Data(contentsOf: URL(fileURLWithPath: headerPath!))
+                    var headers = try JSON(data: headerData)
+                    headers["header"]["type"] = json["type"]
+                    if !json["host"].isEmpty {
+                        headers["header"]["request"]["headers"]["Host"] = JSON(json["host"].stringValue.components(separatedBy: ","))
+                    }
+                    if !json["path"].isEmpty {
+                        headers["header"]["request"]["path"] = [json["path"]]
+                    }
+                    outbound["streamSettings"]["tcpSettings"] = headers
+                }
+            }
+        }
+        outbound["tag"] = json["id"]
+
+        template["outbounds"] = JSON([outbound])
+        
+        let data = try template.rawData()
+        let filepath = NSHomeDirectory() + APP_SUPPORT_DIR + "v2ray.json"
+        try data.write(to: URL(fileURLWithPath: filepath), options: .atomic)
     } catch {
         NSLog("Write haproxy file failed.")
     }

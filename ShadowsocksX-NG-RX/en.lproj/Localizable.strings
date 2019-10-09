@@ -21,7 +21,7 @@
 "Import Configuration" = "Import SS(R) Configuration";
 "Export All Servers" = "Export SS(R) Servers";
 "Import Server URLs From Pasteboard" = "Import Server URLs From Pasteboard";
-"Server Preference" = "SS(R) Server Preference";
+"Server Preference" = "Server Preference";
 "Ping Servers" = "Ping Servers";
 "Enable Load Balance" = "Enable Load Balance";
 "Load Balance Preference" = "Load Balance Preference";
@@ -36,6 +36,7 @@
 "Advance Preference" = "Advance Preference";
 "Launch At Login" = "Launch At Login";
 "Show Logs" = "Show SS Logs";
+"Show v2ray Logs" = "Show v2ray Logs";
 "Language" = "Language";
 "Check for update" = "Check for update";
 "About" = "About";

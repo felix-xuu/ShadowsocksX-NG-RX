@@ -35,7 +35,7 @@ func ScanQRCodeOnScreen() {
             let features = (detector?.features(in: CIImage.init(cgImage: image!)))!
             for item in features {
                 if let feature = (item as! CIQRCodeFeature).messageString {
-                    if feature.hasPrefix("ss://") || feature.hasPrefix("ssr://") {
+                    if feature.hasPrefix("ss://") || feature.hasPrefix("ssr://") || feature.hasPrefix("vmess://") {
                         urls.append(URL.init(string: feature)!)
                     }
                 }
@@ -82,6 +82,8 @@ func ParseAppURLSchemes(url: URL) -> [String : AnyObject]? {
             return ParseSSURL(urlString: host)
         } else if url.absoluteString.hasPrefix("ssr://") {
             return ParseSSRURL(urlString: host)
+        } else if url.absoluteString.hasPrefix("vmess://") {
+            return ParseV2URL(urlString: host)
         }
     }
     return nil
@@ -104,6 +106,7 @@ func ParseSSURL(urlString: String) -> [String : AnyObject] {
         port = 0
     }
     dic["ServerPort"] = port as AnyObject
+    dic["url"] = "ss://" + urlString as AnyObject
     
     return dic
 }
@@ -145,5 +148,24 @@ func ParseSSRURL(urlString: String) -> [String : AnyObject] {
             }
         }
     }
+    dic["url"] = "ssr://" + urlString as AnyObject
+    return dic
+}
+
+// vmess:// + base64({"host":"","path":"","tls":"","add":"","port":1000,"aid":1,"net":"","type":"","v":"2","ps":"","id":""})
+func ParseV2URL(urlString: String) -> [String : AnyObject] {
+    var dic = [String : AnyObject]()
+    let decodeStr = decode64(str: urlString)
+    if let data = decodeStr.data(using: .utf8) {
+        do {
+            let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: AnyObject]
+            dic["ServerHost"] = json["add"] as AnyObject
+            dic["ServerPort"] = json["port"] as AnyObject
+            dic["remarks"] = json["ps"] as AnyObject
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    dic["url"] = "vmess://" + urlString as AnyObject
     return dic
 }

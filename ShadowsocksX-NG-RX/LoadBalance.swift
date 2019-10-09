@@ -26,16 +26,30 @@ class LoadBalance: NSObject {
     }
     
     static func enableLoadBalance() {
-        writeHaproxyConfFile()
-        let accumulate = getLoadBalanceGroup()?.serverProfiles.reduce(into: [:], {$0[$1.method, default: 0] += 1})
-        let method = accumulate?.max(by: {$0.1 < $1.1})?.key
-        let profile = getLoadBalanceGroup()?.serverProfiles.first(where: {$0.method == method})
-        profile?.serverHost = UserDefaults.standard.string(forKey: UserKeys.ListenAddress)!
-        profile?.serverPort = uint16(UserDefaults.standard.integer(forKey: UserKeys.LoadbalancePort))
-        writeSSLocalConfFile(profile!.toJsonConfig())
-        ReloadConfSSLocal()
+        if getLoadBalanceProfiles().count == 0 {
+            return
+        }
+        if getLoadBalanceProfiles()[0].url.hasPrefix("vmess://") {
+            var urls = [String]()
+            for item in getLoadBalanceProfiles() {
+                urls.append(item.url)
+            }
+            writeV2rayConfFile(base64Str: encode64(str: urls.joined(separator: "\n")))
+            StopHaproxy()
+            StopSSLocal()
+            ReloadConfV2ray()
+        } else {
+            writeHaproxyConfFile()
+            let accumulate = getLoadBalanceGroup()?.serverProfiles.reduce(into: [:], {$0[$1.method, default: 0] += 1})
+            let method = accumulate?.max(by: {$0.1 < $1.1})?.key
+            let profile = getLoadBalanceGroup()?.serverProfiles.first(where: {$0.method == method})
+            profile?.serverHost = UserDefaults.standard.string(forKey: UserKeys.ListenAddress)!
+            profile?.serverPort = uint16(UserDefaults.standard.integer(forKey: UserKeys.LoadbalancePort))
+            writeSSLocalConfFile(profile!.toJsonConfig())
+            ReloadConfSSLocal()
+            ReloadConfHaproxy()
+        }
         (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
-        ReloadConfHaproxy()
     }
     
     static func cleanLoadBalanceAfterUpdateFeed() {
