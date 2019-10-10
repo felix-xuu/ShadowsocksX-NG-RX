@@ -44,8 +44,8 @@ class ServerProfile: NSObject {
         let profile = ServerProfile()
         profile.serverHost = data["ServerHost"] as! String
         profile.serverPort = (data["ServerPort"] as! NSNumber).uint16Value
-        profile.method = data["Method"] as! String
-        profile.password = data["Password"] as! String
+        profile.method = data["Method"] as? String ?? ""
+        profile.password = data["Password"] as? String ?? ""
         
         profile.remark = data["remarks"] as? String ?? ""
         profile.obfs = data["obfs"] as? String ?? ""

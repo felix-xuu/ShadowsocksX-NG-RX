@@ -161,6 +161,7 @@ func ParseV2URL(urlString: String) -> [String : AnyObject] {
             let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: AnyObject]
             dic["ServerHost"] = json["add"] as AnyObject
             dic["ServerPort"] = json["port"] as AnyObject
+            dic["Password"] = json["id"] as AnyObject
             dic["remarks"] = json["ps"] as AnyObject
         } catch {
             print(error.localizedDescription)

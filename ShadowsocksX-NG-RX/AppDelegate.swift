@@ -339,8 +339,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             }
             if ServerProfileManager.activeProfile != nil {
                 if ServerProfileManager.activeProfile!.URL().hasPrefix("vmess://") {
+                    StopSSLocal()
                     ReloadConfV2ray()
                 } else {
+                    StopV2ray()
                     ReloadConfSSLocal()
                 }
                 ReloadConfPrivoxy()

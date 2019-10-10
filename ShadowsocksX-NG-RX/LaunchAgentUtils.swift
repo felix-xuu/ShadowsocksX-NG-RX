@@ -457,7 +457,7 @@ func InstallV2ray() {
     let fileMgr = FileManager.default
     let homeDir = NSHomeDirectory()
     let appSupportDir = homeDir + APP_SUPPORT_DIR
-    if !fileMgr.fileExists(atPath: appSupportDir + "v2ray-\(V2RAY_VERSION)/v2ray") {
+    if !fileMgr.fileExists(atPath: appSupportDir + "v2ray-\(V2RAY_VERSION)/v2ray") || !fileMgr.fileExists(atPath: appSupportDir + "v2ray-\(V2RAY_VERSION)/v2ctl") {
         let installerPath = Bundle.main.path(forResource: "install", ofType: "sh")
         let task = Process.launchedProcess(launchPath: installerPath!, arguments: ["v2ray", V2RAY_VERSION])
         task.waitUntilExit()
@@ -478,7 +478,7 @@ func writeV2rayConfFile(base64Str: String) {
         let example = try Data(contentsOf: URL(fileURLWithPath: examplePath!))
         var template = try JSON(data: example)
         
-//        template["inbounds"][0].dictionaryObject!["port"] = defaults.integer(forKey: UserKeys.Socks5_ListenPort)
+        template["inbounds"][0].dictionaryObject!["port"] = defaults.integer(forKey: UserKeys.Socks5_ListenPort)
         template["inbounds"][0].dictionaryObject!["listen"] = defaults.string(forKey: UserKeys.ListenAddress)
         
         let urls = splitor(url: decode64(str: base64Str))
