@@ -2,9 +2,15 @@
 
 This project just toy for self.
 
-`Current version is 2.0.5`
+`Current version is 2.0.6`
 
 ## Release Note
+
+### 2.0.6
+
+- V2ray (BETA. Only feed, QR code, clipboard support)
+- Fix dependence for privoxy
+- Some optimizations
 
 ### 2.0.5
 
