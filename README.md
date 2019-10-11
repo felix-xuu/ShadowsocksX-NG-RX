@@ -8,7 +8,24 @@ This project just toy for self.
 
 ### 2.0.6
 
-- V2ray (BETA. Only feed, QR code, clipboard support)
+- V2ray (BETA. Only feed, QR code, clipboard support. vmess format as same as v2rayN)
+
+  ```json
+  {
+    "v": "2",
+    "ps": "备注别名",
+    "add": "111.111.111.111",
+    "port": "32000",
+    "id": "1386f85e-657b-4d6e-9d56-78badb75e1fd",
+    "aid": "100",
+    "net": "tcp",
+    "type": "none",
+    "host": "www.bbb.com",
+    "path": "/",
+    "tls": "tls"
+  }
+  ```
+
 - Fix dependence for privoxy
 - Some optimizations
 
