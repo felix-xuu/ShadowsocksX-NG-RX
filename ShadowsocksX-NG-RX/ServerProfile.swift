@@ -42,8 +42,8 @@ class ServerProfile: NSObject {
     
     static func fromDictionary(_ data:[String:AnyObject]) -> ServerProfile {
         let profile = ServerProfile()
-        profile.serverHost = data["ServerHost"] as! String
-        profile.serverPort = (data["ServerPort"] as! NSNumber).uint16Value
+        profile.serverHost = data["ServerHost"] as? String ?? ""
+        profile.serverPort = (data["ServerPort"] as? NSNumber)?.uint16Value ?? 0
         profile.method = data["Method"] as? String ?? ""
         profile.password = data["Password"] as? String ?? ""
         

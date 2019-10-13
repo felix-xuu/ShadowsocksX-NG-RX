@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreImage
+import SwiftyJSON
 
 func ScanQRCodeOnScreen() {
     var displays: UnsafeMutablePointer<CGDirectDisplayID>? = nil
@@ -77,13 +78,15 @@ func encode64(str: String) -> String {
 }
 
 func ParseAppURLSchemes(url: URL) -> [String : AnyObject]? {
-    if let host = url.host {
-        if url.absoluteString.hasPrefix("ss://") {
-            return ParseSSURL(urlString: host)
-        } else if url.absoluteString.hasPrefix("ssr://") {
-            return ParseSSRURL(urlString: host)
-        } else if url.absoluteString.hasPrefix("vmess://") {
-            return ParseV2URL(urlString: host)
+    if url.host != nil {
+        let str = url.absoluteString
+        if str.hasPrefix("ss://") {
+            print(str.index(str.startIndex, offsetBy: 5))
+            return ParseSSURL(urlString: str.replacingOccurrences(of: "ss://", with: ""))
+        } else if str.hasPrefix("ssr://") {
+            return ParseSSRURL(urlString: str.replacingOccurrences(of: "ssr://", with: ""))
+        } else if str.hasPrefix("vmess://") {
+            return ParseV2URL(urlString: str.replacingOccurrences(of: "vmess://", with: ""))
         }
     }
     return nil
@@ -101,11 +104,7 @@ func ParseSSURL(urlString: String) -> [String : AnyObject] {
     dic["Method"] = decodeStr[..<firstColonIndex] as AnyObject
     dic["Password"] = decodeStr[decodeStr.index(firstColonIndex, offsetBy: 1)..<atIndex] as AnyObject
     dic["ServerHost"] = decodeStr[decodeStr.index(atIndex, offsetBy: 1)..<lastColonIndex] as AnyObject
-    var port = Int(decodeStr[decodeStr.index(lastColonIndex, offsetBy: 1)...])
-    if port == nil {
-        port = 0
-    }
-    dic["ServerPort"] = port as AnyObject
+    dic["ServerPort"] = Int(decodeStr[decodeStr.index(lastColonIndex, offsetBy: 1)...]) as AnyObject
     dic["url"] = "ss://" + urlString as AnyObject
     
     return dic
@@ -130,11 +129,7 @@ func ParseSSRURL(urlString: String) -> [String : AnyObject] {
     }
     
     dic["ServerHost"] = preArr[0] as AnyObject
-    var port = Int(preArr[1])
-    if port == nil {
-        port = 0
-    }
-    dic["ServerPort"] = port as AnyObject
+    dic["ServerPort"] = Int(preArr[1]) as AnyObject
     dic["xProtocol"] = preArr[2] as AnyObject
     dic["Method"] = preArr[3] as AnyObject
     dic["obfs"] = preArr[4] as AnyObject
@@ -156,17 +151,11 @@ func ParseSSRURL(urlString: String) -> [String : AnyObject] {
 func ParseV2URL(urlString: String) -> [String : AnyObject] {
     var dic = [String : AnyObject]()
     let decodeStr = decode64(str: urlString)
-    if let data = decodeStr.data(using: .utf8) {
-        do {
-            let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: AnyObject]
-            dic["ServerHost"] = json["add"] as AnyObject
-            dic["ServerPort"] = json["port"] as AnyObject
-            dic["Password"] = json["id"] as AnyObject
-            dic["remarks"] = json["ps"] as AnyObject
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
+    let json = JSON(parseJSON: decodeStr)
+    dic["ServerHost"] = json["add"].string as AnyObject
+    dic["ServerPort"] = Int(json["port"].string ?? "") as AnyObject
+    dic["Password"] = json["id"].string as AnyObject
+    dic["remarks"] = json["ps"].string as AnyObject
     dic["url"] = "vmess://" + urlString as AnyObject
     return dic
 }
