@@ -2,9 +2,13 @@
 
 This project just toy for self.
 
-`Current version is 2.0.6`
+`Current version is 2.0.7`
 
 ## Release Note
+
+### 2.0.7
+
+- Update url parse
 
 ### 2.0.6
 
