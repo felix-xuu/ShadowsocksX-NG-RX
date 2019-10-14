@@ -47,6 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         defaults.register(defaults: [
             UserKeys.ShadowsocksXOn: true,
             UserKeys.ShadowsocksXRunningMode: "pac",
+            UserKeys.Socks5_ListenAddress: "127.0.0.1",
             UserKeys.Socks5_ListenPort: NSNumber(value: 1086 as UInt16),
             UserKeys.ListenAddress: "127.0.0.1",
             UserKeys.PacServer_ListenAddress: "127.0.0.1",
@@ -59,6 +60,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.ACLAutoListURL: "https://raw.githubusercontent.com/shadowsocks/shadowsocks-libev/master/acl/gfwlist.acl",
             UserKeys.ACLProxyBlockCHNURL: "https://raw.githubusercontent.com/shadowsocks/shadowsocks-libev/master/acl/server_block_chn.acl",
             UserKeys.AutoConfigureNetworkServices: true,
+            UserKeys.HTTP_ListenAddress: "127.0.0.1",
             UserKeys.HTTP_ListenPort: NSNumber(value: 1087 as UInt16),
             UserKeys.LoadbalancePort: NSNumber(value: 1089 as UInt16),
             UserKeys.HTTPOn: true,
@@ -70,6 +72,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.Language: "en",
             UserKeys.EnableLoadbalance: false,
             UserKeys.LoadbalanceEnableAllNodes: true,
+            UserKeys.V2rayBlockAD: false,
+            UserKeys.V2rayDirectCN: false,
             ])
         
         cleanLogs()
@@ -209,10 +213,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         notifyCenter.addObserver(forName: NSNotification.Name(rawValue: NOTIFY_ADV_CONF_CHANGED), object: nil, queue: nil
             , using: {
                 (note) in
-                SyncSSLocal()
-                self.applyConfig()
                 if UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
                     LoadBalance.enableLoadBalance()
+                } else {
+                    SyncSSLocal()
+                    SyncV2ray()
+                    self.applyConfig()
                 }
             }
         )

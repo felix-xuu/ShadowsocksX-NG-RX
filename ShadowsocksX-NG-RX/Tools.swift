@@ -153,7 +153,7 @@ func ParseV2URL(urlString: String) -> [String : AnyObject] {
     let decodeStr = decode64(str: urlString)
     let json = JSON(parseJSON: decodeStr)
     dic["ServerHost"] = json["add"].string as AnyObject
-    dic["ServerPort"] = Int(json["port"].string ?? "") as AnyObject
+    dic["ServerPort"] = json["port"].intValue as AnyObject
     dic["Password"] = json["id"].string as AnyObject
     dic["remarks"] = json["ps"].string as AnyObject
     dic["url"] = "vmess://" + urlString as AnyObject

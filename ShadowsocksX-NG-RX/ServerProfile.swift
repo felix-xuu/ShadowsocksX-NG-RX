@@ -95,7 +95,7 @@ class ServerProfile: NSObject {
         
         let defaults = UserDefaults.standard
         conf["local_port"] = NSNumber(value: UInt16(defaults.integer(forKey: UserKeys.Socks5_ListenPort)) as UInt16)
-        conf["local_address"] = defaults.string(forKey: UserKeys.ListenAddress) as AnyObject?
+        conf["local_address"] = defaults.string(forKey: UserKeys.Socks5_ListenAddress) as AnyObject?
         conf["timeout"] = NSNumber(value: UInt32(defaults.integer(forKey: UserKeys.Socks5_Timeout)) as UInt32)
         
         conf["protocol"] = xProtocol as AnyObject?

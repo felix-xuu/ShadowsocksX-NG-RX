@@ -121,6 +121,7 @@
 "Advance Preferences" = "Advance Preferences";
 "PAC GFW List URL" = "PAC GFW List URL";
 "DO NOT change anything if you have no idea about what is it" = "DO NOT change anything if you have no idea about what is it";
+"Socks5 Listen Address" = "Socks5 Listen Address";
 "Socks5 Listen Port" = "Socks5 Listen Port";
 "Enable Udp Replay" = "Enable Udp Replay";
 "Enable Verbose Mode" = "Enable Verbose Mode";
@@ -133,8 +134,11 @@
 "Follow Global Mode" = "Follow Global Mode";
 "Timeout" = "Timeout";
 "Seconds" = "Seconds";
+"HTTP Listen Address" = "HTTP Listen Address";
 "HTTP Listen Port" = "HTTP Listen Port";
 "LoadBalance Port" = "LoadBalance Port";
+"Enable CN Direct" = "Enable CN Direct";
+"Enable AD Block" = "Enable AD Block";
 
 "Advance Proxy Preferences" = "Advance Proxy Preferences";
 "Auto Configure" = "Auto Configure";

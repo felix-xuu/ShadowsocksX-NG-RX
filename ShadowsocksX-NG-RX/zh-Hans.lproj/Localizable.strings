@@ -121,6 +121,7 @@
 "Advance Preferences" = "高级设置";
 "PAC GFW List URL" = "PAC 自动代理列表";
 "DO NOT change anything if you have no idea about what is it" = "如果你不知道这是什么，请不要做任何修改";
+"Socks5 Listen Address" = "Socks5 监听地址";
 "Socks5 Listen Port" = "Socks5 监听端口";
 "Enable Udp Replay" = "启用 Udp Replay";
 "Enable Verbose Mode" = "启用 Verbose Mode";
@@ -133,8 +134,11 @@
 "Follow Global Mode" = "跟随全局模式";
 "Timeout" = "超时时间";
 "Seconds" = "秒";
+"HTTP Listen Address" = "HTTP 监听地址";
 "HTTP Listen Port" = "HTTP 监听端口";
 "LoadBalance Port" = "负载均衡端口";
+"Enable CN Direct" = "启用国内直连";
+"Enable AD Block" = "启用广告过滤";
 
 "Advance Proxy Preferences" = "高级代理设置";
 "Auto Configure" = "自动配置";

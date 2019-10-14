@@ -152,7 +152,7 @@ func removeSSLocalConfFile() {
 }
 
 func SyncSSLocal() {
-    if ServerProfileManager.activeProfile != nil {
+    if ServerProfileManager.activeProfile != nil && !ServerProfileManager.activeProfile!.URL().hasPrefix("vmess://") {
         writeSSLocalConfFile((ServerProfileManager.activeProfile!.toJsonConfig()))
         let on = UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn)
         if on {
@@ -163,6 +163,20 @@ func SyncSSLocal() {
     } else {
         removeSSLocalConfFile()
         StopSSLocal()
+    }
+}
+
+func SyncV2ray() {
+    if ServerProfileManager.activeProfile != nil && ServerProfileManager.activeProfile!.URL().hasPrefix("vmess://") {
+        writeV2rayConfFile(base64Str: encode64(str: ServerProfileManager.activeProfile!.URL()))
+        let on = UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn)
+        if on {
+            ReloadConfV2ray()
+            SyncPac()
+            SyncPrivoxy()
+        }
+    } else {
+        StopV2ray()
     }
 }
 
@@ -254,8 +268,8 @@ func writePrivoxyConfFile() {
         let bundle = Bundle.main
         let examplePath = bundle.path(forResource: "privoxy.config.example", ofType: nil)
         var example = try String(contentsOfFile: examplePath!, encoding: .utf8)
-        example = example.replacingOccurrences(of: "{http}", with: defaults.string(forKey: UserKeys.ListenAddress)! + ":" + String(defaults.integer(forKey: UserKeys.HTTP_ListenPort)))
-        example = example.replacingOccurrences(of: "{socks5}", with: defaults.string(forKey: UserKeys.ListenAddress)! + ":" + String(defaults.integer(forKey: UserKeys.Socks5_ListenPort)))
+        example = example.replacingOccurrences(of: "{http}", with: defaults.string(forKey: UserKeys.HTTP_ListenAddress)! + ":" + String(defaults.integer(forKey: UserKeys.HTTP_ListenPort)))
+        example = example.replacingOccurrences(of: "{socks5}", with: defaults.string(forKey: UserKeys.Socks5_ListenAddress)! + ":" + String(defaults.integer(forKey: UserKeys.Socks5_ListenPort)))
         let data = example.data(using: .utf8)
         
         let filepath = NSHomeDirectory() + APP_SUPPORT_DIR + "privoxy.config"
@@ -458,7 +472,7 @@ func InstallV2ray() {
     let fileMgr = FileManager.default
     let homeDir = NSHomeDirectory()
     let appSupportDir = homeDir + APP_SUPPORT_DIR
-    if !fileMgr.fileExists(atPath: appSupportDir + "v2ray-\(V2RAY_VERSION)/v2ray") || !fileMgr.fileExists(atPath: appSupportDir + "v2ray-\(V2RAY_VERSION)/v2ctl") {
+    if !fileMgr.fileExists(atPath: appSupportDir + "v2ray-\(V2RAY_VERSION)/v2ray") || !fileMgr.fileExists(atPath: appSupportDir + "v2ray-\(V2RAY_VERSION)/v2ctl") || !fileMgr.fileExists(atPath: appSupportDir + "geoip.dat") || !fileMgr.fileExists(atPath: appSupportDir + "geosite.dat") {
         let installerPath = Bundle.main.path(forResource: "install", ofType: "sh")
         let task = Process.launchedProcess(launchPath: installerPath!, arguments: ["v2ray", V2RAY_VERSION])
         task.waitUntilExit()
@@ -480,7 +494,7 @@ func writeV2rayConfFile(base64Str: String) {
         var template = try JSON(data: example)
         
         template["inbounds"][0].dictionaryObject!["port"] = defaults.integer(forKey: UserKeys.Socks5_ListenPort)
-        template["inbounds"][0].dictionaryObject!["listen"] = defaults.string(forKey: UserKeys.ListenAddress)
+        template["inbounds"][0].dictionaryObject!["listen"] = defaults.string(forKey: UserKeys.Socks5_ListenAddress)
         
         let urls = splitor(url: decode64(str: base64Str))
         if urls.count == 0 {
@@ -488,14 +502,14 @@ func writeV2rayConfFile(base64Str: String) {
         }
 
         let json = JSON(parseJSON: decode64(str: String(urls[0][urls[0].index(urls[0].firstIndex(of: ":")!, offsetBy: 3)...])))
-        
+        var outbounds = template["outbounds"].arrayValue
         var outbound = JSON()
         let net = json["net"]
         if net == "shadowsocks" {
             var ss = JSON()
             ss["email"] = JSON(json["ps"].stringValue + "@ss")
             ss["address"] = json["add"]
-            ss["port"] = json["port"]
+            ss["port"] = JSON(json["port"].intValue)
             ss["method"] = json["aid"]
             ss["password"] = json["id"]
             outbound["protocol"] = "shadowsocks"
@@ -508,7 +522,7 @@ func writeV2rayConfFile(base64Str: String) {
                 var vnext = JSON()
                 let t = JSON(parseJSON: decode64(str: String(url[url.index(url.firstIndex(of: ":")!, offsetBy: 3)...])))
                 vnext["address"] = t["add"]
-                vnext["port"] = t["port"]
+                vnext["port"] = JSON(t["port"].intValue)
                 var user = JSON()
                 user["id"] = t["id"]
                 user["alterId"] = JSON(t["aid"].intValue)
@@ -561,9 +575,21 @@ func writeV2rayConfFile(base64Str: String) {
             }
         }
         outbound["tag"] = json["id"]
-
-        template["outbounds"] = JSON([outbound])
+        outbounds.append(outbound)
+        template["outbounds"] = JSON(outbounds)
         
+        var rules = template["routing"]["rules"].arrayValue
+        if defaults.bool(forKey: UserKeys.V2rayDirectCN) {
+            let ipJson = JSON(["type": "field", "outboundTag": "direct", "ip": ["geoip:cn"]])
+            let domainJson = JSON(["type": "field", "outboundTag": "direct", "domain": ["geosite:cn"]])
+            rules.append(ipJson)
+            rules.append(domainJson)
+        }
+        if defaults.bool(forKey: UserKeys.V2rayBlockAD) {
+            let adJson = JSON(["type": "field", "outboundTag": "adblock", "domain": ["geosite:category-ads"]])
+            rules.insert(adJson, at: 0)
+        }
+        template["routing"]["rules"] = JSON(rules)
         let data = try template.rawData()
         let filepath = NSHomeDirectory() + APP_SUPPORT_DIR + "v2ray.json"
         try data.write(to: URL(fileURLWithPath: filepath), options: .atomic)

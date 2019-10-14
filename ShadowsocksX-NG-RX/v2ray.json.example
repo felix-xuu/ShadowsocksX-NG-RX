@@ -8,5 +8,31 @@
             "auth": "noauth",
             "udp": true
         }
-    }]
+    }],
+    "outbounds": [
+        {
+          "protocol": "freedom",
+          "tag": "direct",
+          "settings": {
+            "domainStrategy": "AsIs"
+          }
+        },
+        {
+          "protocol": "blackhole",
+          "settings": {},
+          "tag": "adblock"
+        }
+    ],
+    "routing": {
+      "domainStrategy": "IPOnDemand",
+      "rules": [
+        {
+          "type": "field",
+          "ip": [
+            "geoip:private"
+          ],
+          "outboundTag": "direct"
+        }
+      ]
+    }
 }

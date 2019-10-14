@@ -12,6 +12,7 @@ import Foundation
 class UserKeys: NSObject {
     public static let ShadowsocksXOn = "ShadowsocksXOn"
     public static let ShadowsocksXRunningMode = "ShadowsocksXRunningMode"
+    public static let Socks5_ListenAddress = "Socks5.ListenAddress"
     public static let Socks5_ListenPort = "Socks5.ListenPort"
     public static let ListenAddress = "ListenAddress"
     public static let PacServer_ListenAddress = "PacServer.ListenAddress"
@@ -24,6 +25,7 @@ class UserKeys: NSObject {
     public static let ACLAutoListURL = "ACLAutoListURL"
     public static let ACLProxyBlockCHNURL = "ACLProxyBlockCHNURL"
     public static let AutoConfigureNetworkServices = "AutoConfigureNetworkServices"
+    public static let HTTP_ListenAddress = "HTTP.ListenAddress"
     public static let HTTP_ListenPort = "HTTP.ListenPort"
     public static let HTTPOn = "HTTPOn"
     public static let HTTP_FollowGlobal = "HTTP.FollowGlobal"
@@ -43,4 +45,7 @@ class UserKeys: NSObject {
     public static let LoadbalanceProfiles = "LoadbalanceProfiles"
     public static let LoadbalanceEnableAllNodes = "LoadbalanceEnableAllNodes"
     public static let LoadbalanceStrategy = "LoadbalanceStrategy"
+    
+    public static let V2rayDirectCN = "V2ray.cn.direct"
+    public static let V2rayBlockAD = "V2ray.ad.block"
 }

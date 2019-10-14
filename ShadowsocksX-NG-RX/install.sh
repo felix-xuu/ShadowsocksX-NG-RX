@@ -17,4 +17,6 @@ if [ "$1" == 'v2ray' ]; then
     cp -f v2ctl "$HOME/Library/Application Support/ShadowsocksX-NG-RX/$1-$2/"
     rm -f "$HOME/Library/Application Support/ShadowsocksX-NG-RX/v2ctl"
     ln -s "$HOME/Library/Application Support/ShadowsocksX-NG-RX/$1-$2/v2ctl" "$HOME/Library/Application Support/ShadowsocksX-NG-RX/v2ctl"
+    cp -f geoip.dat "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
+    cp -f geosite.dat "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
 fi
