@@ -500,6 +500,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     
     // For NSTableViewDelegate
     func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
-        return false
+        return tableView == groupsTableView ? true : false
     }
 }
