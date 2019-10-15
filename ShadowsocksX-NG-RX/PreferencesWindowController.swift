@@ -502,4 +502,16 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
         return tableView == groupsTableView ? true : false
     }
+    
+    func controlTextDidEndEditing(_ obj: Notification) {
+        if let tView = obj.object as? NSTableView {
+            let index = tView.editedRow
+            if index < 0 {
+                return
+            }
+            if let title = tView.currentEditor() {
+                ServerGroupManager.serverGroups[index].groupName = title.string
+            }
+        }
+    }
 }
