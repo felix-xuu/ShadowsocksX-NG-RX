@@ -336,7 +336,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func updateSSAndPrivoxyServices() {
         if UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn) {
             if ServerProfileManager.activeProfile != nil && !UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
-                if ServerProfileManager.activeProfile!.URL().hasPrefix("vmess://") {
+                if ServerProfileManager.activeProfile!.URL().hasPrefix(UserKeys.VmessPrefix) {
                     writeV2rayConfFile(base64Str: encode64(str: ServerProfileManager.activeProfile!.URL()))
                 } else {
                     writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
@@ -344,7 +344,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 writePrivoxyConfFile()
             }
             if ServerProfileManager.activeProfile != nil {
-                if ServerProfileManager.activeProfile!.URL().hasPrefix("vmess://") {
+                if ServerProfileManager.activeProfile!.URL().hasPrefix(UserKeys.VmessPrefix) {
                     StopSSLocal()
                     ReloadConfV2ray()
                 } else {
@@ -608,7 +608,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 .map { URL(string: $0) }
                 .filter { $0 != nil }
                 .map { $0! }
-            urls = urls.filter { $0.absoluteString.hasPrefix("ss://") || $0.absoluteString.hasPrefix("ssr://") || $0.absoluteString.hasPrefix("vmess://") }
+            urls = urls.filter { $0.absoluteString.hasPrefix(UserKeys.SSPrefix) || $0.absoluteString.hasPrefix(UserKeys.SSRPrefix) || $0.absoluteString.hasPrefix(UserKeys.VmessPrefix) }
             NotificationCenter.default.post(
                 name: Notification.Name(rawValue: NOTIFY_FOUND_SS_URL), object: nil
                 , userInfo: [

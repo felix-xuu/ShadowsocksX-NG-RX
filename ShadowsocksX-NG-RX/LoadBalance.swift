@@ -29,7 +29,7 @@ class LoadBalance: NSObject {
         if getLoadBalanceProfiles().count == 0 {
             return
         }
-        if getLoadBalanceProfiles()[0].url.hasPrefix("vmess://") {
+        if getLoadBalanceProfiles()[0].url.hasPrefix(UserKeys.VmessPrefix) {
             var urls = [String]()
             for item in getLoadBalanceProfiles() {
                 urls.append(item.url)

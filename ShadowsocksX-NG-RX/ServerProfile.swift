@@ -28,6 +28,16 @@ class ServerProfile: NSObject {
     var hashVal: String = ""
     var latency: String?
     
+    //v2ray
+    @objc dynamic var v: String = "2"
+    @objc dynamic var host: String = ""
+    @objc dynamic var path: String = ""
+    @objc dynamic var tls: String = ""
+    @objc dynamic var id: String = ""
+    @objc dynamic var aid: String = ""
+    @objc dynamic var net: String = ""
+    @objc dynamic var type: String = ""
+    
     override init() {
         uuid = UUID().uuidString
     }
@@ -42,6 +52,7 @@ class ServerProfile: NSObject {
     
     static func fromDictionary(_ data:[String:AnyObject]) -> ServerProfile {
         let profile = ServerProfile()
+        profile.uuid = data["Id"] as? String ?? UUID().uuidString
         profile.serverHost = data["ServerHost"] as? String ?? ""
         profile.serverPort = (data["ServerPort"] as? NSNumber)?.uint16Value ?? 0
         profile.method = data["Method"] as? String ?? ""
@@ -56,6 +67,15 @@ class ServerProfile: NSObject {
         profile.groupId = data["groupId"] as? String ?? ""
         profile.group = data["group"] as? String ?? ""
         profile.hashVal = data["hashVal"] as? String ?? ""
+        
+        profile.v = data["v"] as? String ?? "2"
+        profile.host = data["host"] as? String ?? ""
+        profile.path = data["path"] as? String ?? ""
+        profile.tls = data["tls"] as? String ?? ""
+        profile.id = data["id"] as? String ?? ""
+        profile.aid = data["aid"] as? String ?? ""
+        profile.net = data["net"] as? String ?? ""
+        profile.type = data["type"] as? String ?? ""
         return profile
     }
     
@@ -75,6 +95,15 @@ class ServerProfile: NSObject {
         d["groupId"] = data.groupId as AnyObject?
         d["group"] = data.group as AnyObject?
         d["hashVal"] = data.hashVal as AnyObject?
+        
+        d["v"] = data.v as AnyObject?
+        d["host"] = data.host as AnyObject?
+        d["path"] = data.path as AnyObject?
+        d["tls"] = data.tls as AnyObject?
+        d["id"] = data.id as AnyObject?
+        d["aid"] = data.aid as AnyObject?
+        d["net"] = data.net as AnyObject?
+        d["type"] = data.type as AnyObject?
         return d
     }
     
@@ -151,13 +180,16 @@ class ServerProfile: NSObject {
         if !url.isEmpty {
             return url
         }
-        if(obfs == "plain") {
+        if !id.isEmpty {
+            let str = "{\"v\":\(v),\"host\":\(host),\"path\":\(path),\"tls\":\(tls),\"ps\":\(remark),\"add\":\(serverHost),\"port\":\(serverPort),\"id\":\(id),\"aid\":\(aid),\"net\":\(net),\"type\":\(type)}"
+            return UserKeys.VmessPrefix + encode64(str: str)
+        } else if(obfs == "plain") {
             let parts = "\(method):\(password)@\(serverHost):\(serverPort)"
             let base64String = parts.data(using: String.Encoding.utf8)?
                 .base64EncodedString(options: NSData.Base64EncodingOptions())
             if var s = base64String {
                 s = s.trimmingCharacters(in: CharacterSet(charactersIn: "="))
-                return "ss://\(s)"
+                return UserKeys.SSPrefix + s
             }
         } else {
             let firstParts = "\(serverHost):\(serverPort):\(xProtocol):\(method):\(obfs):"
@@ -171,7 +203,7 @@ class ServerProfile: NSObject {
             
             var s = firstParts + base64PasswordString + "/?" + "obfsparam=" + base64obfsParamString + "&protoparam=" + base64xProtocolParamString + "&remarks=" + base64RemarkString + "&group=" + base64GroupString
             s = encode64(str: s)
-            return "ssr://\(s)"
+            return UserKeys.SSRPrefix + s
         }
         return ""
     }

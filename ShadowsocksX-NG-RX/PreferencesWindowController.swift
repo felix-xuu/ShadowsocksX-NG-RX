@@ -14,6 +14,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     @IBOutlet weak var groupsTableView: NSTableView!
     
     @IBOutlet weak var profileBox: NSBox!
+    @IBOutlet weak var v2ProfileBox: NSBox!
     
     @IBOutlet weak var hostTextField: NSTextField!
     @IBOutlet weak var portTextField: NSTextField!
@@ -27,6 +28,18 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     @IBOutlet weak var remarkTextField: NSTextField!
     @IBOutlet weak var groupTextField: NSTextField!
     @IBOutlet weak var urlTextField: NSTextField!
+    //v2
+    @IBOutlet weak var v2HostTextField: NSTextField!
+    @IBOutlet weak var v2PortTextField: NSTextField!
+    @IBOutlet weak var pathTextField: NSTextField!
+    @IBOutlet weak var tlsTextField: NSTextField!
+    @IBOutlet weak var psTextField: NSTextField!
+    @IBOutlet weak var addTextField: NSTextField!
+    @IBOutlet weak var idTextField: NSTextField!
+    @IBOutlet weak var aidTextField: NSTextField!
+    @IBOutlet weak var netTextField: NSTextField!
+    @IBOutlet weak var typeTextField: NSTextField!
+    @IBOutlet weak var v2UrlTextField: NSTextField!
     
     @IBOutlet weak var duplicateGroupButton: NSButton!
     @IBOutlet weak var removeGroupButton: NSButton!
@@ -379,6 +392,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
             removeProfileButton.isEnabled = false
             duplicateProfileButton.isEnabled = false
             profileBox.isHidden = true
+            v2ProfileBox.isHidden = true
         } else {
             removeGroupButton.isEnabled = true
             duplicateGroupButton.isEnabled = true
@@ -386,10 +400,18 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
                 removeProfileButton.isEnabled = false
                 duplicateProfileButton.isEnabled = false
                 profileBox.isHidden = true
+                v2ProfileBox.isHidden = true
             } else {
                 removeProfileButton.isEnabled = true
                 duplicateProfileButton.isEnabled = true
-                profileBox.isHidden = false
+                let p = ServerGroupManager.serverGroups[groupsTableView.selectedRow].serverProfiles[profilesTableView.selectedRow]
+                if p.URL().hasPrefix(UserKeys.VmessPrefix) {
+                    profileBox.isHidden = true
+                    v2ProfileBox.isHidden = false
+                } else {
+                    profileBox.isHidden = false
+                    v2ProfileBox.isHidden = true
+                }
             }
         }
     }
@@ -416,6 +438,19 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
         pwdTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "password", options: [NSBindingOption.continuouslyUpdatesValue: true])
     
         urlTextField.stringValue = editingProfile!.URL()
+        
+        //v2
+        addTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "serverHost", options: [NSBindingOption.continuouslyUpdatesValue: true])
+        v2PortTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "serverPort", options: [NSBindingOption.continuouslyUpdatesValue: true])
+        v2HostTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "host", options: [NSBindingOption.continuouslyUpdatesValue: true])
+        pathTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "path", options: [NSBindingOption.continuouslyUpdatesValue: true])
+        tlsTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "tls", options: [NSBindingOption.continuouslyUpdatesValue: true])
+        psTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "remark", options: [NSBindingOption.continuouslyUpdatesValue: true])
+        idTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "id", options: [NSBindingOption.continuouslyUpdatesValue: true])
+        aidTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "aid", options: [NSBindingOption.continuouslyUpdatesValue: true])
+        netTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "net", options: [NSBindingOption.continuouslyUpdatesValue: true])
+        typeTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "type", options: [NSBindingOption.continuouslyUpdatesValue: true])
+        v2UrlTextField.stringValue = editingProfile!.URL()
     }
     
     //--------------------------------------------------
@@ -465,7 +500,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
             if profiles.isEmpty {
                 return ("", false)
             }
-            let profile = profiles[profiles.count >= index ? index : 0]
+            let profile = profiles[profiles.count > index ? index : 0]
             if UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
                 if UserDefaults.standard.bool(forKey: UserKeys.LoadbalanceEnableAllNodes) {
                     if LoadBalance.getLoadBalanceGroup()!.groupId == profile.groupId {

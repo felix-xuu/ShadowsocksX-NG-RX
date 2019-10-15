@@ -36,7 +36,7 @@ func ScanQRCodeOnScreen() {
             let features = (detector?.features(in: CIImage.init(cgImage: image!)))!
             for item in features {
                 if let feature = (item as! CIQRCodeFeature).messageString {
-                    if feature.hasPrefix("ss://") || feature.hasPrefix("ssr://") || feature.hasPrefix("vmess://") {
+                    if feature.hasPrefix(UserKeys.SSPrefix) || feature.hasPrefix(UserKeys.SSRPrefix) || feature.hasPrefix(UserKeys.VmessPrefix) {
                         urls.append(URL.init(string: feature)!)
                     }
                 }
@@ -80,13 +80,13 @@ func encode64(str: String) -> String {
 func ParseAppURLSchemes(url: URL) -> [String : AnyObject]? {
     if url.host != nil {
         let str = url.absoluteString
-        if str.hasPrefix("ss://") {
+        if str.hasPrefix(UserKeys.SSPrefix) {
             print(str.index(str.startIndex, offsetBy: 5))
-            return ParseSSURL(urlString: str.replacingOccurrences(of: "ss://", with: ""))
-        } else if str.hasPrefix("ssr://") {
-            return ParseSSRURL(urlString: str.replacingOccurrences(of: "ssr://", with: ""))
-        } else if str.hasPrefix("vmess://") {
-            return ParseV2URL(urlString: str.replacingOccurrences(of: "vmess://", with: ""))
+            return ParseSSURL(urlString: str.replacingOccurrences(of: UserKeys.SSPrefix, with: ""))
+        } else if str.hasPrefix(UserKeys.SSRPrefix) {
+            return ParseSSRURL(urlString: str.replacingOccurrences(of: UserKeys.SSRPrefix, with: ""))
+        } else if str.hasPrefix(UserKeys.VmessPrefix) {
+            return ParseV2URL(urlString: str.replacingOccurrences(of: UserKeys.VmessPrefix, with: ""))
         }
     }
     return nil
@@ -105,7 +105,7 @@ func ParseSSURL(urlString: String) -> [String : AnyObject] {
     dic["Password"] = decodeStr[decodeStr.index(firstColonIndex, offsetBy: 1)..<atIndex] as AnyObject
     dic["ServerHost"] = decodeStr[decodeStr.index(atIndex, offsetBy: 1)..<lastColonIndex] as AnyObject
     dic["ServerPort"] = Int(decodeStr[decodeStr.index(lastColonIndex, offsetBy: 1)...]) as AnyObject
-    dic["url"] = "ss://" + urlString as AnyObject
+    dic["url"] = UserKeys.SSPrefix + urlString as AnyObject
     
     return dic
 }
@@ -143,7 +143,7 @@ func ParseSSRURL(urlString: String) -> [String : AnyObject] {
             }
         }
     }
-    dic["url"] = "ssr://" + urlString as AnyObject
+    dic["url"] = UserKeys.SSRPrefix + urlString as AnyObject
     return dic
 }
 
@@ -152,10 +152,17 @@ func ParseV2URL(urlString: String) -> [String : AnyObject] {
     var dic = [String : AnyObject]()
     let decodeStr = decode64(str: urlString)
     let json = JSON(parseJSON: decodeStr)
+    dic["v"] = json["v"].string as AnyObject
     dic["ServerHost"] = json["add"].string as AnyObject
     dic["ServerPort"] = json["port"].intValue as AnyObject
-    dic["Password"] = json["id"].string as AnyObject
+    dic["host"] = json["host"].string as AnyObject
+    dic["path"] = json["path"].string as AnyObject
+    dic["tls"] = json["tls"].string as AnyObject
+    dic["id"] = json["id"].string as AnyObject
+    dic["aid"] = json["aid"].intValue as AnyObject
+    dic["net"] = json["net"].string as AnyObject
+    dic["type"] = json["type"].string as AnyObject
     dic["remarks"] = json["ps"].string as AnyObject
-    dic["url"] = "vmess://" + urlString as AnyObject
+    dic["url"] = UserKeys.VmessPrefix + urlString as AnyObject
     return dic
 }

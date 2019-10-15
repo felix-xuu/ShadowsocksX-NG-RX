@@ -48,4 +48,8 @@ class UserKeys: NSObject {
     
     public static let V2rayDirectCN = "V2ray.cn.direct"
     public static let V2rayBlockAD = "V2ray.ad.block"
+    
+    public static let VmessPrefix = "vmess://"
+    public static let SSPrefix = "ss://"
+    public static let SSRPrefix = "ssr://"
 }

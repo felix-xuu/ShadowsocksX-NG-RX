@@ -152,7 +152,7 @@ func removeSSLocalConfFile() {
 }
 
 func SyncSSLocal() {
-    if ServerProfileManager.activeProfile != nil && !ServerProfileManager.activeProfile!.URL().hasPrefix("vmess://") {
+    if ServerProfileManager.activeProfile != nil && !ServerProfileManager.activeProfile!.URL().hasPrefix(UserKeys.VmessPrefix) {
         writeSSLocalConfFile((ServerProfileManager.activeProfile!.toJsonConfig()))
         let on = UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn)
         if on {
@@ -167,7 +167,7 @@ func SyncSSLocal() {
 }
 
 func SyncV2ray() {
-    if ServerProfileManager.activeProfile != nil && ServerProfileManager.activeProfile!.URL().hasPrefix("vmess://") {
+    if ServerProfileManager.activeProfile != nil && ServerProfileManager.activeProfile!.URL().hasPrefix(UserKeys.VmessPrefix) {
         writeV2rayConfFile(base64Str: encode64(str: ServerProfileManager.activeProfile!.URL()))
         let on = UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn)
         if on {
