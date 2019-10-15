@@ -2,9 +2,16 @@
 
 This project just toy for self.
 
-`Current version is 2.0.7`
+`Current version is 2.0.8`
 
 ## Release Note
+
+### 2.0.8
+
+- Add socks and http host edit
+- Add group name edit(double click group name in server preference)
+- Add vmess display in server preference
+- Add v2ray config in advance preference
 
 ### 2.0.7
 
