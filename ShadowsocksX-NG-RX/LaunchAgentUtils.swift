@@ -168,7 +168,7 @@ func SyncSSLocal() {
 
 func SyncV2ray() {
     if ServerProfileManager.activeProfile != nil && ServerProfileManager.activeProfile!.URL().hasPrefix(UserKeys.VmessPrefix) {
-        writeV2rayConfFile(base64Str: encode64(str: ServerProfileManager.activeProfile!.URL()))
+        writeV2rayConfFile(profiles: [ServerProfileManager.activeProfile!])
         let on = UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn)
         if on {
             ReloadConfV2ray()
@@ -485,7 +485,7 @@ func InstallV2ray() {
     generateV2rayLauchAgentPlist()
 }
 
-func writeV2rayConfFile(base64Str: String) {
+func writeV2rayConfFile(profiles: [ServerProfile]) {
     do {
         let defaults = UserDefaults.standard
         let bundle = Bundle.main
@@ -496,42 +496,40 @@ func writeV2rayConfFile(base64Str: String) {
         template["inbounds"][0].dictionaryObject!["port"] = defaults.integer(forKey: UserKeys.Socks5_ListenPort)
         template["inbounds"][0].dictionaryObject!["listen"] = defaults.string(forKey: UserKeys.Socks5_ListenAddress)
         
-        let urls = splitor(url: decode64(str: base64Str))
-        if urls.count == 0 {
+        if profiles.count == 0 {
             return
         }
 
-        let json = JSON(parseJSON: decode64(str: String(urls[0][urls[0].index(urls[0].firstIndex(of: ":")!, offsetBy: 3)...])))
+        let firstProfile = profiles[0]
         var outbounds = template["outbounds"].arrayValue
         var outbound = JSON()
-        let net = json["net"]
+        let net = firstProfile.net
         if net == "shadowsocks" {
             var ss = JSON()
-            ss["email"] = JSON(json["ps"].stringValue + "@ss")
-            ss["address"] = json["add"]
-            ss["port"] = JSON(json["port"].intValue)
-            ss["method"] = json["aid"]
-            ss["password"] = json["id"]
+            ss["email"] = JSON(firstProfile.remark + "@ss")
+            ss["address"] = JSON(firstProfile.serverHost)
+            ss["port"] = JSON(firstProfile.serverPort)
+            ss["method"] = JSON(firstProfile.aid)
+            ss["password"] = JSON(firstProfile.id)
             outbound["protocol"] = "shadowsocks"
             outbound["settings"] = JSON(["servers":[ss]])
         } else {
             outbound["protocol"] = "vmess"
             outbound["mux"] = JSON(["enabled":true])
             var vnexts = [JSON]()
-            for url in urls {
+            for profile in profiles {
                 var vnext = JSON()
-                let t = JSON(parseJSON: decode64(str: String(url[url.index(url.firstIndex(of: ":")!, offsetBy: 3)...])))
-                vnext["address"] = t["add"]
-                vnext["port"] = JSON(t["port"].intValue)
+                vnext["address"] = JSON(profile.serverHost)
+                vnext["port"] = JSON(profile.serverPort)
                 var user = JSON()
-                user["id"] = t["id"]
-                user["alterId"] = JSON(t["aid"].intValue)
+                user["id"] = JSON(profile.id)
+                user["alterId"] = JSON(Int(profile.aid) as Any)
                 vnext["users"] = [user]
                 vnexts.append(vnext)
             }
             outbound["settings"] = JSON(["vnext":vnexts])
-            outbound["streamSettings"] = JSON(["network":json["net"]])
-            if json["tls"] == "tls" {
+            outbound["streamSettings"] = JSON(["network":firstProfile.net])
+            if firstProfile.tls == "tls" {
                 outbound["streamSettings"]["security"] = "tls"
                 outbound["streamSettings"]["tlsSettings"] = ["allowInsecure":true]
             }
@@ -540,41 +538,41 @@ func writeV2rayConfFile(base64Str: String) {
                 kcpSetting["uplinkCapacity"] = 10
                 kcpSetting["downlinkCapacity"] = 100
                 kcpSetting["congestion"] = true
-                kcpSetting["header"] = JSON(["type":json["type"]])
+                kcpSetting["header"] = JSON(["type":firstProfile.type])
                 outbound["streamSettings"]["kcpSettings"] = kcpSetting
             } else if net == "ws" {
                 var wsSetting = JSON()
-                wsSetting["path"] = json["path"]
-                wsSetting["headers"] = JSON(["Host":json["host"]])
+                wsSetting["path"] = JSON(firstProfile.path)
+                wsSetting["headers"] = JSON(["Host":firstProfile.host])
                 outbound["streamSettings"]["wsSettings"] = wsSetting
             } else if net == "h2" {
                 var h2Setting = JSON()
-                h2Setting["path"] = json["path"]
-                h2Setting["host"] = json["host"]
+                h2Setting["path"] = JSON(firstProfile.path)
+                h2Setting["host"] = JSON(firstProfile.host)
                 outbound["streamSettings"]["httpSettings"] = h2Setting
             } else if net == "quic" {
                 var quic = JSON()
-                quic["header"] = JSON(["type":json["type"]])
-                quic["security"] = json["host"]
-                quic["key"] = json["path"]
+                quic["header"] = JSON(["type":firstProfile.type])
+                quic["security"] = JSON(firstProfile.host)
+                quic["key"] = JSON(firstProfile.path)
                 outbound["streamSettings"]["quicSettings"] = quic
             } else if net == "tcp" {
-                if json["type"] == "http" {
+                if firstProfile.type == "http" {
                     let headerPath = bundle.path(forResource: "v2rayheaders", ofType: "json")
                     let headerData = try Data(contentsOf: URL(fileURLWithPath: headerPath!))
                     var headers = try JSON(data: headerData)
-                    headers["header"]["type"] = json["type"]
-                    if !json["host"].isEmpty {
-                        headers["header"]["request"]["headers"]["Host"] = JSON(json["host"].stringValue.components(separatedBy: ","))
+                    headers["header"]["type"] = JSON(firstProfile.type)
+                    if !firstProfile.host.isEmpty {
+                        headers["header"]["request"]["headers"]["Host"] = JSON(firstProfile.host.components(separatedBy: ","))
                     }
-                    if !json["path"].isEmpty {
-                        headers["header"]["request"]["path"] = [json["path"]]
+                    if !firstProfile.path.isEmpty {
+                        headers["header"]["request"]["path"] = [firstProfile.path]
                     }
                     outbound["streamSettings"]["tcpSettings"] = headers
                 }
             }
         }
-        outbound["tag"] = json["id"]
+        outbound["tag"] = JSON(firstProfile.id)
         outbounds.append(outbound)
         template["outbounds"] = JSON(outbounds)
         

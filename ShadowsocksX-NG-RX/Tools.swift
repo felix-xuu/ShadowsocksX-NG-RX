@@ -159,7 +159,7 @@ func ParseV2URL(urlString: String) -> [String : AnyObject] {
     dic["path"] = json["path"].string as AnyObject
     dic["tls"] = json["tls"].string as AnyObject
     dic["id"] = json["id"].string as AnyObject
-    dic["aid"] = json["aid"].intValue as AnyObject
+    dic["aid"] = json["aid"].stringValue as AnyObject
     dic["net"] = json["net"].string as AnyObject
     dic["type"] = json["type"].string as AnyObject
     dic["remarks"] = json["ps"].string as AnyObject

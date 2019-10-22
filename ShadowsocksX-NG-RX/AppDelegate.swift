@@ -337,7 +337,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         if UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn) {
             if ServerProfileManager.activeProfile != nil && !UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
                 if ServerProfileManager.activeProfile!.URL().hasPrefix(UserKeys.VmessPrefix) {
-                    writeV2rayConfFile(base64Str: encode64(str: ServerProfileManager.activeProfile!.URL()))
+                    writeV2rayConfFile(profiles: [ServerProfileManager.activeProfile!])
                 } else {
                     writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
                 }

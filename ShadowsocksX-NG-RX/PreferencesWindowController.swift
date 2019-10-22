@@ -39,7 +39,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     @IBOutlet weak var aidTextField: NSTextField!
     @IBOutlet weak var netTextField: NSTextField!
     @IBOutlet weak var typeTextField: NSTextField!
-    @IBOutlet weak var v2UrlTextField: NSTextField!
     
     @IBOutlet weak var duplicateGroupButton: NSButton!
     @IBOutlet weak var removeGroupButton: NSButton!
@@ -450,7 +449,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
         aidTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "aid", options: [NSBindingOption.continuouslyUpdatesValue: true])
         netTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "net", options: [NSBindingOption.continuouslyUpdatesValue: true])
         typeTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "type", options: [NSBindingOption.continuouslyUpdatesValue: true])
-        v2UrlTextField.stringValue = editingProfile!.URL()
+        
     }
     
     //--------------------------------------------------

@@ -30,11 +30,7 @@ class LoadBalance: NSObject {
             return
         }
         if getLoadBalanceProfiles()[0].url.hasPrefix(UserKeys.VmessPrefix) {
-            var urls = [String]()
-            for item in getLoadBalanceProfiles() {
-                urls.append(item.url)
-            }
-            writeV2rayConfFile(base64Str: encode64(str: urls.joined(separator: "\n")))
+            writeV2rayConfFile(profiles: getLoadBalanceProfiles())
             StopHaproxy()
             StopSSLocal()
             ReloadConfV2ray()

@@ -1,4 +1,6 @@
-{
+{   "log": {
+        "loglevel": "error"
+    },
     "inbounds": [{
         "tag": "socks-in",
         "port": 1080,

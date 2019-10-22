@@ -177,9 +177,6 @@ class ServerProfile: NSObject {
     }
     
     func URL() -> String {
-        if !url.isEmpty {
-            return url
-        }
         if !id.isEmpty {
             let str = "{\"v\":\(v),\"host\":\(host),\"path\":\(path),\"tls\":\(tls),\"ps\":\(remark),\"add\":\(serverHost),\"port\":\(serverPort),\"id\":\(id),\"aid\":\(aid),\"net\":\(net),\"type\":\(type)}"
             return UserKeys.VmessPrefix + encode64(str: str)
