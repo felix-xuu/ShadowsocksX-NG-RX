@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import SwiftyJSON
 
 class ServerProfile: NSObject {
     var uuid: String
@@ -178,8 +179,8 @@ class ServerProfile: NSObject {
     
     func URL() -> String {
         if !id.isEmpty {
-            let str = "{\"v\":\(v),\"host\":\(host),\"path\":\(path),\"tls\":\(tls),\"ps\":\(remark),\"add\":\(serverHost),\"port\":\(serverPort),\"id\":\(id),\"aid\":\(aid),\"net\":\(net),\"type\":\(type)}"
-            return UserKeys.VmessPrefix + encode64(str: str)
+            let json = JSON(["v": v, "host": host, "path": path, "tls": tls, "ps": remark, "add": serverHost, "port": serverPort, "id": id, "aid": aid, "net": net, "type": type])
+            return UserKeys.VmessPrefix + encode64(str: json.rawString()!)
         } else if(obfs == "plain") {
             let parts = "\(method):\(password)@\(serverHost):\(serverPort)"
             let base64String = parts.data(using: String.Encoding.utf8)?
