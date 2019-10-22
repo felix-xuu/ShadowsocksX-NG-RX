@@ -2,9 +2,14 @@
 
 This project just toy for self.
 
-`Current version is 2.0.8`
+`Current version is 2.0.9`
 
 ## Release Note
+
+### 2.0.9
+
+- set osx to 10.12
+- update vmess parse
 
 ### 2.0.8
 
