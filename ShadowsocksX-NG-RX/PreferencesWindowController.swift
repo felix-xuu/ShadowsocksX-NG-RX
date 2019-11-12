@@ -508,7 +508,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
                 } else {
                     isActive = LoadBalance.getLoadBalanceProfiles().filter({$0.getValidId() == profile.getValidId()}).count > 0
                 }
-            } else if activeProfile != nil {
+            } else if activeProfile != nil && !removedActiveProfile {
                 isActive = activeProfile?.getValidId() == profile.getValidId()
             }
             return (profile.remark.isEmpty ? profile.serverHost : profile.remark, isActive)

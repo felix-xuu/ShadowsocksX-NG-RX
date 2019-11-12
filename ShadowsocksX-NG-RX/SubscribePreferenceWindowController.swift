@@ -104,6 +104,9 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
             })
             while SubscribeManager.autoUpdateCount != self.subscriptions.filter({$0.autoUpdate}).count {
                 usleep(100000)
+                if SubscribeManager.autoUpdateCount > 10000 {
+                    return
+                }
             }
             DispatchQueue.main.async {
                 ServerGroupManager.save()

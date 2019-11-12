@@ -23,6 +23,9 @@ class SubscribeManager:NSObject{
             }
             while queryCount != subscribes.count {
                 usleep(100000)
+                if queryCount > 10000 {
+                    return
+                }
             }
             DispatchQueue.main.async {
                 ServerGroupManager.save()
