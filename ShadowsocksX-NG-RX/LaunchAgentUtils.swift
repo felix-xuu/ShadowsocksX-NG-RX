@@ -9,10 +9,10 @@
 import Foundation
 import SwiftyJSON
 
-let SS_LOCAL_VERSION = "3.3.1"
+let SS_LOCAL_VERSION = "3.3.3"
 let PRIVOXY_VERSION = "3.0.28"
-let HAPROXY_VERSION = "2.0.5"
-let V2RAY_VERSION = "4.20.0"
+let HAPROXY_VERSION = "2.0.8"
+let V2RAY_VERSION = "4.21.3"
 let APP_SUPPORT_DIR = "/Library/Application Support/ShadowsocksX-NG-RX/"
 let LAUNCH_AGENT_DIR = "/Library/LaunchAgents/"
 let LAUNCH_AGENT_CONF_SSLOCAL_NAME = "com.felix.xu.shadowsocksX-NG-RX.local.plist"
