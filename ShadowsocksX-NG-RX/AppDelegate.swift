@@ -216,6 +216,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 if UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
                     LoadBalance.enableLoadBalance()
                 } else {
+                    generateSSLocalLauchAgentPlist()
+                    generateV2rayLauchAgentPlist()
                     SyncSSLocal()
                     SyncV2ray()
                     self.applyConfig()
