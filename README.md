@@ -2,9 +2,15 @@
 
 This project just toy for self.
 
-`Current version is 2.0.9`
+`Current version is 2.1.0`
 
 ## Release Note
+
+### 2.1.0
+
+- fix crash when remove active group
+- reload config when advance setting saved
+- ss-local3.3.3;haproxy2.0.8;v2ray4.21.3
 
 ### 2.0.9
 
