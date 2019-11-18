@@ -621,17 +621,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     @objc func selectServer(_ sender: NSMenuItem) {
-        UserDefaults.standard.set(false, forKey: UserKeys.EnableLoadbalance)
         let index = sender.tag
         let gIndex = sender.parent!.tag
         let newProfile = ServerGroupManager.serverGroups[gIndex].serverProfiles[index]
-        if newProfile.uuid == ServerProfileManager.getActiveProfileId() {
+        if newProfile.uuid == ServerProfileManager.getActiveProfileId() && !UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
                 return
         }
+        UserDefaults.standard.set(false, forKey: UserKeys.EnableLoadbalance)
         ServerProfileManager.setActiveProfile(newProfile)
-        updateServerMenuItemState()
         updateLoadBalanceServices()
         updateSSAndPrivoxyServices()
+        updateServerMenuItemState()
         updateCommonMenuItemState()
     }
     
