@@ -9,14 +9,16 @@ set -e
 
 cd `dirname "${BASH_SOURCE[0]}"`
 
-mkdir -p "$HOME/Library/Application Support/ShadowsocksX-NG-RX/$1-$2"
-cp -f $1 "$HOME/Library/Application Support/ShadowsocksX-NG-RX/$1-$2/"
-rm -f "$HOME/Library/Application Support/ShadowsocksX-NG-RX/$1"
-ln -s "$HOME/Library/Application Support/ShadowsocksX-NG-RX/$1-$2/$1" "$HOME/Library/Application Support/ShadowsocksX-NG-RX/$1"
+APP_DIR="$HOME/Library/Application Support/ShadowsocksX-NG-RX"
+rm -f "$APP_DIR/$1"
+rm -rf $HOME/Library/Application\ Support/ShadowsocksX-NG-RX/$1-*
+mkdir -p "$APP_DIR/$1-$2"
+cp -f $1 "$APP_DIR/$1-$2/"
+ln -s "$APP_DIR/$1-$2/$1" "$APP_DIR/$1"
 if [ "$1" == 'v2ray' ]; then
-    cp -f v2ctl "$HOME/Library/Application Support/ShadowsocksX-NG-RX/$1-$2/"
-    rm -f "$HOME/Library/Application Support/ShadowsocksX-NG-RX/v2ctl"
-    ln -s "$HOME/Library/Application Support/ShadowsocksX-NG-RX/$1-$2/v2ctl" "$HOME/Library/Application Support/ShadowsocksX-NG-RX/v2ctl"
-    cp -f geoip.dat "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
-    cp -f geosite.dat "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
+    cp -f v2ctl "$APP_DIR/$1-$2/"
+    rm -f "$APP_DIR/v2ctl"
+    ln -s "$APP_DIR/$1-$2/v2ctl" "$APP_DIR/v2ctl"
+    cp -f geoip.dat "$APP_DIR/"
+    cp -f geosite.dat "$APP_DIR/"
 fi

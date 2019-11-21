@@ -48,7 +48,7 @@ func generateSSLocalLauchAgentPlist() {
     let enableVerboseMode = defaults.bool(forKey: UserKeys.Socks5_EnableVerboseMode)
     let enabeledMode = defaults.string(forKey: UserKeys.ShadowsocksXRunningMode)
     
-    var arguments = [sslocalPath, "-c", "ss-local-config.json", "--reuse-port", "--fast-open"]
+    var arguments = [sslocalPath, "-c", "ss-local.json", "--reuse-port", "--fast-open"]
     if enableUdpRelay {
         arguments.append("-u")
     }
@@ -121,7 +121,7 @@ func InstallSSLocal() {
     let fileMgr = FileManager.default
     let homeDir = NSHomeDirectory()
     let appSupportDir = homeDir + APP_SUPPORT_DIR
-    if !fileMgr.fileExists(atPath: appSupportDir + "ss-local-\(SS_LOCAL_VERSION)/ss-local") {
+    if !fileMgr.fileExists(atPath: appSupportDir + "ss-local-\(SS_LOCAL_VERSION)/ss-local") || !fileMgr.fileExists(atPath: appSupportDir + "ss-local") {
         let installerPath = Bundle.main.path(forResource: "install", ofType: "sh")
         let task = Process.launchedProcess(launchPath: installerPath!, arguments: ["ss-local", SS_LOCAL_VERSION])
         task.waitUntilExit()
@@ -136,7 +136,7 @@ func InstallSSLocal() {
 
 func writeSSLocalConfFile(_ conf:[String:AnyObject]) {
     do {
-        let filepath = NSHomeDirectory() + APP_SUPPORT_DIR + "ss-local-config.json"
+        let filepath = NSHomeDirectory() + APP_SUPPORT_DIR + "ss-local.json"
         let data: Data = try JSONSerialization.data(withJSONObject: conf, options: .prettyPrinted)
         
         try data.write(to: URL(fileURLWithPath: filepath), options: .atomic)
@@ -147,7 +147,7 @@ func writeSSLocalConfFile(_ conf:[String:AnyObject]) {
 }
 
 func removeSSLocalConfFile() {
-    let filepath = NSHomeDirectory() + APP_SUPPORT_DIR + "ss-local-config.json"
+    let filepath = NSHomeDirectory() + APP_SUPPORT_DIR + "ss-local.json"
     try? FileManager.default.removeItem(atPath: filepath)
 }
 
@@ -248,7 +248,7 @@ func InstallPrivoxy() {
     let fileMgr = FileManager.default
     let homeDir = NSHomeDirectory()
     let appSupportDir = homeDir+APP_SUPPORT_DIR
-    if !fileMgr.fileExists(atPath: appSupportDir + "privoxy-\(PRIVOXY_VERSION)/privoxy") {
+    if !fileMgr.fileExists(atPath: appSupportDir + "privoxy-\(PRIVOXY_VERSION)/privoxy") || !fileMgr.fileExists(atPath: appSupportDir + "privoxy") {
         let installerPath = Bundle.main.path(forResource: "install", ofType: "sh")
         let task = Process.launchedProcess(launchPath: installerPath!, arguments: ["privoxy", PRIVOXY_VERSION])
         task.waitUntilExit()
@@ -363,7 +363,7 @@ func InstallHaproxy() {
     let fileMgr = FileManager.default
     let homeDir = NSHomeDirectory()
     let appSupportDir = homeDir + APP_SUPPORT_DIR
-    if !fileMgr.fileExists(atPath: appSupportDir + "haproxy-\(HAPROXY_VERSION)/haproxy") {
+    if !fileMgr.fileExists(atPath: appSupportDir + "haproxy-\(HAPROXY_VERSION)/haproxy") || !fileMgr.fileExists(atPath: appSupportDir + "haproxy") {
         let installerPath = Bundle.main.path(forResource: "install", ofType: "sh")
         let task = Process.launchedProcess(launchPath: installerPath!, arguments: ["haproxy", HAPROXY_VERSION])
         task.waitUntilExit()
@@ -472,7 +472,7 @@ func InstallV2ray() {
     let fileMgr = FileManager.default
     let homeDir = NSHomeDirectory()
     let appSupportDir = homeDir + APP_SUPPORT_DIR
-    if !fileMgr.fileExists(atPath: appSupportDir + "v2ray-\(V2RAY_VERSION)/v2ray") || !fileMgr.fileExists(atPath: appSupportDir + "v2ray-\(V2RAY_VERSION)/v2ctl") || !fileMgr.fileExists(atPath: appSupportDir + "geoip.dat") || !fileMgr.fileExists(atPath: appSupportDir + "geosite.dat") {
+    if !fileMgr.fileExists(atPath: appSupportDir + "v2ray-\(V2RAY_VERSION)/v2ray") || !fileMgr.fileExists(atPath: appSupportDir + "v2ray-\(V2RAY_VERSION)/v2ctl") || !fileMgr.fileExists(atPath: appSupportDir + "geoip.dat") || !fileMgr.fileExists(atPath: appSupportDir + "geosite.dat") || !fileMgr.fileExists(atPath: appSupportDir + "v2ray") || !fileMgr.fileExists(atPath: appSupportDir + "v2ctl") {
         let installerPath = Bundle.main.path(forResource: "install", ofType: "sh")
         let task = Process.launchedProcess(launchPath: installerPath!, arguments: ["v2ray", V2RAY_VERSION])
         task.waitUntilExit()
