@@ -132,6 +132,13 @@ func InstallSSLocal() {
         }
     }
     generateSSLocalLauchAgentPlist()
+    if !fileMgr.fileExists(atPath: appSupportDir + "ss-local.json") && fileMgr.fileExists(atPath: appSupportDir + "ss-local-config.json") {
+        do {
+            try fileMgr.moveItem(atPath: appSupportDir + "ss-local-config.json", toPath: appSupportDir + "ss-local.json")
+        } catch {
+            NSLog("Rename ss-local config failed.")
+        }
+    }
 }
 
 func writeSSLocalConfFile(_ conf:[String:AnyObject]) {
