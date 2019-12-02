@@ -329,7 +329,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     
     func updateLoadBalanceServices() {
         if UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn) && UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
-            ReloadConfHaproxy()
+            LoadBalance.enableLoadBalance()
         } else {
             StopHaproxy()
         }
