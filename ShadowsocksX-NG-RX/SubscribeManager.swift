@@ -1,9 +1,9 @@
 //
 //  SubscribeManager.swift
-//  ShadowsocksX-NG
+//  ShadowsocksX-NG-RX
 //
-//  Created by 秦宇航 on 2017/6/19.
-//  Copyright © 2017年 qiuyuzhou. All rights reserved.
+//  Created by Felix on 2019/8/13.
+//  Copyright © 2019 felix.xu. All rights reserved.
 //
 
 import Foundation

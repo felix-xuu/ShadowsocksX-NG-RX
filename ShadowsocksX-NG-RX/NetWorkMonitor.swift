@@ -1,9 +1,9 @@
 //
-//  MonitorTask.swift
-//  Up&Down
+//  NetWorkMonitor.swift
+//  ShadowsocksX-NG-RX
 //
-//  Created by 郭佳哲 on 6/3/16.
-//  Copyright © 2016 郭佳哲. All rights reserved.
+//  Created by Felix on 2019/12/25.
+//  Copyright © 2019 felix.xu. All rights reserved.
 //
 
 import Foundation
@@ -14,37 +14,25 @@ class NetWorkMonitor: NSObject {
     static let GB: Float = MB * 1024
     static let TB: Float = GB * 1024
     
-    var thread: Thread?
-    var timer: Timer?
+    var timer: DispatchSourceTimer?
     var lastOutbound: Float = 0.00
     var lastInbound: Float = 0.00
     
     func start() {
-        if thread != nil && thread!.isExecuting {
-            return
-        }
-        thread = Thread(target: self, selector: #selector(startUpdateTimer), object: nil)
-        thread?.start()
-    }
-    
-    @objc func startUpdateTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateNetWorkData), userInfo: nil, repeats: true)
-        RunLoop.current.add(timer!, forMode: RunLoop.Mode.common)
-        RunLoop.current.run()
+        timer = DispatchSource.makeTimerSource()
+        timer?.schedule(deadline: .now(), repeating: .seconds(1))
+        timer?.setEventHandler(handler: {
+            self.updateNetWorkData()
+        })
+        timer?.resume()
     }
     
     func stop(){
-        thread?.cancel()
+        timer?.cancel()
+        timer = nil
     }
     
-    @objc func updateNetWorkData() {
-        if Thread.current.isCancelled {
-            timer?.invalidate()
-            timer = nil
-            thread = nil
-            Thread.exit()
-        }
-        
+    func updateNetWorkData() {
         let task = Process()
         task.launchPath = "/usr/bin/nettop"
         task.arguments = ["-x", "-P", "-L", "1", "-J", "bytes_in,bytes_out", "-t", "external"]

@@ -1,9 +1,9 @@
 //
 //  ServerProfile.swift
-//  ShadowsocksX-NG
+//  ShadowsocksX-NG-RX
 //
-//  Created by 邱宇舟 on 16/6/6.
-//  Copyright © 2016年 qiuyuzhou. All rights reserved.
+//  Created by Felix on 2019/8/13.
+//  Copyright © 2019 felix.xu. All rights reserved.
 //
 
 import Cocoa
