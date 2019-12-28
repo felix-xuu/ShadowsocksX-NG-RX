@@ -2,9 +2,14 @@
 
 This project just toy for self.
 
-`Current version is 2.1.0`
+`Current version is 2.1.1`
 
 ## Release Note
+
+### 2.1.1
+
+- fix possible crash when enable show network speed
+- other optimizes
 
 ### 2.1.0
 
