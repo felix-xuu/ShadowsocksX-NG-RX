@@ -21,8 +21,11 @@ class NetWorkMonitor: NSObject {
     func start() {
         timer = DispatchSource.makeTimerSource()
         timer?.schedule(deadline: .now(), repeating: .seconds(1))
+        let queue = DispatchQueue.global()
         timer?.setEventHandler(handler: {
-            self.updateNetWorkData()
+            queue.async {
+                self.updateNetWorkData()
+            }
         })
         timer?.resume()
     }
