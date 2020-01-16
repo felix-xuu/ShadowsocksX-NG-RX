@@ -2,7 +2,7 @@
 
 This project just toy for self.
 
-`Current version is 2.1.1`
+`Current version is 2.1.2`
 
 ## Release Note
 
