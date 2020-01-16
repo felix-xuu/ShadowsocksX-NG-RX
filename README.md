@@ -6,6 +6,11 @@ This project just toy for self.
 
 ## Release Note
 
+### 2.1.2
+
+- fix http port and loadbalance port modify
+- fix lib dependency
+
 ### 2.1.1
 
 - fix possible crash when enable show network speed
