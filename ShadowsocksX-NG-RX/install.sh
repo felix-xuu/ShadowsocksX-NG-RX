@@ -22,10 +22,3 @@ if [ "$1" == 'v2ray' ]; then
     cp -f geoip.dat "$APP_DIR/"
     cp -f geosite.dat "$APP_DIR/"
 fi
-
-cp -f libev.4.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
-cp -f libcares.2.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
-cp -f libmbedcrypto.3.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
-cp -f libsodium.23.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
-cp -f libpcre.1.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
-cp -f libmbedcrypto.2.16.2.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"

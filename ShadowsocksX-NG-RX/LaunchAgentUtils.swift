@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-let SS_LOCAL_VERSION = "3.3.3"
+let SS_LOCAL_VERSION = "3.3.3_1"
 let PRIVOXY_VERSION = "3.0.28"
 let HAPROXY_VERSION = "2.0.10"
 let V2RAY_VERSION = "4.21.3"
@@ -130,8 +130,20 @@ func InstallSSLocal() {
         } else {
             NSLog("Install ss-local failed.")
         }
+        InstallLib()
     }
     generateSSLocalLauchAgentPlist()
+}
+
+func InstallLib() {
+    let installerPath = Bundle.main.path(forResource: "install_lib", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: installerPath!, arguments: [])
+    task.waitUntilExit()
+    if task.terminationStatus == 0 {
+        NSLog("Install lib succeeded.")
+    } else {
+        NSLog("Install lib failed.")
+    }
 }
 
 func writeSSLocalConfFile(_ conf:[String:AnyObject]) {
