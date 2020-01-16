@@ -19,23 +19,22 @@ class NetWorkMonitor: NSObject {
     var lastInbound: Float = 0.00
     
     func start() {
-        timer = DispatchSource.makeTimerSource()
+        timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.init(label: "shadowsocksX.netspeed"))
         timer?.schedule(deadline: .now(), repeating: .seconds(1))
-        let queue = DispatchQueue.global()
         timer?.setEventHandler(handler: {
-            queue.async {
-                self.updateNetWorkData()
-            }
+            self.updateNetWorkData()
         })
         timer?.resume()
     }
     
     func stop(){
         timer?.cancel()
-        timer = nil
     }
     
     func updateNetWorkData() {
+        if Thread.current.isCancelled || Thread.main.isCancelled {
+            return
+        }
         let task = Process()
         task.launchPath = "/usr/bin/nettop"
         task.arguments = ["-x", "-P", "-L", "1", "-J", "bytes_in,bytes_out", "-t", "external"]
