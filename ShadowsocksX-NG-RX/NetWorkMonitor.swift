@@ -43,18 +43,20 @@ class NetWorkMonitor: NSObject {
         task.standardOutput = pipe
         
         task.launch()
-        task.waitUntilExit()
-        
-        let status = task.terminationStatus
-        if status == 0 {
-            let fileHandle = pipe.fileHandleForReading
-            let data = fileHandle.readDataToEndOfFile()
-            
-            let string = String(data: data, encoding: String.Encoding.utf8)
-            handleNetWorkData(string!)
-        } else {
-            NSLog("Task failed.")
+        var i = 0
+        while task.isRunning {
+            sleep(1)
+            i += 1
+            if i > 2 {
+                task.terminate()
+                break
+            }
         }
+        let fileHandle = pipe.fileHandleForReading
+        let data = fileHandle.readDataToEndOfFile()
+        
+        let string = String(data: data, encoding: String.Encoding.utf8)
+        handleNetWorkData(string!)
     }
     
     func handleNetWorkData(_ string: String) {
