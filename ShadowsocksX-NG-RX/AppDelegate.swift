@@ -87,6 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         updateLoadBalanceServices()
         updateSSAndPrivoxyServices()
         applyConfig()
+        initSleepListener()
         
         DispatchQueue.global().async {
             if defaults.bool(forKey: UserKeys.AutoUpdateSubscribe) {
@@ -191,6 +192,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    func initSleepListener() {
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(sleepListener(_:)),name: NSWorkspace.willSleepNotification, object: nil)
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(sleepListener(_:)),name: NSWorkspace.didWakeNotification, object: nil)
+    }
+    
+    @objc private func sleepListener(_ aNotification: Notification) {
+        if aNotification.name == NSWorkspace.willSleepNotification {
+            print("Going to sleep")
+            if UserDefaults.standard.bool(forKey: UserKeys.ShowSpeed) {
+                networkMonitor.stop()
+            }
+        } else if aNotification.name == NSWorkspace.didWakeNotification {
+            print("Woke up")
+            if UserDefaults.standard.bool(forKey: UserKeys.ShowSpeed) {
+                networkMonitor.start()
             }
         }
     }

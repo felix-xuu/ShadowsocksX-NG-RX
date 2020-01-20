@@ -32,7 +32,7 @@ class NetWorkMonitor: NSObject {
     }
     
     func updateNetWorkData() {
-        if Thread.current.isCancelled || Thread.main.isCancelled {
+        if (timer != nil && timer!.isCancelled) || !Thread.main.isExecuting {
             return
         }
         let task = Process()
@@ -49,6 +49,7 @@ class NetWorkMonitor: NSObject {
             i += 1
             if i > 2 {
                 task.terminate()
+                print("terminate nettop task")
                 break
             }
         }
