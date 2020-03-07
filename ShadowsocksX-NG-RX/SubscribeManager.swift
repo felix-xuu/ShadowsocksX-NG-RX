@@ -73,12 +73,13 @@ class SubscribeManager:NSObject{
             //            "User-Agent": "ShadowsocksX-NG-RX" + (getLocalInfo()["CFBundleShortVersionString"] as! String) + " Version " + (getLocalInfo()["CFBundleVersion"] as! String)
         ]
         
-        Alamofire.request(data.subscribeUrl, headers: headers).responseString {
+        AF.request(data.subscribeUrl, headers: headers).responseString {
             response in
-            if response.result.isSuccess {
+            switch response.result {
+            case .success:
                 data.serverProfiles = []
-                callback(response.result.value!)
-            } else {
+                callback(response.value!)
+            case .failure:
                 notificationDeliver(title: "Subscription Update Failed Title", subTitle: "", text: "Subscription Update Failed Info", data.subscribeUrl)
             }
             if SubscribeManager.queryCount != -1 {

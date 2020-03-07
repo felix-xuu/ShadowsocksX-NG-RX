@@ -192,11 +192,12 @@ func UpdatePACFromGFWList() {
     }
     
     let url = UserDefaults.standard.string(forKey: UserKeys.GFWListURL)
-    Alamofire.request(url!)
+    AF.request(url!)
         .responseString {
             response in
-            if response.result.isSuccess {
-                if let v = response.result.value {
+            switch response.result {
+            case .success:
+                if let v = response.value {
                     do {
                         try v.write(toFile: GFWListFilePath, atomically: true, encoding: String.Encoding.utf8)
                         if GeneratePACFile() {
@@ -206,7 +207,7 @@ func UpdatePACFromGFWList() {
                         NSLog("Write PAC file failed")
                     }
                 }
-            } else {
+            case .failure:
                 notificationDeliver(title: "Failed to download latest GFW List", subTitle: "", text: "")
             }
     }
@@ -222,10 +223,11 @@ func UpdateACL(){
     }
     
     let whiteUrl = UserDefaults.standard.string(forKey: UserKeys.ACLWhiteListURL)
-    Alamofire.request(whiteUrl!).responseString {
+    AF.request(whiteUrl!).responseString {
         response in
-        if response.result.isSuccess {
-            if let v = response.result.value {
+        switch response.result {
+        case .success:
+            if let v = response.value {
                 do {
                     try v.write(toFile: ACLWhiteListFilePath, atomically: true, encoding: String.Encoding.utf8)
                     notificationDeliver(title: "ACL White List updated successful", subTitle: "", text: "")
@@ -233,16 +235,17 @@ func UpdateACL(){
                     NSLog("Write ACL White List file failed")
                 }
             }
-        } else {
+        case .failure:
             notificationDeliver(title: "Failed to download latest ACL White List", subTitle: "", text: "")
         }
     }
     
     let autoUrl = UserDefaults.standard.string(forKey: UserKeys.ACLAutoListURL)
-    Alamofire.request(autoUrl!).responseString {
+    AF.request(autoUrl!).responseString {
         response in
-        if response.result.isSuccess {
-            if let v = response.result.value {
+        switch response.result {
+        case .success:
+            if let v = response.value {
                 do {
                     try v.write(toFile: ACLGFWListFilePath, atomically: true, encoding: String.Encoding.utf8)
                     notificationDeliver(title: "ACL Auto List update successful", subTitle: "", text: "")
@@ -250,16 +253,17 @@ func UpdateACL(){
                     NSLog("Write ACL Auto file failed")
                 }
             }
-        } else {
+        case .failure:
             notificationDeliver(title: "Failed to download latest ACL Auto List", subTitle: "", text: "")
         }
     }
     
     let blockChnUrl = UserDefaults.standard.string(forKey: UserKeys.ACLProxyBlockCHNURL)
-    Alamofire.request(blockChnUrl!).responseString {
+    AF.request(blockChnUrl!).responseString {
         response in
-        if response.result.isSuccess {
-            if let v = response.result.value {
+        switch response.result {
+        case .success:
+            if let v = response.value {
                 do {
                     try v.write(toFile: ACLGFWListFilePath, atomically: true, encoding: String.Encoding.utf8)
                     notificationDeliver(title: "ACL Block CHN List update successful", subTitle: "", text: "")
@@ -267,7 +271,7 @@ func UpdateACL(){
                     NSLog("Write ACL Block CHN file failed")
                 }
             }
-        } else {
+        case .failure:
             notificationDeliver(title: "Failed to download latest ACL Block CHN List", subTitle: "", text: "")
         }
     }
