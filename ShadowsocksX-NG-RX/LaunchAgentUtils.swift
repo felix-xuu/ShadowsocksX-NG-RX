@@ -11,8 +11,9 @@ import SwiftyJSON
 
 let SS_LOCAL_VERSION = "3.3.4"
 let PRIVOXY_VERSION = "3.0.28"
-let HAPROXY_VERSION = "2.1.3"
-let V2RAY_VERSION = "4.22.1"
+let HAPROXY_VERSION = "2.1.4"
+let V2RAY_VERSION = "4.23.1"
+let HTTPING_VERSION = "2.5"
 let APP_SUPPORT_DIR = "/Library/Application Support/ShadowsocksX-NG-RX/"
 let LAUNCH_AGENT_DIR = "/Library/LaunchAgents/"
 let LAUNCH_AGENT_CONF_SSLOCAL_NAME = "com.felix.xu.shadowsocksX-NG-RX.local.plist"
@@ -25,6 +26,22 @@ func getFileSHA1Sum(_ filepath: String) -> String {
         return data.sha1()
     }
     return ""
+}
+
+func InstallHttping() {
+    let fileMgr = FileManager.default
+    let homeDir = NSHomeDirectory()
+    let appSupportDir = homeDir + APP_SUPPORT_DIR
+    if !fileMgr.fileExists(atPath: appSupportDir + "httping-\(HTTPING_VERSION)/httping") || !fileMgr.fileExists(atPath: appSupportDir + "httping") {
+        let installerPath = Bundle.main.path(forResource: "install", ofType: "sh")
+        let task = Process.launchedProcess(launchPath: installerPath!, arguments: ["httping", HTTPING_VERSION])
+        task.waitUntilExit()
+        if task.terminationStatus == 0 {
+            NSLog("Install httping succeeded.")
+        } else {
+            NSLog("Install httping failed.")
+        }
+    }
 }
 
 // Ref: https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html

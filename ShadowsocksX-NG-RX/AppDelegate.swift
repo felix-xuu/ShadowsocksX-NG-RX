@@ -144,6 +144,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         InstallV2ray()
         ProxyConfHelper.install()
         InstallHaproxy()
+        InstallHttping()
     }
     
     func initLanguageSelector() {
