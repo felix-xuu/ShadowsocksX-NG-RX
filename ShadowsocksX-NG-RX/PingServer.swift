@@ -166,37 +166,40 @@ class PingServers:NSObject {
                 })
             }
         }
-        
-        while finished<total && Date().timeIntervalSince(startTime!)<30 {
-            sleep(1)
-        }
-        
-        for k in 0..<ServerGroupManager.serverGroups.count {
-            let profiles = ServerGroupManager.serverGroups[k].serverProfiles
-            for j in 0..<profiles.count {
-                if let late = profiles[j].latency {
-                    if let latency = Double(late){
-                        result.append((k, j, latency))
+        DispatchQueue.global().async {
+            while self.finished<self.total && Date().timeIntervalSince(self.startTime!)<30 {
+                sleep(1)
+            }
+            
+            for k in 0..<ServerGroupManager.serverGroups.count {
+                let profiles = ServerGroupManager.serverGroups[k].serverProfiles
+                for j in 0..<profiles.count {
+                    if let late = profiles[j].latency {
+                        if let latency = Double(late){
+                            result.append((k, j, latency))
+                        }
                     }
                 }
             }
-        }
-        (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
-        (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
-        
-        if let min = result.min(by: {$0.2 < $1.2}){
-            let groupName = ServerGroupManager.serverGroups[min.0].groupName
-            notificationDeliver(title: "Done the ping, the fastest as follow", subTitle: "", text: "\(groupName)"
-                + " - \(ServerGroupManager.serverGroups[min.0].serverProfiles[min.1].remark)"
-                + " - \(ServerGroupManager.serverGroups[min.0].serverProfiles[min.1].latency!)ms")
-        }
-        let shPath = Bundle.main.path(forResource: "killPing", ofType: "sh")
-        let task = Process.launchedProcess(launchPath: shPath!, arguments: [])
-        task.waitUntilExit()
-        if task.terminationStatus == 0 {
-            NSLog("clean ping succeeded.")
-        } else {
-            NSLog("clean ping failed.")
+            DispatchQueue.main.async {
+                (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
+                (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
+                
+                if let min = result.min(by: {$0.2 < $1.2}){
+                    let groupName = ServerGroupManager.serverGroups[min.0].groupName
+                    notificationDeliver(title: "Done the ping, the fastest as follow", subTitle: "", text: "\(groupName)"
+                        + " - \(ServerGroupManager.serverGroups[min.0].serverProfiles[min.1].remark)"
+                        + " - \(ServerGroupManager.serverGroups[min.0].serverProfiles[min.1].latency!)ms")
+                }
+                let shPath = Bundle.main.path(forResource: "killPing", ofType: "sh")
+                let task = Process.launchedProcess(launchPath: shPath!, arguments: [])
+                task.waitUntilExit()
+                if task.terminationStatus == 0 {
+                    NSLog("clean ping succeeded.")
+                } else {
+                    NSLog("clean ping failed.")
+                }
+            }
         }
     }
 }
