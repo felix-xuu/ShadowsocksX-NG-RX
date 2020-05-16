@@ -2,9 +2,14 @@
 
 This project just toy for self.
 
-`Current version is 2.1.2`
+`Current version is 2.1.3`
 
 ## Release Note
+
+### 2.1.3
+
+- ping latency use google
+- other optimizes
 
 ### 2.1.2
 
