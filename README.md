@@ -6,6 +6,10 @@ This project just toy for self.
 
 ## Release Note
 
+### 2.1.4
+
+- actually location shown(click to refresh)
+
 ### 2.1.3
 
 - ping latency use google
