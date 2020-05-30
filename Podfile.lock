@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.1.0)
+  - Alamofire (5.2.1)
   - BRLOptionParser (0.3.1)
   - GCDWebServer (3.5.4):
     - GCDWebServer/Core (= 3.5.4)
@@ -23,7 +23,7 @@ SPEC REPOS:
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   BRLOptionParser: a03256a8ff003ca1f5376c55f55f210e085a3958
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   Sparkle: 55b1a87ba69d56913375a281546b7c82dec95bb0
