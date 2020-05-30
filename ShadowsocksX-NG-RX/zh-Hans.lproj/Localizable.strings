@@ -69,6 +69,7 @@
 
 "Active Group: " = "当前分组: ";
 "Active Node: " = "当前节点: ";
+"Actually Location: " = "真实位置: ";
 
 "Subscription Update Failed Title" = "更新订阅失败";
 "Subscription Update Failed Info" = "请求 $ 失败, 请检查配置和网络";

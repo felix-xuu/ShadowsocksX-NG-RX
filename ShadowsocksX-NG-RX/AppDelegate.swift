@@ -742,6 +742,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             statusMenu!.insertItem(separator, at: 2)
             statusMenu!.insertItem(withTitle: "Active Group: ".localized + ServerGroupManager.getServerGroupByGroupId(profile.groupId)!.groupName, action: nil, keyEquivalent: "", at: 3).setAccessibilityIdentifier("active")
             statusMenu!.insertItem(withTitle: "Active Node: ".localized + (ServerGroupManager.getServerGroupByGroupId(profile.groupId)?.serverProfiles.first(where: {$0.getValidId() == profile.getValidId()})!.titleForActive())!, action: nil, keyEquivalent: "", at: 4).setAccessibilityIdentifier("active")
+            DispatchQueue.global().async {
+                let location = PingServers.instance.getLocation()
+                self.statusMenu!.insertItem(withTitle: "Actually Location: ".localized + location, action: #selector(AppDelegate.refreshLocation), keyEquivalent: "", at: 5).setAccessibilityIdentifier("active")
+            }
+        }
+    }
+    
+    @objc func refreshLocation(){
+        DispatchQueue.global().async {
+            let location = PingServers.instance.getLocation()
+            self.statusMenu!.item(at: 5)?.title = "Actually Location: ".localized + location
         }
     }
     

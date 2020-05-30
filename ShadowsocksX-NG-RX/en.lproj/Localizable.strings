@@ -69,6 +69,7 @@
 
 "Active Group: " = "Active Group: ";
 "Active Node: " = "Active Node: ";
+"Actually Location: " = "Actually Location: ";
 
 "Subscription Update Failed Title" = "Update Subscription Failed";
 "Subscription Update Failed Info" = "Request $ failed, please check configuration or network";

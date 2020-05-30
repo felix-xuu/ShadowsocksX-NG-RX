@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class PingServers:NSObject {
     static let instance = PingServers()
@@ -201,5 +202,20 @@ class PingServers:NSObject {
                 }
             }
         }
+    }
+    
+    func getLocation() -> String {
+        usleep(useconds_t(0.5 * 1000 * 1000))
+        let defaults = UserDefaults.standard
+        let op = runCommand(cmd: "/usr/bin/curl", args: "-m", "5", "--socks5", defaults.string(forKey: UserKeys.Socks5_ListenAddress)!+":"+defaults.string(forKey: UserKeys.Socks5_ListenPort)!, "ipinfo.io").output.joined()
+        let json = JSON(op.data(using: String.Encoding.utf8) ?? Data())
+        var location = " -"
+        if let city = json["city"].string{
+            location = city
+            if let country = json["country"].string{
+                location = location + " (" + country + ")"
+            }
+        }
+        return location
     }
 }
