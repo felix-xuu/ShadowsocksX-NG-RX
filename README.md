@@ -111,3 +111,7 @@ This project just toy for self.
 ## License
 
 The project is released under the terms of GPLv3.
+
+## Acknowledgment
+
+[![jetbrains](./static/jetbrains.svg)](https://www.jetbrains.com/?from=ShadowsocksX-NG-RX)
