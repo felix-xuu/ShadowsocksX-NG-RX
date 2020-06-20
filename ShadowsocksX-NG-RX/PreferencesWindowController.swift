@@ -47,6 +47,9 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     @IBOutlet weak var copyURLBtn: NSButton!
     @IBOutlet weak var eyeButton: NSButton!
     
+    @IBOutlet weak var orderAddress: NSButton!
+    @IBOutlet weak var orderRemark: NSButton!
+    
     var defaults: UserDefaults!
     
     var editingProfile: ServerProfile!
@@ -104,6 +107,13 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
             "tls1.2_ticket_auth",
             "tls1.2_ticket_auth_compatible",
             ])
+        if defaults.bool(forKey: UserKeys.OrderAddress) {
+            orderAddress.state = .on
+            orderRemark.state = .off
+        } else {
+            orderAddress.state = .off
+            orderRemark.state = .on
+        }
         loadBalanceGroup = LoadBalance.getLoadBalanceGroup()
         loadBalanceProfiles = LoadBalance.getLoadBalanceProfiles()
         groupsTableView.reloadData()
@@ -123,6 +133,10 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
                 let button = item as! NSButton
                 button.setAccessibilityValueDescription(button.title)
                 keys[button.title] = button.title
+            } else if item.tag == 1 && item is NSTextField {
+                let textField = item as! NSTextField
+                textField.setAccessibilityValueDescription(textField.stringValue)
+                keys[textField.stringValue] = textField.stringValue
             }
         }
         for item in hostTextField.superview!.subviews {
@@ -146,6 +160,9 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
             if item.tag == 1 && item is NSButton {
                 let button = item as! NSButton
                 button.title = keys[button.accessibilityValueDescription()!]!.localized
+            } else if item.tag == 1 && item is NSTextField {
+                let textFiled = item as! NSTextField
+                textFiled.stringValue = keys[textFiled.accessibilityValueDescription()!]!.localized
             }
         }
         for item in hostTextField.superview!.subviews {
@@ -300,6 +317,13 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
             UserDefaults.standard.removeObject(forKey: UserKeys.LoadbalanceGroup)
         }
         UserDefaults.standard.set(ServerProfile.toDictionaries(loadBalanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
+        if orderAddress.state == .on {
+            UserDefaults.standard.set(true, forKey: UserKeys.OrderAddress)
+            UserDefaults.standard.set(false, forKey: UserKeys.OrderRemark)
+        } else {
+            UserDefaults.standard.set(true, forKey: UserKeys.OrderRemark)
+            UserDefaults.standard.set(false, forKey: UserKeys.OrderAddress)
+        }
         ServerGroupManager.save()
         (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
         
@@ -547,5 +571,9 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
                 ServerGroupManager.serverGroups[index].groupName = title.string
             }
         }
+    }
+    
+    @IBAction func order(_ sender: NSButton) {
+        
     }
 }

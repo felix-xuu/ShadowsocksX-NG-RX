@@ -55,13 +55,8 @@ class AdvPreferencesWindowController: NSWindowController, NSWindowDelegate {
         }
     }
     
-    @IBAction func ok(_ sender: NSButton) {
+    func windowWillClose(_ notification: Notification) {
         NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIFY_ADV_CONF_CHANGED), object: nil)
-        window?.performClose(self)
-    }
-    
-    @IBAction func cancel(_ sender: NSButton) {
-        window?.performClose(self)
     }
     
 }

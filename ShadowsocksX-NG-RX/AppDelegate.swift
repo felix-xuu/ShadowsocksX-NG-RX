@@ -74,6 +74,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.LoadbalanceEnableAllNodes: true,
             UserKeys.V2rayBlockAD: false,
             UserKeys.V2rayDirectCN: false,
+            UserKeys.OrderRemark: false,
+            UserKeys.OrderAddress: true,
             ])
         
         cleanLogs()
@@ -675,8 +677,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             serversMenuItem.submenu?.insertItem(groupItem, at: 0)
             serversMenuItem.submenu?.setSubmenu(groupMenu, for: groupItem)
             
+            let profiles = g.serverProfiles.sorted(by: {
+                (a, b) in return UserDefaults.standard.bool(forKey: UserKeys.OrderAddress) ? a.serverHost < b.serverHost : a.remark < b.remark
+            })
             var item: NSMenuItem
-            for (index, profile) in g.serverProfiles.enumerated() {
+            for (index, profile) in profiles.enumerated() {
                 item = NSMenuItem()
                 item.tag = index
                 item.action = #selector(AppDelegate.selectServer)

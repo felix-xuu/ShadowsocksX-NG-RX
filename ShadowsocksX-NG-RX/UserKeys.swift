@@ -52,4 +52,7 @@ class UserKeys: NSObject {
     public static let VmessPrefix = "vmess://"
     public static let SSPrefix = "ss://"
     public static let SSRPrefix = "ssr://"
+    
+    public static let OrderAddress = "order.address"
+    public static let OrderRemark = "order.remark"
 }
