@@ -16,13 +16,24 @@ class ServerGroupManager: NSObject {
         let defaults = UserDefaults.standard
         if let groups = defaults.array(forKey: UserKeys.ServerGroups) {
             for item in groups {
-                ServerGroupManager.serverGroups.append(ServerGroup.fromDictionary(item as! [String : AnyObject]))
+                let serverGroup = ServerGroup.fromDictionary(item as! [String : AnyObject])
+                let profiles = serverGroup.serverProfiles.sorted(by: {
+                    (a, b) in return UserDefaults.standard.bool(forKey: UserKeys.OrderAddress) ? a.serverHost < b.serverHost : a.remark < b.remark
+                })
+                serverGroup.serverProfiles = profiles
+                ServerGroupManager.serverGroups.append(serverGroup)
             }
         }
         NSLog("ServerGroup manager init")
     }
     
     static func save() {
+        for group in serverGroups {
+            let profiles = group.serverProfiles.sorted(by: {
+                (a, b) in return UserDefaults.standard.bool(forKey: UserKeys.OrderAddress) ? a.serverHost < b.serverHost : a.remark < b.remark
+            })
+            group.serverProfiles = profiles
+        }
         UserDefaults.standard.set(ServerGroup.toDictionaries(serverGroups), forKey: UserKeys.ServerGroups)
     }
     

@@ -677,9 +677,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             serversMenuItem.submenu?.insertItem(groupItem, at: 0)
             serversMenuItem.submenu?.setSubmenu(groupMenu, for: groupItem)
             
-            let profiles = g.serverProfiles.sorted(by: {
-                (a, b) in return UserDefaults.standard.bool(forKey: UserKeys.OrderAddress) ? a.serverHost < b.serverHost : a.remark < b.remark
-            })
+            let profiles = g.serverProfiles
             var item: NSMenuItem
             for (index, profile) in profiles.enumerated() {
                 item = NSMenuItem()
