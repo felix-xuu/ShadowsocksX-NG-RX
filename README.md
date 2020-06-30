@@ -2,9 +2,14 @@
 
 This project just toy for self.
 
-`Current version is 2.1.4`
+`Current version is 2.1.5`
 
 ## Release Note
+
+### 2.1.5
+
+- add nodes order(default order by host, you can change it to remark in server preference)
+- remove url schema
 
 ### 2.1.4
 
