@@ -59,6 +59,9 @@ class PingServers:NSObject {
         let ssTask = Process()
         ssTask.launchPath = NSHomeDirectory()+APP_SUPPORT_DIR+"ss-local"
         ssTask.arguments = ssArgs
+        var environment =  ProcessInfo.processInfo.environment
+        environment["DYLD_LIBRARY_PATH"] = NSHomeDirectory() + APP_SUPPORT_DIR
+        ssTask.environment = environment
         ssTask.launch()
         ssTask.waitUntilExit()
         
