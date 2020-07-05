@@ -2,9 +2,13 @@
 
 This project just toy for self.
 
-`Current version is 2.1.5`
+`Current version is 2.1.6`
 
 ## Release Note
+
+### 2.1.6
+
+- fix ping servers
 
 ### 2.1.5
 
