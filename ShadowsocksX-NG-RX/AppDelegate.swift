@@ -76,6 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.V2rayDirectCN: false,
             UserKeys.OrderRemark: false,
             UserKeys.OrderAddress: true,
+            UserKeys.DNSEnable: false,
             ])
         
         cleanLogs()
@@ -90,7 +91,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         updateSSAndPrivoxyServices()
         applyConfig()
         initSleepListener()
-        
+        DNSServersChange()
         DispatchQueue.global().async {
             if defaults.bool(forKey: UserKeys.AutoUpdateSubscribe) {
                 self.updateSubscribe(self.manualUpdateSubscribeMenuItem)
@@ -225,6 +226,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             , using: {
                 (note) in
                 self.applyConfig()
+                DNSServersChange()
             }
         )
         notifyCenter.addObserver(forName: NSNotification.Name(rawValue: NOTIFY_SERVER_PROFILES_CHANGED), object: nil, queue: nil

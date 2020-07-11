@@ -377,7 +377,7 @@
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="749" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="CN2-Ej-egl">
-                        <rect key="frame" x="35" y="521" width="132" height="18"/>
+                        <rect key="frame" x="35" y="522" width="132" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="HTTP Listen Address" id="mK0-uA-wia">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -385,7 +385,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f5V-Ny-c8e" userLabel="PAC address Text Field">
-                        <rect key="frame" x="173" y="520" width="105" height="20"/>
+                        <rect key="frame" x="173" y="520" width="105" height="21"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="2ZV-qr-Grr">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -521,7 +521,6 @@
                     <constraint firstItem="Ghj-z7-MU4" firstAttribute="leading" secondItem="vxh-A2-KSz" secondAttribute="trailing" constant="8" symbolic="YES" id="eMv-nd-PeU"/>
                     <constraint firstItem="Ghj-z7-MU4" firstAttribute="centerY" secondItem="vxh-A2-KSz" secondAttribute="centerY" id="eRD-uL-Wcu"/>
                     <constraint firstItem="gMW-uq-O4L" firstAttribute="leading" secondItem="X9m-FK-fcs" secondAttribute="leading" id="emM-JU-d3r"/>
-                    <constraint firstItem="xu9-Ww-qdS" firstAttribute="centerY" secondItem="f5V-Ny-c8e" secondAttribute="centerY" constant="9" id="ery-lh-hjr"/>
                     <constraint firstItem="f5V-Ny-c8e" firstAttribute="centerY" secondItem="CN2-Ej-egl" secondAttribute="centerY" id="fQe-a9-giy"/>
                     <constraint firstItem="vxh-A2-KSz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="fcO-VK-ehN"/>
                     <constraint firstItem="sRP-xs-alR" firstAttribute="leading" secondItem="4bu-fv-1H1" secondAttribute="leading" constant="-1" id="gXj-Pg-wj9"/>

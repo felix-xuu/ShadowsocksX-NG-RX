@@ -166,3 +166,46 @@ func ParseV2URL(urlString: String) -> [String : AnyObject] {
     dic["url"] = UserKeys.VmessPrefix + urlString as AnyObject
     return dic
 }
+
+func DNSServersChange() {
+    var args = "Empty"
+    var servers: [String] = []
+    if UserDefaults.standard.bool(forKey: UserKeys.DNSEnable) {
+        if let dnsServers = UserDefaults.standard.string(forKey: UserKeys.DNSServers) {
+            let serverArr = dnsServers.components(separatedBy: [",", "\n"])
+            for item in serverArr {
+                let str = item.trimmingCharacters(in: .whitespacesAndNewlines)
+                if str != "" && validateIpAddress(ipToValidate: str) {
+                    servers.append(str)
+                }
+            }
+        }
+    }
+    if servers.count > 0 {
+        args = servers.joined(separator: " ")
+    }
+    let shPath = Bundle.main.path(forResource: "dns_change", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: shPath!, arguments: [args])
+    task.waitUntilExit()
+    if task.terminationStatus == 0 {
+        NSLog("DNS changed successful.")
+    } else {
+        NSLog("DNS change failed.")
+    }
+}
+
+func validateIpAddress(ipToValidate: String) -> Bool {
+    var sin = sockaddr_in()
+    var sin6 = sockaddr_in6()
+
+    if ipToValidate.withCString({ cstring in inet_pton(AF_INET6, cstring, &sin6.sin6_addr) }) == 1 {
+        // IPv6 peer.
+        return true
+    }
+    else if ipToValidate.withCString({ cstring in inet_pton(AF_INET, cstring, &sin.sin_addr) }) == 1 {
+        // IPv4 peer.
+        return true
+    }
+
+    return false;
+}

@@ -14,7 +14,9 @@ class ProxyPreferencesController: NSWindowController, NSTableViewDataSource, NST
     var selectedNetworkServices: NSMutableSet!
     
     @objc dynamic var autoConfigureNetworkServices: Bool = true
+    @objc dynamic var enableDNS: Bool = false
     
+    @IBOutlet var dnsServersView: NSTextView!
     @IBOutlet var tableView: NSTableView!
     
     var keys: [String : String] = [:]
@@ -25,7 +27,9 @@ class ProxyPreferencesController: NSWindowController, NSTableViewDataSource, NST
         keyLocalize()
 
         let defaults = UserDefaults.standard
-        self.setValue(defaults.bool(forKey: UserKeys.AutoConfigureNetworkServices), forKey: UserKeys.AutoConfigureNetworkServices)
+        autoConfigureNetworkServices = defaults.bool(forKey: UserKeys.AutoConfigureNetworkServices)
+        enableDNS = defaults.bool(forKey: UserKeys.DNSEnable)
+        dnsServersView.string = defaults.string(forKey: UserKeys.DNSServers) ?? ""
         
         if let services = defaults.array(forKey: UserKeys.Proxy4NetworkServices) {
             selectedNetworkServices = NSMutableSet(array: services)
@@ -41,10 +45,16 @@ class ProxyPreferencesController: NSWindowController, NSTableViewDataSource, NST
         self.window!.setAccessibilityValueDescription(self.window!.title)
         keys[self.window!.title] = self.window!.title
         for item in self.window!.contentView!.subviews {
-            if item.tag == 1 && item is NSButton {
-                let button = item as! NSButton
-                button.setAccessibilityValueDescription(button.title)
-                keys[button.title] = button.title
+            if item.tag == 1 {
+                if item is NSTextField {
+                    let textField = item as! NSTextField
+                    textField.setAccessibilityValueDescription(textField.stringValue)
+                    keys[textField.stringValue] = textField.stringValue
+                } else if item is NSButton {
+                    let button = item as! NSButton
+                    button.setAccessibilityValueDescription(button.title)
+                    keys[button.title] = button.title
+                }
             }
         }
     }
@@ -52,9 +62,14 @@ class ProxyPreferencesController: NSWindowController, NSTableViewDataSource, NST
     func keyLocalize() {
         self.window!.title = keys[self.window!.accessibilityValueDescription()!]!.localized
         for item in self.window!.contentView!.subviews {
-            if item.tag == 1 && item is NSButton {
-                let button = item as! NSButton
-                button.title = keys[button.accessibilityValueDescription()!]!.localized
+            if item.tag == 1 {
+                if item is NSTextField {
+                    let textField = item as! NSTextField
+                    textField.stringValue = keys[textField.accessibilityValueDescription()!]!.localized
+                } else if item is NSButton {
+                    let button = item as! NSButton
+                    button.title = keys[button.accessibilityValueDescription()!]!.localized
+                }
             }
         }
     }
@@ -63,6 +78,8 @@ class ProxyPreferencesController: NSWindowController, NSTableViewDataSource, NST
         let defaults = UserDefaults.standard
         defaults.setValue(selectedNetworkServices.allObjects, forKeyPath: UserKeys.Proxy4NetworkServices)
         defaults.set(autoConfigureNetworkServices, forKey: UserKeys.AutoConfigureNetworkServices)
+        defaults.set(enableDNS, forKey: UserKeys.DNSEnable)
+        defaults.set(dnsServersView.string, forKey: UserKeys.DNSServers)
         
         defaults.synchronize()
         

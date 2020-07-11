@@ -162,3 +162,8 @@
 "Nodes Order:" = "Nodes Order:";
 "Address" = "Address";
 "Remark" = "Remark";
+
+"DNS Servers" = "DNS Servers";
+"Enable" = "Enable";
+"Split with comma or newline" = "Split with comma or newline";
+

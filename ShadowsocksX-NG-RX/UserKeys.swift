@@ -55,4 +55,7 @@ class UserKeys: NSObject {
     
     public static let OrderAddress = "order.address"
     public static let OrderRemark = "order.remark"
+    
+    public static let DNSEnable = "DNSEnable"
+    public static let DNSServers = "DNSServers"
 }
