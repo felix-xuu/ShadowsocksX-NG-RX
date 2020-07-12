@@ -91,6 +91,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         updateSSAndPrivoxyServices()
         applyConfig()
         initSleepListener()
+        DNSServersChange()
         initExceptionHandler()
 
         DispatchQueue.global().async {
