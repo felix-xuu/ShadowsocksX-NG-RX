@@ -2,9 +2,14 @@
 
 This project just toy for self.
 
-`Current version is 2.1.6`
+`Current version is 2.1.7`
 
 ## Release Note
+
+### 2.1.7
+
+- add DNS config in proxy preference
+- add error handler
 
 ### 2.1.6
 
