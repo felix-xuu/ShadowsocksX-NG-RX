@@ -91,7 +91,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         updateSSAndPrivoxyServices()
         applyConfig()
         initSleepListener()
-        DNSServersChange()
+        initExceptionHandler()
+
         DispatchQueue.global().async {
             if defaults.bool(forKey: UserKeys.AutoUpdateSubscribe) {
                 self.updateSubscribe(self.manualUpdateSubscribeMenuItem)
@@ -806,6 +807,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         StopHaproxy()
         networkMonitor.stop()
         NSLog("ShadowsocksX stopped")
+    }
+    
+    func initExceptionHandler() {
+        NSSetUncaughtExceptionHandler(uncaughtExceptionHandler)
+        signal(SIGABRT, signalExceptionHandler)
+        signal(SIGILL, signalExceptionHandler)
+        signal(SIGKILL, signalExceptionHandler)
+        signal(SIGSEGV, signalExceptionHandler)
+        signal(SIGFPE, signalExceptionHandler)
+        signal(SIGBUS, signalExceptionHandler)
+        signal(SIGPIPE, signalExceptionHandler)
+        signal(SIGTRAP, signalExceptionHandler)
     }
 }
 
