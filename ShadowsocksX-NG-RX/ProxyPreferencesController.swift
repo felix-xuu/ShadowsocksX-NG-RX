@@ -75,6 +75,20 @@ class ProxyPreferencesController: NSWindowController, NSTableViewDataSource, NST
     }
     
     @IBAction func ok(_ sender: NSObject){
+        let serverArr = dnsServersView.string.components(separatedBy: [",", "\n"])
+        for item in serverArr {
+            let str = item.trimmingCharacters(in: .whitespacesAndNewlines)
+            if str != "" && !validateIpAddress(ipToValidate: str) {
+                let alert = NSAlert.init()
+                alert.alertStyle = NSAlert.Style.warning
+                alert.addButton(withTitle: "OK".localized)
+                alert.messageText = "Warning".localized
+                alert.informativeText = "Invalid IP Address".localized
+                NSApp.activate(ignoringOtherApps: true)
+                alert.runModal()
+                return
+            }
+        }
         let defaults = UserDefaults.standard
         defaults.setValue(selectedNetworkServices.allObjects, forKeyPath: UserKeys.Proxy4NetworkServices)
         defaults.set(autoConfigureNetworkServices, forKey: UserKeys.AutoConfigureNetworkServices)
