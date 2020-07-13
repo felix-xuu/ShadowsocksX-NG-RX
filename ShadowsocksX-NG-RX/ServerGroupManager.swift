@@ -20,7 +20,16 @@ class ServerGroupManager: NSObject {
                 let profiles = serverGroup.serverProfiles.sorted(by: {
                     (a, b) in return UserDefaults.standard.bool(forKey: UserKeys.OrderAddress) ? a.serverHost < b.serverHost : a.remark < b.remark
                 })
-                serverGroup.serverProfiles = profiles
+                var infoArr: [ServerProfile] = []
+                var otherArr: [ServerProfile] = []
+                for item in profiles {
+                    if item.remark.contains("剩余流量") || item.remark.contains("过期时间") {
+                        infoArr.append(item)
+                    } else {
+                        otherArr.append(item)
+                    }
+                }
+                serverGroup.serverProfiles = infoArr + otherArr
                 ServerGroupManager.serverGroups.append(serverGroup)
             }
         }
@@ -32,7 +41,16 @@ class ServerGroupManager: NSObject {
             let profiles = group.serverProfiles.sorted(by: {
                 (a, b) in return UserDefaults.standard.bool(forKey: UserKeys.OrderAddress) ? a.serverHost < b.serverHost : a.remark < b.remark
             })
-            group.serverProfiles = profiles
+            var infoArr: [ServerProfile] = []
+            var otherArr: [ServerProfile] = []
+            for item in profiles {
+                if item.remark.contains("剩余流量") || item.remark.contains("过期时间") {
+                    infoArr.append(item)
+                } else {
+                    otherArr.append(item)
+                }
+            }
+            group.serverProfiles = infoArr + otherArr
         }
         UserDefaults.standard.set(ServerGroup.toDictionaries(serverGroups), forKey: UserKeys.ServerGroups)
     }
