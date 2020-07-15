@@ -9,7 +9,7 @@ This project just toy for self.
 ### 2.1.7
 
 - add DNS config in proxy preference
-- add error handler
+- some improvements
 
 ### 2.1.6
 
