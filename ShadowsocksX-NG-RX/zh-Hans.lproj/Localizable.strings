@@ -16,9 +16,8 @@
 "Manual Update Subscriptions" = "手动更新订阅";
 "Show QR Code For Current Server" = "显示当前服务器二维码";
 "Scan QR Code From Screen" = "扫描屏幕上的二维码";
-"Show Example Configuration" = "显示示例 SS(R) 配置";
-"Import Configuration" = "导入 SS(R) 服务器配置";
-"Export All Servers" = "导出 SS(R) 服务器配置";
+"Import Configuration" = "导入服务器配置";
+"Export All Servers" = "导出服务器配置";
 "Import Server URLs From Pasteboard" = "从剪切板导入服务器配置";
 "Server Preference" = "服务器设置";
 "Ping Servers" = "服务器延迟测试";

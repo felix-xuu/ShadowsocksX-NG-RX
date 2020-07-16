@@ -16,9 +16,8 @@
 "Manual Update Subscriptions" = "Manual Update Subscriptions";
 "Show QR Code For Current Server" = "Show QR Code For Current Server";
 "Scan QR Code From Screen" = "Scan QR Code From Screen";
-"Show Example Configuration" = "Show Example SS(R) Configuration";
-"Import Configuration" = "Import SS(R) Configuration";
-"Export All Servers" = "Export SS(R) Servers";
+"Import Configuration" = "Import Configuration";
+"Export All Servers" = "Export Servers";
 "Import Server URLs From Pasteboard" = "Import Server URLs From Pasteboard";
 "Server Preference" = "Server Preference";
 "Ping Servers" = "Ping Servers";

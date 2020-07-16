@@ -124,12 +124,6 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="hW7-qK-7dd"/>
-                            <menuItem title="Show Example Configuration" id="pdy-JE-50Q">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="showExampleConfig:" target="Voe-Tx-rLC" id="2fR-af-bNb"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Import Configuration" id="T9g-gy-gvv">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>

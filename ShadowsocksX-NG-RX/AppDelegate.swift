@@ -15,7 +15,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     // MARK: Controllers
     var qrcodeWinCtrl: SWBQRCodeWindowController!
     var preferencesWinCtrl: PreferencesWindowController!
-    var showExampleWinCtrl: ShowExampleConfigController!
     var advPreferencesWinCtrl: AdvPreferencesWindowController!
     var proxyPreferencesWinCtrl: ProxyPreferencesController!
     var editUserRulesWinCtrl: UserRulesController!
@@ -472,13 +471,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     
     @IBAction func scanQRCodeFromScreen(_ sender: NSMenuItem) {
         ScanQRCodeOnScreen()
-    }
-    
-    @IBAction func showExampleConfig(_ sender: NSMenuItem) {
-        showExampleWinCtrl = ShowExampleConfigController(windowNibName: "ShowExampleConfigController")
-        showExampleWinCtrl.showWindow(self)
-        NSApp.activate(ignoringOtherApps: true)
-        showExampleWinCtrl.window?.makeKeyAndOrderFront(self)
     }
     
     @IBAction func importConfigFile(_ sender: NSMenuItem) {
