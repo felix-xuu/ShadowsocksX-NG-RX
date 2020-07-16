@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 class PingServers:NSObject {
     static let instance = PingServers()
@@ -112,32 +111,26 @@ class PingServers:NSObject {
         return latency
     }
     
-    func pingSingleHost(host:String,v2host:String,port:UInt16,localPort:UInt16,method:String,password:String ,completionHandler:@escaping (String?) -> Void){
+    func pingSingleHost(host:String,port:UInt16,localPort:UInt16,method:String,password:String ,completionHandler:@escaping (String?) -> Void){
         DispatchQueue.global(qos: .userInteractive).async {
-            if v2host != "" {
-                if let outputString = self.runCommand(cmd: "/sbin/ping", args: "-c", "1", "-t", "3", v2host).output.last{
-                    completionHandler(self.getlatencyFromString(result: outputString,type: "v2"))
-                }
-            }else{
-                let path = NSHomeDirectory()+APP_SUPPORT_DIR+"httping"
-                var ssArgs: [String] = []
-                ssArgs.append("-s")
-                ssArgs.append(host)
-                ssArgs.append("-p")
-                ssArgs.append(String(port))
-                ssArgs.append("-k")
-                ssArgs.append(password)
-                ssArgs.append("-m")
-                ssArgs.append(method)
-                ssArgs.append("-l")
-                ssArgs.append(String(localPort))
-                ssArgs.append("--reuse-port")
-                ssArgs.append("--fast-open")
-                ssArgs.append("-f")
-                ssArgs.append("sspid.txt")
-                if let outputString = self.runCommand2(ssArgs: ssArgs,cmd: path, args: "-5", "-x", "127.0.0.1:"+String(localPort), "-g", "http://www.gstatic.com/generate_204", "-c","1","-t","3","-o","204","-m").output.last{
-                    completionHandler(self.getlatencyFromString(result: outputString,type: "ss"))
-                }
+            let path = NSHomeDirectory()+APP_SUPPORT_DIR+"httping"
+            var ssArgs: [String] = []
+            ssArgs.append("-s")
+            ssArgs.append(host)
+            ssArgs.append("-p")
+            ssArgs.append(String(port))
+            ssArgs.append("-k")
+            ssArgs.append(password)
+            ssArgs.append("-m")
+            ssArgs.append(method)
+            ssArgs.append("-l")
+            ssArgs.append(String(localPort))
+            ssArgs.append("--reuse-port")
+            ssArgs.append("--fast-open")
+            ssArgs.append("-f")
+            ssArgs.append("sspid.txt")
+            if let outputString = self.runCommand2(ssArgs: ssArgs,cmd: path, args: "-5", "-x", "127.0.0.1:"+String(localPort), "-g", "http://www.gstatic.com/generate_204", "-c","1","-t","3","-o","204","-m").output.last{
+                completionHandler(self.getlatencyFromString(result: outputString,type: "ss"))
             }
         }
     }
@@ -152,11 +145,10 @@ class PingServers:NSObject {
                 total += 1
                 po = po + 1
                 let host = profiles[j].serverHost
-                let v2host=profiles[j].host
                 let port = profiles[j].serverPort
                 let method = profiles[j].method
                 let password = profiles[j].password
-                pingSingleHost(host: host,v2host: v2host,port: port,localPort: po,method: method,password: password, completionHandler: {
+                pingSingleHost(host: host,port: port,localPort: po,method: method,password: password, completionHandler: {
                     if let latency = $0 {
                         profiles[j].latency = latency
                     } else {
@@ -211,12 +203,13 @@ class PingServers:NSObject {
         usleep(useconds_t(1 * 1000 * 1000))
         let defaults = UserDefaults.standard
         let op = runCommand(cmd: "/usr/bin/curl", args: "-m", "5", "--socks5", defaults.string(forKey: UserKeys.Socks5_ListenAddress)!+":"+defaults.string(forKey: UserKeys.Socks5_ListenPort)!, "ipinfo.io").output.joined()
-        let json = JSON(op.data(using: String.Encoding.utf8) ?? Data())
         var location = " -"
-        if let city = json["city"].string{
-            location = city
-            if let country = json["country"].string{
-                location = location + " (" + country + ")"
+        if let json = try? JSONSerialization.jsonObject(with: Data(op.utf8), options: []) as? [String:Any] {
+            if let city = json["city"] as? String {
+                location = city
+                if let country = json["country"] as? String {
+                    location = location + " (" + country + ")"
+                }
             }
         }
         return location

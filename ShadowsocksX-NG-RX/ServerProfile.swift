@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import SwiftyJSON
 
 class ServerProfile: NSObject {
     var uuid: String
@@ -28,16 +27,6 @@ class ServerProfile: NSObject {
     var groupId: String = ""
     var hashVal: String = ""
     var latency: String?
-    
-    //v2ray
-    @objc dynamic var v: String = "2"
-    @objc dynamic var host: String = ""
-    @objc dynamic var path: String = ""
-    @objc dynamic var tls: String = ""
-    @objc dynamic var id: String = ""
-    @objc dynamic var aid: String = ""
-    @objc dynamic var net: String = ""
-    @objc dynamic var type: String = ""
     
     override init() {
         uuid = UUID().uuidString
@@ -68,15 +57,6 @@ class ServerProfile: NSObject {
         profile.groupId = data["groupId"] as? String ?? ""
         profile.group = data["group"] as? String ?? ""
         profile.hashVal = data["hashVal"] as? String ?? ""
-        
-        profile.v = data["v"] as? String ?? "2"
-        profile.host = data["host"] as? String ?? ""
-        profile.path = data["path"] as? String ?? ""
-        profile.tls = data["tls"] as? String ?? ""
-        profile.id = data["id"] as? String ?? ""
-        profile.aid = data["aid"] as? String ?? ""
-        profile.net = data["net"] as? String ?? ""
-        profile.type = data["type"] as? String ?? ""
         return profile
     }
     
@@ -96,15 +76,6 @@ class ServerProfile: NSObject {
         d["groupId"] = data.groupId as AnyObject?
         d["group"] = data.group as AnyObject?
         d["hashVal"] = data.hashVal as AnyObject?
-        
-        d["v"] = data.v as AnyObject?
-        d["host"] = data.host as AnyObject?
-        d["path"] = data.path as AnyObject?
-        d["tls"] = data.tls as AnyObject?
-        d["id"] = data.id as AnyObject?
-        d["aid"] = data.aid as AnyObject?
-        d["net"] = data.net as AnyObject?
-        d["type"] = data.type as AnyObject?
         return d
     }
     
@@ -178,10 +149,7 @@ class ServerProfile: NSObject {
     }
     
     func URL() -> String {
-        if !id.isEmpty {
-            let json = JSON(["v": v, "host": host, "path": path, "tls": tls, "ps": remark, "add": serverHost, "port": serverPort, "id": id, "aid": aid, "net": net, "type": type])
-            return UserKeys.VmessPrefix + encode64(str: json.rawString()!)
-        } else if(obfs == "plain") {
+        if(obfs == "plain") {
             let parts = "\(method):\(password)@\(serverHost):\(serverPort)"
             let base64String = parts.data(using: String.Encoding.utf8)?
                 .base64EncodedString(options: NSData.Base64EncodingOptions())

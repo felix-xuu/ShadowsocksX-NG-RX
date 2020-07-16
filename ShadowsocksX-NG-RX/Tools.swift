@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreImage
-import SwiftyJSON
 
 func ScanQRCodeOnScreen() {
     var displays: UnsafeMutablePointer<CGDirectDisplayID>? = nil
@@ -36,7 +35,7 @@ func ScanQRCodeOnScreen() {
             let features = (detector?.features(in: CIImage.init(cgImage: image!)))!
             for item in features {
                 if let feature = (item as! CIQRCodeFeature).messageString {
-                    if feature.hasPrefix(UserKeys.SSPrefix) || feature.hasPrefix(UserKeys.SSRPrefix) || feature.hasPrefix(UserKeys.VmessPrefix) {
+                    if feature.hasPrefix(UserKeys.SSPrefix) || feature.hasPrefix(UserKeys.SSRPrefix) {
                         urls.append(URL.init(string: feature)!)
                     }
                 }
@@ -85,8 +84,6 @@ func ParseAppURLSchemes(url: URL) -> [String : AnyObject]? {
             return ParseSSURL(urlString: str.replacingOccurrences(of: UserKeys.SSPrefix, with: ""))
         } else if str.hasPrefix(UserKeys.SSRPrefix) {
             return ParseSSRURL(urlString: str.replacingOccurrences(of: UserKeys.SSRPrefix, with: ""))
-        } else if str.hasPrefix(UserKeys.VmessPrefix) {
-            return ParseV2URL(urlString: str.replacingOccurrences(of: UserKeys.VmessPrefix, with: ""))
         }
     }
     return nil
@@ -144,26 +141,6 @@ func ParseSSRURL(urlString: String) -> [String : AnyObject] {
         }
     }
     dic["url"] = UserKeys.SSRPrefix + urlString as AnyObject
-    return dic
-}
-
-// vmess:// + base64({"host":"","path":"","tls":"","add":"","port":1000,"aid":1,"net":"","type":"","v":"2","ps":"","id":""})
-func ParseV2URL(urlString: String) -> [String : AnyObject] {
-    var dic = [String : AnyObject]()
-    let decodeStr = decode64(str: urlString)
-    let json = JSON(parseJSON: decodeStr)
-    dic["v"] = json["v"].string as AnyObject
-    dic["ServerHost"] = json["add"].string as AnyObject
-    dic["ServerPort"] = json["port"].intValue as AnyObject
-    dic["host"] = json["host"].string as AnyObject
-    dic["path"] = json["path"].string as AnyObject
-    dic["tls"] = json["tls"].string as AnyObject
-    dic["id"] = json["id"].string as AnyObject
-    dic["aid"] = json["aid"].stringValue as AnyObject
-    dic["net"] = json["net"].string as AnyObject
-    dic["type"] = json["type"].string as AnyObject
-    dic["remarks"] = json["ps"].string as AnyObject
-    dic["url"] = UserKeys.VmessPrefix + urlString as AnyObject
     return dic
 }
 

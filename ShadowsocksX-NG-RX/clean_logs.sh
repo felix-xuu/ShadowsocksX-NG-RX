@@ -10,4 +10,3 @@ cd `dirname "${BASH_SOURCE[0]}"`
 rm "$HOME/Library/Logs/ssr-haproxy.log"
 rm "$HOME/Library/Logs/ssr-local.log"
 rm "$HOME/Library/Logs/ssr-privoxy.log"
-rm "$HOME/Library/Logs/ssr-v2ray.log"

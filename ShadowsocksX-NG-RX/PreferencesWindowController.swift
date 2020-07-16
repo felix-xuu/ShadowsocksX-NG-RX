@@ -28,17 +28,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     @IBOutlet weak var remarkTextField: NSTextField!
     @IBOutlet weak var groupTextField: NSTextField!
     @IBOutlet weak var urlTextField: NSTextField!
-    //v2
-    @IBOutlet weak var v2HostTextField: NSTextField!
-    @IBOutlet weak var v2PortTextField: NSTextField!
-    @IBOutlet weak var pathTextField: NSTextField!
-    @IBOutlet weak var tlsTextField: NSTextField!
-    @IBOutlet weak var psTextField: NSTextField!
-    @IBOutlet weak var addTextField: NSTextField!
-    @IBOutlet weak var idTextField: NSTextField!
-    @IBOutlet weak var aidTextField: NSTextField!
-    @IBOutlet weak var netTextField: NSTextField!
-    @IBOutlet weak var typeTextField: NSTextField!
     
     @IBOutlet weak var duplicateGroupButton: NSButton!
     @IBOutlet weak var removeGroupButton: NSButton!
@@ -427,14 +416,8 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
             } else {
                 removeProfileButton.isEnabled = true
                 duplicateProfileButton.isEnabled = true
-                let p = ServerGroupManager.serverGroups[groupsTableView.selectedRow].serverProfiles[profilesTableView.selectedRow]
-                if p.URL().hasPrefix(UserKeys.VmessPrefix) {
-                    profileBox.isHidden = true
-                    v2ProfileBox.isHidden = false
-                } else {
-                    profileBox.isHidden = false
-                    v2ProfileBox.isHidden = true
-                }
+                profileBox.isHidden = false
+                v2ProfileBox.isHidden = true
             }
         }
     }
@@ -461,19 +444,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
         pwdTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "password", options: [NSBindingOption.continuouslyUpdatesValue: true])
     
         urlTextField.stringValue = editingProfile!.URL()
-        
-        //v2
-        addTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "serverHost", options: [NSBindingOption.continuouslyUpdatesValue: true])
-        v2PortTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "serverPort", options: [NSBindingOption.continuouslyUpdatesValue: true])
-        v2HostTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "host", options: [NSBindingOption.continuouslyUpdatesValue: true])
-        pathTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "path", options: [NSBindingOption.continuouslyUpdatesValue: true])
-        tlsTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "tls", options: [NSBindingOption.continuouslyUpdatesValue: true])
-        psTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "remark", options: [NSBindingOption.continuouslyUpdatesValue: true])
-        idTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "id", options: [NSBindingOption.continuouslyUpdatesValue: true])
-        aidTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "aid", options: [NSBindingOption.continuouslyUpdatesValue: true])
-        netTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "net", options: [NSBindingOption.continuouslyUpdatesValue: true])
-        typeTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "type", options: [NSBindingOption.continuouslyUpdatesValue: true])
-        
     }
     
     //--------------------------------------------------

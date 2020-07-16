@@ -50,7 +50,7 @@ extension ServerProfile {
 }
 
 func splitor(url: String) -> [String] {
-    let regexp = "((ssr://)||(ss://)||(vmess://))(.+)"
+    let regexp = "((ssr://)||(ss://))(.+)"
     var ret: [String] = []
     var ssrUrl = url
     while ssrUrl.range(of:regexp, options: .regularExpression) != nil {

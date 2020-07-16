@@ -35,8 +35,7 @@
 "Show Network Speed" = "显示网速";
 "Advance Preference" = "高级设置";
 "Launch At Login" = "登录时自动启动";
-"Show Logs" = "显示 SS 日志";
-"Show v2ray Logs" = "显示 v2ray 日志";
+"Show Logs" = "显示日志";
 "Language" = "语言";
 "Check for update" = "检查更新";
 "About" = "关于";

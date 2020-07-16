@@ -72,8 +72,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.Language: "en",
             UserKeys.EnableLoadbalance: false,
             UserKeys.LoadbalanceEnableAllNodes: true,
-            UserKeys.V2rayBlockAD: false,
-            UserKeys.V2rayDirectCN: false,
             UserKeys.OrderRemark: false,
             UserKeys.OrderAddress: true,
             UserKeys.DNSEnable: false,
@@ -146,7 +144,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func initInstall() {
         InstallSSLocal()
         InstallPrivoxy()
-        InstallV2ray()
         ProxyConfHelper.install()
         InstallHaproxy()
         InstallHttping()
@@ -244,9 +241,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                     LoadBalance.enableLoadBalance()
                 } else {
                     generateSSLocalLauchAgentPlist()
-                    generateV2rayLauchAgentPlist()
                     SyncSSLocal()
-                    SyncV2ray()
                     self.applyConfig()
                 }
             }
@@ -365,28 +360,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func updateSSAndPrivoxyServices() {
         if UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn) {
             if ServerProfileManager.activeProfile != nil && !UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
-                if ServerProfileManager.activeProfile!.URL().hasPrefix(UserKeys.VmessPrefix) {
-                    writeV2rayConfFile(profiles: [ServerProfileManager.activeProfile!])
-                } else {
-                    writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
-                }
+                writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
                 writePrivoxyConfFile()
             }
             if ServerProfileManager.activeProfile != nil {
-                if ServerProfileManager.activeProfile!.URL().hasPrefix(UserKeys.VmessPrefix) {
-                    StopSSLocal()
-                    ReloadConfV2ray()
-                } else {
-                    StopV2ray()
-                    ReloadConfSSLocal()
-                }
+                ReloadConfSSLocal()
                 ReloadConfPrivoxy()
             }
             SyncPac()
         } else {
             StopSSLocal()
             StopPrivoxy()
-            StopV2ray()
         }
     }
     
@@ -595,22 +579,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         NSWorkspace.shared.openFile(path, withApplication: "Console")
     }
     
-    @IBAction func showV2Logs(_ sender: NSMenuItem) {
-        let fileMgr = FileManager.default
-        let path = NSHomeDirectory() + "/Library/Logs/ssr-v2ray.log"
-        if !fileMgr.fileExists(atPath: path) {
-            let alert = NSAlert.init()
-            alert.alertStyle = NSAlert.Style.warning
-            alert.addButton(withTitle: "OK".localized)
-            alert.messageText = "Warning".localized
-            alert.informativeText = "Log not exist".localized
-            NSApp.activate(ignoringOtherApps: true)
-            alert.runModal()
-            return
-        }
-        NSWorkspace.shared.openFile(path, withApplication: "Console")
-    }
-    
     @IBAction func showAbout(_ sender: NSMenuItem) {
         NSApp.orderFrontStandardAboutPanel(sender);
         NSApp.activate(ignoringOtherApps: true)
@@ -637,7 +605,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 .map { URL(string: $0) }
                 .filter { $0 != nil }
                 .map { $0! }
-            urls = urls.filter { $0.absoluteString.hasPrefix(UserKeys.SSPrefix) || $0.absoluteString.hasPrefix(UserKeys.SSRPrefix) || $0.absoluteString.hasPrefix(UserKeys.VmessPrefix) }
+            urls = urls.filter { $0.absoluteString.hasPrefix(UserKeys.SSPrefix) || $0.absoluteString.hasPrefix(UserKeys.SSRPrefix) }
             NotificationCenter.default.post(
                 name: Notification.Name(rawValue: NOTIFY_FOUND_SS_URL), object: nil
                 , userInfo: [
