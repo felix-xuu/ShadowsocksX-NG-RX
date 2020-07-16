@@ -5,14 +5,12 @@ PODS:
     - GCDWebServer/Core (= 3.5.4)
   - GCDWebServer/Core (3.5.4)
   - Sparkle (1.23.0)
-  - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - BRLOptionParser
   - GCDWebServer
   - Sparkle
-  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
@@ -20,15 +18,13 @@ SPEC REPOS:
     - BRLOptionParser
     - GCDWebServer
     - Sparkle
-    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   BRLOptionParser: a03256a8ff003ca1f5376c55f55f210e085a3958
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   Sparkle: 55b1a87ba69d56913375a281546b7c82dec95bb0
-  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 70a2d940a632aa8566a0248924af6efe004260e1
+PODFILE CHECKSUM: 6f2b46546977ce0bdffebc04896251bc160e7340
 
 COCOAPODS: 1.9.3

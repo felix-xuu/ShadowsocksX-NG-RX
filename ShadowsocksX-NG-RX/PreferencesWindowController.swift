@@ -14,7 +14,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     @IBOutlet weak var groupsTableView: NSTableView!
     
     @IBOutlet weak var profileBox: NSBox!
-    @IBOutlet weak var v2ProfileBox: NSBox!
     
     @IBOutlet weak var hostTextField: NSTextField!
     @IBOutlet weak var portTextField: NSTextField!
@@ -404,7 +403,6 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
             removeProfileButton.isEnabled = false
             duplicateProfileButton.isEnabled = false
             profileBox.isHidden = true
-            v2ProfileBox.isHidden = true
         } else {
             removeGroupButton.isEnabled = true
             duplicateGroupButton.isEnabled = true
@@ -412,12 +410,10 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
                 removeProfileButton.isEnabled = false
                 duplicateProfileButton.isEnabled = false
                 profileBox.isHidden = true
-                v2ProfileBox.isHidden = true
             } else {
                 removeProfileButton.isEnabled = true
                 duplicateProfileButton.isEnabled = true
                 profileBox.isHidden = false
-                v2ProfileBox.isHidden = true
             }
         }
     }
