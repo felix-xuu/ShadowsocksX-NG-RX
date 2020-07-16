@@ -27,7 +27,7 @@
 "Proxy" = "Proxy";
 "Update PAC" = "Update PAC";
 "Update ACL" = "Update ACL";
-"Edit Customize PAC Rules" = "Edit Customize PAC Rules";
+"Edit PAC Rules" = "Edit PAC Rules";
 "DNS Preference" = "DNS Preference";
 
 "Show Network Speed" = "Show Network Speed";
@@ -154,5 +154,5 @@
 
 "DNS Servers" = "DNS Servers";
 "Enable" = "Enable";
-"Split with comma or newline" = "Split with comma or newline";
+"split with comma or newline" = "split with comma or newline";
 "Invalid IP Address" = "Invalid IP Address";

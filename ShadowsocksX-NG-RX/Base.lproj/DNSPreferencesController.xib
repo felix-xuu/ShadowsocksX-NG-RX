@@ -75,17 +75,6 @@ DQ
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
-                    <textField verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="aYU-L3-gdd">
-                        <rect key="frame" x="65" y="176" width="178" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="mTQ-ak-cPB"/>
-                        </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Split with comma or newline" id="2Y6-O2-TAI">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                     <button tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="cam-qM-3nd">
                         <rect key="frame" x="18" y="206" width="63" height="18"/>
                         <buttonCell key="cell" type="check" title="Enable" bezelStyle="regularSquare" imagePosition="left" tag="1" inset="2" id="hyi-8H-EGF">
@@ -96,25 +85,35 @@ DQ
                             <binding destination="-2" name="value" keyPath="enableDNS" id="E4t-a7-ANP"/>
                         </connections>
                     </button>
+                    <textField verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="aYU-L3-gdd" userLabel="split with comma or newline">
+                        <rect key="frame" x="61" y="179" width="177" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="W7q-RC-gNK"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="split with comma or newline" id="2Y6-O2-TAI">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="NVO-zo-7QI" secondAttribute="trailing" constant="19" id="2nE-1t-Bj2"/>
                     <constraint firstItem="ulk-V7-E4w" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="3Xm-yu-XWf"/>
                     <constraint firstItem="NVO-zo-7QI" firstAttribute="leading" secondItem="ulk-V7-E4w" secondAttribute="trailing" constant="12" symbolic="YES" id="6HE-9H-l2E"/>
-                    <constraint firstItem="aYU-L3-gdd" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="45" id="BA6-I0-Kdq"/>
+                    <constraint firstAttribute="trailing" secondItem="3IH-ma-BAN" secondAttribute="trailing" constant="20" symbolic="YES" id="6hh-J0-U5i"/>
+                    <constraint firstItem="aYU-L3-gdd" firstAttribute="centerX" secondItem="3IH-ma-BAN" secondAttribute="centerX" id="71Q-v4-G30"/>
+                    <constraint firstItem="aYU-L3-gdd" firstAttribute="top" secondItem="cam-qM-3nd" secondAttribute="bottom" constant="8" symbolic="YES" id="AKk-cP-Z6X"/>
                     <constraint firstAttribute="trailing" secondItem="ulk-V7-E4w" secondAttribute="trailing" constant="101" id="CrM-ho-RyQ"/>
-                    <constraint firstItem="3IH-ma-BAN" firstAttribute="top" secondItem="cam-qM-3nd" secondAttribute="bottom" constant="28" id="E6W-29-rg5"/>
-                    <constraint firstItem="aYU-L3-gdd" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="67" id="P83-h4-8ae"/>
-                    <constraint firstItem="NVO-zo-7QI" firstAttribute="top" secondItem="3IH-ma-BAN" secondAttribute="bottom" constant="19" id="Q3K-p0-1MV"/>
-                    <constraint firstItem="aYU-L3-gdd" firstAttribute="top" secondItem="cam-qM-3nd" secondAttribute="bottom" constant="11" id="Srq-tR-ipF"/>
+                    <constraint firstItem="cam-qM-3nd" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="LRC-Oi-AWg"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cam-qM-3nd" secondAttribute="trailing" constant="20" symbolic="YES" id="X5B-9s-bAF"/>
+                    <constraint firstItem="cam-qM-3nd" firstAttribute="leading" secondItem="3IH-ma-BAN" secondAttribute="leading" id="aEl-w9-eeN"/>
                     <constraint firstItem="NVO-zo-7QI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="se5-gp-TjO" secondAttribute="leading" symbolic="YES" id="afN-et-6Yf"/>
                     <constraint firstItem="ulk-V7-E4w" firstAttribute="baseline" secondItem="NVO-zo-7QI" secondAttribute="baseline" id="eeP-xO-41M"/>
-                    <constraint firstItem="3IH-ma-BAN" firstAttribute="trailing" secondItem="aYU-L3-gdd" secondAttribute="trailing" constant="37" id="kqC-Ua-dhY"/>
-                    <constraint firstItem="cam-qM-3nd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="mYV-j3-BI2"/>
-                    <constraint firstItem="3IH-ma-BAN" firstAttribute="top" secondItem="cam-qM-3nd" secondAttribute="bottom" constant="28" id="oAs-pv-UaI"/>
-                    <constraint firstAttribute="trailing" secondItem="cam-qM-3nd" secondAttribute="trailing" constant="219" id="tJw-5X-xR1"/>
+                    <constraint firstItem="NVO-zo-7QI" firstAttribute="top" secondItem="3IH-ma-BAN" secondAttribute="bottom" constant="19" id="iye-hL-R95"/>
+                    <constraint firstItem="cam-qM-3nd" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" symbolic="YES" id="rti-mJ-7J5"/>
+                    <constraint firstItem="3IH-ma-BAN" firstAttribute="top" secondItem="cam-qM-3nd" secondAttribute="bottom" constant="28" id="wEw-7A-Iej"/>
                     <constraint firstAttribute="bottom" secondItem="ulk-V7-E4w" secondAttribute="bottom" constant="7" id="wHX-zr-KtQ"/>
-                    <constraint firstItem="3IH-ma-BAN" firstAttribute="leading" secondItem="aYU-L3-gdd" secondAttribute="leading" constant="-47" id="xtW-a6-AAW"/>
                 </constraints>
             </view>
             <connections>

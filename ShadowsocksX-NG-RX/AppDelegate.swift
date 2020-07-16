@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     var qrcodeWinCtrl: SWBQRCodeWindowController!
     var preferencesWinCtrl: PreferencesWindowController!
     var advPreferencesWinCtrl: AdvPreferencesWindowController!
-    var proxyPreferencesWinCtrl: ProxyPreferencesController!
+    var dnsPreferencesWinCtrl: DNSPreferencesController!
     var editUserRulesWinCtrl: UserRulesController!
     var subscribePreferenceWinCtrl: SubscribePreferenceWindowController!
     var loadBalancePreferenceController: LoadBalancePreferenceController!
@@ -506,10 +506,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     @IBAction func editProxyPreferences(_ sender: NSObject) {
-        proxyPreferencesWinCtrl = ProxyPreferencesController(windowNibName: "ProxyPreferencesController")
-        proxyPreferencesWinCtrl.showWindow(self)
+        dnsPreferencesWinCtrl = DNSPreferencesController(windowNibName: "DNSPreferencesController")
+        dnsPreferencesWinCtrl.showWindow(self)
         NSApp.activate(ignoringOtherApps: true)
-        proxyPreferencesWinCtrl.window?.makeKeyAndOrderFront(self)
+        dnsPreferencesWinCtrl.window?.makeKeyAndOrderFront(self)
     }
     
     @IBAction func doPingTest(_ sender: AnyObject) {

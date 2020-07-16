@@ -156,7 +156,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Proxy" id="YZp-bf-L40">
                         <items>
-                            <menuItem title="Edit Customize PAC Rules" id="rms-p0-CvB">
+                            <menuItem title="Edit PAC Rules" id="rms-p0-CvB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="editUserRulesForPAC:" target="Voe-Tx-rLC" id="ZtK-2d-Pcl"/>
