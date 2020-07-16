@@ -28,7 +28,7 @@
 "Update PAC" = "Update PAC";
 "Update ACL" = "Update ACL";
 "Edit Customize PAC Rules" = "Edit Customize PAC Rules";
-"Advance Proxy Preference" = "Advance Proxy Preference";
+"DNS Preference" = "DNS Preference";
 
 "Show Network Speed" = "Show Network Speed";
 "Advance Preference" = "Advance Preference";
@@ -132,9 +132,6 @@
 "HTTP Listen Address" = "HTTP Listen Address";
 "HTTP Listen Port" = "HTTP Listen Port";
 "LoadBalance Port" = "LoadBalance Port";
-
-"Advance Proxy Preferences" = "Advance Proxy Preferences";
-"Auto Configure" = "Auto Configure";
 
 "Subscription" = "Subscription";
 "Strategy" = "Strategy";

@@ -8,16 +8,10 @@
 
 import Cocoa
 
-class ProxyPreferencesController: NSWindowController, NSTableViewDataSource, NSTableViewDelegate {
-    
-    var networkServices: NSArray!
-    var selectedNetworkServices: NSMutableSet!
-    
-    @objc dynamic var autoConfigureNetworkServices: Bool = true
+class DNSPreferencesController: NSWindowController {
     @objc dynamic var enableDNS: Bool = false
     
     @IBOutlet var dnsServersView: NSTextView!
-    @IBOutlet var tableView: NSTableView!
     
     var keys: [String : String] = [:]
 
@@ -27,18 +21,8 @@ class ProxyPreferencesController: NSWindowController, NSTableViewDataSource, NST
         keyLocalize()
 
         let defaults = UserDefaults.standard
-        autoConfigureNetworkServices = defaults.bool(forKey: UserKeys.AutoConfigureNetworkServices)
         enableDNS = defaults.bool(forKey: UserKeys.DNSEnable)
         dnsServersView.string = defaults.string(forKey: UserKeys.DNSServers) ?? ""
-        
-        if let services = defaults.array(forKey: UserKeys.Proxy4NetworkServices) {
-            selectedNetworkServices = NSMutableSet(array: services)
-        } else {
-            selectedNetworkServices = NSMutableSet()
-        }
-        
-        networkServices = ProxyConfTool.networkServicesList() as NSArray
-        tableView.reloadData()
     }
     
     func initKeys() {
@@ -90,52 +74,15 @@ class ProxyPreferencesController: NSWindowController, NSTableViewDataSource, NST
             }
         }
         let defaults = UserDefaults.standard
-        defaults.setValue(selectedNetworkServices.allObjects, forKeyPath: UserKeys.Proxy4NetworkServices)
-        defaults.set(autoConfigureNetworkServices, forKey: UserKeys.AutoConfigureNetworkServices)
         defaults.set(enableDNS, forKey: UserKeys.DNSEnable)
         defaults.set(dnsServersView.string, forKey: UserKeys.DNSServers)
-        
         defaults.synchronize()
         
         window?.performClose(self)
-        
         NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIFY_ADV_PROXY_CONF_CHANGED), object: nil)
     }
     
     @IBAction func cancel(_ sender: NSObject){
         window?.performClose(self)
-    }
-    
-    // For NSTableViewDataSource
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        if networkServices != nil {
-            return networkServices.count
-        }
-        return 0;
-    }
-    
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        let cell = tableColumn!.dataCell as! NSButtonCell
-        
-        let key = (networkServices[row] as AnyObject)["key"] as! String
-        if selectedNetworkServices.contains(key) {
-            cell.state = NSControl.StateValue(rawValue: 1)
-        } else {
-            cell.state = NSControl.StateValue(rawValue: 0)
-        }
-        let userDefinedName = (networkServices[row] as AnyObject)["userDefinedName"] as! String
-        cell.title = userDefinedName
-        return cell
-    }
-    
-    func tableView(_ tableView: NSTableView, setObjectValue object: Any?
-        , for tableColumn: NSTableColumn?, row: Int) {
-        let key = (networkServices[row] as AnyObject)["key"] as! String
-        
-        if (object! as AnyObject).intValue == 1 {
-            selectedNetworkServices.add(key)
-        } else {
-            selectedNetworkServices.remove(key)
-        }
     }
 }

@@ -28,7 +28,7 @@
 "Update PAC" = "更新PAC文件";
 "Update ACL" = "更新ACL文件";
 "Edit Customize PAC Rules" = "编辑自定义 PAC 规则";
-"Advance Proxy Preference" = "高级代理设置";
+"DNS Preference" = "DNS 设置";
 
 "Show Network Speed" = "显示网速";
 "Advance Preference" = "高级设置";
@@ -132,9 +132,6 @@
 "HTTP Listen Address" = "HTTP 监听地址";
 "HTTP Listen Port" = "HTTP 监听端口";
 "LoadBalance Port" = "负载均衡端口";
-
-"Advance Proxy Preferences" = "高级代理设置";
-"Auto Configure" = "自动配置";
 
 "Subscription" = "订阅分组";
 "Strategy" = "策略";
