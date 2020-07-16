@@ -74,8 +74,6 @@ func generateSSLocalLauchAgentPlist() {
         ACLPath = NSHomeDirectory() + "/.ShadowsocksX-NG-RX/chn.acl"
     } else if enabeledMode == "aclAuto" {
         ACLPath = NSHomeDirectory() + "/.ShadowsocksX-NG-RX/gfwlist.acl"
-    } else if enabeledMode == "aclBlockChina" {
-        ACLPath = NSHomeDirectory() + "/.ShadowsocksX-NG-RX/blockchn.acl"
     }
     
     if ACLPath != nil {

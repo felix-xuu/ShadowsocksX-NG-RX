@@ -9,7 +9,6 @@
 "Global Mode" = "全局模式";
 "Manual Mode" = "手动模式";
 "ACL Auto Mode" = "ACL自动模式";
-"ACL Block China IP Mode" = "ACL绕过大陆IP模式";
 
 "Servers" = "服务器";
 "Edit Subscriptions" = "编辑订阅";
@@ -113,8 +112,6 @@
 "Failed to download latest ACL White List" = "ACL 白名单更新失败";
 "ACL Auto List update successful" = "ACL 自动代理列表更新成功";
 "Failed to download latest ACL Auto List" = "ACL 自动代理列表更新失败";
-"ACL Block CHN List update successful" = "ACL 中国地址列表更新成功";
-"Failed to download latest ACL Block CHN List" = "更新 ACL 中国地址列表失败";
 
 "User Rules" = "用户规则";
 
@@ -129,7 +126,6 @@
 "PAC Listen Port" = "PAC 监听端口";
 "ACL White List URL" = "ACL 白名单列表";
 "ACL Auto List URL" = "ACL 自动代理列表";
-"ACL Block China URL" = "ACL 中国地址列表";
 "HTTP Proxy Enable" = "启用 HTTP 代理";
 "Follow Global Mode" = "跟随全局模式";
 "Timeout" = "超时时间";
@@ -137,8 +133,6 @@
 "HTTP Listen Address" = "HTTP 监听地址";
 "HTTP Listen Port" = "HTTP 监听端口";
 "LoadBalance Port" = "负载均衡端口";
-"Enable CN Direct" = "启用国内直连";
-"Enable AD Block" = "启用广告过滤";
 
 "Advance Proxy Preferences" = "高级代理设置";
 "Auto Configure" = "自动配置";

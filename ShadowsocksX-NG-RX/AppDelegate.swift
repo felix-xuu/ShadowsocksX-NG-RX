@@ -58,7 +58,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.GFWListURL: "https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt",
             UserKeys.ACLWhiteListURL: "https://raw.githubusercontent.com/shadowsocks/shadowsocks-libev/master/acl/chn.acl",
             UserKeys.ACLAutoListURL: "https://raw.githubusercontent.com/shadowsocks/shadowsocks-libev/master/acl/gfwlist.acl",
-            UserKeys.ACLProxyBlockCHNURL: "https://raw.githubusercontent.com/shadowsocks/shadowsocks-libev/master/acl/server_block_chn.acl",
             UserKeys.AutoConfigureNetworkServices: true,
             UserKeys.HTTP_ListenAddress: "127.0.0.1",
             UserKeys.HTTP_ListenPort: NSNumber(value: 1087 as UInt16),
@@ -388,8 +387,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             } else if mode == "aclWhiteList" {
                 ProxyConfHelper.enableGlobalProxy()
             } else if mode == "aclAuto" {
-                ProxyConfHelper.enableGlobalProxy()
-            } else if mode == "aclBlockChina" {
                 ProxyConfHelper.enableGlobalProxy()
             }
         } else {

@@ -15,7 +15,6 @@ let PACFilePath = PACRulesDirPath + "gfwlist.js"
 let GFWListFilePath = PACRulesDirPath + "gfwlist.txt"
 
 let ACLWhiteListFilePath = PACRulesDirPath + "chn.acl"
-let ACLBlockCHNFilePath = PACRulesDirPath + "blockchn.acl"
 let ACLGFWListFilePath = PACRulesDirPath + "gfwlist.acl"
 
 // Because of LocalSocks5.ListenPort may be changed
@@ -34,7 +33,7 @@ func SyncPac() {
         needGenerate = true
     }
     
-    if !fileMgr.fileExists(atPath: PACUserRuleFilePath) || !fileMgr.fileExists(atPath: GFWListFilePath) || !fileMgr.fileExists(atPath: ACLWhiteListFilePath) || !fileMgr.fileExists(atPath: ACLBlockCHNFilePath) || !fileMgr.fileExists(atPath: ACLGFWListFilePath) || !fileMgr.fileExists(atPath: PACFilePath) {
+    if !fileMgr.fileExists(atPath: PACUserRuleFilePath) || !fileMgr.fileExists(atPath: GFWListFilePath) || !fileMgr.fileExists(atPath: ACLWhiteListFilePath) || !fileMgr.fileExists(atPath: ACLGFWListFilePath) || !fileMgr.fileExists(atPath: PACFilePath) {
         needGenerate = true
     }
     
@@ -71,11 +70,6 @@ func initFile() {
         try! fileMgr.copyItem(atPath: src!, toPath: ACLWhiteListFilePath)
     }
     
-    // If blockchn is not exsited, copy from bundle
-    if !fileMgr.fileExists(atPath: ACLBlockCHNFilePath) {
-        let src = Bundle.main.path(forResource: "blockchn", ofType: "acl")
-        try! fileMgr.copyItem(atPath: src!, toPath: ACLBlockCHNFilePath)
-    }
     // If chn.acl
     if !fileMgr.fileExists(atPath: ACLGFWListFilePath) {
         let src = Bundle.main.path(forResource: "gfwlist", ofType: "acl")
@@ -255,24 +249,6 @@ func UpdateACL(){
             }
         case .failure:
             notificationDeliver(title: "Failed to download latest ACL Auto List", subTitle: "", text: "")
-        }
-    }
-    
-    let blockChnUrl = UserDefaults.standard.string(forKey: UserKeys.ACLProxyBlockCHNURL)
-    AF.request(blockChnUrl!).responseString {
-        response in
-        switch response.result {
-        case .success:
-            if let v = response.value {
-                do {
-                    try v.write(toFile: ACLGFWListFilePath, atomically: true, encoding: String.Encoding.utf8)
-                    notificationDeliver(title: "ACL Block CHN List update successful", subTitle: "", text: "")
-                } catch {
-                    NSLog("Write ACL Block CHN file failed")
-                }
-            }
-        case .failure:
-            notificationDeliver(title: "Failed to download latest ACL Block CHN List", subTitle: "", text: "")
         }
     }
 }

@@ -65,10 +65,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <accessibility identifier="aclAuto"/>
                             </menuItem>
-                            <menuItem title="ACL Block China IP Mode" id="lam-el-r4I">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <accessibility identifier="aclBlockChina"/>
-                            </menuItem>
                         </items>
                     </menu>
                     <accessibility identifier="mode"/>

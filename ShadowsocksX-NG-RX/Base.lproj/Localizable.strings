@@ -9,7 +9,6 @@
 "Global Mode" = "Global Mode";
 "Manual Mode" = "Manual Mode";
 "ACL Auto Mode" = "ACL Auto Mode";
-"ACL Block China IP Mode" = "ACL Block China IP Mode";
 
 "Servers" = "Servers";
 "Edit Subscriptions" = "Edit Subscriptions";
@@ -113,8 +112,6 @@
 "Failed to download latest ACL White List" = "Failed to download latest ACL White List";
 "ACL Auto List update successful" = "ACL Auto List update successful";
 "Failed to download latest ACL Auto List" = "Failed to download latest ACL Auto List";
-"ACL Block CHN List update successful" = "ACL Block CHN List update successful";
-"Failed to download latest ACL Block CHN List" = "Failed to download latest ACL Block CHN List";
 
 "User Rules" = "User Rules";
 
@@ -129,7 +126,6 @@
 "PAC Listen Port" = "PAC Listen Port";
 "ACL White List URL" = "ACL White List URL";
 "ACL Auto List URL" = "ACL Auto List URL";
-"ACL Block China URL" = "ACL Block China URL";
 "HTTP Proxy Enable" = "HTTP Proxy Enable";
 "Follow Global Mode" = "Follow Global Mode";
 "Timeout" = "Timeout";
@@ -137,8 +133,6 @@
 "HTTP Listen Address" = "HTTP Listen Address";
 "HTTP Listen Port" = "HTTP Listen Port";
 "LoadBalance Port" = "LoadBalance Port";
-"Enable CN Direct" = "Enable CN Direct";
-"Enable AD Block" = "Enable AD Block";
 
 "Advance Proxy Preferences" = "Advance Proxy Preferences";
 "Auto Configure" = "Auto Configure";

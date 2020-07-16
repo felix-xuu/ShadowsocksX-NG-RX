@@ -23,7 +23,6 @@ class UserKeys: NSObject {
     public static let GFWListURL = "GFWListURL"
     public static let ACLWhiteListURL = "ACLWhiteListURL"
     public static let ACLAutoListURL = "ACLAutoListURL"
-    public static let ACLProxyBlockCHNURL = "ACLProxyBlockCHNURL"
     public static let AutoConfigureNetworkServices = "AutoConfigureNetworkServices"
     public static let HTTP_ListenAddress = "HTTP.ListenAddress"
     public static let HTTP_ListenPort = "HTTP.ListenPort"
