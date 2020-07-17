@@ -29,7 +29,7 @@
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
-	<string>SWBApplication</string>
+	<string>MainApplication</string>
 	<key>SUFeedURL</key>
 	<string>https://felix-xuu.github.io/ShadowsocksX-NG-RX/release/appUpdate.xml</string>
 </dict>
