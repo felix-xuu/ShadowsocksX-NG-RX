@@ -161,8 +161,8 @@ func DNSServersChange() {
     if servers.count > 0 {
         args = servers.joined(separator: " ")
     }
-    let shPath = Bundle.main.path(forResource: "dns_change", ofType: "sh")
-    let task = Process.launchedProcess(launchPath: shPath!, arguments: [args])
+    let shPath = Bundle.main.path(forResource: "networksetup", ofType: "sh")
+    let task = Process.launchedProcess(launchPath: shPath!, arguments: ["-setdnsservers", args])
     task.waitUntilExit()
     if task.terminationStatus == 0 {
         NSLog("DNS changed successful.")

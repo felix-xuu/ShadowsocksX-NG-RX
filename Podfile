@@ -9,8 +9,3 @@ target 'ShadowsocksX-NG-RX' do
   pod 'GCDWebServer'
   pod 'Sparkle'
 end
-
-target 'proxy_conf_helper' do
-  pod 'BRLOptionParser'
-end
-

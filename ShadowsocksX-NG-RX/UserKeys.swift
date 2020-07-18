@@ -23,7 +23,6 @@ class UserKeys: NSObject {
     public static let GFWListURL = "GFWListURL"
     public static let ACLWhiteListURL = "ACLWhiteListURL"
     public static let ACLAutoListURL = "ACLAutoListURL"
-    public static let AutoConfigureNetworkServices = "AutoConfigureNetworkServices"
     public static let HTTP_ListenAddress = "HTTP.ListenAddress"
     public static let HTTP_ListenPort = "HTTP.ListenPort"
     public static let HTTPOn = "HTTPOn"
@@ -37,7 +36,6 @@ class UserKeys: NSObject {
     public static let ActiveServerProfile = "ActiveServerProfile"
     public static let ServerGroups = "ServerGroups"
     
-    public static let Proxy4NetworkServices = "Proxy4NetworkServices"
     public static let LoadbalancePort = "LoadbalancePort"
     public static let EnableLoadbalance = "EnableLoadbalance"
     public static let LoadbalanceGroup = "LoadbalanceGroup"

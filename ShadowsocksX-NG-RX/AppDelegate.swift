@@ -57,7 +57,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.GFWListURL: "https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt",
             UserKeys.ACLWhiteListURL: "https://raw.githubusercontent.com/shadowsocks/shadowsocks-libev/master/acl/chn.acl",
             UserKeys.ACLAutoListURL: "https://raw.githubusercontent.com/shadowsocks/shadowsocks-libev/master/acl/gfwlist.acl",
-            UserKeys.AutoConfigureNetworkServices: true,
             UserKeys.HTTP_ListenAddress: "127.0.0.1",
             UserKeys.HTTP_ListenPort: NSNumber(value: 1087 as UInt16),
             UserKeys.LoadbalancePort: NSNumber(value: 1089 as UInt16),
@@ -74,7 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.OrderAddress: true,
             UserKeys.DNSEnable: false,
             ])
-        
+
         cleanLogs()
         initInstall()
         initLanguageSelector()
@@ -142,9 +141,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func initInstall() {
         InstallSSLocal()
         InstallPrivoxy()
-        ProxyConfHelper.install()
         InstallHaproxy()
         InstallHttping()
+        setPassby()
     }
     
     func initLanguageSelector() {
@@ -378,18 +377,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let mode = defaults.string(forKey: UserKeys.ShadowsocksXRunningMode)
         if isOn {
             if mode == "pac" {
-                ProxyConfHelper.enablePACProxy()
+                enablePACProxy()
             } else if mode == "global" {
-                ProxyConfHelper.enableGlobalProxy()
+                enableGlobalProxy()
             } else if mode == "manual" {
-                ProxyConfHelper.disableProxy()
-            } else if mode == "aclWhiteList" {
-                ProxyConfHelper.enableGlobalProxy()
+                disableProxy()
+            } else if mode == "whiteList" {
+                enableGlobalProxy()
             } else if mode == "aclAuto" {
-                ProxyConfHelper.enableGlobalProxy()
+                enableGlobalProxy()
             }
         } else {
-            ProxyConfHelper.disableProxy()
+            disableProxy()
         }
     }
     
@@ -761,7 +760,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func applicationWillTerminate(_ aNotification: Notification) {
         StopSSLocal()
         StopPrivoxy()
-        ProxyConfHelper.disableProxy()
+        disableProxy()
         StopHaproxy()
         networkMonitor.stop()
         NSLog("ShadowsocksX stopped")

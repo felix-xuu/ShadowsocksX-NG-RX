@@ -38,8 +38,8 @@ class UserRulesController: NSWindowController {
             do {
                 try str.data(using: String.Encoding.utf8)?.write(to: URL(fileURLWithPath: PACUserRuleFilePath), options: .atomic)
                 if GeneratePACFile() {
-                    ProxyConfHelper.stopPACServer()
-                    ProxyConfHelper.startPACServer()
+                    stopPACServer()
+                    _ = startPACServer()
                     notificationDeliver(title: "User's PAC rule updated", subTitle: "", text: "")
                 } else {
                     notificationDeliver(title: "Failed update PAC rule for User", subTitle: "", text: "")
