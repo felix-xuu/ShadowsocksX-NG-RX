@@ -1,6 +1,5 @@
 PODS:
-  - Alamofire (5.2.1)
-  - BRLOptionParser (0.3.1)
+  - Alamofire (5.2.2)
   - GCDWebServer (3.5.4):
     - GCDWebServer/Core (= 3.5.4)
   - GCDWebServer/Core (3.5.4)
@@ -8,23 +7,20 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - BRLOptionParser
   - GCDWebServer
   - Sparkle
 
 SPEC REPOS:
   trunk:
     - Alamofire
-    - BRLOptionParser
     - GCDWebServer
     - Sparkle
 
 SPEC CHECKSUMS:
-  Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
-  BRLOptionParser: a03256a8ff003ca1f5376c55f55f210e085a3958
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   Sparkle: 55b1a87ba69d56913375a281546b7c82dec95bb0
 
-PODFILE CHECKSUM: 6f2b46546977ce0bdffebc04896251bc160e7340
+PODFILE CHECKSUM: 8c0faf890bda4cc0db825fcb35719425adad8f01
 
 COCOAPODS: 1.9.3
