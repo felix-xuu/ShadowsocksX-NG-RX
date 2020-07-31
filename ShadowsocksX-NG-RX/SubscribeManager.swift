@@ -46,6 +46,9 @@ class SubscribeManager:NSObject{
         func updateServerHandler(resString: String) {
             let decodeRes = decode64(str: resString)
             let urls = splitor(url: decodeRes)
+            if urls.count == 0 {
+                notificationDeliver(title: "Subscription Update Failed Title", subTitle: "", text: "Empty subscriptions", data.subscribeUrl)
+            }
             let maxN = (data.maxCount > urls.count) ? urls.count : (data.maxCount == -1) ? urls.count: data.maxCount
             for index in 0..<maxN {
                 if let profileDict = ParseAppURLSchemes(url: URL(string: urls[index])!) {

@@ -70,6 +70,7 @@
 
 "Subscription Update Failed Title" = "Update Subscription Failed";
 "Subscription Update Failed Info" = "Request $ failed, please check configuration or network";
+"Empty subscriptions" = "Found empty subscriptions, current subscriptions reserved: $";
 "Subscription Update Succeed Title" = "Update Subscription Succeed";
 "Subscription Update Succeed Info" = "Subscriptions updated from $";
 

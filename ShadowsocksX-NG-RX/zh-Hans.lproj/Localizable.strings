@@ -70,6 +70,7 @@
 
 "Subscription Update Failed Title" = "更新订阅失败";
 "Subscription Update Failed Info" = "请求 $ 失败, 请检查配置和网络";
+"Empty subscriptions" = "无订阅内容，保留当前节点: $";
 "Subscription Update Succeed Title" = "更新订阅成功";
 "Subscription Update Succeed Info" = "成功更新来自 $ 的订阅";
 
