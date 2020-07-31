@@ -2,9 +2,17 @@
 
 This project just toy for self.
 
-`Current version is 2.1.7`
+`Current version is 2.1.8`
 
 ## Release Note
+
+### 2.1.8
+
+- remove vmess support
+- remove acl block chn
+- remove example config
+- remove advance proxy preference
+- make improvements
 
 ### 2.1.7
 
