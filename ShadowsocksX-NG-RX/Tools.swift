@@ -145,16 +145,17 @@ func ParseSSRURL(urlString: String) -> [String : AnyObject] {
 }
 
 func DNSServersChange() {
+    if !UserDefaults.standard.bool(forKey: UserKeys.DNSEnable) {
+        return
+    }
     var args = "Empty"
     var servers: [String] = []
-    if UserDefaults.standard.bool(forKey: UserKeys.DNSEnable) {
-        if let dnsServers = UserDefaults.standard.string(forKey: UserKeys.DNSServers) {
-            let serverArr = dnsServers.components(separatedBy: [",", "\n"])
-            for item in serverArr {
-                let str = item.trimmingCharacters(in: .whitespacesAndNewlines)
-                if str != "" && validateIpAddress(ipToValidate: str) {
-                    servers.append(str)
-                }
+    if let dnsServers = UserDefaults.standard.string(forKey: UserKeys.DNSServers) {
+        let serverArr = dnsServers.components(separatedBy: [",", "\n"])
+        for item in serverArr {
+            let str = item.trimmingCharacters(in: .whitespacesAndNewlines)
+            if str != "" && validateIpAddress(ipToValidate: str) {
+                servers.append(str)
             }
         }
     }
