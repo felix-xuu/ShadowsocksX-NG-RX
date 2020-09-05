@@ -143,6 +143,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         InstallPrivoxy()
         InstallHaproxy()
         InstallHttping()
+        initRuleFile()
         setPassby()
     }
     

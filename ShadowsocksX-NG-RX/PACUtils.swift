@@ -38,43 +38,37 @@ func SyncPac() {
     }
     
     if needGenerate {
-        initFile()
+        initRuleFile()
         if !GeneratePACFile() {
             NSLog("Generate PAC filed")
         }
     }
 }
 
-func initFile() {
+func initRuleFile() {
     let fileMgr = FileManager.default
     // Maker the dir if rulesDirPath is not exesited.
     if !fileMgr.fileExists(atPath: PACRulesDirPath) {
-    try! fileMgr.createDirectory(atPath: PACRulesDirPath, withIntermediateDirectories: true, attributes: nil)
+        try? fileMgr.createDirectory(atPath: PACRulesDirPath, withIntermediateDirectories: true, attributes: nil)
     }
     
-    // If gfwlist.txt is not exsited, copy from bundle
-    if !fileMgr.fileExists(atPath: GFWListFilePath) {
-        let src = Bundle.main.path(forResource: "gfwlist", ofType: "txt")
-        try! fileMgr.copyItem(atPath: src!, toPath: GFWListFilePath)
-    }
+    var src = Bundle.main.path(forResource: "gfwlist", ofType: "txt")
+    try? fileMgr.removeItem(atPath: GFWListFilePath)
+    try? fileMgr.copyItem(atPath: src!, toPath: GFWListFilePath)
     
     // If user-rule.txt is not exsited, copy from bundle
     if !fileMgr.fileExists(atPath: PACUserRuleFilePath) {
         let src = Bundle.main.path(forResource: "user-rule", ofType: "txt")
-        try! fileMgr.copyItem(atPath: src!, toPath: PACUserRuleFilePath)
+        try? fileMgr.copyItem(atPath: src!, toPath: PACUserRuleFilePath)
     }
     
-    // If chn.acl is not exsited, copy from bundle
-    if !fileMgr.fileExists(atPath: ACLWhiteListFilePath) {
-        let src = Bundle.main.path(forResource: "chn", ofType: "acl")
-        try! fileMgr.copyItem(atPath: src!, toPath: ACLWhiteListFilePath)
-    }
-    
-    // If chn.acl
-    if !fileMgr.fileExists(atPath: ACLGFWListFilePath) {
-        let src = Bundle.main.path(forResource: "gfwlist", ofType: "acl")
-        try! fileMgr.copyItem(atPath: src!, toPath: ACLGFWListFilePath)
-    }
+    src = Bundle.main.path(forResource: "chn", ofType: "acl")
+    try? fileMgr.removeItem(atPath: ACLWhiteListFilePath)
+    try? fileMgr.copyItem(atPath: src!, toPath: ACLWhiteListFilePath)
+
+    src = Bundle.main.path(forResource: "gfwlist", ofType: "acl")
+    try? fileMgr.removeItem(atPath: ACLGFWListFilePath)
+    try? fileMgr.copyItem(atPath: src!, toPath: ACLGFWListFilePath)
 }
 
 func GeneratePACFile() -> Bool {
