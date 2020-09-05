@@ -2,9 +2,13 @@
 
 This project just toy for self.
 
-`Current version is 2.1.8`
+`Current version is 2.1.9`
 
 ## Release Note
+
+### 2.1.9
+
+- some improvements
 
 ### 2.1.8
 
