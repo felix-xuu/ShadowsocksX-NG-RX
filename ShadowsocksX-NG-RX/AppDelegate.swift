@@ -707,7 +707,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             statusMenu!.insertItem(withTitle: "Active Node: ".localized + (ServerGroupManager.getServerGroupByGroupId(profile.groupId)?.serverProfiles.first(where: {$0.getValidId() == profile.getValidId()})!.titleForActive())!, action: nil, keyEquivalent: "", at: 4).setAccessibilityIdentifier("active")
             DispatchQueue.global().async {
                 let location = PingServers.instance.getLocation()
-                self.statusMenu!.insertItem(withTitle: "Actually Location: ".localized + location, action: #selector(AppDelegate.refreshLocation), keyEquivalent: "", at: 5).setAccessibilityIdentifier("active")
+                let latency = PingServers.instance.pingCurrent()
+                self.statusMenu!.insertItem(withTitle: "\("Actually Location: ".localized)\(location)   \("Latency: ".localized)\(latency ?? "-")ms", action: #selector(AppDelegate.refreshLocation), keyEquivalent: "", at: 5).setAccessibilityIdentifier("active")
             }
         }
     }

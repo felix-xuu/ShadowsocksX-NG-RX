@@ -91,23 +91,13 @@ class PingServers:NSObject {
         return (output, error, status)
     }
     
-    func getlatencyFromString(result:String, type:String) -> String?{
-        var res = result
+    func getlatencyFromString(result:String) -> String?{
         finished += 1
         var latency:String?=nil
-        if type=="ss" {
-            if result.isEmpty {
-                return nil
-            }
-            latency = res.components(separatedBy: ".")[0]
-        }else{
-            if !result.contains("round-trip min/avg/max/stddev =") {
-                return nil
-            }
-            res.removeSubrange(res.range(of: "round-trip min/avg/max/stddev = ")!)
-            res = String(res.dropLast(3))
-            latency = res.components(separatedBy: "/")[1].components(separatedBy: ".")[0]
+        if result.isEmpty {
+            return nil
         }
+        latency = result.components(separatedBy: ".")[0]
         return latency
     }
     
@@ -130,12 +120,12 @@ class PingServers:NSObject {
             ssArgs.append("-f")
             ssArgs.append("sspid.txt")
             if let outputString = self.runCommand2(ssArgs: ssArgs,cmd: path, args: "-5", "-x", "127.0.0.1:"+String(localPort), "-g", "http://www.gstatic.com/generate_204", "-c","1","-t","3","-o","204","-m").output.last{
-                completionHandler(self.getlatencyFromString(result: outputString,type: "ss"))
+                completionHandler(self.getlatencyFromString(result: outputString))
             }
         }
     }
     
-    func ping(_ i: Int=0) {
+    func ping() {
         startTime = Date()
         po = 1100
         var result: [(Int, Int, Double)] = []
@@ -213,5 +203,16 @@ class PingServers:NSObject {
             }
         }
         return location
+    }
+    
+    func pingCurrent() -> String? {
+        if ServerProfileManager.activeProfile == nil {
+            return nil
+        }
+        let path = NSHomeDirectory()+APP_SUPPORT_DIR+"httping"
+        if let outputString = self.runCommand(cmd: path, args: "-5", "-x", "127.0.0.1:"+UserDefaults.standard.string(forKey: UserKeys.Socks5_ListenPort)!, "-g", "http://www.gstatic.com/generate_204", "-c","1","-t","3","-o","204","-m").output.last{
+            return self.getlatencyFromString(result: outputString)
+        }
+        return nil
     }
 }
