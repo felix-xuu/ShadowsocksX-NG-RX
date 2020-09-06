@@ -709,15 +709,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             DispatchQueue.global().async {
                 let location = PingServers.instance.getLocation()
                 let latency = PingServers.instance.pingCurrent()
-                self.statusMenu!.insertItem(withTitle: "\("Actually Location: ".localized)\(location)   \("Latency: ".localized)\(latency ?? "-")ms", action: #selector(AppDelegate.refreshLocation), keyEquivalent: "", at: 5).setAccessibilityIdentifier("active")
+                self.statusMenu!.insertItem(withTitle: "\("Actually Location: ".localized)\(location)   \("Latency: ".localized)\(latency ?? "-")ms", action: #selector(AppDelegate.refreshLocationAndLatency), keyEquivalent: "", at: 5).setAccessibilityIdentifier("active")
             }
         }
     }
     
-    @objc func refreshLocation(){
+    @objc func refreshLocationAndLatency(){
         DispatchQueue.global().async {
             let location = PingServers.instance.getLocation()
-            self.statusMenu!.item(at: 5)?.title = "Actually Location: ".localized + location
+            let latency = PingServers.instance.pingCurrent()
+            self.statusMenu!.item(at: 5)?.title = "\("Actually Location: ".localized)\(location)   \("Latency: ".localized)\(latency ?? "-")ms"
         }
     }
     
