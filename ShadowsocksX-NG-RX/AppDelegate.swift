@@ -415,6 +415,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         defaults.set(!defaults.bool(forKey: UserKeys.ShadowsocksXOn), forKey: UserKeys.ShadowsocksXOn)
         updateLoadBalanceServices()
         updateSSAndPrivoxyServices()
+        applyConfig()
     }
     
     @IBAction func updatePacGFWList(_ sender: NSMenuItem) {
