@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.2.2)
+  - Alamofire (5.4.0)
   - GCDWebServer (3.5.4):
     - GCDWebServer/Core (= 3.5.4)
   - GCDWebServer/Core (3.5.4)
@@ -17,10 +17,10 @@ SPEC REPOS:
     - Sparkle
 
 SPEC CHECKSUMS:
-  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   Sparkle: 55b1a87ba69d56913375a281546b7c82dec95bb0
 
 PODFILE CHECKSUM: 8c0faf890bda4cc0db825fcb35719425adad8f01
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0
