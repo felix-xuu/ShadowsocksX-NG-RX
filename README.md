@@ -2,9 +2,13 @@
 
 This project just toy for self.
 
-`Current version is 2.1.11`
+`Current version is 2.1.12`
 
 ## Release Note
+
+### 2.1.12
+
+- chroe update
 
 ### 2.1.11
 
