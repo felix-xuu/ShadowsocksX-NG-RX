@@ -15,3 +15,5 @@ cp -f libmbedcrypto.3.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-R
 cp -f libsodium.23.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
 cp -f libpcre.1.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
 cp -f libmbedcrypto.2.16.2.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
+cp -f libmbedcrypto.2.24.0.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
+cp -f libmbedcrypto.5.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
