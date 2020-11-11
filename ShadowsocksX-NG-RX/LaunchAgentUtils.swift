@@ -328,7 +328,8 @@ func generateHaproxyLauchAgentPlist() {
         "KeepAlive": true,
         "StandardOutPath": logFilePath,
         "StandardErrorPath": logFilePath,
-        "ProgramArguments": arguments
+        "ProgramArguments": arguments,
+        "EnvironmentVariables": ["DYLD_LIBRARY_PATH": NSHomeDirectory() + APP_SUPPORT_DIR]
     ]
     dict.write(toFile: plistFilepath, atomically: true)
 }
