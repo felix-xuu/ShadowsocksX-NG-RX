@@ -8,10 +8,10 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
         <item>
-            <title>Version 2.1.12</title>
-            <sparkle:releaseNotesLink>https://felix-xuu.github.io/ShadowsocksX-NG-RX/release/release2.1.12.html</sparkle:releaseNotesLink>
-            <sparkle:releaseNotesLink xml:lang="zh_CN">https://felix-xuu.github.io/ShadowsocksX-NG-RX/release/release2.1.12-zh.html</sparkle:releaseNotesLink>
-            <enclosure url="https://github.com/felix-xuu/ShadowsocksX-NG-RX/releases/download/v2.1.12/ShadowsocksX-NG-RX.app.zip" sparkle:version="2.1.12"
+            <title>Version 2.1.13</title>
+            <sparkle:releaseNotesLink>https://felix-xuu.github.io/ShadowsocksX-NG-RX/release/release2.1.13.html</sparkle:releaseNotesLink>
+            <sparkle:releaseNotesLink xml:lang="zh_CN">https://felix-xuu.github.io/ShadowsocksX-NG-RX/release/release2.1.13-zh.html</sparkle:releaseNotesLink>
+            <enclosure url="https://github.com/felix-xuu/ShadowsocksX-NG-RX/releases/download/v2.1.13/ShadowsocksX-NG-RX.app.zip" sparkle:version="2.1.13"
                 length="22161281" type="application/octet-stream"/>
         </item>
     </channel>

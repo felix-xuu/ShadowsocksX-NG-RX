@@ -2,9 +2,13 @@
 
 This project just toy for self.
 
-`Current version is 2.1.12`
+`Current version is 2.1.13`
 
 ## Release Note
+
+### 2.1.13
+
+- loadbalance fix
 
 ### 2.1.12
 
