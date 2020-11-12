@@ -2,9 +2,13 @@
 
 This project just toy for self.
 
-`Current version is 2.1.13`
+`Current version is 2.2.0`
 
 ## Release Note
+
+### 2.2.0
+
+- stay with BigSur
 
 ### 2.1.13
 
