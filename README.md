@@ -2,9 +2,13 @@
 
 This project just toy for self.
 
-`Current version is 2.2.0`
+`Current version is 2.2.1`
 
 ## Release Note
+
+### 2.2.1
+
+- change icon
 
 ### 2.2.0
 
