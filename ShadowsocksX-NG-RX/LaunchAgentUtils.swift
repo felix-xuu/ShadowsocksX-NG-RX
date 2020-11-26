@@ -387,29 +387,35 @@ func InstallHaproxy() {
     generateHaproxyLauchAgentPlist()
 }
 
-func writeHaproxyConfFile() {
+func writeHaproxyConfFile(type:String) {
     do {
         let defaults = UserDefaults.standard
         let bundle = Bundle.main
         let examplePath = bundle.path(forResource: "haproxy.cfg.example", ofType: nil)
         var example = try String(contentsOfFile: examplePath!, encoding: .utf8)
-        example = example.replacingOccurrences(of: "{strategy}", with: defaults.string(forKey: UserKeys.LoadbalanceStrategy)!)
         example = example.replacingOccurrences(of: "{port}", with: defaults.string(forKey: UserKeys.LoadbalancePort)!)
+        if type == "balance" {
+            example = example.replacingOccurrences(of: "{balance strategy}", with: defaults.string(forKey: UserKeys.LoadbalanceStrategy)!)
+            example = example.replacingOccurrences(of: "{use_backend strategy}", with: "")
+        }
         
         var data = example.data(using: .utf8)
-        
-        var profiles: [ServerProfile]
-        if UserDefaults.standard.bool(forKey: UserKeys.LoadbalanceEnableAllNodes) {
-            profiles = LoadBalance.getLoadBalanceGroup()!.serverProfiles
-        } else {
-            profiles = LoadBalance.getLoadBalanceProfiles()
+
+        if type == "balance" {
+            var profiles: [ServerProfile]
+            if UserDefaults.standard.bool(forKey: UserKeys.LoadbalanceEnableAllNodes) {
+                profiles = LoadBalance.getLoadBalanceGroup()!.serverProfiles
+            } else {
+                profiles = LoadBalance.getLoadBalanceProfiles()
+            }
+            var servers: String = ""
+            for item in profiles {
+                servers.append(contentsOf: "    server \(item.serverHost)-\(UUID().hashValue) \(item.serverHost):\(item.serverPort) check\n")
+            }
+            data?.append(contentsOf: servers.utf8)
+        } else if type == "rule" {
+
         }
-        var servers: String = ""
-        for item in profiles {
-            servers.append(contentsOf: "    server \(item.serverHost)-\(UUID().hashValue) \(item.serverHost):\(item.serverPort) check\n")
-        }
-        data?.append(contentsOf: servers.utf8)
-        
         let filepath = NSHomeDirectory() + APP_SUPPORT_DIR + "haproxy.cfg"
         try data?.write(to: URL(fileURLWithPath: filepath), options: .atomic)
     } catch {

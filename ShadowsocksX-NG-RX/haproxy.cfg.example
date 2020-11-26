@@ -6,10 +6,11 @@ defaults
     timeout connect 5000ms
     timeout client 50000ms
     timeout server 50000ms
-    balance {strategy}
+    {balance strategy}
 
 frontend ss-in
     bind 127.0.0.1:{port}
+    {use_backend strategy}
     default_backend ss-out
 
 backend ss-out
