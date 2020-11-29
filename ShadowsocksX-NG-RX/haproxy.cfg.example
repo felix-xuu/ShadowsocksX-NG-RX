@@ -1,8 +1,11 @@
 global
     maxconn 256
+    log stdout local0 
 
 defaults
     mode tcp
+    option tcplog
+    log global
     timeout connect 5000ms
     timeout client 50000ms
     timeout server 50000ms
@@ -14,4 +17,4 @@ frontend ss-in
     default_backend ss-out
 
 backend ss-out
-#    server www.google.com www.google.com:1 check
+    {backend_default}

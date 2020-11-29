@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -45,7 +45,11 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Agent Mode" id="Cfd-1H-Rq5">
                         <items>
-                            <menuItem title="PAC Auto Mode" id="r07-Gu-aEz">
+                            <menuItem title="Rule Mode" id="hGB-Ij-5ja">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <accessibility identifier="rule"/>
+                            </menuItem>
+                            <menuItem title="PAC Mode" id="r07-Gu-aEz">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <accessibility identifier="pac"/>
                             </menuItem>
@@ -156,6 +160,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Proxy" id="YZp-bf-L40">
                         <items>
+                            <menuItem title="Rule Config" id="yvm-Ai-dTi">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="ruleConfigPreferences:" target="Voe-Tx-rLC" id="f4D-Ja-d1x"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Edit PAC Rules" id="rms-p0-CvB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -178,7 +188,7 @@
                             <menuItem title="DNS Preference" id="sbx-yz-3lO" userLabel="DNS Preference">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="editProxyPreferences:" target="Voe-Tx-rLC" id="Jji-Ea-Sy8"/>
+                                    <action selector="editDNSPreferences:" target="Voe-Tx-rLC" id="z5X-en-b2T"/>
                                 </connections>
                             </menuItem>
                         </items>

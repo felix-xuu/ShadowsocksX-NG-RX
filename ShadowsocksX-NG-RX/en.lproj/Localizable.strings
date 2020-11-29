@@ -4,11 +4,12 @@
 "Turn ShadowsocksX Off" = "Turn ShadowsocksX Off";
 
 "Agent Mode" = "Agent Mode";
-"PAC Auto Mode" = "PAC Auto Mode";
+"PAC Mode" = "PAC Mode";
 "ACL White List Mode" = "ACL White List Mode";
 "Global Mode" = "Global Mode";
 "Manual Mode" = "Manual Mode";
 "ACL Auto Mode" = "ACL Auto Mode";
+"Rule Mode" = "Rule Mode";
 
 "Servers" = "Servers";
 "Edit Subscriptions" = "Edit Subscriptions";
@@ -29,6 +30,7 @@
 "Update ACL" = "Update ACL";
 "Edit PAC Rules" = "Edit PAC Rules";
 "DNS Preference" = "DNS Preference";
+"Rule Config" = "Rule Config";
 
 "Show Network Speed" = "Show Network Speed";
 "Advance Preference" = "Advance Preference";
@@ -158,3 +160,7 @@
 "Enable" = "Enable";
 "split with comma or newline" = "split with comma or newline";
 "Invalid IP Address" = "Invalid IP Address";
+
+"Rule Preferences" = "Rule Preferences";
+"Default Flow" = "Default Flow";
+"Direct" = "Direct";

@@ -136,6 +136,9 @@ class LoadBalancePreferenceController: NSWindowController, NSWindowDelegate, NST
     }
     
     @IBAction func onClick(_ sender: NSTableView) {
+        if subscriptions.isEmpty || nodesTableView.selectedRow <= 0 {
+            return
+        }
         let group = subscriptions[subscriptionsBox.indexOfSelectedItem]
         let profile = group.serverProfiles[nodesTableView.selectedRow]
         if loadbalanceProfiles.filter({$0.hashVal == profile.hashVal}).isEmpty {

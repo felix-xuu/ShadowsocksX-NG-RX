@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,7 +17,7 @@
         <window title="Advance Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <rect key="contentRect" x="469" y="456" width="519" height="637"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="519" height="637"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -63,7 +63,7 @@
                         </textFieldCell>
                     </textField>
                     <button horizontalHuggingPriority="249" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="DiD-K0-Y43">
-                        <rect key="frame" x="315" y="502" width="136" height="22"/>
+                        <rect key="frame" x="315" y="503" width="140" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="hbJ-1V-Tpw"/>
                         </constraints>
@@ -96,7 +96,7 @@
                         </connections>
                     </textField>
                     <button horizontalHuggingPriority="251" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="qVQ-tJ-cO6">
-                        <rect key="frame" x="315" y="476" width="154" height="22"/>
+                        <rect key="frame" x="315" y="477" width="158" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="Zyt-I0-lv1"/>
                         </constraints>
@@ -185,7 +185,7 @@
                         </connections>
                     </textField>
                     <button tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="eyc-H0-nn8">
-                        <rect key="frame" x="315" y="562" width="138" height="22"/>
+                        <rect key="frame" x="315" y="563" width="142" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="QYM-QL-iA0"/>
                         </constraints>
@@ -198,7 +198,7 @@
                         </connections>
                     </button>
                     <button tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="UDw-SI-qfh">
-                        <rect key="frame" x="315" y="534" width="141" height="22"/>
+                        <rect key="frame" x="315" y="535" width="145" height="20"/>
                         <buttonCell key="cell" type="check" title="Follow Global Mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="efG-cV-nlk">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -235,7 +235,7 @@
                         </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="wCp-nB-dda">
-                        <rect key="frame" x="72" y="601" width="376" height="16"/>
+                        <rect key="frame" x="72" y="601" width="375" height="16"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="DO NOT change anything if you have no idea about what it is" id="8wL-qv-5nD">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>

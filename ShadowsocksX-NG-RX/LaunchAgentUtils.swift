@@ -394,14 +394,10 @@ func writeHaproxyConfFile(type:String) {
         let examplePath = bundle.path(forResource: "haproxy.cfg.example", ofType: nil)
         var example = try String(contentsOfFile: examplePath!, encoding: .utf8)
         example = example.replacingOccurrences(of: "{port}", with: defaults.string(forKey: UserKeys.LoadbalancePort)!)
+        var data: Data = Data.init()
         if type == "balance" {
-            example = example.replacingOccurrences(of: "{balance strategy}", with: defaults.string(forKey: UserKeys.LoadbalanceStrategy)!)
+            example = example.replacingOccurrences(of: "{balance strategy}", with: "balance \(defaults.string(forKey: UserKeys.LoadbalanceStrategy)!)")
             example = example.replacingOccurrences(of: "{use_backend strategy}", with: "")
-        }
-        
-        var data = example.data(using: .utf8)
-
-        if type == "balance" {
             var profiles: [ServerProfile]
             if UserDefaults.standard.bool(forKey: UserKeys.LoadbalanceEnableAllNodes) {
                 profiles = LoadBalance.getLoadBalanceGroup()!.serverProfiles
@@ -410,14 +406,50 @@ func writeHaproxyConfFile(type:String) {
             }
             var servers: String = ""
             for item in profiles {
-                servers.append(contentsOf: "    server \(item.serverHost)-\(UUID().hashValue) \(item.serverHost):\(item.serverPort) check\n")
+                servers.append(contentsOf: "server \(item.serverHost)-\(UUID().hashValue) \(item.serverHost):\(item.serverPort) check\n    ")
             }
-            data?.append(contentsOf: servers.utf8)
+            example = example.replacingOccurrences(of: "{backend_default}", with: servers)
+            data = example.data(using: .utf8) ?? Data.init()
         } else if type == "rule" {
-
+            example = example.replacingOccurrences(of: "{balance strategy}", with: "")
+            let defaultProfile = ServerProfileManager.activeProfile
+            let defaultProxy =  "server \(defaultProfile!.serverHost)-\(UUID().hashValue) \(defaultProfile!.serverHost):\(defaultProfile!.serverPort)"
+            example = example.replacingOccurrences(of: "{backend_default}", with: defaultProxy)
+            
+            var acls = ""
+            var backends = ""
+            if let ruleConfigs = RuleManager.getRuleConfigs() {
+                for item in ruleConfigs {
+                    if !item.enable {
+                        continue
+                    }
+                    if let p = item.profile {
+                        let backendName = "\(item.name ?? "ruleName")-\(UUID().hashValue)"
+                        var acl = "use_backend \(backendName) if { dst "
+                        var needAdd = false
+                        let rules = item.rules.split(separator: "\n")
+                        for rule in rules {
+                            if rule.starts(with: "#") {
+                                continue
+                            }
+                            acl.append(String(rule))
+                            acl.append(" ")
+                            needAdd = true
+                        }
+                        acl.append("}\n    ")
+                        if needAdd {
+                            acls.append(acl)
+                            backends.append("backend \(backendName)\n    server \(p.serverHost) \(p.serverHost):\(p.serverPort)\n")
+                        }
+                    }
+                }
+            }
+            example = example.replacingOccurrences(of: "{use_backend strategy}", with: acls)
+            data = example.data(using: .utf8) ?? Data.init()
+            data.append(contentsOf: backends.utf8)
         }
         let filepath = NSHomeDirectory() + APP_SUPPORT_DIR + "haproxy.cfg"
-        try data?.write(to: URL(fileURLWithPath: filepath), options: .atomic)
+        try data.write(to: URL(fileURLWithPath: filepath), options: .atomic)
     } catch {
         NSLog("Write haproxy file failed.")
     }

@@ -4,11 +4,12 @@
 "Turn ShadowsocksX Off" = "关闭 ShadowsocksX";
 
 "Agent Mode" = "代理模式";
-"PAC Auto Mode" = "PAC自动模式";
+"PAC Mode" = "PAC模式";
 "ACL White List Mode" = "ACL白名单模式";
 "Global Mode" = "全局模式";
 "Manual Mode" = "手动模式";
 "ACL Auto Mode" = "ACL自动模式";
+"Rule Mode" = "规则分流";
 
 "Servers" = "服务器";
 "Edit Subscriptions" = "编辑订阅";
@@ -29,6 +30,7 @@
 "Update ACL" = "更新ACL文件";
 "Edit PAC Rules" = "编辑PAC规则";
 "DNS Preference" = "DNS设置";
+"Rule Config" = "规则配置";
 
 "Show Network Speed" = "显示网速";
 "Advance Preference" = "高级设置";
@@ -158,3 +160,7 @@
 "Enable" = "启用";
 "split with comma or newline" = "使用逗号或换行分隔";
 "Invalid IP Address" = "无效的IP地址";
+
+"Rule Preferences" = "规则配置";
+"Default Flow" = "默认流量";
+"Direct" = "直连";

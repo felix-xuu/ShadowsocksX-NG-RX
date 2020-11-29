@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="ProxyPreferencesController" customModule="ShadowsocksX_NG_RX" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="DNSPreferencesController" customModule="ShadowsocksX_NG_RX" customModuleProvider="target">
             <connections>
                 <outlet property="dnsServersView" destination="fmh-l6-N83" id="iSY-HR-c0D"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
@@ -16,15 +16,14 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="DNS Preference" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5" userLabel="DNS Preferences">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
-            <windowPositionMask key="initialPositionMask" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="503" y="308" width="298" height="242"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="298" height="242"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="NVO-zo-7QI">
-                        <rect key="frame" x="203" y="0.0" width="82" height="32"/>
+                        <rect key="frame" x="202" y="0.0" width="84" height="32"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lsQ-1C-OhG">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -37,7 +36,7 @@ Gw
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="ulk-V7-E4w">
-                        <rect key="frame" x="144" y="0.0" width="59" height="32"/>
+                        <rect key="frame" x="151" y="0.0" width="53" height="32"/>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rWE-M6-TvV">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -50,17 +49,17 @@ DQ
                         </connections>
                     </button>
                     <scrollView focusRingType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" translatesAutoresizingMaskIntoConstraints="NO" id="3IH-ma-BAN">
-                        <rect key="frame" x="20" y="47" width="258" height="133"/>
+                        <rect key="frame" x="20" y="46" width="258" height="132"/>
                         <clipView key="contentView" focusRingType="none" id="uIm-SJ-Z67">
-                            <rect key="frame" x="1" y="1" width="256" height="131"/>
+                            <rect key="frame" x="1" y="1" width="256" height="130"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView focusRingType="none" drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="fmh-l6-N83">
-                                    <rect key="frame" x="0.0" y="0.0" width="256" height="131"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="256" height="130"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="256" height="131"/>
+                                    <size key="minSize" width="256" height="130"/>
                                     <size key="maxSize" width="259" height="10000000"/>
                                     <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 </textView>
@@ -71,12 +70,12 @@ DQ
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Elo-EG-Nk2">
-                            <rect key="frame" x="241" y="1" width="16" height="131"/>
+                            <rect key="frame" x="241" y="1" width="16" height="130"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
                     <button tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="cam-qM-3nd">
-                        <rect key="frame" x="18" y="206" width="63" height="18"/>
+                        <rect key="frame" x="18" y="205" width="67" height="18"/>
                         <buttonCell key="cell" type="check" title="Enable" bezelStyle="regularSquare" imagePosition="left" tag="1" inset="2" id="hyi-8H-EGF">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -86,7 +85,7 @@ DQ
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="aYU-L3-gdd" userLabel="split with comma or newline">
-                        <rect key="frame" x="61" y="179" width="177" height="21"/>
+                        <rect key="frame" x="61" y="177" width="177" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="W7q-RC-gNK"/>
                         </constraints>
@@ -108,7 +107,7 @@ DQ
                     <constraint firstItem="cam-qM-3nd" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="LRC-Oi-AWg"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cam-qM-3nd" secondAttribute="trailing" constant="20" symbolic="YES" id="X5B-9s-bAF"/>
                     <constraint firstItem="cam-qM-3nd" firstAttribute="leading" secondItem="3IH-ma-BAN" secondAttribute="leading" id="aEl-w9-eeN"/>
-                    <constraint firstItem="NVO-zo-7QI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="se5-gp-TjO" secondAttribute="leading" symbolic="YES" id="afN-et-6Yf"/>
+                    <constraint firstItem="NVO-zo-7QI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="afN-et-6Yf"/>
                     <constraint firstItem="ulk-V7-E4w" firstAttribute="baseline" secondItem="NVO-zo-7QI" secondAttribute="baseline" id="eeP-xO-41M"/>
                     <constraint firstItem="NVO-zo-7QI" firstAttribute="top" secondItem="3IH-ma-BAN" secondAttribute="bottom" constant="19" id="iye-hL-R95"/>
                     <constraint firstItem="cam-qM-3nd" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" symbolic="YES" id="rti-mJ-7J5"/>

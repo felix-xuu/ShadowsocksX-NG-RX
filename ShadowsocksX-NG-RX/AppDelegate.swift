@@ -20,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     var editUserRulesWinCtrl: UserRulesController!
     var subscribePreferenceWinCtrl: SubscribePreferenceWindowController!
     var loadBalancePreferenceController: LoadBalancePreferenceController!
+    var ruleConfigPreferenceController: RuleConfigPreferenceController!
     
     var statusItem: NSStatusItem!
     var keys: [String : String] = [:]
@@ -45,7 +46,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let defaults = UserDefaults.standard
         defaults.register(defaults: [
             UserKeys.ShadowsocksXOn: true,
-            UserKeys.ShadowsocksXRunningMode: "pac",
+            UserKeys.ShadowsocksXRunningMode: "manual",
             UserKeys.Socks5_ListenAddress: "127.0.0.1",
             UserKeys.Socks5_ListenPort: NSNumber(value: 1086 as UInt16),
             UserKeys.ListenAddress: "127.0.0.1",
@@ -72,6 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.OrderRemark: false,
             UserKeys.OrderAddress: true,
             UserKeys.DNSEnable: false,
+            UserKeys.RuleDefaultFlow: "direct",
             ])
 
         cleanLogs()
@@ -387,6 +389,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 enableGlobalProxy()
             } else if mode == "aclAuto" {
                 enableGlobalProxy()
+            } else if mode == "rule" {
+                RuleManager.syncRuleFlow()
             }
         } else {
             disableProxy()
@@ -506,11 +510,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         advPreferencesWinCtrl.window?.makeKeyAndOrderFront(self)
     }
     
-    @IBAction func editProxyPreferences(_ sender: NSObject) {
+    @IBAction func editDNSPreferences(_ sender: NSObject) {
         dnsPreferencesWinCtrl = DNSPreferencesController(windowNibName: "DNSPreferencesController")
         dnsPreferencesWinCtrl.showWindow(self)
         NSApp.activate(ignoringOtherApps: true)
         dnsPreferencesWinCtrl.window?.makeKeyAndOrderFront(self)
+    }
+    
+    @IBAction func ruleConfigPreferences(_ sender: NSObject) {
+        ruleConfigPreferenceController = RuleConfigPreferenceController(windowNibName: "RuleConfigPreferenceController")
+        ruleConfigPreferenceController.showWindow(self)
+        NSApp.activate(ignoringOtherApps: true)
+        ruleConfigPreferenceController.window?.makeKeyAndOrderFront(self)
     }
     
     @IBAction func doPingTest(_ sender: AnyObject) {

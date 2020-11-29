@@ -51,4 +51,7 @@ class UserKeys: NSObject {
     
     public static let DNSEnable = "DNSEnable"
     public static let DNSServers = "DNSServers"
+    
+    public static let RuleDefaultFlow = "rule.default.flow"
+    public static let RuleConfigs = "rule.configs"
 }
