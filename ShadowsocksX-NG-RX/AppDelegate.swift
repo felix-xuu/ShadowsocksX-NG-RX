@@ -60,7 +60,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.ShowSpeed: false,
             UserKeys.LaunchAtLogin: false,
             UserKeys.Language: "en",
-            UserKeys.EnableLoadbalance: false,
             UserKeys.LoadbalanceEnableAllNodes: true,
             UserKeys.OrderRemark: false,
             UserKeys.OrderAddress: true,
@@ -76,8 +75,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         initManager()
         initKeys()
         
-        updateLoadBalanceServices()
-        updateSSAndPrivoxyServices()
         applyConfig()
         initSleepListener()
         DNSServersChange()
@@ -130,6 +127,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     func initInstall() {
+        InstallLib()
         InstallSSLocal()
         InstallPrivoxy()
         InstallHaproxy()
@@ -209,29 +207,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func initNotificationObserver() {
         let notifyCenter = NotificationCenter.default
         
-        notifyCenter.addObserver(forName: NSNotification.Name(rawValue: NOTIFY_ADV_PROXY_CONF_CHANGED), object: nil, queue: nil
+        notifyCenter.addObserver(forName: NSNotification.Name(rawValue: DNS_CONF_CHANGED), object: nil, queue: nil
             , using: {
                 (note) in
-                self.applyConfig()
                 DNSServersChange()
-            }
-        )
-        notifyCenter.addObserver(forName: NSNotification.Name(rawValue: NOTIFY_SERVER_PROFILES_CHANGED), object: nil, queue: nil
-            , using: {
-                (note) in
-                self.updateServersMenu()
             }
         )
         notifyCenter.addObserver(forName: NSNotification.Name(rawValue: NOTIFY_ADV_CONF_CHANGED), object: nil, queue: nil
             , using: {
                 (note) in
-                if UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
-                    LoadBalance.enableLoadBalance()
-                } else {
-                    generateSSLocalLauchAgentPlist()
-                    SyncSSLocal()
-                    self.applyConfig()
-                }
+                applyConfig()
             }
         )
         notifyCenter.addObserver(forName: NSNotification.Name(rawValue: NOTIFY_FOUND_SS_URL), object: nil, queue: nil) {
@@ -295,9 +280,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     
     @objc func changeMode(_ sender: NSMenuItem) {
         let defaults = UserDefaults.standard
-        if !defaults.bool(forKey: UserKeys.ShadowsocksXOn) {
-            return
-        }
         let mode = sender.accessibilityIdentifier()
         if mode == defaults.string(forKey: UserKeys.ShadowsocksXRunningMode) {
             return
@@ -314,9 +296,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let image = NSImage(named: "menu_icon_" + mode)
         image!.isTemplate = true
         statusItem!.button!.image = image
+        if !defaults.bool(forKey: UserKeys.ShadowsocksXOn) {
+            return
+        }
         // change proxy
-        generateSSLocalLauchAgentPlist()
-        updateSSAndPrivoxyServices()
         applyConfig()
     }
     
@@ -337,48 +320,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         }
     }
     
-    func updateLoadBalanceServices() {
-        if UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn) && UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
-            LoadBalance.enableLoadBalance()
-        } else {
-            StopHaproxy()
-        }
-    }
-    
-    func updateSSAndPrivoxyServices() {
-        if UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn) {
-            if ServerProfileManager.activeProfile != nil && !UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
-                writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
-                writePrivoxyConfFile()
-            }
-            if ServerProfileManager.activeProfile != nil {
-                ReloadConfSSLocal()
-                ReloadConfPrivoxy()
-            }
-        } else {
-            StopSSLocal()
-            StopPrivoxy()
-        }
-    }
-    
-    func applyConfig() {
-        let defaults = UserDefaults.standard
-        let isOn = defaults.bool(forKey: UserKeys.ShadowsocksXOn)
-        let mode = defaults.string(forKey: UserKeys.ShadowsocksXRunningMode)
-        if isOn {
-            if mode == "global" {
-                enableGlobalProxy()
-            } else if mode == "manual" {
-                disableProxy()
-            } else if mode == "rule" {
-                RuleManager.syncRuleFlow()
-            } else if mode == "loadbalance" {
-                LoadBalance.enableLoadBalance()
-            }
-        } else {
-            disableProxy()
-        }
-    }
+//    func updateSSAndPrivoxyServices() {
+//        if UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn) {
+//            if ServerProfileManager.activeProfile != nil && !UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
+//                writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
+//                writePrivoxyConfFile()
+//            }
+//            if ServerProfileManager.activeProfile != nil {
+//                ReloadConfSSLocal()
+//                ReloadConfPrivoxy()
+//            }
+//        } else {
+//            StopSSLocal()
+//            StopPrivoxy()
+//        }
+//    }
     
     @IBAction func toggleRunning(_ sender: NSMenuItem) {
         let defaults = UserDefaults.standard
@@ -400,8 +356,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         image.isTemplate = true
         statusItem.button!.image = image
         defaults.set(!defaults.bool(forKey: UserKeys.ShadowsocksXOn), forKey: UserKeys.ShadowsocksXOn)
-        updateLoadBalanceServices()
-        updateSSAndPrivoxyServices()
         applyConfig()
     }
     
@@ -482,28 +436,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         PingServers.instance.ping()
     }
     
-    @IBAction func enableLoadbalance(_ sender: AnyObject) {
-        let defaults = UserDefaults.standard
-        if LoadBalance.getLoadBalanceGroup() == nil {
-            let alert = NSAlert.init()
-            alert.alertStyle = NSAlert.Style.warning
-            alert.addButton(withTitle: "OK".localized)
-            alert.messageText = "Warning".localized
-            alert.informativeText = "Config your load balance preference firstly please".localized
-            NSApp.activate(ignoringOtherApps: true)
-            alert.runModal()
-            return
-        }
-        defaults.set(!defaults.bool(forKey: UserKeys.EnableLoadbalance), forKey: UserKeys.EnableLoadbalance)
-        if defaults.bool(forKey: UserKeys.EnableLoadbalance) {
-            LoadBalance.enableLoadBalance()
-        } else {
-            updateSSAndPrivoxyServices()
-            updateServerMenuItemState()
-        }
-        updateCommonMenuItemState()
-    }
-    
     @IBAction func loadbalancePreference(_ sender: AnyObject) {
         loadBalancePreferenceController = LoadBalancePreferenceController(windowNibName: "LoadBalancePreferenceController")
         loadBalancePreferenceController.showWindow(self)
@@ -579,8 +511,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         }
         UserDefaults.standard.set(false, forKey: UserKeys.EnableLoadbalance)
         ServerProfileManager.setActiveProfile(newProfile)
-        updateLoadBalanceServices()
-        updateSSAndPrivoxyServices()
+        applyConfig()
         updateServerMenuItemState()
         updateCommonMenuItemState()
     }

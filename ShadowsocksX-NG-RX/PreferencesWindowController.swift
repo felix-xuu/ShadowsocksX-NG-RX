@@ -337,7 +337,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
             removeSSLocalConfFile()
             StopSSLocal()
             StopPrivoxy()
-            (NSApplication.shared.delegate as! AppDelegate).updateSSAndPrivoxyServices()
+//            (NSApplication.shared.delegate as! AppDelegate).updateSSAndPrivoxyServices()
             updateMenu = true
         }
         if updateMenu {

@@ -37,6 +37,11 @@ class LoadBalance: NSObject {
         profile?.serverPort = uint16(UserDefaults.standard.integer(forKey: UserKeys.LoadbalancePort))
         writeSSLocalConfFile(profile!.toJsonConfig())
         ReloadConfSSLocal()
+        if UserDefaults.standard.bool(forKey: UserKeys.HTTPOn) {
+            ReloadConfPrivoxy()
+        } else {
+            StopPrivoxy()
+        }
         ReloadConfHaproxy()
     }
     
@@ -58,7 +63,7 @@ class LoadBalance: NSObject {
             }
         }
         UserDefaults.standard.set(ServerProfile.toDictionaries(balanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
-        if UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
+        if UserDefaults.standard.string(forKey: UserKeys.ShadowsocksXRunningMode) == "loadbalance" {
             writeHaproxyConfFile(type: "balance")
             ReloadConfHaproxy()
         }

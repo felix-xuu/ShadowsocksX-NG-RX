@@ -71,10 +71,12 @@ func generateSSLocalLauchAgentPlist() {
         arguments.append("-v")
     }
     var ACLPath: String?
-    if enabeledMode == "aclWhiteList" {
-        ACLPath = NSHomeDirectory() + "/.ShadowsocksX-NG-RX/chn.acl"
-    } else if enabeledMode == "aclAuto" {
-        ACLPath = NSHomeDirectory() + "/.ShadowsocksX-NG-RX/gfwlist.acl"
+    if enabeledMode == "rule" {
+        if defaults.string(forKey: UserKeys.RuleDefaultFlow) == "direct" {
+            ACLPath = NSHomeDirectory() + APP_SUPPORT_DIR + "gfwlist.acl"
+        } else {
+            ACLPath = NSHomeDirectory() + APP_SUPPORT_DIR + "chn.acl"
+        }
     }
     
     if ACLPath != nil {
@@ -143,7 +145,6 @@ func InstallSSLocal() {
         } else {
             NSLog("Install ss-local failed.")
         }
-        InstallLib()
     }
     generateSSLocalLauchAgentPlist()
 }
@@ -174,20 +175,6 @@ func writeSSLocalConfFile(_ conf:[String:AnyObject]) {
 func removeSSLocalConfFile() {
     let filepath = NSHomeDirectory() + APP_SUPPORT_DIR + "ss-local.json"
     try? FileManager.default.removeItem(atPath: filepath)
-}
-
-func SyncSSLocal() {
-    if ServerProfileManager.activeProfile != nil {
-        writeSSLocalConfFile((ServerProfileManager.activeProfile!.toJsonConfig()))
-        let on = UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn)
-        if on {
-            ReloadConfSSLocal()
-            SyncPrivoxy()
-        }
-    } else {
-        removeSSLocalConfFile()
-        StopSSLocal()
-    }
 }
 
 //  MARK: privoxy
@@ -268,8 +255,8 @@ func InstallPrivoxy() {
             NSLog("Install privoxy failed.")
         }
     }
-    generatePrivoxyLauchAgentPlist()
     writePrivoxyConfFile()
+    generatePrivoxyLauchAgentPlist()
 }
 
 func writePrivoxyConfFile() {
@@ -293,18 +280,6 @@ func writePrivoxyConfFile() {
 func removePrivoxyConfFile() {
     let filepath = NSHomeDirectory() + APP_SUPPORT_DIR + "privoxy.config"
     try? FileManager.default.removeItem(atPath: filepath)
-}
-
-func SyncPrivoxy() {
-    writePrivoxyConfFile()
-
-    let on = UserDefaults.standard.bool(forKey: UserKeys.HTTPOn)
-    if on {
-        ReloadConfPrivoxy()
-    } else {
-        removePrivoxyConfFile()
-        StopPrivoxy()
-    }
 }
 
 //  MARK: haproxy

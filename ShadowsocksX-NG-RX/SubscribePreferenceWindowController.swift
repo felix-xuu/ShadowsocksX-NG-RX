@@ -90,7 +90,7 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
         if loadBalanceGroup == nil && UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
             UserDefaults.standard.set(false, forKey: UserKeys.EnableLoadbalance)
             StopHaproxy()
-            (NSApplication.shared.delegate as! AppDelegate).updateSSAndPrivoxyServices()
+//            (NSApplication.shared.delegate as! AppDelegate).updateSSAndPrivoxyServices()
             (NSApplication.shared.delegate as! AppDelegate).updateCommonMenuItemState()
         }
         ServerGroupManager.save()

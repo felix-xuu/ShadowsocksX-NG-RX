@@ -1,9 +1,9 @@
 //
-//  ProxyPreferencesController.swift
-//  ShadowsocksX-NG
+//  DNSPreferencesController.swift
+//  ShadowsocksX-NG-RX
 //
-//  Created by 邱宇舟 on 16/6/29.
-//  Copyright © 2016年 qiuyuzhou. All rights reserved.
+//  Created by Felix Xu on 2020/10/28.
+//  Copyright © 2020 felix.xu. All rights reserved.
 //
 
 import Cocoa
@@ -79,7 +79,7 @@ class DNSPreferencesController: NSWindowController {
         defaults.synchronize()
         
         window?.performClose(self)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIFY_ADV_PROXY_CONF_CHANGED), object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: DNS_CONF_CHANGED), object: nil)
     }
     
     @IBAction func cancel(_ sender: NSObject){

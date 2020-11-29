@@ -30,7 +30,6 @@ class UserKeys: NSObject {
     public static let ServerGroups = "ServerGroups"
     
     public static let LoadbalancePort = "LoadbalancePort"
-    public static let EnableLoadbalance = "EnableLoadbalance"
     public static let LoadbalanceGroup = "LoadbalanceGroup"
     public static let LoadbalanceProfiles = "LoadbalanceProfiles"
     public static let LoadbalanceEnableAllNodes = "LoadbalanceEnableAllNodes"

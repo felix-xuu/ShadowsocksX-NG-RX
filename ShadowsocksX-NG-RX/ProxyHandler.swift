@@ -40,3 +40,57 @@ func proxyControl(aim: String, args: String) {
         NSLog("proxy change failed:\(aim)")
     }
 }
+
+func applyConfig() {
+    let defaults = UserDefaults.standard
+    let isOn = defaults.bool(forKey: UserKeys.ShadowsocksXOn)
+    let mode = defaults.string(forKey: UserKeys.ShadowsocksXRunningMode)
+    if isOn {
+        if mode == "global" {
+            if ServerProfileManager.activeProfile != nil {
+                writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
+                ReloadConfSSLocal()
+                if defaults.bool(forKey: UserKeys.HTTPOn) {
+                    ReloadConfPrivoxy()
+                } else {
+                    StopPrivoxy()
+                }
+            }
+            enableGlobalProxy()
+        } else if mode == "manual" {
+            if ServerProfileManager.activeProfile != nil {
+                writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
+                ReloadConfSSLocal()
+                if defaults.bool(forKey: UserKeys.HTTPOn) {
+                    ReloadConfPrivoxy()
+                } else {
+                    StopPrivoxy()
+                }
+            }
+            disableProxy()
+        } else if mode == "rule" {
+            RuleManager.syncRuleFlow()
+        } else if mode == "loadbalance" {
+            enableLoadbalance()
+        }
+    } else {
+        disableProxy()
+        StopHaproxy()
+        StopPrivoxy()
+        StopSSLocal()
+    }
+}
+
+func enableLoadbalance() {
+    if LoadBalance.getLoadBalanceGroup() == nil {
+        let alert = NSAlert.init()
+        alert.alertStyle = NSAlert.Style.warning
+        alert.addButton(withTitle: "OK".localized)
+        alert.messageText = "Warning".localized
+        alert.informativeText = "Config your load balance preference firstly please".localized
+        NSApp.activate(ignoringOtherApps: true)
+        alert.runModal()
+        return
+    }
+    LoadBalance.enableLoadBalance()
+}

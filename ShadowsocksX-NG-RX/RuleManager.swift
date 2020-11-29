@@ -24,6 +24,11 @@ class RuleManager: NSObject {
             writeSSLocalConfFile(profile.toJsonConfig())
             generateSSLocalLauchAgentPlist()
             ReloadConfSSLocal()
+            if UserDefaults.standard.bool(forKey: UserKeys.HTTPOn) {
+                ReloadConfPrivoxy()
+            } else {
+                StopPrivoxy()
+            }
             ReloadConfHaproxy()
         }
     }
