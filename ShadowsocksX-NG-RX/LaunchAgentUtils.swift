@@ -25,6 +25,7 @@ func getFileSHA1Sum(_ filepath: String) -> String {
     return ""
 }
 
+//  MARK: httping
 func InstallHttping() {
     let fileMgr = FileManager.default
     let homeDir = NSHomeDirectory()
@@ -181,7 +182,6 @@ func SyncSSLocal() {
         let on = UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn)
         if on {
             ReloadConfSSLocal()
-            SyncPac()
             SyncPrivoxy()
         }
     } else {
@@ -307,6 +307,7 @@ func SyncPrivoxy() {
     }
 }
 
+//  MARK: haproxy
 func generateHaproxyLauchAgentPlist() {
     let haproxyPath = NSHomeDirectory() + APP_SUPPORT_DIR + "haproxy"
     let logFilePath = NSHomeDirectory() + "/Library/Logs/ssr-haproxy.log"

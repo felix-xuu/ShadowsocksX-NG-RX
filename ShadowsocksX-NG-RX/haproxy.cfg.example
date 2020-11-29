@@ -1,6 +1,6 @@
 global
     maxconn 256
-    log stdout local0 
+    log stdout local0 err
 
 defaults
     mode tcp

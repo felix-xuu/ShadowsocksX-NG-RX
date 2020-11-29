@@ -23,7 +23,6 @@
                 <outlet property="serversMenuItem" destination="u5M-hQ-VSc" id="8gp-SY-Y4U"/>
                 <outlet property="statusMenu" destination="Hob-KD-bx9" id="clA-ZW-0pT"/>
                 <outlet property="toggleRunningMenuItem" destination="GSu-Tf-StS" id="XHw-pU-nCa"/>
-                <outlet property="updateSubscribeAtLaunchMenuItem" destination="nQ4-Nv-tox" id="dOD-xa-Rw4"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -49,10 +48,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <accessibility identifier="rule"/>
                             </menuItem>
-                            <menuItem title="PAC Mode" id="r07-Gu-aEz">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <accessibility identifier="pac"/>
-                            </menuItem>
                             <menuItem title="Global Mode" id="Mw3-Jm-eXA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <accessibility identifier="global"/>
@@ -61,13 +56,12 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <accessibility identifier="manual"/>
                             </menuItem>
-                            <menuItem title="ACL White List Mode" id="RvZ-Zn-29U">
+                            <menuItem title="Load Balance" id="Tkt-1D-Rpv">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <accessibility identifier="whiteList"/>
-                            </menuItem>
-                            <menuItem title="ACL Auto Mode" id="sDG-YV-yuQ">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <accessibility identifier="aclAuto"/>
+                                <accessibility identifier="loadbalance"/>
+                                <connections>
+                                    <action selector="enableLoadbalance:" target="Voe-Tx-rLC" id="7QU-9t-fKe"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>
@@ -87,25 +81,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="updateSubscribe:" target="Voe-Tx-rLC" id="Vno-Oh-0oc"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Update Subscriptions At Launch" id="nQ4-Nv-tox">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="updateSubscribeAtLaunch:" target="Voe-Tx-rLC" id="mCZ-VF-av8"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="Wyo-qr-9AY"/>
-                            <menuItem title="Enable Load Balance" id="Tkt-1D-Rpv">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="enableLoadbalance:" target="Voe-Tx-rLC" id="7QU-9t-fKe"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Load Balance Preference" id="CZ1-6S-0Fo">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="loadbalancePreference:" target="Voe-Tx-rLC" id="1Db-TM-d6t"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="iQu-7t-Evv"/>
@@ -128,23 +103,35 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="hW7-qK-7dd"/>
-                            <menuItem title="Import Configuration" id="T9g-gy-gvv">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="importConfigFile:" target="Voe-Tx-rLC" id="ptm-YK-H93"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Export All Servers" id="6k0-gn-DQv">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="exportAllServerProfile:" target="Voe-Tx-rLC" id="C5A-Pp-tYo"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="6sL-A4-S7N"/>
                             <menuItem title="Server Preference" id="M5r-E7-44f">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="editServerPreferences:" target="Voe-Tx-rLC" id="6Lv-6i-Neb"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Proxy" id="diI-fB-Rss">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Proxy" id="YZp-bf-L40">
+                        <items>
+                            <menuItem title="Rule Preferences" id="yvm-Ai-dTi">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="ruleConfigPreferences:" target="Voe-Tx-rLC" id="f4D-Ja-d1x"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Load Balance Preference" id="CZ1-6S-0Fo">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="loadbalancePreference:" target="Voe-Tx-rLC" id="1Db-TM-d6t"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="DNS Preference" id="sbx-yz-3lO" userLabel="DNS Preference">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="editDNSPreferences:" target="Voe-Tx-rLC" id="z5X-en-b2T"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -155,44 +142,6 @@
                     <connections>
                         <action selector="doPingTest:" target="Voe-Tx-rLC" id="rRs-7S-tvD"/>
                     </connections>
-                </menuItem>
-                <menuItem title="Proxy" id="diI-fB-Rss">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Proxy" id="YZp-bf-L40">
-                        <items>
-                            <menuItem title="Rule Config" id="yvm-Ai-dTi">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="ruleConfigPreferences:" target="Voe-Tx-rLC" id="f4D-Ja-d1x"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Edit PAC Rules" id="rms-p0-CvB">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="editUserRulesForPAC:" target="Voe-Tx-rLC" id="ZtK-2d-Pcl"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Update PAC" id="TFc-Ec-duM">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="updatePacGFWList:" target="Voe-Tx-rLC" id="Ztt-PS-F3T"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Update ACL" id="gde-ZE-086">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="updateAclWhiteList:" target="Voe-Tx-rLC" id="2Iv-M4-k9C"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="bMX-qn-Qwi"/>
-                            <menuItem title="DNS Preference" id="sbx-yz-3lO" userLabel="DNS Preference">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="editDNSPreferences:" target="Voe-Tx-rLC" id="z5X-en-b2T"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                 </menuItem>
                 <menuItem title="Advance Preference" id="bZ3-fy-34d">
                     <modifierMask key="keyEquivalentModifierMask"/>

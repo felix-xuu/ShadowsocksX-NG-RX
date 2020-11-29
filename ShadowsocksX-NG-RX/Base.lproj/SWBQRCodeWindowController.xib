@@ -9,6 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="SWBQRCodeWindowController">
             <connections>
                 <outlet property="imageView" destination="yRy-QH-TEe" id="aa5-Ri-k04"/>
+                <outlet property="qrCopyButton" destination="fAd-u3-u8m" id="xnN-0z-4v5"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="HLy-eJ-5RD"/>
             </connections>
         </customObject>
@@ -16,8 +17,9 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="QR Code" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="566" y="456" width="290" height="359"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="290" height="359"/>
                 <autoresizingMask key="autoresizingMask"/>

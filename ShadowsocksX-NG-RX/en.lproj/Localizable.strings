@@ -4,33 +4,23 @@
 "Turn ShadowsocksX Off" = "Turn ShadowsocksX Off";
 
 "Agent Mode" = "Agent Mode";
-"PAC Mode" = "PAC Mode";
-"ACL White List Mode" = "ACL White List Mode";
 "Global Mode" = "Global Mode";
 "Manual Mode" = "Manual Mode";
-"ACL Auto Mode" = "ACL Auto Mode";
 "Rule Mode" = "Rule Mode";
 
 "Servers" = "Servers";
 "Edit Subscriptions" = "Edit Subscriptions";
-"Update Subscriptions At Launch" = "Update Subscriptions At Launch";
 "Manual Update Subscriptions" = "Manual Update Subscriptions";
 "Show QR Code For Current Server" = "Show QR Code For Current Server";
 "Scan QR Code From Screen" = "Scan QR Code From Screen";
-"Import Configuration" = "Import Configuration";
-"Export All Servers" = "Export Servers";
 "Import Server URLs From Pasteboard" = "Import Server URLs From Pasteboard";
 "Server Preference" = "Server Preference";
 "Ping Servers" = "Ping Servers";
-"Enable Load Balance" = "Enable Load Balance";
+"Load Balance" = "Load Balance";
 "Load Balance Preference" = "Load Balance Preference";
 
 "Proxy" = "Proxy";
-"Update PAC" = "Update PAC";
-"Update ACL" = "Update ACL";
-"Edit PAC Rules" = "Edit PAC Rules";
 "DNS Preference" = "DNS Preference";
-"Rule Config" = "Rule Config";
 
 "Show Network Speed" = "Show Network Speed";
 "Advance Preference" = "Advance Preference";
@@ -90,45 +80,14 @@
 "Copy to Clipboard" = "Copy to Clipboard";
 "QR Code" = "QR Code";
 
-"Example Configuration" = "Example Configuration";
-
-"Choose Config File" = "Choose Config File";
-"Import configurations failed" = "Import configurations failed";
-"Invalid config file" = "Invalid config file";
-"Import configurations succeed" = "Import configurations succeed";
-"Successful import items, total: " = "Successful import items, total: $";
-"Importing start" = "Importing start";
-"Importing... Hold on please" = "Importing... Hold on please";
-
-"Export server configurations" = "Export server configurations";
-"Export server configurations succeed" = "Export server configurations succeed";
-"Export items succeed, total: " = "Export items succeed, total: $";
-
 "Done the ping, the fastest as follow" = "Done the ping, the fastest as follow";
 
-"User's PAC rule updated" = "User's PAC rule updated";
-"Failed update PAC rule for User" = "Update user's PAC rule failed";
-
-"PAC has been updated to latest GFW List" = "PAC has been updated to latest GFW List";
-"Failed to download latest GFW List" = "Failed to download latest GFW List";
-"ACL White List updated successful" = "ACL White List updated successful";
-"Failed to download latest ACL White List" = "Failed to download latest ACL White List";
-"ACL Auto List update successful" = "ACL Auto List update successful";
-"Failed to download latest ACL Auto List" = "Failed to download latest ACL Auto List";
-
-"User Rules" = "User Rules";
-
 "Advance Preferences" = "Advance Preferences";
-"PAC GFW List URL" = "PAC GFW List URL";
 "DO NOT change anything if you have no idea about what is it" = "DO NOT change anything if you have no idea about what is it";
 "Socks5 Listen Address" = "Socks5 Listen Address";
 "Socks5 Listen Port" = "Socks5 Listen Port";
 "Enable Udp Replay" = "Enable Udp Replay";
 "Enable Verbose Mode" = "Enable Verbose Mode";
-"PAC Listen Address" = "PAC Listen Address";
-"PAC Listen Port" = "PAC Listen Port";
-"ACL White List URL" = "ACL White List URL";
-"ACL Auto List URL" = "ACL Auto List URL";
 "HTTP Proxy Enable" = "HTTP Proxy Enable";
 "Follow Global Mode" = "Follow Global Mode";
 "Timeout" = "Timeout";

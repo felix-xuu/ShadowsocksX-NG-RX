@@ -8,14 +8,6 @@
 
 import Foundation
 
-var webServer:GCDWebServer!
-
-func enablePACProxy() {
-    disableProxy()
-    let address = startPACServer()
-    proxyControl(aim: "-setautoproxyurl", args: address)
-}
-
 func enableGlobalProxy() {
     disableProxy()
     let defaults = UserDefaults.standard
@@ -31,7 +23,6 @@ func disableProxy() {
     proxyControl(aim: "-setwebproxystate", args: "off")
     proxyControl(aim: "-setsecurewebproxystate", args: "off")
     proxyControl(aim: "-setsocksfirewallproxystate", args: "off")
-    stopPACServer()
 }
 
 func setPassby() {
@@ -47,25 +38,5 @@ func proxyControl(aim: String, args: String) {
         NSLog("proxy changed successful:\(aim)")
     } else {
         NSLog("proxy change failed:\(aim)")
-    }
-}
-
-func startPACServer() -> String {
-    let originData = try! Data.init(contentsOf: URL.init(fileURLWithPath: NSHomeDirectory() + "/.ShadowsocksX-NG-RX/gfwlist.js"))
-    let routePath = "/proxy.pac"
-    webServer = GCDWebServer()
-    webServer.addHandler(forMethod: "GET", pathRegex: routePath, request: GCDWebServerRequest.self, processBlock: {request in
-        return GCDWebServerDataResponse(data: originData, contentType: "application/x-ns-proxy-autoconfig")
-    })
-    let defaults = UserDefaults.standard
-    let address = defaults.string(forKey: UserKeys.PacServer_ListenAddress)!
-    let port = defaults.integer(forKey: UserKeys.PacServer_ListenPort)
-    try? webServer.start(options: ["BindToLocalhost": true, "Port": port])
-    return "http://\(address):\(port)\(routePath)"
-}
-
-func stopPACServer() {
-    if (webServer != nil) && webServer.isRunning {
-        webServer.stop()
     }
 }

@@ -38,7 +38,6 @@ class LoadBalance: NSObject {
         writeSSLocalConfFile(profile!.toJsonConfig())
         ReloadConfSSLocal()
         ReloadConfHaproxy()
-        (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
     }
     
     static func cleanLoadBalanceAfterUpdateFeed() {

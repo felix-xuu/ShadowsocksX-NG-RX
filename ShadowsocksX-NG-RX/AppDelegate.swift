@@ -17,7 +17,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     var preferencesWinCtrl: PreferencesWindowController!
     var advPreferencesWinCtrl: AdvPreferencesWindowController!
     var dnsPreferencesWinCtrl: DNSPreferencesController!
-    var editUserRulesWinCtrl: UserRulesController!
     var subscribePreferenceWinCtrl: SubscribePreferenceWindowController!
     var loadBalancePreferenceController: LoadBalancePreferenceController!
     var ruleConfigPreferenceController: RuleConfigPreferenceController!
@@ -31,7 +30,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     @IBOutlet var toggleRunningMenuItem: NSMenuItem!
     @IBOutlet var serversMenu: NSMenu!
     @IBOutlet var serversMenuItem: NSMenuItem!
-    @IBOutlet var updateSubscribeAtLaunchMenuItem: NSMenuItem!
     @IBOutlet var manualUpdateSubscribeMenuItem: NSMenuItem!
     @IBOutlet var ShowNetworkSpeedItem: NSMenuItem!
     @IBOutlet var launchAtLoginMenuItem: NSMenuItem!
@@ -50,21 +48,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.Socks5_ListenAddress: "127.0.0.1",
             UserKeys.Socks5_ListenPort: NSNumber(value: 1086 as UInt16),
             UserKeys.ListenAddress: "127.0.0.1",
-            UserKeys.PacServer_ListenAddress: "127.0.0.1",
-            UserKeys.PacServer_ListenPort: NSNumber(value: 8090 as UInt16),
             UserKeys.Socks5_Timeout: NSNumber(value: 60 as UInt8),
             UserKeys.Socks5_EnableUDPRelay: false,
             UserKeys.Socks5_EnableVerboseMode: false,
-            UserKeys.GFWListURL: "https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt",
-            UserKeys.ACLWhiteListURL: "https://raw.githubusercontent.com/shadowsocks/shadowsocks-libev/master/acl/chn.acl",
-            UserKeys.ACLAutoListURL: "https://raw.githubusercontent.com/shadowsocks/shadowsocks-libev/master/acl/gfwlist.acl",
             UserKeys.HTTP_ListenAddress: "127.0.0.1",
             UserKeys.HTTP_ListenPort: NSNumber(value: 1087 as UInt16),
             UserKeys.LoadbalancePort: NSNumber(value: 1089 as UInt16),
             UserKeys.HTTPOn: true,
             UserKeys.HTTP_FollowGlobal: true,
             UserKeys.ServerGroups: [],
-            UserKeys.AutoUpdateSubscribe: false,
             UserKeys.ShowSpeed: false,
             UserKeys.LaunchAtLogin: false,
             UserKeys.Language: "en",
@@ -92,9 +84,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         initExceptionHandler()
 
         DispatchQueue.global().async {
-            if defaults.bool(forKey: UserKeys.AutoUpdateSubscribe) {
-                self.updateSubscribe(self.manualUpdateSubscribeMenuItem)
-            } 
             DispatchQueue.main.async {
                 self.setUpMenuBar()
                 self.updateModeMenuItemState()
@@ -145,7 +134,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         InstallPrivoxy()
         InstallHaproxy()
         InstallHttping()
-        initRuleFile()
         setPassby()
     }
     
@@ -367,7 +355,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 ReloadConfSSLocal()
                 ReloadConfPrivoxy()
             }
-            SyncPac()
         } else {
             StopSSLocal()
             StopPrivoxy()
@@ -379,18 +366,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let isOn = defaults.bool(forKey: UserKeys.ShadowsocksXOn)
         let mode = defaults.string(forKey: UserKeys.ShadowsocksXRunningMode)
         if isOn {
-            if mode == "pac" {
-                enablePACProxy()
-            } else if mode == "global" {
+            if mode == "global" {
                 enableGlobalProxy()
             } else if mode == "manual" {
                 disableProxy()
-            } else if mode == "whiteList" {
-                enableGlobalProxy()
-            } else if mode == "aclAuto" {
-                enableGlobalProxy()
             } else if mode == "rule" {
                 RuleManager.syncRuleFlow()
+            } else if mode == "loadbalance" {
+                LoadBalance.enableLoadBalance()
             }
         } else {
             disableProxy()
@@ -420,21 +403,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         updateLoadBalanceServices()
         updateSSAndPrivoxyServices()
         applyConfig()
-    }
-    
-    @IBAction func updatePacGFWList(_ sender: NSMenuItem) {
-        UpdatePACFromGFWList()
-    }
-    
-    @IBAction func updateAclWhiteList(_ sender: NSMenuItem) {
-        UpdateACL()
-    }
-    
-    @IBAction func editUserRulesForPAC(_ sender: NSMenuItem) {
-        editUserRulesWinCtrl = UserRulesController(windowNibName: "UserRulesController")
-        editUserRulesWinCtrl.showWindow(self)
-        NSApp.activate(ignoringOtherApps: true)
-        editUserRulesWinCtrl.window?.makeKeyAndOrderFront(self)
     }
     
     @IBAction func editSubscribe(_ sender: NSMenuItem) {
@@ -478,22 +446,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         ScanQRCodeOnScreen()
     }
     
-    @IBAction func importConfigFile(_ sender: NSMenuItem) {
-        ServerProfileManager.importConfigFile()
-    }
-    
-    @IBAction func exportAllServerProfile(_ sender: NSMenuItem) {
-        ServerProfileManager.exportConfigFile()
-    }
-    
     @IBAction func updateSubscribe(_ sender: NSMenuItem) {
         SubscribeManager.updateAllServerFromSubscribe()
-    }
-    
-    @IBAction func updateSubscribeAtLaunch(_ sender: NSMenuItem) {
-        let defaults = UserDefaults.standard
-        defaults.set(!defaults.bool(forKey: UserKeys.AutoUpdateSubscribe), forKey: UserKeys.AutoUpdateSubscribe)
-        updateCommonMenuItemState()
     }
     
     @IBAction func editServerPreferences(_ sender: NSMenuItem) {
@@ -761,7 +715,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     
     func updateCommonMenuItemState() {
         let defaults = UserDefaults.standard
-        updateSubscribeAtLaunchMenuItem.state = NSControl.StateValue(rawValue: defaults.bool(forKey: UserKeys.AutoUpdateSubscribe) ? 1 : 0)
         ShowNetworkSpeedItem.state = NSControl.StateValue(rawValue: defaults.bool(forKey: UserKeys.ShowSpeed) ? 1 : 0)
         launchAtLoginMenuItem.state = NSControl.StateValue(rawValue: defaults.bool(forKey: UserKeys.LaunchAtLogin) ? 1 : 0)
         enableLoadbalanceMenuItem.state = NSControl.StateValue(rawValue: defaults.bool(forKey: UserKeys.EnableLoadbalance) ? 1 : 0)

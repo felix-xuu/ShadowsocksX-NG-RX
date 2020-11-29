@@ -4,33 +4,23 @@
 "Turn ShadowsocksX Off" = "关闭 ShadowsocksX";
 
 "Agent Mode" = "代理模式";
-"PAC Mode" = "PAC模式";
-"ACL White List Mode" = "ACL白名单模式";
 "Global Mode" = "全局模式";
 "Manual Mode" = "手动模式";
-"ACL Auto Mode" = "ACL自动模式";
 "Rule Mode" = "规则分流";
 
 "Servers" = "服务器";
 "Edit Subscriptions" = "编辑订阅";
-"Update Subscriptions At Launch" = "启动时更新订阅";
 "Manual Update Subscriptions" = "手动更新订阅";
 "Show QR Code For Current Server" = "显示当前服务器二维码";
 "Scan QR Code From Screen" = "扫描屏幕上的二维码";
-"Import Configuration" = "导入服务器配置";
-"Export All Servers" = "导出服务器配置";
 "Import Server URLs From Pasteboard" = "从剪切板导入服务器配置";
 "Server Preference" = "服务器设置";
 "Ping Servers" = "服务器延迟测试";
-"Enable Load Balance" = "启用负载均衡";
+"Load Balance" = "负载均衡";
 "Load Balance Preference" = "负载均衡设置";
 
 "Proxy" = "代理";
-"Update PAC" = "更新PAC文件";
-"Update ACL" = "更新ACL文件";
-"Edit PAC Rules" = "编辑PAC规则";
 "DNS Preference" = "DNS设置";
-"Rule Config" = "规则配置";
 
 "Show Network Speed" = "显示网速";
 "Advance Preference" = "高级设置";
@@ -89,46 +79,15 @@
 "No URL found" = "未识别到URL";
 "Copy to Clipboard" = "复制到剪切板";
 "QR Code" = "二维码";
-"Example Configuration" = "示例配置";
-
-"Choose Config File" = "选择配置文件";
-
-"Import configurations failed" = "倒入配置失败";
-"Invalid config file" = "无效的配置文件";
-"Import configurations succeed" = "倒入配置成功";
-"Successful import items, total: " = "成功导入配置, 总计: $";
-"Importing start" = "导入进程已启动";
-"Importing... Hold on please" = "正在导入配置... 请稍后";
-
-"Export server configurations" = "导出服务器配置";
-"Export server configurations succeed" = "导出服务器配置成功";
-"Export items succeed, total: " = "导出配置成功, 总计: $";
 
 "Done the ping, the fastest as follow" = "测速完成, 最快的如下";
 
-"User's PAC rule updated" = "用户PAC规则更新成功";
-"Failed update PAC rule for User" = "更新用户PAC规则失败";
-
-"PAC has been updated to latest GFW List" = "从GFW更新PAC成功";
-"Failed to download latest GFW List" = "从GFW更新PAC失败";
-"ACL White List updated successful" = "ACL白名单更新成功";
-"Failed to download latest ACL White List" = "ACL白名单更新失败";
-"ACL Auto List update successful" = "ACL自动代理列表更新成功";
-"Failed to download latest ACL Auto List" = "ACL自动代理列表更新失败";
-
-"User Rules" = "用户规则";
-
 "Advance Preferences" = "高级设置";
-"PAC GFW List URL" = "PAC文件地址";
 "DO NOT change anything if you have no idea about what is it" = "如果你不知道这是什么，请不要做任何修改";
 "Socks5 Listen Address" = "Socks5监听地址";
 "Socks5 Listen Port" = "Socks5监听端口";
 "Enable Udp Replay" = "启用 Udp Replay";
 "Enable Verbose Mode" = "启用 Verbose Mode";
-"PAC Listen Address" = "PAC监听地址";
-"PAC Listen Port" = "PAC监听端口";
-"ACL White List URL" = "ACL白名单地址";
-"ACL Auto List URL" = "ACL自动代理地址";
 "HTTP Proxy Enable" = "启用HTTP代理";
 "Follow Global Mode" = "跟随全局模式";
 "Timeout" = "超时时间";

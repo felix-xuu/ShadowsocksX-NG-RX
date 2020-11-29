@@ -6,6 +6,5 @@ target 'ShadowsocksX-NG-RX' do
   use_frameworks!
 
   pod 'Alamofire'
-  pod 'GCDWebServer'
   pod 'Sparkle'
 end
