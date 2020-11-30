@@ -297,6 +297,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             return
         }
         setupProxy()
+        updateServerMenuItemState()
     }
     
     func updateModeMenuItemState() {
@@ -495,6 +496,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             writeSSLocalConfFile(newProfile.toJsonConfig())
             ReloadConfSSLocal()
         }
+        updateServersMenu()
+        updateServerMenuItemState()
     }
     
     func updateServersMenu() {
