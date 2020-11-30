@@ -83,20 +83,11 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
     }
     
     @IBAction func onOk(_ sender: NSButton) {
-        if loadBalanceGroup != nil {
-            UserDefaults.standard.set(ServerGroup.toDictionary(loadBalanceGroup!), forKey: UserKeys.LoadbalanceGroup)
-        }
+        UserDefaults.standard.set(loadBalanceGroup == nil ? nil : ServerGroup.toDictionary(loadBalanceGroup!), forKey: UserKeys.LoadbalanceGroup)
         UserDefaults.standard.set(ServerProfile.toDictionaries(loadBalanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
-        if loadBalanceGroup == nil && UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
-            UserDefaults.standard.set(false, forKey: UserKeys.EnableLoadbalance)
-            StopHaproxy()
-//            (NSApplication.shared.delegate as! AppDelegate).updateSSAndPrivoxyServices()
-            (NSApplication.shared.delegate as! AppDelegate).updateCommonMenuItemState()
-        }
-        ServerGroupManager.save()
         SubscribeManager.autoUpdateCount = 0
         window?.performClose(self)
-        DispatchQueue.global().async {
+        DispatchQueue.global().sync {
             ServerGroupManager.getSubscriptions().forEach({ value in
                 if value.autoUpdate {
                     SubscribeManager.updateServerFromSubscription(value)
@@ -110,9 +101,7 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
             }
             DispatchQueue.main.async {
                 ServerGroupManager.save()
-                LoadBalance.cleanLoadBalanceAfterUpdateFeed()
-                (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
-                (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
+                applyConfig()
                 SubscribeManager.autoUpdateCount = -1
             }
         }

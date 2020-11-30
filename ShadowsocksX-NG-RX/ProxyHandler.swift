@@ -46,7 +46,7 @@ func applyConfig() {
     let isOn = defaults.bool(forKey: UserKeys.ShadowsocksXOn)
     let mode = defaults.string(forKey: UserKeys.ShadowsocksXRunningMode)
     if isOn {
-        if mode == "global" {
+        if mode == UserKeys.Mode_Global {
             if ServerProfileManager.activeProfile != nil {
                 writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
                 ReloadConfSSLocal()
@@ -57,7 +57,7 @@ func applyConfig() {
                 }
             }
             enableGlobalProxy()
-        } else if mode == "manual" {
+        } else if mode == UserKeys.Mode_Manual {
             if ServerProfileManager.activeProfile != nil {
                 writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
                 ReloadConfSSLocal()
@@ -68,9 +68,9 @@ func applyConfig() {
                 }
             }
             disableProxy()
-        } else if mode == "rule" {
+        } else if mode == UserKeys.Mode_Rule {
             RuleManager.syncRuleFlow()
-        } else if mode == "loadbalance" {
+        } else if mode == UserKeys.Mode_Loadbalance {
             enableLoadbalance()
         }
     } else {

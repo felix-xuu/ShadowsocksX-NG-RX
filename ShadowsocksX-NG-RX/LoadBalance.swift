@@ -63,8 +63,8 @@ class LoadBalance: NSObject {
             }
         }
         UserDefaults.standard.set(ServerProfile.toDictionaries(balanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
-        if UserDefaults.standard.string(forKey: UserKeys.ShadowsocksXRunningMode) == "loadbalance" {
-            writeHaproxyConfFile(type: "balance")
+        if UserDefaults.standard.string(forKey: UserKeys.ShadowsocksXRunningMode) == UserKeys.Mode_Loadbalance {
+            writeHaproxyConfFile(type: UserKeys.Mode_Loadbalance)
             ReloadConfHaproxy()
         }
     }

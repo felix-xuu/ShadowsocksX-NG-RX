@@ -104,17 +104,7 @@ class LoadBalancePreferenceController: NSWindowController, NSWindowDelegate, NST
         defaults.set(ServerProfile.toDictionaries(loadbalanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
         defaults.set(allNodesButton.state.rawValue == 1 ? true : false, forKey: UserKeys.LoadbalanceEnableAllNodes)
         defaults.set(loadbalanceStrategy, forKey: UserKeys.LoadbalanceStrategy)
-        if defaults.bool(forKey: UserKeys.EnableLoadbalance) {
-            if loadbalanceProfiles.isEmpty {
-                UserDefaults.standard.set(false, forKey: UserKeys.EnableLoadbalance)
-                StopHaproxy()
-//                (NSApplication.shared.delegate as! AppDelegate).updateSSAndPrivoxyServices()
-                (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
-                (NSApplication.shared.delegate as! AppDelegate).updateCommonMenuItemState()
-            } else {
-                LoadBalance.enableLoadBalance()
-            }
-        }
+        applyConfig()
         window?.performClose(self)
     }
     

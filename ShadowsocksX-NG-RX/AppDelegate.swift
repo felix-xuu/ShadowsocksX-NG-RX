@@ -34,7 +34,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     @IBOutlet var ShowNetworkSpeedItem: NSMenuItem!
     @IBOutlet var launchAtLoginMenuItem: NSMenuItem!
     @IBOutlet var languageMenuItem: NSMenuItem!
-    @IBOutlet var enableLoadbalanceMenuItem: NSMenuItem!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -44,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let defaults = UserDefaults.standard
         defaults.register(defaults: [
             UserKeys.ShadowsocksXOn: true,
-            UserKeys.ShadowsocksXRunningMode: "manual",
+            UserKeys.ShadowsocksXRunningMode: UserKeys.Mode_Manual,
             UserKeys.Socks5_ListenAddress: "127.0.0.1",
             UserKeys.Socks5_ListenPort: NSNumber(value: 1086 as UInt16),
             UserKeys.ListenAddress: "127.0.0.1",
@@ -320,22 +319,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         }
     }
     
-//    func updateSSAndPrivoxyServices() {
-//        if UserDefaults.standard.bool(forKey: UserKeys.ShadowsocksXOn) {
-//            if ServerProfileManager.activeProfile != nil && !UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
-//                writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
-//                writePrivoxyConfFile()
-//            }
-//            if ServerProfileManager.activeProfile != nil {
-//                ReloadConfSSLocal()
-//                ReloadConfPrivoxy()
-//            }
-//        } else {
-//            StopSSLocal()
-//            StopPrivoxy()
-//        }
-//    }
-    
     @IBAction func toggleRunning(_ sender: NSMenuItem) {
         let defaults = UserDefaults.standard
         var image = NSImage()
@@ -506,14 +489,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let index = sender.tag
         let gIndex = sender.parent!.tag
         let newProfile = ServerGroupManager.serverGroups[gIndex].serverProfiles[index]
-        if newProfile.uuid == ServerProfileManager.getActiveProfileId() && !UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
-                return
-        }
-        UserDefaults.standard.set(false, forKey: UserKeys.EnableLoadbalance)
         ServerProfileManager.setActiveProfile(newProfile)
+        UserDefaults.standard.setValue(UserKeys.Mode_Manual, forKey: UserKeys.ShadowsocksXRunningMode)
         applyConfig()
-        updateServerMenuItemState()
-        updateCommonMenuItemState()
     }
     
     func updateServersMenu() {
@@ -555,7 +533,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 statusMenu.removeItem(item)
             }
         }
-        if UserDefaults.standard.bool(forKey: UserKeys.EnableLoadbalance) {
+        if UserDefaults.standard.string(forKey: UserKeys.ShadowsocksXRunningMode) == UserKeys.Mode_Loadbalance {
             for item in serversMenuItem.submenu!.items {
                 if item.accessibilityIdentifier() == "server" {
                     if item.accessibilityValueDescription() == LoadBalance.getLoadBalanceGroup()?.groupId {
@@ -648,7 +626,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let defaults = UserDefaults.standard
         ShowNetworkSpeedItem.state = NSControl.StateValue(rawValue: defaults.bool(forKey: UserKeys.ShowSpeed) ? 1 : 0)
         launchAtLoginMenuItem.state = NSControl.StateValue(rawValue: defaults.bool(forKey: UserKeys.LaunchAtLogin) ? 1 : 0)
-        enableLoadbalanceMenuItem.state = NSControl.StateValue(rawValue: defaults.bool(forKey: UserKeys.EnableLoadbalance) ? 1 : 0)
     }
     
     // MARK: NSUserNotificationCenterDelegate

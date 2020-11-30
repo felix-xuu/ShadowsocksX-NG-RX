@@ -46,4 +46,9 @@ class UserKeys: NSObject {
     
     public static let RuleDefaultFlow = "rule.default.flow"
     public static let RuleConfigs = "rule.configs"
+    
+    public static let Mode_Manual = "manual"
+    public static let Mode_Global = "global"
+    public static let Mode_Rule = "rule"
+    public static let Mode_Loadbalance = "loadbalance"
 }

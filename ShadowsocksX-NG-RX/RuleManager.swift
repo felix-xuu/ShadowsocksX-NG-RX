@@ -18,7 +18,7 @@ class RuleManager: NSObject {
     
     static func syncRuleFlow() {
         if let profile = ServerProfileManager.activeProfile {
-            writeHaproxyConfFile(type: "rule")
+            writeHaproxyConfFile(type: UserKeys.Mode_Rule)
             profile.serverHost = UserDefaults.standard.string(forKey: UserKeys.ListenAddress)!
             profile.serverPort = uint16(UserDefaults.standard.integer(forKey: UserKeys.LoadbalancePort))
             writeSSLocalConfFile(profile.toJsonConfig())

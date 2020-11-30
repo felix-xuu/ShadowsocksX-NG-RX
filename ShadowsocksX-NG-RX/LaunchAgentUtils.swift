@@ -71,7 +71,7 @@ func generateSSLocalLauchAgentPlist() {
         arguments.append("-v")
     }
     var ACLPath: String?
-    if enabeledMode == "rule" {
+    if enabeledMode == UserKeys.Mode_Rule {
         if defaults.string(forKey: UserKeys.RuleDefaultFlow) == "direct" {
             ACLPath = NSHomeDirectory() + APP_SUPPORT_DIR + "gfwlist.acl"
         } else {
