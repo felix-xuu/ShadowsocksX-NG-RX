@@ -16,19 +16,14 @@ class RuleManager: NSObject {
         return nil
     }
     
-    static func syncRuleFlow() {
+    static func enableRuleFlow() {
         if let profile = ServerProfileManager.activeProfile {
             writeHaproxyConfFile(type: UserKeys.Mode_Rule)
-            profile.serverHost = UserDefaults.standard.string(forKey: UserKeys.ListenAddress)!
+            profile.serverHost = "127.0.0.1"
             profile.serverPort = uint16(UserDefaults.standard.integer(forKey: UserKeys.LoadbalancePort))
             writeSSLocalConfFile(profile.toJsonConfig())
             generateSSLocalLauchAgentPlist()
             ReloadConfSSLocal()
-            if UserDefaults.standard.bool(forKey: UserKeys.HTTPOn) {
-                ReloadConfPrivoxy()
-            } else {
-                StopPrivoxy()
-            }
             ReloadConfHaproxy()
         }
     }

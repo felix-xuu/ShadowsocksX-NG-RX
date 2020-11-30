@@ -310,7 +310,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
             ServerProfileManager.activeProfile = nil
         }
         ServerGroupManager.save()
-        applyConfig()
+//        applyConfig()
         window?.performClose(self)
     }
     
@@ -351,12 +351,12 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     
     @IBAction func displayPassword(_ sender: NSButton) {
         if showPassword {
-            sender.image = NSImage(named: "eye_open")
+            sender.image = NSImage(named: "NSLockUnlockedTemplate")
             pwdTextField.isHidden = false
             passwordTextField.isHidden = true
             showPassword = false
         } else {
-            sender.image = NSImage(named: "eye_close")
+            sender.image = NSImage(named: "NSLockLockedTemplate")
             pwdTextField.isHidden = true
             passwordTextField.isHidden = false
             showPassword = true

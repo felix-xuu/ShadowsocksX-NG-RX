@@ -74,22 +74,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         initManager()
         initKeys()
         
-        applyConfig()
+        setupProxy()
         initSleepListener()
         DNSServersChange()
         initExceptionHandler()
 
-        DispatchQueue.global().async {
-            DispatchQueue.main.async {
-                self.setUpMenuBar()
-                self.updateModeMenuItemState()
-                self.updateLanguageMenuItemState()
-                self.updateCommonMenuItemState()
-                self.updateServersMenu()
-                self.updateServerMenuItemState()
-                self.updateLocalizedMenu()
-                NSLog("ShadowsocksX running")
-            }
+        DispatchQueue.main.async {
+            self.setUpMenuBar()
+            self.updateModeMenuItemState()
+            self.updateLanguageMenuItemState()
+            self.updateCommonMenuItemState()
+            self.updateServersMenu()
+            self.updateServerMenuItemState()
+            self.updateLocalizedMenu()
+            NSLog("ShadowsocksX running")
         }
     }
     
@@ -167,9 +165,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             if item.accessibilityIdentifier() == "switch" {
                 let key = keys[item.accessibilityValueDescription()!]
                 if defaults.bool(forKey: UserKeys.ShadowsocksXOn){
-                    item.title = item.isEnabled ? key!.replacingOccurrences(of: "On", with: "Off").localized : key!.localized
+                    item.title = key!.replacingOccurrences(of: "On", with: "Off").localized
                 } else {
-                    item.title = item.isEnabled ? key!.localized : key!.replacingOccurrences(of: "On", with: "Off").localized
+                    item.title = key!.localized
                 }
             } else if !item.isSeparatorItem && item.accessibilityIdentifier() != "active" {
                 item.title = keys[item.accessibilityValueDescription()!]!.localized
@@ -215,7 +213,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         notifyCenter.addObserver(forName: NSNotification.Name(rawValue: NOTIFY_ADV_CONF_CHANGED), object: nil, queue: nil
             , using: {
                 (note) in
-                applyConfig()
+                setupProxy()
             }
         )
         notifyCenter.addObserver(forName: NSNotification.Name(rawValue: NOTIFY_FOUND_SS_URL), object: nil, queue: nil) {
@@ -298,8 +296,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         if !defaults.bool(forKey: UserKeys.ShadowsocksXOn) {
             return
         }
-        // change proxy
-        applyConfig()
+        setupProxy()
     }
     
     func updateModeMenuItemState() {
@@ -327,7 +324,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 let key = keys[item.accessibilityValueDescription()!]
                 if defaults.bool(forKey: UserKeys.ShadowsocksXOn){
                     NSLog("Shut down ShadowsocksX")
-                    item.title = key!.replacingOccurrences(of: "Off", with: "On").localized
+                    item.title = key!.localized
                     image = NSImage(named: "menu_icon_disabled")!
                 } else {
                     NSLog("Start up ShadowsocksX")
@@ -340,7 +337,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         image.isTemplate = true
         statusItem.button!.image = image
         defaults.set(!defaults.bool(forKey: UserKeys.ShadowsocksXOn), forKey: UserKeys.ShadowsocksXOn)
-        applyConfig()
+        setupProxy()
     }
     
     @IBAction func editSubscribe(_ sender: NSMenuItem) {
@@ -491,8 +488,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let gIndex = sender.parent!.tag
         let newProfile = ServerGroupManager.serverGroups[gIndex].serverProfiles[index]
         ServerProfileManager.setActiveProfile(newProfile)
-        UserDefaults.standard.setValue(UserKeys.Mode_Manual, forKey: UserKeys.ShadowsocksXRunningMode)
-        applyConfig()
+        let mode = UserDefaults.standard.string(forKey: UserKeys.ShadowsocksXRunningMode)
+        if mode == UserKeys.Mode_Rule {
+            RuleManager.enableRuleFlow()
+        } else if mode == UserKeys.Mode_Manual || mode == UserKeys.Mode_Global {
+            writeSSLocalConfFile(newProfile.toJsonConfig())
+            ReloadConfSSLocal()
+        }
     }
     
     func updateServersMenu() {

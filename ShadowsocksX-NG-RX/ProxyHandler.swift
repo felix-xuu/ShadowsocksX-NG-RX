@@ -41,56 +41,43 @@ func proxyControl(aim: String, args: String) {
     }
 }
 
-func applyConfig() {
+func setupProxy() {
     let defaults = UserDefaults.standard
     let isOn = defaults.bool(forKey: UserKeys.ShadowsocksXOn)
-    let mode = defaults.string(forKey: UserKeys.ShadowsocksXRunningMode)
-    if isOn {
-        if mode == UserKeys.Mode_Global {
-            if ServerProfileManager.activeProfile != nil {
-                writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
-                ReloadConfSSLocal()
-                if defaults.bool(forKey: UserKeys.HTTPOn) {
-                    ReloadConfPrivoxy()
-                } else {
-                    StopPrivoxy()
-                }
-            }
-            enableGlobalProxy()
-        } else if mode == UserKeys.Mode_Manual {
-            if ServerProfileManager.activeProfile != nil {
-                writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
-                ReloadConfSSLocal()
-                if defaults.bool(forKey: UserKeys.HTTPOn) {
-                    ReloadConfPrivoxy()
-                } else {
-                    StopPrivoxy()
-                }
-            }
-            disableProxy()
-        } else if mode == UserKeys.Mode_Rule {
-            RuleManager.syncRuleFlow()
-        } else if mode == UserKeys.Mode_Loadbalance {
-            enableLoadbalance()
-        }
-    } else {
+    if !isOn {
         disableProxy()
         StopHaproxy()
         StopPrivoxy()
         StopSSLocal()
-    }
-}
-
-func enableLoadbalance() {
-    if LoadBalance.getLoadBalanceGroup() == nil {
-        let alert = NSAlert.init()
-        alert.alertStyle = NSAlert.Style.warning
-        alert.addButton(withTitle: "OK".localized)
-        alert.messageText = "Warning".localized
-        alert.informativeText = "Config your load balance preference firstly please".localized
-        NSApp.activate(ignoringOtherApps: true)
-        alert.runModal()
         return
     }
-    LoadBalance.enableLoadBalance()
+    let mode = defaults.string(forKey: UserKeys.ShadowsocksXRunningMode)
+    if mode == UserKeys.Mode_Rule {
+        RuleManager.enableRuleFlow()
+    } else if mode == UserKeys.Mode_Loadbalance {
+        if LoadBalance.getLoadBalanceGroup() == nil {
+            let alert = NSAlert.init()
+            alert.alertStyle = NSAlert.Style.warning
+            alert.addButton(withTitle: "OK".localized)
+            alert.messageText = "Warning".localized
+            alert.informativeText = "Config your load balance preference firstly please".localized
+            NSApp.activate(ignoringOtherApps: true)
+            alert.runModal()
+            return
+        }
+        LoadBalance.enableLoadBalance()
+    } else {
+        StopHaproxy()
+        if ServerProfileManager.activeProfile != nil {
+            writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
+            ReloadConfSSLocal()
+        }
+        mode == UserKeys.Mode_Global ? enableGlobalProxy() : disableProxy()
+    }
+    if defaults.bool(forKey: UserKeys.HTTPOn) {
+        writePrivoxyConfFile()
+        ReloadConfPrivoxy()
+    } else {
+        StopPrivoxy()
+    }
 }

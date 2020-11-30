@@ -237,8 +237,8 @@
                                     </textFieldCell>
                                 </textField>
                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="cOf-em-6UG" userLabel="Eye Button">
-                                    <rect key="frame" x="296" y="283" width="23" height="21"/>
-                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="eye_close" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="SOX-OU-TgB">
+                                    <rect key="frame" x="296" y="280.5" width="23" height="27"/>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSLockLockedTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="SOX-OU-TgB">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
@@ -382,8 +382,8 @@ Gw
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZgM-eW-IFM">
-                                    <rect key="frame" x="236" y="-1" width="38" height="23"/>
-                                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="copyV1" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="s5r-hM-4Gh">
+                                    <rect key="frame" x="256" y="-1" width="18" height="23"/>
+                                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="doc.on.doc" catalog="system" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="s5r-hM-4Gh">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
@@ -539,8 +539,8 @@ DQ
                                         <action selector="addGroup:" target="-2" id="CeF-ll-EaJ"/>
                                     </connections>
                                 </button>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fqa-yy-m1T">
-                                    <rect key="frame" x="30" y="-1" width="30" height="23"/>
+                                <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fqa-yy-m1T">
+                                    <rect key="frame" x="30" y="-1" width="42" height="23"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="Abe-5A-QPW"/>
                                     </constraints>
@@ -553,8 +553,8 @@ DQ
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sKh-he-mAJ">
-                                    <rect key="frame" x="110" y="-1" width="30" height="23"/>
-                                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="copyV1" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yJx-0g-7ol">
+                                    <rect key="frame" x="122" y="-1" width="18" height="23"/>
+                                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="doc.on.doc" catalog="system" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="yJx-0g-7ol">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
@@ -679,8 +679,8 @@ DQ
     </objects>
     <resources>
         <image name="NSAddTemplate" width="14" height="13"/>
+        <image name="NSLockLockedTemplate" width="14" height="15"/>
         <image name="NSRemoveTemplate" width="14" height="4"/>
-        <image name="copyV1" width="36" height="36"/>
-        <image name="eye_close" width="64" height="64"/>
+        <image name="doc.on.doc" catalog="system" width="16" height="18"/>
     </resources>
 </document>

@@ -101,7 +101,7 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
             }
             DispatchQueue.main.async {
                 ServerGroupManager.save()
-                applyConfig()
+//                applyConfig()
                 SubscribeManager.autoUpdateCount = -1
             }
         }

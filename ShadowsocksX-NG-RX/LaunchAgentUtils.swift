@@ -371,7 +371,7 @@ func writeHaproxyConfFile(type:String) {
         var example = try String(contentsOfFile: examplePath!, encoding: .utf8)
         example = example.replacingOccurrences(of: "{port}", with: defaults.string(forKey: UserKeys.LoadbalancePort)!)
         var data: Data = Data.init()
-        if type == "balance" {
+        if type == UserKeys.Mode_Loadbalance {
             example = example.replacingOccurrences(of: "{balance strategy}", with: "balance \(defaults.string(forKey: UserKeys.LoadbalanceStrategy)!)")
             example = example.replacingOccurrences(of: "{use_backend strategy}", with: "")
             var profiles: [ServerProfile]
@@ -386,7 +386,7 @@ func writeHaproxyConfFile(type:String) {
             }
             example = example.replacingOccurrences(of: "{backend_default}", with: servers)
             data = example.data(using: .utf8) ?? Data.init()
-        } else if type == "rule" {
+        } else if type == UserKeys.Mode_Rule {
             example = example.replacingOccurrences(of: "{balance strategy}", with: "")
             let defaultProfile = ServerProfileManager.activeProfile
             let defaultProxy =  "server \(defaultProfile!.serverHost)-\(UUID().hashValue) \(defaultProfile!.serverHost):\(defaultProfile!.serverPort)"
