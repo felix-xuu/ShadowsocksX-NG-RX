@@ -15,7 +15,6 @@
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="ShadowsocksX_NG_RX" customModuleProvider="target">
             <connections>
                 <outlet property="ShowNetworkSpeedItem" destination="a3h-uQ-DuO" id="OLq-K8-rEO"/>
-                <outlet property="enableLoadbalanceMenuItem" destination="Tkt-1D-Rpv" id="xqH-76-sgw"/>
                 <outlet property="languageMenuItem" destination="XEZ-Dd-JP7" id="WeN-tJ-1P1"/>
                 <outlet property="launchAtLoginMenuItem" destination="eUq-p7-ICK" id="w4p-0c-DZn"/>
                 <outlet property="manualUpdateSubscribeMenuItem" destination="NnE-Ad-1An" id="2Vf-Br-EnF"/>
@@ -28,10 +27,6 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="ShadowsocksX-NG-RX" id="Hob-KD-bx9">
             <items>
-                <menuItem title="ShadowsocksX: On" enabled="NO" id="fzk-mE-CEV">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <accessibility identifier="switch"/>
-                </menuItem>
                 <menuItem title="Turn ShadowsocksX On" id="GSu-Tf-StS">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <accessibility identifier="switch"/>
@@ -59,9 +54,6 @@
                             <menuItem title="Load Balance" id="Tkt-1D-Rpv">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <accessibility identifier="loadbalance"/>
-                                <connections>
-                                    <action selector="enableLoadbalance:" target="Voe-Tx-rLC" id="7QU-9t-fKe"/>
-                                </connections>
                             </menuItem>
                         </items>
                     </menu>
