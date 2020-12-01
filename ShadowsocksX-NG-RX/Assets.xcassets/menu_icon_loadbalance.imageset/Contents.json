@@ -1,12 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "menu_icon_acl.png",
+      "filename" : "menu_icon_loadbalance.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "menu_icon_acl@2x.png",
+      "filename" : "menu_icon_loadbalance@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
