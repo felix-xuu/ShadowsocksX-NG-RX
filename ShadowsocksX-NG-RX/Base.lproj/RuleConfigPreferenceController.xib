@@ -24,7 +24,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="423" y="365" width="724" height="392"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1095"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="724" height="392"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -256,8 +256,19 @@ DQ
                             <action selector="removeRule:" target="-2" id="oCE-1N-WQh"/>
                         </connections>
                     </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="222-pu-CUg">
+                        <rect key="frame" x="247" y="348" width="231" height="32"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="L7Z-6u-cZO">
+                            <font key="font" metaFont="system"/>
+                            <string key="title">Depend on active node
+Only active in the SAME subscription</string>
+                            <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="agn-Rx-Ryx" firstAttribute="leading" secondItem="222-pu-CUg" secondAttribute="trailing" constant="60" id="47X-47-okw"/>
                     <constraint firstAttribute="bottom" secondItem="Z1h-4G-ZCF" secondAttribute="bottom" constant="13" id="4ld-h8-KaU"/>
                     <constraint firstItem="pW0-i4-mFn" firstAttribute="bottom" secondItem="EBN-Et-eAw" secondAttribute="bottom" id="5LA-BD-ZsS"/>
                     <constraint firstItem="kGm-Zm-ipY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yyD-qq-aSk" secondAttribute="trailing" constant="12" symbolic="YES" id="DbD-lU-dWL"/>
@@ -266,6 +277,7 @@ DQ
                     <constraint firstItem="pW0-i4-mFn" firstAttribute="trailing" secondItem="HOR-4Q-PrS" secondAttribute="trailing" id="HSn-mx-hCL"/>
                     <constraint firstItem="r85-Bh-dif" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="8" id="Hv2-XD-1zp"/>
                     <constraint firstItem="yyD-qq-aSk" firstAttribute="baseline" secondItem="kGm-Zm-ipY" secondAttribute="baseline" id="Ibm-bR-GJu"/>
+                    <constraint firstItem="222-pu-CUg" firstAttribute="centerY" secondItem="AfR-wM-I8v" secondAttribute="centerY" id="Iuo-nD-LzN"/>
                     <constraint firstItem="agn-Rx-Ryx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AfR-wM-I8v" secondAttribute="trailing" constant="6" symbolic="YES" id="LvB-X6-LZR"/>
                     <constraint firstItem="HOR-4Q-PrS" firstAttribute="baseline" secondItem="agn-Rx-Ryx" secondAttribute="baseline" constant="-2" id="NCR-Fw-EY3"/>
                     <constraint firstItem="yyD-qq-aSk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="V8T-N1-Cga" secondAttribute="trailing" constant="8" symbolic="YES" id="NLp-Di-nPg"/>
@@ -285,6 +297,7 @@ DQ
                     <constraint firstAttribute="trailing" secondItem="HOR-4Q-PrS" secondAttribute="trailing" constant="9" id="cLT-E1-sqd"/>
                     <constraint firstItem="nb9-Hk-CLk" firstAttribute="leading" secondItem="Z1h-4G-ZCF" secondAttribute="leading" id="cMY-ds-C0V"/>
                     <constraint firstItem="HOR-4Q-PrS" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="18" id="d1r-3y-4z1"/>
+                    <constraint firstItem="222-pu-CUg" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="fe2-YB-ZdN"/>
                     <constraint firstItem="EBN-Et-eAw" firstAttribute="bottom" secondItem="nb9-Hk-CLk" secondAttribute="bottom" id="gI7-BX-cVA"/>
                     <constraint firstItem="EBN-Et-eAw" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="158" id="gQ5-ED-cdk"/>
                     <constraint firstItem="V8T-N1-Cga" firstAttribute="top" secondItem="yyD-qq-aSk" secondAttribute="top" id="gsm-Tt-wB6"/>
