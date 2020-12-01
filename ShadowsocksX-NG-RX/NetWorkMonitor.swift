@@ -59,7 +59,7 @@ class NetWorkMonitor: NSObject {
     func handleNetWorkData(_ string: String) {
         var outbound: Float = 0.00
         var inbound: Float = 0.00
-        let results = string.split(separator: "\n")
+        let results = string.components(separatedBy: .newlines)
         for (index, result) in results.enumerated() {
             if index == 0 {
                 continue

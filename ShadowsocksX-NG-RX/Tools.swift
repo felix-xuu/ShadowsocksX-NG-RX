@@ -153,7 +153,7 @@ func DNSServersChange() {
     if let dnsServers = UserDefaults.standard.string(forKey: UserKeys.DNSServers) {
         let serverArr = dnsServers.components(separatedBy: [",", "\n"])
         for item in serverArr {
-            let str = item.trimmingCharacters(in: .whitespacesAndNewlines)
+            let str = item.trimmingCharacters(in: .whitespaces)
             if str != "" && validateIpAddress(ipToValidate: str) {
                 servers.append(str)
             }

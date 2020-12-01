@@ -72,11 +72,7 @@ func generateSSLocalLauchAgentPlist() {
     }
     var ACLPath: String?
     if enabeledMode == UserKeys.Mode_Rule {
-        if defaults.string(forKey: UserKeys.RuleDefaultFlow) == "direct" {
-            ACLPath = NSHomeDirectory() + APP_SUPPORT_DIR + "gfwlist.acl"
-        } else {
-            ACLPath = NSHomeDirectory() + APP_SUPPORT_DIR + "chn.acl"
-        }
+        ACLPath = generateAclFile()
     }
     
     if ACLPath != nil {
@@ -399,9 +395,9 @@ func writeHaproxyConfFile(type:String) {
                 let backendName = "\(item.name ?? "ruleName")-\(UUID().hashValue)"
                 var acl = "use_backend \(backendName) if { dst "
                 var needAdd = false
-                let rules = item.rules.split(separator: "\n")
+                let rules = item.rules.components(separatedBy: .newlines)
                 for rule in rules {
-                    if rule.starts(with: "#") {
+                    if rule.starts(with: "#") || rule.trimmingCharacters(in: .whitespaces) == "" {
                         continue
                     }
                     acl.append(String(rule))
@@ -422,5 +418,62 @@ func writeHaproxyConfFile(type:String) {
         try data.write(to: URL(fileURLWithPath: filepath), options: .atomic)
     } catch {
         NSLog("Write haproxy file failed.")
+    }
+}
+
+func generateAclFile() -> String {
+    let defaultProfile = ServerProfileManager.activeProfile
+    let rules = RuleManager.getRuleConfigs().filter({$0.enable && $0.profile != nil && $0.profile.groupId == defaultProfile!.groupId}).map({$0.rules})
+    var ruleArr:[String] = []
+    for item in rules {
+        let ruleItems = item!.components(separatedBy: .newlines)
+        for rule in ruleItems {
+            if rule.starts(with: "#") || rule.trimmingCharacters(in: .whitespaces) == "" {
+                continue
+            }
+            ruleArr.append(rule)
+        }
+    }
+    if UserDefaults.standard.string(forKey: UserKeys.RuleDefaultFlow) == "direct" {
+        let aclPath = Bundle.main.path(forResource: "gfwlist", ofType: "acl")
+        var aclContent = try! String(contentsOfFile: aclPath!, encoding: .utf8)
+        for item in ruleArr {
+            aclContent.append("\n")
+            aclContent.append(item)
+        }
+        let filePath = NSHomeDirectory() + APP_SUPPORT_DIR + "gfwlist.acl"
+        do {
+            try FileManager.default.removeItem(atPath: filePath)
+        } catch _ {
+            NSLog("remove gfwlist failed")
+        }
+        try! aclContent.data(using: .utf8)?.write(to: URL(fileURLWithPath: filePath), options: .atomic)
+        return filePath
+    } else {
+        let aclPath = Bundle.main.path(forResource: "chn", ofType: "acl")
+        var aclContent = try! String(contentsOfFile: aclPath!, encoding: .utf8)
+        var acls = aclContent.components(separatedBy: .newlines)
+        ruleArr = ruleArr.map({
+            if let index = $0.firstIndex(of: "/") {
+                return String($0.prefix(upTo: index))
+            }
+            return $0
+        })
+        for (idx, item) in acls.enumerated() {
+            if let index = item.firstIndex(of: "/") {
+                let itemOnlyIP = String(item.prefix(upTo: index))
+                if ruleArr.contains(itemOnlyIP) {
+                    acls[idx] = ""
+                }
+            }
+        }
+        let filePath = NSHomeDirectory() + APP_SUPPORT_DIR + "chn.acl"
+        do {
+            try FileManager.default.removeItem(atPath: filePath)
+        } catch _ {
+            NSLog("remove gfwlist failed")
+        }
+        try! acls.joined(separator: "\n").data(using: .utf8)?.write(to: URL(fileURLWithPath: filePath), options: .atomic)
+        return filePath
     }
 }

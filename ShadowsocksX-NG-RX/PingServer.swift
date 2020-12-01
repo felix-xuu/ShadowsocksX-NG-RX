@@ -34,13 +34,13 @@ class PingServers:NSObject {
         let outdata = outpipe.fileHandleForReading.readDataToEndOfFile()
         if var string = String(data: outdata, encoding: .utf8) {
             string = string.trimmingCharacters(in: .newlines)
-            output = string.components(separatedBy: "\n")
+            output = string.components(separatedBy: .newlines)
         }
         
         let errdata = errpipe.fileHandleForReading.readDataToEndOfFile()
         if var string = String(data: errdata, encoding: .utf8) {
             string = string.trimmingCharacters(in: .newlines)
-            error = string.components(separatedBy: "\n")
+            error = string.components(separatedBy: .newlines)
         }
         
         task.waitUntilExit()
@@ -77,13 +77,13 @@ class PingServers:NSObject {
         let outdata = outpipe.fileHandleForReading.readDataToEndOfFile()
         if var string = String(data: outdata, encoding: .utf8) {
             string = string.trimmingCharacters(in: .newlines)
-            output = string.components(separatedBy: "\n")
+            output = string.components(separatedBy: .newlines)
         }
         
         let errdata = errpipe.fileHandleForReading.readDataToEndOfFile()
         if var string = String(data: errdata, encoding: .utf8) {
             string = string.trimmingCharacters(in: .newlines)
-            error = string.components(separatedBy: "\n")
+            error = string.components(separatedBy: .newlines)
         }
         
         task.waitUntilExit()

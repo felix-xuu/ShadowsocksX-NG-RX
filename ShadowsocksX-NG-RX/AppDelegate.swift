@@ -471,7 +471,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             }
         }
         if let text = pb.string(forType: NSPasteboard.PasteboardType.string) {
-            var urls = text.split(separator: "\n")
+            var urls = text.components(separatedBy: .newlines)
                 .map { String($0).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
                 .map { URL(string: $0) }
                 .filter { $0 != nil }
