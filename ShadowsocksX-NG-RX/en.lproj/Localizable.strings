@@ -121,3 +121,6 @@
 "Rule Preferences" = "Rule Preferences";
 "Default Flow" = "Default Flow";
 "Direct" = "Direct";
+
+" ({nums} rules enabled)" = " ({nums} rules enabled)";
+"Default Node: " = "Default Node: ";

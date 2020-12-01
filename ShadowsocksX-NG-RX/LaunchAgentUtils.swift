@@ -394,30 +394,24 @@ func writeHaproxyConfFile(type:String) {
             
             var acls = ""
             var backends = ""
-            if let ruleConfigs = RuleManager.getRuleConfigs() {
-                for item in ruleConfigs {
-                    if !item.enable {
+            let ruleConfigs = RuleManager.getRuleConfigs().filter({$0.enable && $0.profile != nil && $0.profile.groupId == defaultProfile!.groupId})
+            for item in ruleConfigs {
+                let backendName = "\(item.name ?? "ruleName")-\(UUID().hashValue)"
+                var acl = "use_backend \(backendName) if { dst "
+                var needAdd = false
+                let rules = item.rules.split(separator: "\n")
+                for rule in rules {
+                    if rule.starts(with: "#") {
                         continue
                     }
-                    if let p = item.profile {
-                        let backendName = "\(item.name ?? "ruleName")-\(UUID().hashValue)"
-                        var acl = "use_backend \(backendName) if { dst "
-                        var needAdd = false
-                        let rules = item.rules.split(separator: "\n")
-                        for rule in rules {
-                            if rule.starts(with: "#") {
-                                continue
-                            }
-                            acl.append(String(rule))
-                            acl.append(" ")
-                            needAdd = true
-                        }
-                        acl.append("}\n    ")
-                        if needAdd {
-                            acls.append(acl)
-                            backends.append("backend \(backendName)\n    server \(p.serverHost) \(p.serverHost):\(p.serverPort)\n")
-                        }
-                    }
+                    acl.append(String(rule))
+                    acl.append(" ")
+                    needAdd = true
+                }
+                acl.append("}\n    ")
+                if needAdd {
+                    acls.append(acl)
+                    backends.append("backend \(backendName)\n    server \(item.profile.serverHost) \(item.profile.serverHost):\(item.profile.serverPort)\n")
                 }
             }
             example = example.replacingOccurrences(of: "{use_backend strategy}", with: acls)

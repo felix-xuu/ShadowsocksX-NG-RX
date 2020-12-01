@@ -24,7 +24,7 @@ class RuleConfigPreferenceController: NSWindowController, NSWindowDelegate, NSTa
     
     override func windowWillLoad() {
         subscriptions = ServerGroupManager.getSubscriptions()
-        ruleConfigs = RuleManager.getRuleConfigs() ?? []
+        ruleConfigs = RuleManager.getRuleConfigs()
     }
     
     override func windowDidLoad() {

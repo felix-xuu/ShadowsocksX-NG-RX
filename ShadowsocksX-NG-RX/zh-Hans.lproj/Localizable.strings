@@ -121,3 +121,6 @@
 "Rule Preferences" = "规则配置";
 "Default Flow" = "默认流量";
 "Direct" = "直连";
+
+" ({nums} rules enabled)" = " ({nums}规则已启用)";
+"Default Node: " = "默认节点: ";

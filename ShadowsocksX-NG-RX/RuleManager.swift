@@ -9,11 +9,11 @@
 import Foundation
 
 class RuleManager: NSObject {
-    static func getRuleConfigs() -> [RuleConfig]? {
+    static func getRuleConfigs() -> [RuleConfig] {
         if let configs = UserDefaults.standard.object(forKey: UserKeys.RuleConfigs) {
             return RuleConfig.fromDictionaries(configs as! [[String : AnyObject]])
         }
-        return nil
+        return []
     }
     
     static func enableRuleFlow() {
