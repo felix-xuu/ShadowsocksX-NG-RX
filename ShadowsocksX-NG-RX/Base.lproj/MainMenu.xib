@@ -39,17 +39,17 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Agent Mode" id="Cfd-1H-Rq5">
                         <items>
-                            <menuItem title="Rule Mode" id="hGB-Ij-5ja">
+                            <menuItem title="Manual Mode" id="8PR-gs-c5N">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <accessibility identifier="rule"/>
+                                <accessibility identifier="manual"/>
                             </menuItem>
                             <menuItem title="Global Mode" id="Mw3-Jm-eXA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <accessibility identifier="global"/>
                             </menuItem>
-                            <menuItem title="Manual Mode" id="8PR-gs-c5N">
+                            <menuItem title="Rule Mode" id="hGB-Ij-5ja">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <accessibility identifier="manual"/>
+                                <accessibility identifier="rule"/>
                             </menuItem>
                             <menuItem title="Load Balance" id="Tkt-1D-Rpv">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -69,26 +69,26 @@
                                     <action selector="editSubscribe:" target="Voe-Tx-rLC" id="V3v-T4-Rfn"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Manual Update Subscriptions" id="NnE-Ad-1An">
+                            <menuItem title="Update Subscriptions" id="NnE-Ad-1An">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="updateSubscribe:" target="Voe-Tx-rLC" id="Vno-Oh-0oc"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="iQu-7t-Evv"/>
-                            <menuItem title="Show QR Code For Current Server" id="R6A-96-Zcb">
+                            <menuItem title="Show QR Code" id="R6A-96-Zcb">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="showQRCodeForCurrentServer:" target="Voe-Tx-rLC" id="t45-Zk-cai"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Scan QR Code From Screen" id="Qe6-bF-paT">
+                            <menuItem title="Scan QR Code" id="Qe6-bF-paT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="scanQRCodeFromScreen:" target="Voe-Tx-rLC" id="zQZ-IT-H4a"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Import Server URLs From Pasteboard" id="7LY-N4-ofD">
+                            <menuItem title="Import From Pasteboard" id="7LY-N4-ofD">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="importProfileURLFromPasteboard:" target="Voe-Tx-rLC" id="2LD-Ua-ehP"/>

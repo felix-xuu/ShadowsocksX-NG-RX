@@ -26,7 +26,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="508" y="401" width="480" height="270"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -107,7 +107,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vQO-bq-Igs">
-                        <rect key="frame" x="236" y="97" width="224" height="16"/>
+                        <rect key="frame" x="236" y="97" width="224" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="224" id="zre-fn-PCG"/>
                         </constraints>
@@ -212,7 +212,7 @@ Gw
                 </subviews>
                 <constraints>
                     <constraint firstItem="rC3-mg-tMh" firstAttribute="top" secondItem="fPc-GO-ivK" secondAttribute="bottom" constant="20" symbolic="YES" id="3DA-K2-yYR"/>
-                    <constraint firstItem="vQO-bq-Igs" firstAttribute="top" secondItem="MrH-Ft-1tn" secondAttribute="bottom" constant="16" id="71r-dd-ykt"/>
+                    <constraint firstItem="vQO-bq-Igs" firstAttribute="top" secondItem="MrH-Ft-1tn" secondAttribute="bottom" constant="11" id="71r-dd-ykt"/>
                     <constraint firstItem="MrH-Ft-1tn" firstAttribute="trailing" secondItem="rC3-mg-tMh" secondAttribute="trailing" constant="76" id="7B7-nd-TLL"/>
                     <constraint firstItem="jSv-em-0Gp" firstAttribute="baseline" secondItem="rC3-mg-tMh" secondAttribute="firstBaseline" constant="1" id="7gP-mj-gMA"/>
                     <constraint firstItem="uNY-1k-LwL" firstAttribute="centerY" secondItem="p1W-Md-Wfw" secondAttribute="centerY" id="9fw-m5-qp1"/>
@@ -237,7 +237,7 @@ Gw
                     <constraint firstItem="MrH-Ft-1tn" firstAttribute="leading" secondItem="Fkq-Nl-5rY" secondAttribute="trailing" constant="5" id="f61-7H-Ru6"/>
                     <constraint firstItem="P7L-eo-l3V" firstAttribute="leading" secondItem="uNY-1k-LwL" secondAttribute="leading" constant="69" id="fDy-fs-ZnP"/>
                     <constraint firstItem="MrH-Ft-1tn" firstAttribute="trailing" secondItem="p1W-Md-Wfw" secondAttribute="trailing" id="iTW-Og-aCE"/>
-                    <constraint firstItem="vQO-bq-Igs" firstAttribute="centerY" secondItem="XLx-TZ-soe" secondAttribute="centerY" id="jkd-CC-vo0"/>
+                    <constraint firstItem="vQO-bq-Igs" firstAttribute="centerY" secondItem="XLx-TZ-soe" secondAttribute="centerY" constant="-2.5" id="jkd-CC-vo0"/>
                     <constraint firstItem="fPc-GO-ivK" firstAttribute="trailing" secondItem="vQO-bq-Igs" secondAttribute="trailing" id="l1M-Pe-scp"/>
                     <constraint firstItem="P7L-eo-l3V" firstAttribute="leading" secondItem="uNY-1k-LwL" secondAttribute="leading" constant="69" id="lCH-5t-qVb"/>
                     <constraint firstItem="nzj-fK-Vip" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="mn4-pg-oMy"/>

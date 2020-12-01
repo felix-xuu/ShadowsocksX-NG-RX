@@ -8,10 +8,10 @@
 
 "Servers" = "Servers";
 "Edit Subscriptions" = "Edit Subscriptions";
-"Manual Update Subscriptions" = "Manual Update Subscriptions";
-"Show QR Code For Current Server" = "Show QR Code For Current Server";
-"Scan QR Code From Screen" = "Scan QR Code From Screen";
-"Import Server URLs From Pasteboard" = "Import Server URLs From Pasteboard";
+"Update Subscriptions" = "Update Subscriptions";
+"Show QR Code" = "Show QR Code";
+"Scan QR Code" = "Scan QR Code";
+"Import From Pasteboard" = "Import From Pasteboard";
 "Server Preference" = "Server Preference";
 "Ping Servers" = "Ping Servers";
 "Load Balance" = "Load Balance";

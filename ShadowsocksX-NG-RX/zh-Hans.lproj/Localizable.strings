@@ -8,10 +8,10 @@
 
 "Servers" = "服务器";
 "Edit Subscriptions" = "编辑订阅";
-"Manual Update Subscriptions" = "手动更新订阅";
-"Show QR Code For Current Server" = "显示当前服务器二维码";
-"Scan QR Code From Screen" = "扫描屏幕上的二维码";
-"Import Server URLs From Pasteboard" = "从剪切板导入服务器配置";
+"Update Subscriptions" = "更新订阅";
+"Show QR Code" = "显示二维码";
+"Scan QR Code" = "扫描二维码";
+"Import From Pasteboard" = "剪切板导入";
 "Server Preference" = "服务器设置";
 "Ping Servers" = "服务器延迟测试";
 "Load Balance" = "负载均衡";

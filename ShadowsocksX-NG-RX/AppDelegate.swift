@@ -636,7 +636,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         DispatchQueue.global().async {
             let location = PingServers.instance.getLocation()
             let latency = PingServers.instance.pingCurrent()
-            self.statusMenu!.item(at: 5)?.title = "\("Actually Location: ".localized)\(location)   \("Latency: ".localized)\(latency ?? "-")ms"
+            self.statusMenu!.item(at: 4)?.title = "\("Actually Location: ".localized)\(location)   \("Latency: ".localized)\(latency ?? "-")ms"
         }
     }
     
