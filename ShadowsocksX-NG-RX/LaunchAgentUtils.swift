@@ -9,8 +9,8 @@
 import Foundation
 
 let SS_LOCAL_VERSION = "3.3.5"
-let PRIVOXY_VERSION = "3.0.28"
-let HAPROXY_VERSION = "2.3.1"
+let PRIVOXY_VERSION = "3.0.29"
+let HAPROXY_VERSION = "2.3.2"
 let HTTPING_VERSION = "2.5"
 let APP_SUPPORT_DIR = "/Library/Application Support/ShadowsocksX-NG-RX/"
 let LAUNCH_AGENT_DIR = "/Library/LaunchAgents/"
