@@ -47,6 +47,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     var removedActiveProfile: Bool = false
     var loadBalanceGroup: ServerGroup?
     var loadBalanceProfiles: [ServerProfile]!
+    var tempServerGroups = ServerGroupManager.serverGroups
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -171,15 +172,15 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     }
     
     @IBAction func addProfile(_ sender: NSButton) {
-        if ServerGroupManager.serverGroups.isEmpty {
+        if tempServerGroups.isEmpty {
             addGroup(NSButton())
         }
         
         let profile = ServerProfile()
         profile.remark = "New Server".localized
-        profile.groupId = ServerGroupManager.serverGroups[groupsTableView.selectedRow].groupId
-        profile.group = ServerGroupManager.serverGroups[groupsTableView.selectedRow].groupName
-        ServerGroupManager.serverGroups[groupsTableView.selectedRow].serverProfiles.insert(profile, at: 0)
+        profile.groupId = tempServerGroups[groupsTableView.selectedRow].groupId
+        profile.group = tempServerGroups[groupsTableView.selectedRow].groupName
+        tempServerGroups[groupsTableView.selectedRow].serverProfiles.insert(profile, at: 0)
 
         profilesTableView.beginUpdates()
         profilesTableView.insertRows(at: IndexSet(integer: 0), withAnimation: .effectFade)
@@ -195,14 +196,14 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
         profilesTableView.beginUpdates()
         for toDeleteIndex in profilesTableView.selectedRowIndexes {
             if let activeProfile = ServerProfileManager.activeProfile {
-                if activeProfile.uuid == ServerGroupManager.serverGroups[groupsTableView.selectedRow].serverProfiles[toDeleteIndex - deleteCount].uuid {
+                if activeProfile.uuid == tempServerGroups[groupsTableView.selectedRow].serverProfiles[toDeleteIndex - deleteCount].uuid {
                     removedActiveProfile = true
                 }
             }
-            ServerGroupManager.serverGroups[groupsTableView.selectedRow].serverProfiles.remove(at: toDeleteIndex - deleteCount)
+            tempServerGroups[groupsTableView.selectedRow].serverProfiles.remove(at: toDeleteIndex - deleteCount)
             profilesTableView.removeRows(at: IndexSet(integer: toDeleteIndex - deleteCount), withAnimation: .effectFade)
-            if ServerGroupManager.serverGroups[groupsTableView.selectedRow].isSubscription && loadBalanceProfiles.contains(where: {$0.hashVal == ServerGroupManager.serverGroups[groupsTableView.selectedRow].serverProfiles[toDeleteIndex - deleteCount].hashVal}) {
-                loadBalanceProfiles.removeAll(where: {$0.hashVal == ServerGroupManager.serverGroups[groupsTableView.selectedRow].serverProfiles[toDeleteIndex - deleteCount].hashVal})
+            if tempServerGroups[groupsTableView.selectedRow].isSubscription && loadBalanceProfiles.contains(where: {$0.hashVal == tempServerGroups[groupsTableView.selectedRow].serverProfiles[toDeleteIndex - deleteCount].hashVal}) {
+                loadBalanceProfiles.removeAll(where: {$0.hashVal == tempServerGroups[groupsTableView.selectedRow].serverProfiles[toDeleteIndex - deleteCount].hashVal})
             }
             deleteCount += 1
         }
@@ -217,14 +218,14 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
             return
         }
         let index = profilesTableView.selectedRow
-        var group = ServerGroupManager.serverGroups[groupsTableView.selectedRow]
+        var group = tempServerGroups[groupsTableView.selectedRow]
         let newProfile = ServerProfile.fromDictionary(ServerProfile.toDictionary(group.serverProfiles[index]))
         newProfile.uuid = UUID().uuidString
         
         if group.isSubscription {
             addGroup(NSButton())
         }
-        group = ServerGroupManager.serverGroups[groupsTableView.selectedRow]
+        group = tempServerGroups[groupsTableView.selectedRow]
         group.serverProfiles.insert(newProfile, at: 0)
         
         profilesTableView.beginUpdates()
@@ -239,7 +240,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     @IBAction func addGroup(_ sender: NSButton) {
         let group = ServerGroup()
         group.groupName = "Default Group".localized
-        ServerGroupManager.serverGroups.insert(group, at: 0)
+        tempServerGroups.insert(group, at: 0)
         groupsTableView.beginUpdates()
         groupsTableView.insertRows(at: IndexSet(integer: 0), withAnimation: .effectFade)
         groupsTableView.endUpdates()
@@ -253,16 +254,16 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
         groupsTableView.beginUpdates()
         for toDeleteIndex in groupsTableView.selectedRowIndexes {
             if let activeProfile = ServerProfileManager.activeProfile {
-                if activeProfile.groupId == ServerGroupManager.serverGroups[toDeleteIndex - deleteCount].groupId {
+                if activeProfile.groupId == tempServerGroups[toDeleteIndex - deleteCount].groupId {
                     removedActiveProfile = true
                 }
             }
-            if loadBalanceGroup != nil && loadBalanceGroup?.groupId == ServerGroupManager.serverGroups[toDeleteIndex - deleteCount].groupId {
+            if loadBalanceGroup != nil && loadBalanceGroup?.groupId == tempServerGroups[toDeleteIndex - deleteCount].groupId {
                 loadBalanceGroup = nil
                 loadBalanceProfiles = []
             }
-            ServerGroupManager.serverGroups[toDeleteIndex - deleteCount].serverProfiles = []
-            ServerGroupManager.serverGroups.remove(at: toDeleteIndex - deleteCount)
+            tempServerGroups[toDeleteIndex - deleteCount].serverProfiles = []
+            tempServerGroups.remove(at: toDeleteIndex - deleteCount)
             groupsTableView.removeRows(at: IndexSet(integer: toDeleteIndex - deleteCount), withAnimation: .effectFade)
             deleteCount += 1
         }
@@ -277,13 +278,13 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
         if groupsTableView.selectedRowIndexes.count != 1 {
             return
         }
-        let group = ServerGroupManager.serverGroups[groupsTableView.selectedRow]
+        let group = tempServerGroups[groupsTableView.selectedRow]
         let newGroup = ServerGroup.fromDictionary(ServerGroup.toDictionary(group))
         newGroup.groupId = UUID().uuidString
         for item in newGroup.serverProfiles {
             item.uuid = UUID().uuidString
         }
-        ServerGroupManager.serverGroups.insert(newGroup, at: 0)
+        tempServerGroups.insert(newGroup, at: 0)
         
         groupsTableView.beginUpdates()
         groupsTableView.insertRows(at: IndexSet(integer: 0), withAnimation: .effectFade)
@@ -296,47 +297,44 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     }
     
     @IBAction func ok(_ sender: NSButton) {
-        UserDefaults.standard.set(loadBalanceGroup == nil ? nil : ServerGroup.toDictionary(loadBalanceGroup!), forKey: UserKeys.LoadbalanceGroup)
-        UserDefaults.standard.set(ServerProfile.toDictionaries(loadBalanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
+        let defaults = UserDefaults.standard
+        defaults.set(loadBalanceGroup == nil ? nil : ServerGroup.toDictionary(loadBalanceGroup!), forKey: UserKeys.LoadbalanceGroup)
+        defaults.set(ServerProfile.toDictionaries(loadBalanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
         if orderAddress.state == .on {
-            UserDefaults.standard.set(true, forKey: UserKeys.OrderAddress)
-            UserDefaults.standard.set(false, forKey: UserKeys.OrderRemark)
+            defaults.set(true, forKey: UserKeys.OrderAddress)
+            defaults.set(false, forKey: UserKeys.OrderRemark)
         } else {
-            UserDefaults.standard.set(true, forKey: UserKeys.OrderRemark)
-            UserDefaults.standard.set(false, forKey: UserKeys.OrderAddress)
+            defaults.set(true, forKey: UserKeys.OrderRemark)
+            defaults.set(false, forKey: UserKeys.OrderAddress)
         }
         if removedActiveProfile {
-            UserDefaults.standard.removeObject(forKey: UserKeys.ActiveServerProfile)
+            defaults.removeObject(forKey: UserKeys.ActiveServerProfile)
             ServerProfileManager.activeProfile = nil
         }
+        ServerGroupManager.serverGroups = tempServerGroups
         ServerGroupManager.save()
-//        applyConfig()
+        DispatchQueue.global().async {
+            setupProxy()
+            DispatchQueue.main.async {
+                (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
+                (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
+            }
+        }
         window?.performClose(self)
     }
     
     @IBAction func cancel(_ sender: NSButton) {
-        resetData()
         window?.performClose(self)
     }
     
-    func resetData() {
-        showPassword = false
-        displayPassword(eyeButton)
-        let p = defaults.array(forKey: UserKeys.ServerGroups)
-        ServerGroupManager.serverGroups = ServerGroup.fromDictionaries(p as! [[String : AnyObject]])
-        groupsTableView.reloadData()
-        profilesTableView.reloadData()
-    }
-    
     func windowShouldClose(_ sender: NSWindow) -> Bool {
-        resetData()
         return true
     }
     
     @IBAction func copyCurrentProfileURL2Pasteboard(_ sender: NSButton) {
         let index = profilesTableView.selectedRow
         if  index >= 0 {
-            let profile = ServerGroupManager.serverGroups[groupsTableView.selectedRow].serverProfiles[index]
+            let profile = tempServerGroups[groupsTableView.selectedRow].serverProfiles[index]
             let url = profile.URL()
             let pboard = NSPasteboard.general
             pboard.clearContents()
@@ -364,7 +362,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     }
     
     func updateProfileBoxVisible() {
-        if ServerGroupManager.serverGroups.isEmpty {
+        if tempServerGroups.isEmpty {
             removeGroupButton.isEnabled = false
             duplicateGroupButton.isEnabled = false
             removeProfileButton.isEnabled = false
@@ -373,7 +371,7 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
         } else {
             removeGroupButton.isEnabled = true
             duplicateGroupButton.isEnabled = true
-            if ServerGroupManager.serverGroups[groupsTableView.selectedRow].serverProfiles.isEmpty {
+            if tempServerGroups[groupsTableView.selectedRow].serverProfiles.isEmpty {
                 removeProfileButton.isEnabled = false
                 duplicateProfileButton.isEnabled = false
                 profileBox.isHidden = true
@@ -386,12 +384,12 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     }
     
     func bindProfile(_ groupIndex: Int, _ serverIndex: Int) {
-        if ServerGroupManager.serverGroups.isEmpty || ServerGroupManager.serverGroups[groupIndex].serverProfiles.isEmpty {
+        if tempServerGroups.isEmpty || tempServerGroups[groupIndex].serverProfiles.isEmpty {
             updateProfileBoxVisible()
             return
         }
         
-        editingProfile = ServerGroupManager.serverGroups[groupIndex < 0 ? 0 : groupIndex].serverProfiles[serverIndex < 0 ? 0 : serverIndex]
+        editingProfile = tempServerGroups[groupIndex < 0 ? 0 : groupIndex].serverProfiles[serverIndex < 0 ? 0 : serverIndex]
         
         hostTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "serverHost", options: [NSBindingOption.continuouslyUpdatesValue: true])
         portTextField.bind(NSBindingName(rawValue: "value"), to: editingProfile!, withKeyPath: "serverPort", options: [NSBindingOption.continuouslyUpdatesValue: true])
@@ -413,13 +411,13 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
     // MARK: For NSTableViewDataSource
     func numberOfRows(in tableView: NSTableView) -> Int {
         if tableView == groupsTableView {
-            return ServerGroupManager.serverGroups.count
+            return tempServerGroups.count
         } else {
-            if ServerGroupManager.serverGroups.isEmpty {
+            if tempServerGroups.isEmpty {
                 return 0
             }
             let index = groupsTableView.selectedRow == -1 ? 0 : groupsTableView.selectedRow
-            return ServerGroupManager.serverGroups[index].serverProfiles.count
+            return tempServerGroups[index].serverProfiles.count
         }
     }
 
@@ -446,13 +444,13 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
         var isActive = false
         if tableView == groupsTableView {
             if UserDefaults.standard.string(forKey: UserKeys.ShadowsocksXRunningMode) == UserKeys.Mode_Loadbalance {
-                isActive = LoadBalance.getLoadBalanceGroup()!.groupId == ServerGroupManager.serverGroups[index].groupId
+                isActive = LoadBalance.getLoadBalanceGroup()!.groupId == tempServerGroups[index].groupId
             } else if activeProfile != nil {
-                isActive = ServerGroupManager.serverGroups[index].groupId == activeProfile!.groupId
+                isActive = tempServerGroups[index].groupId == activeProfile!.groupId
             }
-            return (ServerGroupManager.serverGroups[index].groupName, isActive)
+            return (tempServerGroups[index].groupName, isActive)
         } else {
-            let profiles = ServerGroupManager.serverGroups[groupsTableView.selectedRow].serverProfiles
+            let profiles = tempServerGroups[groupsTableView.selectedRow].serverProfiles
             if profiles.isEmpty {
                 return ("", false)
             }
@@ -501,12 +499,11 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate, NSTable
                 return
             }
             if let title = tView.currentEditor() {
-                ServerGroupManager.serverGroups[index].groupName = title.string
+                tempServerGroups[index].groupName = title.string
             }
         }
     }
     
     @IBAction func order(_ sender: NSButton) {
-        
     }
 }

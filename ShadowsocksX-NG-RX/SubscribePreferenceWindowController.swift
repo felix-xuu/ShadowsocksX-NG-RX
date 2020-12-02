@@ -26,6 +26,8 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
     var subscriptions: [ServerGroup]!
     var loadBalanceGroup: ServerGroup?
     var loadBalanceProfiles: [ServerProfile]!
+    var tempServerGroups = ServerGroupManager.serverGroups
+    var tempActiveProfile = ServerProfileManager.activeProfile
     
     var keys: [String : String] = [:]
     
@@ -83,11 +85,14 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
     }
     
     @IBAction func onOk(_ sender: NSButton) {
-        UserDefaults.standard.set(loadBalanceGroup == nil ? nil : ServerGroup.toDictionary(loadBalanceGroup!), forKey: UserKeys.LoadbalanceGroup)
-        UserDefaults.standard.set(ServerProfile.toDictionaries(loadBalanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
+        let defaults = UserDefaults.standard
+        ServerGroupManager.serverGroups = tempServerGroups
+        ServerProfileManager.activeProfile = tempActiveProfile
+        defaults.set(loadBalanceGroup == nil ? nil : ServerGroup.toDictionary(loadBalanceGroup!), forKey: UserKeys.LoadbalanceGroup)
+        defaults.set(ServerProfile.toDictionaries(loadBalanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
         SubscribeManager.autoUpdateCount = 0
         window?.performClose(self)
-        DispatchQueue.global().sync {
+        DispatchQueue.global().async {
             ServerGroupManager.getSubscriptions().forEach({ value in
                 if value.autoUpdate {
                     SubscribeManager.updateServerFromSubscription(value)
@@ -99,27 +104,26 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
                     return
                 }
             }
-            DispatchQueue.main.async {
-                ServerGroupManager.save()
-//                applyConfig()
+            ServerGroupManager.save()
+            setupProxy()
+            DispatchQueue.main.async { [self] in
+                (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
+                if defaults.string(forKey: UserKeys.ShadowsocksXRunningMode) == UserKeys.Mode_Loadbalance {
+                    if loadBalanceGroup == nil {
+                        (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
+                    }
+                } else {
+                    if tempActiveProfile == nil {
+                        (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
+                    }
+                }
                 SubscribeManager.autoUpdateCount = -1
             }
         }
     }
     
     @IBAction func cancel(_ sender: NSButton) {
-        resetData()
         window?.performClose(self)
-    }
-    
-    func windowShouldClose(_ sender: NSWindow) -> Bool {
-        resetData()
-        return true
-    }
-    
-    func resetData() {
-        ServerGroupManager.serverGroups = ServerGroup.fromDictionaries(defaults.array(forKey: UserKeys.ServerGroups) as! [[String : AnyObject]])
-        SubscribeTableView.reloadData()
     }
     
     @IBAction func onAdd(_ sender: NSButton) {
@@ -128,7 +132,7 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
         subscription.isSubscription = true
         subscription.groupName = "Default Group".localized
         subscriptions.insert(subscription, at: 0)
-        ServerGroupManager.serverGroups.insert(subscription, at: 0)
+        tempServerGroups.insert(subscription, at: 0)
         
         SubscribeTableView.insertRows(at: IndexSet(integer: 0), withAnimation: .effectFade)
         
@@ -143,10 +147,10 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
         var deleteCount = 0
         SubscribeTableView.beginUpdates()
         for toDeleteIndex in SubscribeTableView.selectedRowIndexes {
-            ServerGroupManager.serverGroups.removeAll(where: {$0.groupId == subscriptions[toDeleteIndex - deleteCount].groupId})
-            if let p = ServerProfileManager.activeProfile {
+            tempServerGroups.removeAll(where: {$0.groupId == subscriptions[toDeleteIndex - deleteCount].groupId})
+            if let p = tempActiveProfile {
                 if p.groupId == subscriptions[toDeleteIndex - deleteCount].groupId {
-                    ServerProfileManager.activeProfile = nil
+                    tempActiveProfile = nil
                 }
             }
             if loadBalanceGroup != nil && subscriptions[toDeleteIndex - deleteCount].groupId == loadBalanceGroup?.groupId {

@@ -1,0 +1,891 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		083BF8361D82742200831C68 /* NetWorkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BF8341D82742200831C68 /* NetWorkMonitor.swift */; };
+		083BF8371D82742200831C68 /* PingServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BF8351D82742200831C68 /* PingServer.swift */; };
+		08635C771EF750FA00F1D25E /* SubscribeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08635C761EF750FA00F1D25E /* SubscribeManager.swift */; };
+		086A31451F1AF797004C7285 /* SubscribePreferenceWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086A31471F1AF797004C7285 /* SubscribePreferenceWindowController.xib */; };
+		0877D6571EF1E82400126865 /* SubscribePreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877D6551EF1E82400126865 /* SubscribePreferenceWindowController.swift */; };
+		08F162BE1EBEDF0100C52869 /* chn.acl in Resources */ = {isa = PBXBuildFile; fileRef = 08F162BD1EBEDF0100C52869 /* chn.acl */; };
+		08F162C21EBEEC0F00C52869 /* gfwlist.acl in Resources */ = {isa = PBXBuildFile; fileRef = 08F162C11EBEEC0F00C52869 /* gfwlist.acl */; };
+		9B07EFA71D048BBB0052D9DF /* ss-local in Resources */ = {isa = PBXBuildFile; fileRef = 9B07EFA61D048BBB0052D9DF /* ss-local */; };
+		9B0BFFE91D0460A70040E62B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0BFFE81D0460A70040E62B /* AppDelegate.swift */; };
+		9B0BFFEB1D0460A70040E62B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B0BFFEA1D0460A70040E62B /* Assets.xcassets */; };
+		9B0BFFEE1D0460A70040E62B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B0BFFEC1D0460A70040E62B /* MainMenu.xib */; };
+		9B2491B41D0ACC3A003BBECC /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B2491B61D0ACC3A003BBECC /* PreferencesWindowController.xib */; };
+		9B2491B71D0ACC3E003BBECC /* AdvPreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B2491B91D0ACC3E003BBECC /* AdvPreferencesWindowController.xib */; };
+		9B3FFF0D1D05FEB30019A709 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3FFF0C1D05FEB30019A709 /* Utils.swift */; };
+		9B3FFF141D0705810019A709 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3FFF131D0705810019A709 /* Notifications.swift */; };
+		9B3FFF321D08CEE40019A709 /* SWBQRCodeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B3FFF311D08CEE40019A709 /* SWBQRCodeWindowController.m */; };
+		9B3FFF3E1D08D9910019A709 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B3FFF3D1D08D9910019A709 /* SystemConfiguration.framework */; };
+		9BC70EDC1D2E3E3100EDA4CA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B172A6C1D0ADDDD00B87B9A /* Localizable.strings */; };
+		9BEEF06E1D04DCE400FC52B3 /* ServerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEEF06D1D04DCE400FC52B3 /* ServerProfile.swift */; };
+		9BEEF0701D04DDB100FC52B3 /* ServerProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEEF06F1D04DDB100FC52B3 /* ServerProfileManager.swift */; };
+		9BEEF0751D04EF3E00FC52B3 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEEF0731D04EF3E00FC52B3 /* PreferencesWindowController.swift */; };
+		9BEEF0781D04FE8A00FC52B3 /* LaunchAgentUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEEF0771D04FE8A00FC52B3 /* LaunchAgentUtils.swift */; };
+		9BEEF07B1D05631500FC52B3 /* AdvPreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEEF0791D05631500FC52B3 /* AdvPreferencesWindowController.swift */; };
+		A1382C08C2D2572CC7C42F63 /* Pods_ShadowsocksX_NG_RX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 880C68997DA78C41BEF1D115 /* Pods_ShadowsocksX_NG_RX.framework */; };
+		C6D429941DA75988002A5711 /* privoxy in Resources */ = {isa = PBXBuildFile; fileRef = C6D4298F1DA75988002A5711 /* privoxy */; };
+		C6D429991DA76FBC002A5711 /* privoxy.config.example in Resources */ = {isa = PBXBuildFile; fileRef = C6D429981DA76FBC002A5711 /* privoxy.config.example */; };
+		DC053F18234C8A5C00491A50 /* install.sh in Resources */ = {isa = PBXBuildFile; fileRef = DC053F14234C8A5C00491A50 /* install.sh */; };
+		DC053F19234C8A5C00491A50 /* start.sh in Resources */ = {isa = PBXBuildFile; fileRef = DC053F15234C8A5C00491A50 /* start.sh */; };
+		DC053F1A234C8A5C00491A50 /* reload_conf.sh in Resources */ = {isa = PBXBuildFile; fileRef = DC053F16234C8A5C00491A50 /* reload_conf.sh */; };
+		DC053F1B234C8A5C00491A50 /* stop.sh in Resources */ = {isa = PBXBuildFile; fileRef = DC053F17234C8A5C00491A50 /* stop.sh */; };
+		DC0CDC38230534AD0033CEA3 /* libsodium.23.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DC0CDC36230533D40033CEA3 /* libsodium.23.dylib */; };
+		DC0CDC3B23053A8C0033CEA3 /* libpcre.1.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DC0CDC3923053A810033CEA3 /* libpcre.1.dylib */; };
+		DC3BE8CC230941D200F7332D /* LoadBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3BE8CB230941D200F7332D /* LoadBalance.swift */; };
+		DC3BE8CE2309863000F7332D /* clean_logs.sh in Resources */ = {isa = PBXBuildFile; fileRef = DC3BE8CD2309863000F7332D /* clean_logs.sh */; };
+		DC5159D2257771220007737C /* DNSPreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5159CA257771210007737C /* DNSPreferencesController.xib */; };
+		DC5159D3257771220007737C /* LoadBalancePreferenceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5159CC257771210007737C /* LoadBalancePreferenceController.xib */; };
+		DC5159D4257771220007737C /* RuleConfigPreferenceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5159CE257771220007737C /* RuleConfigPreferenceController.xib */; };
+		DC5159D5257771220007737C /* SWBQRCodeWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5159D0257771220007737C /* SWBQRCodeWindowController.xib */; };
+		DC5159DB257771490007737C /* RuleConfigPreferenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5159D9257771490007737C /* RuleConfigPreferenceController.swift */; };
+		DC5159DC257771490007737C /* DNSPreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5159DA257771490007737C /* DNSPreferencesController.swift */; };
+		DC5159E52577716E0007737C /* libmbedcrypto.2.24.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5159E02577716D0007737C /* libmbedcrypto.2.24.0.dylib */; };
+		DC5159E62577716E0007737C /* networksetup.sh in Resources */ = {isa = PBXBuildFile; fileRef = DC5159E12577716D0007737C /* networksetup.sh */; };
+		DC5159E72577716E0007737C /* killPing.sh in Resources */ = {isa = PBXBuildFile; fileRef = DC5159E22577716D0007737C /* killPing.sh */; };
+		DC5159E82577716E0007737C /* httping in Resources */ = {isa = PBXBuildFile; fileRef = DC5159E32577716E0007737C /* httping */; };
+		DC5159E92577716E0007737C /* install_lib.sh in Resources */ = {isa = PBXBuildFile; fileRef = DC5159E42577716E0007737C /* install_lib.sh */; };
+		DC5159F1257771840007737C /* RuleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5159ED257771840007737C /* RuleManager.swift */; };
+		DC5159F2257771840007737C /* ProxyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5159EE257771840007737C /* ProxyHandler.swift */; };
+		DC5159F3257771840007737C /* MainApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5159EF257771840007737C /* MainApplication.swift */; };
+		DC5159F4257771840007737C /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5159F0257771840007737C /* ExceptionHandler.swift */; };
+		DC5496972306DBA600EB1968 /* haproxy.cfg.example in Resources */ = {isa = PBXBuildFile; fileRef = DC5496962306DBA600EB1968 /* haproxy.cfg.example */; };
+		DC5496992306DF7700EB1968 /* haproxy in Resources */ = {isa = PBXBuildFile; fileRef = DC5496982306DF7700EB1968 /* haproxy */; };
+		DC8FFD712340B77E00C902B1 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8FFD702340B77E00C902B1 /* Tools.swift */; };
+		DC90A2C92302CC920000509D /* ServerGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC90A2C82302CC920000509D /* ServerGroup.swift */; };
+		DC90A2CB2302CD2E0000509D /* ServerGroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC90A2CA2302CD2E0000509D /* ServerGroupManager.swift */; };
+		DCA7BB2B23070515008F2F87 /* LoadBalancePreferenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA7BB2A23070515008F2F87 /* LoadBalancePreferenceController.swift */; };
+		DCCA780C22FC4BD8009E5ECC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA780B22FC4BD8009E5ECC /* AppDelegate.swift */; };
+		DCCA781022FC4BD9009E5ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCCA780F22FC4BD9009E5ECC /* Assets.xcassets */; };
+		DCCA781322FC4BD9009E5ECC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCCA781122FC4BD9009E5ECC /* Main.storyboard */; };
+		DCCA781A22FC508B009E5ECC /* LaunchHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = DCCA780922FC4BD8009E5ECC /* LaunchHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DCCA781C22FC50D8009E5ECC /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCA781B22FC50D8009E5ECC /* ServiceManagement.framework */; };
+		DCD0B28622FC901800B9A47E /* libcares.2.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DCD0B28022FC900700B9A47E /* libcares.2.dylib */; };
+		DCD0B28722FC901800B9A47E /* libev.4.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DCD0B28122FC900800B9A47E /* libev.4.dylib */; };
+		DCD0B28822FC901800B9A47E /* libmbedcrypto.3.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DCD0B28222FC900800B9A47E /* libmbedcrypto.3.dylib */; };
+		DCF8F58A22F4AFAB00636EF1 /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8F58922F4AFAB00636EF1 /* UserKeys.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DCCA781922FC503C009E5ECC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				DCCA781A22FC508B009E5ECC /* LaunchHelper.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		083BF8341D82742200831C68 /* NetWorkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetWorkMonitor.swift; sourceTree = "<group>"; };
+		083BF8351D82742200831C68 /* PingServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingServer.swift; sourceTree = "<group>"; };
+		085641E91D7188C400116B27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		08635C761EF750FA00F1D25E /* SubscribeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribeManager.swift; sourceTree = "<group>"; };
+		0877D6551EF1E82400126865 /* SubscribePreferenceWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribePreferenceWindowController.swift; sourceTree = "<group>"; };
+		08F162BD1EBEDF0100C52869 /* chn.acl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chn.acl; sourceTree = "<group>"; };
+		08F162C11EBEEC0F00C52869 /* gfwlist.acl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gfwlist.acl; sourceTree = "<group>"; };
+		18BDCDD91C3E0BC968A1835A /* Pods-ShadowsocksX-NG-RX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShadowsocksX-NG-RX.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShadowsocksX-NG-RX/Pods-ShadowsocksX-NG-RX.release.xcconfig"; sourceTree = "<group>"; };
+		4A6D9D671CD4564500F85A9B /* Pods-ShadowsocksX-NG-RX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShadowsocksX-NG-RX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShadowsocksX-NG-RX/Pods-ShadowsocksX-NG-RX.debug.xcconfig"; sourceTree = "<group>"; };
+		880C68997DA78C41BEF1D115 /* Pods_ShadowsocksX_NG_RX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShadowsocksX_NG_RX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B07EFA61D048BBB0052D9DF /* ss-local */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "ss-local"; sourceTree = "<group>"; };
+		9B0BFFE51D0460A70040E62B /* ShadowsocksX-NG-RX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ShadowsocksX-NG-RX.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B0BFFE81D0460A70040E62B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9B0BFFEA1D0460A70040E62B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9B0BFFEF1D0460A70040E62B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B172A6D1D0ADDE800B87B9A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		9B3FFF0C1D05FEB30019A709 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		9B3FFF131D0705810019A709 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		9B3FFF301D08CEE40019A709 /* SWBQRCodeWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBQRCodeWindowController.h; sourceTree = "<group>"; };
+		9B3FFF311D08CEE40019A709 /* SWBQRCodeWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWBQRCodeWindowController.m; sourceTree = "<group>"; };
+		9B3FFF3B1D08D93B0019A709 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		9B3FFF3D1D08D9910019A709 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9BEEF06D1D04DCE400FC52B3 /* ServerProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerProfile.swift; sourceTree = "<group>"; };
+		9BEEF06F1D04DDB100FC52B3 /* ServerProfileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerProfileManager.swift; sourceTree = "<group>"; };
+		9BEEF0731D04EF3E00FC52B3 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		9BEEF0771D04FE8A00FC52B3 /* LaunchAgentUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchAgentUtils.swift; sourceTree = "<group>"; };
+		9BEEF0791D05631500FC52B3 /* AdvPreferencesWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvPreferencesWindowController.swift; sourceTree = "<group>"; };
+		C6D4298F1DA75988002A5711 /* privoxy */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = privoxy; sourceTree = "<group>"; };
+		C6D429981DA76FBC002A5711 /* privoxy.config.example */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = privoxy.config.example; sourceTree = "<group>"; };
+		DC053F14234C8A5C00491A50 /* install.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = install.sh; sourceTree = "<group>"; };
+		DC053F15234C8A5C00491A50 /* start.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = start.sh; sourceTree = "<group>"; };
+		DC053F16234C8A5C00491A50 /* reload_conf.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = reload_conf.sh; sourceTree = "<group>"; };
+		DC053F17234C8A5C00491A50 /* stop.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = stop.sh; sourceTree = "<group>"; };
+		DC0674D522EE9FD40082FA8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		DC0674DE22EEA1760082FA8D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DC0674DF22EEA2910082FA8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SubscribePreferenceWindowController.xib; sourceTree = "<group>"; };
+		DC0674E022EEA29F0082FA8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreferencesWindowController.xib; sourceTree = "<group>"; };
+		DC0674E122EEA2AB0082FA8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AdvPreferencesWindowController.xib; sourceTree = "<group>"; };
+		DC0CDC36230533D40033CEA3 /* libsodium.23.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libsodium.23.dylib; sourceTree = "<group>"; };
+		DC0CDC3923053A810033CEA3 /* libpcre.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libpcre.1.dylib; sourceTree = "<group>"; };
+		DC3BE8CB230941D200F7332D /* LoadBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadBalance.swift; sourceTree = "<group>"; };
+		DC3BE8CD2309863000F7332D /* clean_logs.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = clean_logs.sh; sourceTree = "<group>"; };
+		DC5159CB257771210007737C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DNSPreferencesController.xib; sourceTree = "<group>"; };
+		DC5159CD257771210007737C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LoadBalancePreferenceController.xib; sourceTree = "<group>"; };
+		DC5159CF257771220007737C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/RuleConfigPreferenceController.xib; sourceTree = "<group>"; };
+		DC5159D1257771220007737C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SWBQRCodeWindowController.xib; sourceTree = "<group>"; };
+		DC5159D9257771490007737C /* RuleConfigPreferenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleConfigPreferenceController.swift; sourceTree = "<group>"; };
+		DC5159DA257771490007737C /* DNSPreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPreferencesController.swift; sourceTree = "<group>"; };
+		DC5159E02577716D0007737C /* libmbedcrypto.2.24.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmbedcrypto.2.24.0.dylib; sourceTree = "<group>"; };
+		DC5159E12577716D0007737C /* networksetup.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = networksetup.sh; sourceTree = "<group>"; };
+		DC5159E22577716D0007737C /* killPing.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = killPing.sh; sourceTree = "<group>"; };
+		DC5159E32577716E0007737C /* httping */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = httping; sourceTree = "<group>"; };
+		DC5159E42577716E0007737C /* install_lib.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = install_lib.sh; sourceTree = "<group>"; };
+		DC5159ED257771840007737C /* RuleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleManager.swift; sourceTree = "<group>"; };
+		DC5159EE257771840007737C /* ProxyHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProxyHandler.swift; sourceTree = "<group>"; };
+		DC5159EF257771840007737C /* MainApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainApplication.swift; sourceTree = "<group>"; };
+		DC5159F0257771840007737C /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
+		DC5496962306DBA600EB1968 /* haproxy.cfg.example */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = haproxy.cfg.example; sourceTree = "<group>"; };
+		DC5496982306DF7700EB1968 /* haproxy */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = haproxy; sourceTree = "<group>"; };
+		DC8FFD702340B77E00C902B1 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		DC90A2C82302CC920000509D /* ServerGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerGroup.swift; sourceTree = "<group>"; };
+		DC90A2CA2302CD2E0000509D /* ServerGroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerGroupManager.swift; sourceTree = "<group>"; };
+		DCA7BB2A23070515008F2F87 /* LoadBalancePreferenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadBalancePreferenceController.swift; sourceTree = "<group>"; };
+		DCCA780922FC4BD8009E5ECC /* LaunchHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LaunchHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCCA780B22FC4BD8009E5ECC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DCCA780F22FC4BD9009E5ECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DCCA781222FC4BD9009E5ECC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DCCA781422FC4BD9009E5ECC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCCA781522FC4BD9009E5ECC /* LaunchHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LaunchHelper.entitlements; sourceTree = "<group>"; };
+		DCCA781B22FC50D8009E5ECC /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		DCD0B28022FC900700B9A47E /* libcares.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libcares.2.dylib; sourceTree = "<group>"; };
+		DCD0B28122FC900800B9A47E /* libev.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libev.4.dylib; sourceTree = "<group>"; };
+		DCD0B28222FC900800B9A47E /* libmbedcrypto.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmbedcrypto.3.dylib; sourceTree = "<group>"; };
+		DCD0B28C22FC952D00B9A47E /* libmbedcrypto.2.16.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmbedcrypto.2.16.2.dylib; sourceTree = "<group>"; };
+		DCF8F58822F4AEC500636EF1 /* ShadowsocksX-NG-RX-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShadowsocksX-NG-RX-Bridging-Header.h"; sourceTree = "<group>"; };
+		DCF8F58922F4AFAB00636EF1 /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9B0BFFE21D0460A70040E62B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCCA781C22FC50D8009E5ECC /* ServiceManagement.framework in Frameworks */,
+				9B3FFF3E1D08D9910019A709 /* SystemConfiguration.framework in Frameworks */,
+				DC5159E52577716E0007737C /* libmbedcrypto.2.24.0.dylib in Frameworks */,
+				A1382C08C2D2572CC7C42F63 /* Pods_ShadowsocksX_NG_RX.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCCA780622FC4BD8009E5ECC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		33F4F299F89330966F4526E4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4A6D9D671CD4564500F85A9B /* Pods-ShadowsocksX-NG-RX.debug.xcconfig */,
+				18BDCDD91C3E0BC968A1835A /* Pods-ShadowsocksX-NG-RX.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9B07EFB01D048E900052D9DF /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				DC053F14234C8A5C00491A50 /* install.sh */,
+				DC053F16234C8A5C00491A50 /* reload_conf.sh */,
+				DC053F15234C8A5C00491A50 /* start.sh */,
+				DC053F17234C8A5C00491A50 /* stop.sh */,
+				DC5159E42577716E0007737C /* install_lib.sh */,
+				DC5159E22577716D0007737C /* killPing.sh */,
+				DC5159E12577716D0007737C /* networksetup.sh */,
+				DC3BE8CD2309863000F7332D /* clean_logs.sh */,
+				DC5159E02577716D0007737C /* libmbedcrypto.2.24.0.dylib */,
+				DCD0B28C22FC952D00B9A47E /* libmbedcrypto.2.16.2.dylib */,
+				DC0CDC3923053A810033CEA3 /* libpcre.1.dylib */,
+				DCD0B28022FC900700B9A47E /* libcares.2.dylib */,
+				DC0CDC36230533D40033CEA3 /* libsodium.23.dylib */,
+				DCD0B28122FC900800B9A47E /* libev.4.dylib */,
+				DCD0B28222FC900800B9A47E /* libmbedcrypto.3.dylib */,
+				DC5159E32577716E0007737C /* httping */,
+				DC5496982306DF7700EB1968 /* haproxy */,
+				C6D4298F1DA75988002A5711 /* privoxy */,
+				9B07EFA61D048BBB0052D9DF /* ss-local */,
+				DC5496962306DBA600EB1968 /* haproxy.cfg.example */,
+				C6D429981DA76FBC002A5711 /* privoxy.config.example */,
+				08F162BD1EBEDF0100C52869 /* chn.acl */,
+				08F162C11EBEEC0F00C52869 /* gfwlist.acl */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
+		9B0BFFDC1D0460A70040E62B = {
+			isa = PBXGroup;
+			children = (
+				9B0BFFE71D0460A70040E62B /* ShadowsocksX-NG-RX */,
+				DCCA780A22FC4BD8009E5ECC /* LaunchHelper */,
+				9B0BFFE61D0460A70040E62B /* Products */,
+				33F4F299F89330966F4526E4 /* Pods */,
+				D3CE66CC039F651F28057DDB /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9B0BFFE61D0460A70040E62B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9B0BFFE51D0460A70040E62B /* ShadowsocksX-NG-RX.app */,
+				DCCA780922FC4BD8009E5ECC /* LaunchHelper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9B0BFFE71D0460A70040E62B /* ShadowsocksX-NG-RX */ = {
+			isa = PBXGroup;
+			children = (
+				9B172A6C1D0ADDDD00B87B9A /* Localizable.strings */,
+				DCF8F58822F4AEC500636EF1 /* ShadowsocksX-NG-RX-Bridging-Header.h */,
+				DC5159EF257771840007737C /* MainApplication.swift */,
+				9B0BFFE81D0460A70040E62B /* AppDelegate.swift */,
+				9B0BFFEC1D0460A70040E62B /* MainMenu.xib */,
+				9B0BFFEF1D0460A70040E62B /* Info.plist */,
+				9BEEF06D1D04DCE400FC52B3 /* ServerProfile.swift */,
+				9BEEF06F1D04DDB100FC52B3 /* ServerProfileManager.swift */,
+				DC90A2C82302CC920000509D /* ServerGroup.swift */,
+				DC90A2CA2302CD2E0000509D /* ServerGroupManager.swift */,
+				08635C761EF750FA00F1D25E /* SubscribeManager.swift */,
+				DC3BE8CB230941D200F7332D /* LoadBalance.swift */,
+				DC5159F0257771840007737C /* ExceptionHandler.swift */,
+				9BEEF0771D04FE8A00FC52B3 /* LaunchAgentUtils.swift */,
+				DC5159EE257771840007737C /* ProxyHandler.swift */,
+				DC5159ED257771840007737C /* RuleManager.swift */,
+				083BF8341D82742200831C68 /* NetWorkMonitor.swift */,
+				083BF8351D82742200831C68 /* PingServer.swift */,
+				9B3FFF131D0705810019A709 /* Notifications.swift */,
+				9B3FFF0C1D05FEB30019A709 /* Utils.swift */,
+				DC8FFD702340B77E00C902B1 /* Tools.swift */,
+				DCF8F58922F4AFAB00636EF1 /* UserKeys.swift */,
+				9B0BFFEA1D0460A70040E62B /* Assets.xcassets */,
+				9B07EFB01D048E900052D9DF /* Support Files */,
+				9B3FFF0B1D05D8B80019A709 /* UI */,
+			);
+			path = "ShadowsocksX-NG-RX";
+			sourceTree = "<group>";
+		};
+		9B3FFF0B1D05D8B80019A709 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				DC5159D9257771490007737C /* RuleConfigPreferenceController.swift */,
+				DC5159CE257771220007737C /* RuleConfigPreferenceController.xib */,
+				DC5159DA257771490007737C /* DNSPreferencesController.swift */,
+				DC5159CA257771210007737C /* DNSPreferencesController.xib */,
+				DCA7BB2A23070515008F2F87 /* LoadBalancePreferenceController.swift */,
+				DC5159CC257771210007737C /* LoadBalancePreferenceController.xib */,
+				9B3FFF301D08CEE40019A709 /* SWBQRCodeWindowController.h */,
+				9B3FFF311D08CEE40019A709 /* SWBQRCodeWindowController.m */,
+				DC5159D0257771220007737C /* SWBQRCodeWindowController.xib */,
+				0877D6551EF1E82400126865 /* SubscribePreferenceWindowController.swift */,
+				086A31471F1AF797004C7285 /* SubscribePreferenceWindowController.xib */,
+				9BEEF0731D04EF3E00FC52B3 /* PreferencesWindowController.swift */,
+				9B2491B61D0ACC3A003BBECC /* PreferencesWindowController.xib */,
+				9BEEF0791D05631500FC52B3 /* AdvPreferencesWindowController.swift */,
+				9B2491B91D0ACC3E003BBECC /* AdvPreferencesWindowController.xib */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		D3CE66CC039F651F28057DDB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DCCA781B22FC50D8009E5ECC /* ServiceManagement.framework */,
+				9B3FFF3D1D08D9910019A709 /* SystemConfiguration.framework */,
+				9B3FFF3B1D08D93B0019A709 /* WebKit.framework */,
+				880C68997DA78C41BEF1D115 /* Pods_ShadowsocksX_NG_RX.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DCCA780A22FC4BD8009E5ECC /* LaunchHelper */ = {
+			isa = PBXGroup;
+			children = (
+				DCCA780B22FC4BD8009E5ECC /* AppDelegate.swift */,
+				DCCA780F22FC4BD9009E5ECC /* Assets.xcassets */,
+				DCCA781122FC4BD9009E5ECC /* Main.storyboard */,
+				DCCA781422FC4BD9009E5ECC /* Info.plist */,
+				DCCA781522FC4BD9009E5ECC /* LaunchHelper.entitlements */,
+			);
+			path = LaunchHelper;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9B0BFFE41D0460A70040E62B /* ShadowsocksX-NG-RX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B0B00081D0460A70040E62B /* Build configuration list for PBXNativeTarget "ShadowsocksX-NG-RX" */;
+			buildPhases = (
+				A3C8167BB5EB01FBDE2A08BC /* [CP] Check Pods Manifest.lock */,
+				9B0BFFE11D0460A70040E62B /* Sources */,
+				9B0BFFE21D0460A70040E62B /* Frameworks */,
+				9B0BFFE31D0460A70040E62B /* Resources */,
+				5E160625E3EC80E27DA7EF05 /* [CP] Embed Pods Frameworks */,
+				DCCA781922FC503C009E5ECC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ShadowsocksX-NG-RX";
+			productName = "ShadowsocksX-NG";
+			productReference = 9B0BFFE51D0460A70040E62B /* ShadowsocksX-NG-RX.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DCCA780822FC4BD8009E5ECC /* LaunchHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCCA781822FC4BD9009E5ECC /* Build configuration list for PBXNativeTarget "LaunchHelper" */;
+			buildPhases = (
+				DCCA780522FC4BD8009E5ECC /* Sources */,
+				DCCA780622FC4BD8009E5ECC /* Frameworks */,
+				DCCA780722FC4BD8009E5ECC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LaunchHelper;
+			productName = LaunchHelper;
+			productReference = DCCA780922FC4BD8009E5ECC /* LaunchHelper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9B0BFFDD1D0460A70040E62B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1030;
+				LastUpgradeCheck = 1220;
+				ORGANIZATIONNAME = felix.xu;
+				TargetAttributes = {
+					9B0BFFE41D0460A70040E62B = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
+					};
+					DCCA780822FC4BD8009E5ECC = {
+						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 9B0BFFE01D0460A70040E62B /* Build configuration list for PBXProject "ShadowsocksX-NG-RX" */;
+			compatibilityVersion = "Xcode 10.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+				global,
+			);
+			mainGroup = 9B0BFFDC1D0460A70040E62B;
+			productRefGroup = 9B0BFFE61D0460A70040E62B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9B0BFFE41D0460A70040E62B /* ShadowsocksX-NG-RX */,
+				DCCA780822FC4BD8009E5ECC /* LaunchHelper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9B0BFFE31D0460A70040E62B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC5159E82577716E0007737C /* httping in Resources */,
+				DC053F18234C8A5C00491A50 /* install.sh in Resources */,
+				DC5159D2257771220007737C /* DNSPreferencesController.xib in Resources */,
+				DC5159D5257771220007737C /* SWBQRCodeWindowController.xib in Resources */,
+				DC0CDC3B23053A8C0033CEA3 /* libpcre.1.dylib in Resources */,
+				DC0CDC38230534AD0033CEA3 /* libsodium.23.dylib in Resources */,
+				DC5159E92577716E0007737C /* install_lib.sh in Resources */,
+				DCD0B28622FC901800B9A47E /* libcares.2.dylib in Resources */,
+				DCD0B28722FC901800B9A47E /* libev.4.dylib in Resources */,
+				DC5496972306DBA600EB1968 /* haproxy.cfg.example in Resources */,
+				DC5159E62577716E0007737C /* networksetup.sh in Resources */,
+				DCD0B28822FC901800B9A47E /* libmbedcrypto.3.dylib in Resources */,
+				086A31451F1AF797004C7285 /* SubscribePreferenceWindowController.xib in Resources */,
+				9B2491B41D0ACC3A003BBECC /* PreferencesWindowController.xib in Resources */,
+				DC5159E72577716E0007737C /* killPing.sh in Resources */,
+				DC053F1B234C8A5C00491A50 /* stop.sh in Resources */,
+				C6D429941DA75988002A5711 /* privoxy in Resources */,
+				C6D429991DA76FBC002A5711 /* privoxy.config.example in Resources */,
+				DC053F1A234C8A5C00491A50 /* reload_conf.sh in Resources */,
+				08F162C21EBEEC0F00C52869 /* gfwlist.acl in Resources */,
+				DC053F19234C8A5C00491A50 /* start.sh in Resources */,
+				9B0BFFEB1D0460A70040E62B /* Assets.xcassets in Resources */,
+				DC5159D4257771220007737C /* RuleConfigPreferenceController.xib in Resources */,
+				9B2491B71D0ACC3E003BBECC /* AdvPreferencesWindowController.xib in Resources */,
+				DC3BE8CE2309863000F7332D /* clean_logs.sh in Resources */,
+				DC5496992306DF7700EB1968 /* haproxy in Resources */,
+				08F162BE1EBEDF0100C52869 /* chn.acl in Resources */,
+				9BC70EDC1D2E3E3100EDA4CA /* Localizable.strings in Resources */,
+				DC5159D3257771220007737C /* LoadBalancePreferenceController.xib in Resources */,
+				9B0BFFEE1D0460A70040E62B /* MainMenu.xib in Resources */,
+				9B07EFA71D048BBB0052D9DF /* ss-local in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCCA780722FC4BD8009E5ECC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCCA781022FC4BD9009E5ECC /* Assets.xcassets in Resources */,
+				DCCA781322FC4BD9009E5ECC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5E160625E3EC80E27DA7EF05 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ShadowsocksX-NG-RX/Pods-ShadowsocksX-NG-RX-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ShadowsocksX-NG-RX/Pods-ShadowsocksX-NG-RX-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ShadowsocksX-NG-RX/Pods-ShadowsocksX-NG-RX-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3C8167BB5EB01FBDE2A08BC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ShadowsocksX-NG-RX-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9B0BFFE11D0460A70040E62B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B3FFF321D08CEE40019A709 /* SWBQRCodeWindowController.m in Sources */,
+				DCA7BB2B23070515008F2F87 /* LoadBalancePreferenceController.swift in Sources */,
+				DC3BE8CC230941D200F7332D /* LoadBalance.swift in Sources */,
+				DCF8F58A22F4AFAB00636EF1 /* UserKeys.swift in Sources */,
+				DC5159DC257771490007737C /* DNSPreferencesController.swift in Sources */,
+				DC90A2CB2302CD2E0000509D /* ServerGroupManager.swift in Sources */,
+				083BF8371D82742200831C68 /* PingServer.swift in Sources */,
+				083BF8361D82742200831C68 /* NetWorkMonitor.swift in Sources */,
+				DC90A2C92302CC920000509D /* ServerGroup.swift in Sources */,
+				DC5159F1257771840007737C /* RuleManager.swift in Sources */,
+				DC8FFD712340B77E00C902B1 /* Tools.swift in Sources */,
+				9B3FFF141D0705810019A709 /* Notifications.swift in Sources */,
+				9BEEF0701D04DDB100FC52B3 /* ServerProfileManager.swift in Sources */,
+				08635C771EF750FA00F1D25E /* SubscribeManager.swift in Sources */,
+				DC5159DB257771490007737C /* RuleConfigPreferenceController.swift in Sources */,
+				0877D6571EF1E82400126865 /* SubscribePreferenceWindowController.swift in Sources */,
+				9BEEF07B1D05631500FC52B3 /* AdvPreferencesWindowController.swift in Sources */,
+				DC5159F4257771840007737C /* ExceptionHandler.swift in Sources */,
+				DC5159F3257771840007737C /* MainApplication.swift in Sources */,
+				9BEEF06E1D04DCE400FC52B3 /* ServerProfile.swift in Sources */,
+				9B3FFF0D1D05FEB30019A709 /* Utils.swift in Sources */,
+				DC5159F2257771840007737C /* ProxyHandler.swift in Sources */,
+				9BEEF0751D04EF3E00FC52B3 /* PreferencesWindowController.swift in Sources */,
+				9B0BFFE91D0460A70040E62B /* AppDelegate.swift in Sources */,
+				9BEEF0781D04FE8A00FC52B3 /* LaunchAgentUtils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCCA780522FC4BD8009E5ECC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCCA780C22FC4BD8009E5ECC /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		086A31471F1AF797004C7285 /* SubscribePreferenceWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC0674DF22EEA2910082FA8D /* Base */,
+			);
+			name = SubscribePreferenceWindowController.xib;
+			sourceTree = "<group>";
+		};
+		9B0BFFEC1D0460A70040E62B /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC0674D522EE9FD40082FA8D /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		9B172A6C1D0ADDDD00B87B9A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B172A6D1D0ADDE800B87B9A /* zh-Hans */,
+				085641E91D7188C400116B27 /* Base */,
+				DC0674DE22EEA1760082FA8D /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		9B2491B61D0ACC3A003BBECC /* PreferencesWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC0674E022EEA29F0082FA8D /* Base */,
+			);
+			name = PreferencesWindowController.xib;
+			sourceTree = "<group>";
+		};
+		9B2491B91D0ACC3E003BBECC /* AdvPreferencesWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC0674E122EEA2AB0082FA8D /* Base */,
+			);
+			name = AdvPreferencesWindowController.xib;
+			sourceTree = "<group>";
+		};
+		DC5159CA257771210007737C /* DNSPreferencesController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC5159CB257771210007737C /* Base */,
+			);
+			name = DNSPreferencesController.xib;
+			sourceTree = "<group>";
+		};
+		DC5159CC257771210007737C /* LoadBalancePreferenceController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC5159CD257771210007737C /* Base */,
+			);
+			name = LoadBalancePreferenceController.xib;
+			sourceTree = "<group>";
+		};
+		DC5159CE257771220007737C /* RuleConfigPreferenceController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC5159CF257771220007737C /* Base */,
+			);
+			name = RuleConfigPreferenceController.xib;
+			sourceTree = "<group>";
+		};
+		DC5159D0257771220007737C /* SWBQRCodeWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC5159D1257771220007737C /* Base */,
+			);
+			name = SWBQRCodeWindowController.xib;
+			sourceTree = "<group>";
+		};
+		DCCA781122FC4BD9009E5ECC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCCA781222FC4BD9009E5ECC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9B0B00061D0460A70040E62B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 95DKRM2PHW;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		9B0B00071D0460A70040E62B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 95DKRM2PHW;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		9B0B00091D0460A70040E62B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A6D9D671CD4564500F85A9B /* Pods-ShadowsocksX-NG-RX.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 95DKRM2PHW;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "ShadowsocksX-NG-RX/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+					"$(PROJECT_DIR)/ShadowsocksX-NG-RX",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.felix.xu.ShadowsocksX-NG-RX";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ShadowsocksX-NG-RX/ShadowsocksX-NG-RX-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		9B0B000A1D0460A70040E62B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18BDCDD91C3E0BC968A1835A /* Pods-ShadowsocksX-NG-RX.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 95DKRM2PHW;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "ShadowsocksX-NG-RX/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+					"$(PROJECT_DIR)/ShadowsocksX-NG-RX",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.felix.xu.ShadowsocksX-NG-RX";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ShadowsocksX-NG-RX/ShadowsocksX-NG-RX-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		DCCA781622FC4BD9009E5ECC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 95DKRM2PHW;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LaunchHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.felix.xu.LaunchHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DCCA781722FC4BD9009E5ECC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 95DKRM2PHW;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LaunchHelper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.felix.xu.LaunchHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9B0B00081D0460A70040E62B /* Build configuration list for PBXNativeTarget "ShadowsocksX-NG-RX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B0B00091D0460A70040E62B /* Debug */,
+				9B0B000A1D0460A70040E62B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B0BFFE01D0460A70040E62B /* Build configuration list for PBXProject "ShadowsocksX-NG-RX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B0B00061D0460A70040E62B /* Debug */,
+				9B0B00071D0460A70040E62B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCCA781822FC4BD9009E5ECC /* Build configuration list for PBXNativeTarget "LaunchHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DCCA781622FC4BD9009E5ECC /* Debug */,
+				DCCA781722FC4BD9009E5ECC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9B0BFFDD1D0460A70040E62B /* Project object */;
+}

@@ -104,7 +104,7 @@ class LoadBalancePreferenceController: NSWindowController, NSWindowDelegate, NST
         defaults.set(ServerProfile.toDictionaries(loadbalanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
         defaults.set(allNodesButton.state.rawValue == 1 ? true : false, forKey: UserKeys.LoadbalanceEnableAllNodes)
         defaults.set(loadbalanceStrategy, forKey: UserKeys.LoadbalanceStrategy)
-//        applyConfig()
+        setupProxy()
         window?.performClose(self)
     }
     

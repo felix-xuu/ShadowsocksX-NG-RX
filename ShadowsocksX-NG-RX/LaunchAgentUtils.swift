@@ -451,7 +451,7 @@ func generateAclFile() -> String {
         return filePath
     } else {
         let aclPath = Bundle.main.path(forResource: "chn", ofType: "acl")
-        var aclContent = try! String(contentsOfFile: aclPath!, encoding: .utf8)
+        let aclContent = try! String(contentsOfFile: aclPath!, encoding: .utf8)
         var acls = aclContent.components(separatedBy: .newlines)
         ruleArr = ruleArr.map({
             if let index = $0.firstIndex(of: "/") {
@@ -471,7 +471,7 @@ func generateAclFile() -> String {
         do {
             try FileManager.default.removeItem(atPath: filePath)
         } catch _ {
-            NSLog("remove gfwlist failed")
+            NSLog("remove chn failed")
         }
         try! acls.joined(separator: "\n").data(using: .utf8)?.write(to: URL(fileURLWithPath: filePath), options: .atomic)
         return filePath
