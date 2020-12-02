@@ -47,7 +47,6 @@
 		DC5159D5257771220007737C /* SWBQRCodeWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5159D0257771220007737C /* SWBQRCodeWindowController.xib */; };
 		DC5159DB257771490007737C /* RuleConfigPreferenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5159D9257771490007737C /* RuleConfigPreferenceController.swift */; };
 		DC5159DC257771490007737C /* DNSPreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5159DA257771490007737C /* DNSPreferencesController.swift */; };
-		DC5159E52577716E0007737C /* libmbedcrypto.2.24.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5159E02577716D0007737C /* libmbedcrypto.2.24.0.dylib */; };
 		DC5159E62577716E0007737C /* networksetup.sh in Resources */ = {isa = PBXBuildFile; fileRef = DC5159E12577716D0007737C /* networksetup.sh */; };
 		DC5159E72577716E0007737C /* killPing.sh in Resources */ = {isa = PBXBuildFile; fileRef = DC5159E22577716D0007737C /* killPing.sh */; };
 		DC5159E82577716E0007737C /* httping in Resources */ = {isa = PBXBuildFile; fileRef = DC5159E32577716E0007737C /* httping */; };
@@ -172,7 +171,6 @@
 			files = (
 				DCCA781C22FC50D8009E5ECC /* ServiceManagement.framework in Frameworks */,
 				9B3FFF3E1D08D9910019A709 /* SystemConfiguration.framework in Frameworks */,
-				DC5159E52577716E0007737C /* libmbedcrypto.2.24.0.dylib in Frameworks */,
 				A1382C08C2D2572CC7C42F63 /* Pods_ShadowsocksX_NG_RX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
