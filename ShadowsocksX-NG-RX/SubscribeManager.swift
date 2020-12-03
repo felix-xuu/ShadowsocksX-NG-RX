@@ -11,23 +11,20 @@ import Alamofire
 
 class SubscribeManager:NSObject{
     static var subscribesDefault = [[String: AnyObject]]()
-    static var queryCount = -1
-    static var autoUpdateCount = -1
+    static var queryCount = 0
     
     static func updateAllServerFromSubscribe() {
-        queryCount = 0
         let subscribes = ServerGroupManager.getSubscriptions()
         DispatchQueue.global().async {
             subscribes.forEach{ value in
                 SubscribeManager.updateServerFromSubscription(value)
             }
-            while queryCount != subscribes.count {
+            while queryCount < subscribes.count {
                 usleep(100000)
-                if queryCount > 10000 {
-                    return
-                }
             }
             DispatchQueue.main.async {
+                ServerGroupManager.serverGroups.removeAll(where: {$0.isSubscription})
+                ServerGroupManager.serverGroups.append(contentsOf: subscribes)
                 ServerGroupManager.save()
                 LoadBalance.cleanLoadBalanceAfterUpdateFeed()
                 if let profile = ServerProfileManager.activeProfile {
@@ -37,7 +34,6 @@ class SubscribeManager:NSObject{
                 }
                 (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
                 (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
-                queryCount = -1
             }
         }
     }
@@ -48,6 +44,7 @@ class SubscribeManager:NSObject{
             let urls = splitor(url: decodeRes)
             if urls.count == 0 {
                 notificationDeliver(title: "Subscription Update Failed Title", subTitle: "", text: "Empty subscriptions", data.subscribeUrl)
+                return
             }
             let maxN = (data.maxCount > urls.count) ? urls.count : (data.maxCount == -1) ? urls.count: data.maxCount
             for index in 0..<maxN {
@@ -59,9 +56,9 @@ class SubscribeManager:NSObject{
                     data.serverProfiles.append(profile)
                 }
             }
+            queryCount += 1
             notificationDeliver(title: "Subscription Update Succeed Title", subTitle: "", text: "Subscription Update Succeed Info", data.subscribeUrl)
         }
-        
         sendRequest(data: data, callback: { resString in
             if resString.isEmpty { return }
             updateServerHandler(resString: resString)
@@ -83,13 +80,8 @@ class SubscribeManager:NSObject{
                 data.serverProfiles = []
                 callback(response.value!)
             case .failure:
+                queryCount += 1
                 notificationDeliver(title: "Subscription Update Failed Title", subTitle: "", text: "Subscription Update Failed Info", data.subscribeUrl)
-            }
-            if SubscribeManager.queryCount != -1 {
-                SubscribeManager.queryCount += 1
-            }
-            if SubscribeManager.autoUpdateCount != -1 {
-                SubscribeManager.autoUpdateCount += 1
             }
         }
     }

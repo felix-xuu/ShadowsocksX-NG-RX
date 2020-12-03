@@ -90,7 +90,7 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
         ServerProfileManager.activeProfile = tempActiveProfile
         defaults.set(loadBalanceGroup == nil ? nil : ServerGroup.toDictionary(loadBalanceGroup!), forKey: UserKeys.LoadbalanceGroup)
         defaults.set(ServerProfile.toDictionaries(loadBalanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
-        SubscribeManager.autoUpdateCount = 0
+        SubscribeManager.queryCount = 0
         window?.performClose(self)
         DispatchQueue.global().async {
             ServerGroupManager.getSubscriptions().forEach({ value in
@@ -98,26 +98,14 @@ class SubscribePreferenceWindowController: NSWindowController, NSWindowDelegate,
                     SubscribeManager.updateServerFromSubscription(value)
                 }
             })
-            while SubscribeManager.autoUpdateCount != self.subscriptions.filter({$0.autoUpdate}).count {
+            while SubscribeManager.queryCount < self.subscriptions.filter({$0.autoUpdate}).count {
                 usleep(100000)
-                if SubscribeManager.autoUpdateCount > 10000 {
-                    return
-                }
             }
             ServerGroupManager.save()
             setupProxy()
-            DispatchQueue.main.async { [self] in
+            DispatchQueue.main.async {
                 (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
-                if defaults.string(forKey: UserKeys.ShadowsocksXRunningMode) == UserKeys.Mode_Loadbalance {
-                    if loadBalanceGroup == nil {
-                        (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
-                    }
-                } else {
-                    if tempActiveProfile == nil {
-                        (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
-                    }
-                }
-                SubscribeManager.autoUpdateCount = -1
+                (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
             }
         }
     }
