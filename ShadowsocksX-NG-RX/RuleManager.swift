@@ -22,7 +22,7 @@ class RuleManager: NSObject {
             var config = profile.toJsonConfig()
             config["server"] = "127.0.0.1" as AnyObject
             config["server_port"] = uint16(UserDefaults.standard.integer(forKey: UserKeys.LoadbalancePort)) as AnyObject
-            writeSSLocalConfFile(profile.toJsonConfig())
+            writeSSLocalConfFile(config)
             generateSSLocalLauchAgentPlist()
             ReloadConfSSLocal()
             ReloadConfHaproxy()
