@@ -104,7 +104,13 @@ class LoadBalancePreferenceController: NSWindowController, NSWindowDelegate, NST
         defaults.set(ServerProfile.toDictionaries(loadbalanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
         defaults.set(allNodesButton.state.rawValue == 1 ? true : false, forKey: UserKeys.LoadbalanceEnableAllNodes)
         defaults.set(loadbalanceStrategy, forKey: UserKeys.LoadbalanceStrategy)
-        setupProxy()
+        DispatchQueue.global().async {
+            setupProxy()
+            DispatchQueue.main.async {
+                (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
+                (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
+            }
+        }
         window?.performClose(self)
     }
     

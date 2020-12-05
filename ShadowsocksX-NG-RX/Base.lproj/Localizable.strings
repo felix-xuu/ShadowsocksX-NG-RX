@@ -18,6 +18,7 @@
 "Load Balance Preference" = "Load Balance Preference";
 
 "Proxy" = "Proxy";
+"Preference" = "Preference";
 "DNS Preference" = "DNS Preference";
 
 "Show Network Speed" = "Show Network Speed";
@@ -118,9 +119,9 @@
 "split with comma or newline" = "split with comma or newline";
 "Invalid IP Address" = "Invalid IP Address";
 
-"Rule Preferences" = "Rule Preferences";
+"Rule Preference" = "Rule Preference";
 "Default Flow" = "Default Flow";
 "Direct" = "Direct";
 
-" ({nums} rules enabled)" = " ({nums} rules enabled)";
+" ({nums} rules effective)" = " ({nums} rules effective)";
 "Default Node: " = "Default Node: ";

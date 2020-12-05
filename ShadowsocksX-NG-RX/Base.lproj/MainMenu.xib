@@ -104,11 +104,17 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Proxy" id="diI-fB-Rss">
+                <menuItem title="Ping Servers" id="zfR-Jt-GmS">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Proxy" id="YZp-bf-L40">
+                    <connections>
+                        <action selector="doPingTest:" target="Voe-Tx-rLC" id="rRs-7S-tvD"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Preference" id="diI-fB-Rss">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Preference" id="YZp-bf-L40">
                         <items>
-                            <menuItem title="Rule Preferences" id="yvm-Ai-dTi">
+                            <menuItem title="Rule Preference" id="yvm-Ai-dTi">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="ruleConfigPreferences:" target="Voe-Tx-rLC" id="f4D-Ja-d1x"/>
@@ -126,20 +132,14 @@
                                     <action selector="editDNSPreferences:" target="Voe-Tx-rLC" id="z5X-en-b2T"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Advance Preference" id="bZ3-fy-34d">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="editAdvPreferences:" target="Voe-Tx-rLC" id="mEF-XS-HJE"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
-                </menuItem>
-                <menuItem title="Ping Servers" id="zfR-Jt-GmS">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="doPingTest:" target="Voe-Tx-rLC" id="rRs-7S-tvD"/>
-                    </connections>
-                </menuItem>
-                <menuItem title="Advance Preference" id="bZ3-fy-34d">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="editAdvPreferences:" target="Voe-Tx-rLC" id="mEF-XS-HJE"/>
-                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="DTJ-NF-Wxr"/>
                 <menuItem title="Show Network Speed" id="a3h-uQ-DuO">

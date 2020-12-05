@@ -91,7 +91,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <binding destination="pR1-Bo-AWz" name="value" keyPath="values.HTTP.FollowGlobal" id="mIV-9D-MFo"/>
+                            <binding destination="pR1-Bo-AWz" name="value" keyPath="values.FollowGlobal" id="RxN-Qc-peK"/>
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="wCp-nB-dda">

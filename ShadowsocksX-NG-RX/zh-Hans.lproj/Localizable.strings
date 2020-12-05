@@ -18,6 +18,7 @@
 "Load Balance Preference" = "负载均衡设置";
 
 "Proxy" = "代理";
+"Preference" = "设置";
 "DNS Preference" = "DNS设置";
 
 "Show Network Speed" = "显示网速";
@@ -118,9 +119,9 @@
 "split with comma or newline" = "使用逗号或换行分隔";
 "Invalid IP Address" = "无效的IP地址";
 
-"Rule Preferences" = "规则配置";
+"Rule Preference" = "规则配置";
 "Default Flow" = "默认流量";
 "Direct" = "直连";
 
-" ({nums} rules enabled)" = " ({nums}规则已启用)";
+" ({nums} rules effective)" = " ({nums}规则已生效)";
 "Default Node: " = "默认节点: ";

@@ -21,7 +21,7 @@ class UserKeys: NSObject {
     public static let HTTP_ListenAddress = "HTTP.ListenAddress"
     public static let HTTP_ListenPort = "HTTP.ListenPort"
     public static let HTTPOn = "HTTPOn"
-    public static let HTTP_FollowGlobal = "HTTP.FollowGlobal"
+    public static let FollowGlobal = "FollowGlobal"
     public static let ShowSpeed = "ShowSpeed"
     public static let LaunchAtLogin = "LaunchAtLogin"
     public static let Language = "Language"

@@ -121,6 +121,13 @@ class RuleConfigPreferenceController: NSWindowController, NSWindowDelegate, NSTa
             defaults.set("proxy", forKey: UserKeys.RuleDefaultFlow)
         }
         defaults.set(RuleConfig.toDictionaries(ruleConfigs), forKey: UserKeys.RuleConfigs)
+        DispatchQueue.global().async {
+            setupProxy()
+            DispatchQueue.main.async {
+                (NSApplication.shared.delegate as! AppDelegate).updateServersMenu()
+                (NSApplication.shared.delegate as! AppDelegate).updateServerMenuItemState()
+            }
+        }
         window?.performClose(self)
     }
     

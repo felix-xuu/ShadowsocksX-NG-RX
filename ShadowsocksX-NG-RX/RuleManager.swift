@@ -19,8 +19,9 @@ class RuleManager: NSObject {
     static func enableRuleFlow() {
         if let profile = ServerProfileManager.activeProfile {
             writeHaproxyConfFile(type: UserKeys.Mode_Rule)
-            profile.serverHost = "127.0.0.1"
-            profile.serverPort = uint16(UserDefaults.standard.integer(forKey: UserKeys.LoadbalancePort))
+            var config = profile.toJsonConfig()
+            config["server"] = "127.0.0.1" as AnyObject
+            config["server_port"] = uint16(UserDefaults.standard.integer(forKey: UserKeys.LoadbalancePort)) as AnyObject
             writeSSLocalConfFile(profile.toJsonConfig())
             generateSSLocalLauchAgentPlist()
             ReloadConfSSLocal()

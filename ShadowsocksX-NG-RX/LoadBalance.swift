@@ -33,9 +33,10 @@ class LoadBalance: NSObject {
         let accumulate = getLoadBalanceGroup()?.serverProfiles.reduce(into: [:], {$0[$1.method, default: 0] += 1})
         let method = accumulate?.max(by: {$0.1 < $1.1})?.key
         let profile = getLoadBalanceGroup()?.serverProfiles.first(where: {$0.method == method})
-        profile?.serverHost = "127.0.0.1"
-        profile?.serverPort = uint16(UserDefaults.standard.integer(forKey: UserKeys.LoadbalancePort))
-        writeSSLocalConfFile(profile!.toJsonConfig())
+        var config = profile!.toJsonConfig()
+        config["server"] = "127.0.0.1" as AnyObject
+        config["server_port"] = uint16(UserDefaults.standard.integer(forKey: UserKeys.LoadbalancePort)) as AnyObject
+        writeSSLocalConfFile(config)
         ReloadConfSSLocal()
         ReloadConfHaproxy()
     }

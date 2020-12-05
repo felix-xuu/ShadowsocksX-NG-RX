@@ -12,7 +12,7 @@ func enableGlobalProxy() {
     disableProxy()
     let defaults = UserDefaults.standard
     proxyControl(aim: "-setsocksfirewallproxy", args: ["127.0.0.1", defaults.string(forKey: UserKeys.Socks5_ListenPort)!].joined(separator: " "))
-    if defaults.bool(forKey: UserKeys.HTTPOn) && defaults.bool(forKey: UserKeys.HTTP_FollowGlobal) {
+    if defaults.bool(forKey: UserKeys.HTTPOn) && defaults.bool(forKey: UserKeys.FollowGlobal) {
         proxyControl(aim: "-setsecurewebproxy", args: ["127.0.0.1", defaults.string(forKey: UserKeys.HTTP_ListenPort)!].joined(separator: " "))
         proxyControl(aim: "-setwebproxy", args: ["127.0.0.1", defaults.string(forKey: UserKeys.HTTP_ListenPort)!].joined(separator: " "))
     }
@@ -52,8 +52,10 @@ func setupProxy() {
         return
     }
     let mode = defaults.string(forKey: UserKeys.ShadowsocksXRunningMode)
+    let fllowGlobal = defaults.bool(forKey: UserKeys.FollowGlobal)
     if mode == UserKeys.Mode_Rule {
         RuleManager.enableRuleFlow()
+        fllowGlobal ? enableGlobalProxy() : disableProxy()
     } else if mode == UserKeys.Mode_Loadbalance {
         if LoadBalance.getLoadBalanceGroup() == nil {
             let alert = NSAlert.init()
@@ -66,6 +68,7 @@ func setupProxy() {
             return
         }
         LoadBalance.enableLoadBalance()
+        fllowGlobal ? enableGlobalProxy() : disableProxy()
     } else {
         StopHaproxy()
         if ServerProfileManager.activeProfile != nil {

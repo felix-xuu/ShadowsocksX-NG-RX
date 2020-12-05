@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.HTTP_ListenPort: NSNumber(value: 1087 as UInt16),
             UserKeys.LoadbalancePort: NSNumber(value: 1089 as UInt16),
             UserKeys.HTTPOn: true,
-            UserKeys.HTTP_FollowGlobal: true,
+            UserKeys.FollowGlobal: true,
             UserKeys.ServerGroups: [],
             UserKeys.ShowSpeed: false,
             UserKeys.LaunchAtLogin: false,
@@ -67,11 +67,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             ])
 
         cleanLogs()
+        initManager()
         initInstall()
         initLanguageSelector()
         initModeSelector()
         initNotificationObserver()
-        initManager()
         initKeys()
         
         setupProxy()
@@ -594,7 +594,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 let separator = NSMenuItem.separator()
                 separator.setAccessibilityIdentifier("active")
                 statusMenu!.insertItem(separator, at: 1)
-                let activeGroupTitle = "Active Group: ".localized + ServerGroupManager.getServerGroupByGroupId(profile.groupId)!.groupName + " ({nums} rules enabled)".localized.replacingOccurrences(of: "{nums}", with: String(ruleConfigValidIds.count))
+                let activeGroupTitle = "Active Group: ".localized + ServerGroupManager.getServerGroupByGroupId(profile.groupId)!.groupName + " ({nums} rules effective)".localized.replacingOccurrences(of: "{nums}", with: String(ruleConfigValidIds.count))
                 statusMenu!.insertItem(withTitle: activeGroupTitle, action: nil, keyEquivalent: "", at: 2).setAccessibilityIdentifier("active")
                 statusMenu!.insertItem(withTitle: "Default Node: ".localized + (ServerGroupManager.getServerGroupByGroupId(profile.groupId)?.serverProfiles.first(where: {$0.getValidId() == profile.getValidId()})!.titleForActive())!, action: nil, keyEquivalent: "", at: 3).setAccessibilityIdentifier("active")
                 DispatchQueue.global().async {
