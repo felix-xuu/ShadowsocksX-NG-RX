@@ -44,11 +44,9 @@ class UserKeys: NSObject {
     public static let DNSEnable = "DNSEnable"
     public static let DNSServers = "DNSServers"
     
-    public static let RuleDefaultFlow = "rule.default.flow"
-    public static let RuleConfigs = "rule.configs"
-    
     public static let Mode_Manual = "manual"
     public static let Mode_Global = "global"
-    public static let Mode_Rule = "rule"
+    public static let Mode_AclDirect = "aclDirect"
+    public static let Mode_AclProxy = "aclProxy"
     public static let Mode_Loadbalance = "loadbalance"
 }

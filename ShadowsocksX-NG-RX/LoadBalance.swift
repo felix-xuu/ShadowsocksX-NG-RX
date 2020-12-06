@@ -29,7 +29,7 @@ class LoadBalance: NSObject {
         if getLoadBalanceProfiles().count == 0 {
             return
         }
-        writeHaproxyConfFile(type: UserKeys.Mode_Loadbalance)
+        writeHaproxyConfFile()
         let accumulate = getLoadBalanceGroup()?.serverProfiles.reduce(into: [:], {$0[$1.method, default: 0] += 1})
         let method = accumulate?.max(by: {$0.1 < $1.1})?.key
         let profile = getLoadBalanceGroup()?.serverProfiles.first(where: {$0.method == method})
@@ -60,7 +60,7 @@ class LoadBalance: NSObject {
         }
         UserDefaults.standard.set(ServerProfile.toDictionaries(balanceProfiles), forKey: UserKeys.LoadbalanceProfiles)
         if UserDefaults.standard.string(forKey: UserKeys.ShadowsocksXRunningMode) == UserKeys.Mode_Loadbalance {
-            writeHaproxyConfFile(type: UserKeys.Mode_Loadbalance)
+            writeHaproxyConfFile()
             ReloadConfHaproxy()
         }
     }

@@ -13,7 +13,6 @@ defaults
 
 frontend ss-in
     bind 127.0.0.1:{port}
-    {use_backend strategy}
     default_backend ss-out
 
 backend ss-out

@@ -43,13 +43,17 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <accessibility identifier="manual"/>
                             </menuItem>
+                            <menuItem title="Acl Direct" id="hGB-Ij-5ja">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <accessibility identifier="aclDirect"/>
+                            </menuItem>
+                            <menuItem title="Acl Proxy" id="Z0g-Eb-2gr">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <accessibility identifier="aclProxy"/>
+                            </menuItem>
                             <menuItem title="Global Mode" id="Mw3-Jm-eXA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <accessibility identifier="global"/>
-                            </menuItem>
-                            <menuItem title="Rule Mode" id="hGB-Ij-5ja">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <accessibility identifier="rule"/>
                             </menuItem>
                             <menuItem title="Load Balance" id="Tkt-1D-Rpv">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -114,12 +118,6 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Preference" id="YZp-bf-L40">
                         <items>
-                            <menuItem title="Rule Preference" id="yvm-Ai-dTi">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="ruleConfigPreferences:" target="Voe-Tx-rLC" id="f4D-Ja-d1x"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Load Balance Preference" id="CZ1-6S-0Fo">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>

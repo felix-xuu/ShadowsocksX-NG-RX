@@ -4,7 +4,8 @@
 "Agent Mode" = "Agent Mode";
 "Global Mode" = "Global Mode";
 "Manual Mode" = "Manual Mode";
-"Rule Mode" = "Rule Mode";
+"Acl Direct" = "ACL Direct";
+"Acl Proxy" = "ACL Proxy";
 
 "Servers" = "Servers";
 "Edit Subscriptions" = "Edit Subscriptions";
@@ -82,7 +83,7 @@
 "Done the ping, the fastest as follow" = "Done the ping, the fastest as follow";
 
 "Advance Preferences" = "Advance Preferences";
-"DO NOT change anything if you have no idea about what is it" = "DO NOT change anything if you have no idea about what is it";
+"DO NOT change anything if you have no idea about what it is" = "DO NOT change anything if you have no idea about what it is";
 "Socks5 Listen Address" = "Socks5 Listen Address";
 "Socks5 Listen Port" = "Socks5 Listen Port";
 "Enable Udp Replay" = "Enable Udp Replay";
@@ -118,10 +119,3 @@
 "Enable" = "Enable";
 "split with comma or newline" = "split with comma or newline";
 "Invalid IP Address" = "Invalid IP Address";
-
-"Rule Preference" = "Rule Preference";
-"Default Flow" = "Default Flow";
-"Direct" = "Direct";
-
-" ({nums} rules effective)" = " ({nums} rules effective)";
-"Default Node: " = "Default Node: ";

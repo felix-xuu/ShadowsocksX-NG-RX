@@ -19,7 +19,6 @@ func enableGlobalProxy() {
 }
 
 func disableProxy() {
-    proxyControl(aim: "-setautoproxystate", args: "off")
     proxyControl(aim: "-setwebproxystate", args: "off")
     proxyControl(aim: "-setsecurewebproxystate", args: "off")
     proxyControl(aim: "-setsocksfirewallproxystate", args: "off")
@@ -52,11 +51,7 @@ func setupProxy() {
         return
     }
     let mode = defaults.string(forKey: UserKeys.ShadowsocksXRunningMode)
-    let fllowGlobal = defaults.bool(forKey: UserKeys.FollowGlobal)
-    if mode == UserKeys.Mode_Rule {
-        RuleManager.enableRuleFlow()
-        fllowGlobal ? enableGlobalProxy() : disableProxy()
-    } else if mode == UserKeys.Mode_Loadbalance {
+    if mode == UserKeys.Mode_Loadbalance {
         if LoadBalance.getLoadBalanceGroup() == nil {
             let alert = NSAlert.init()
             alert.alertStyle = NSAlert.Style.warning
@@ -68,14 +63,17 @@ func setupProxy() {
             return
         }
         LoadBalance.enableLoadBalance()
-        fllowGlobal ? enableGlobalProxy() : disableProxy()
+        defaults.bool(forKey: UserKeys.FollowGlobal) ? enableGlobalProxy() : disableProxy()
     } else {
         StopHaproxy()
+        if [UserKeys.Mode_AclProxy, UserKeys.Mode_AclDirect].contains(mode) {
+            generateSSLocalLauchAgentPlist()
+        }
         if ServerProfileManager.activeProfile != nil {
             writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
             ReloadConfSSLocal()
         }
-        mode == UserKeys.Mode_Global ? enableGlobalProxy() : disableProxy()
+        [UserKeys.Mode_Global, UserKeys.Mode_AclProxy, UserKeys.Mode_AclDirect].contains(mode) ? enableGlobalProxy() : disableProxy()
     }
     if defaults.bool(forKey: UserKeys.HTTPOn) {
         writePrivoxyConfFile()

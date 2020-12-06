@@ -4,7 +4,8 @@
 "Agent Mode" = "代理模式";
 "Global Mode" = "全局模式";
 "Manual Mode" = "手动模式";
-"Rule Mode" = "规则分流";
+"Acl Direct" = "ACL直连";
+"Acl Proxy" = "ACL代理";
 
 "Servers" = "服务器";
 "Edit Subscriptions" = "编辑订阅";
@@ -82,7 +83,7 @@
 "Done the ping, the fastest as follow" = "测速完成, 最快的如下";
 
 "Advance Preferences" = "高级设置";
-"DO NOT change anything if you have no idea about what is it" = "如果你不知道这是什么，请不要做任何修改";
+"DO NOT change anything if you have no idea about what it is" = "如果你不知道这是什么，请不要做任何修改";
 "Socks5 Listen Address" = "Socks5监听地址";
 "Socks5 Listen Port" = "Socks5监听端口";
 "Enable Udp Replay" = "启用 Udp Replay";
@@ -118,10 +119,3 @@
 "Enable" = "启用";
 "split with comma or newline" = "使用逗号或换行分隔";
 "Invalid IP Address" = "无效的IP地址";
-
-"Rule Preference" = "规则配置";
-"Default Flow" = "默认流量";
-"Direct" = "直连";
-
-" ({nums} rules effective)" = " ({nums}规则已生效)";
-"Default Node: " = "默认节点: ";

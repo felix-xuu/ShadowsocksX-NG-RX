@@ -71,8 +71,10 @@ func generateSSLocalLauchAgentPlist() {
         arguments.append("-v")
     }
     var ACLPath: String?
-    if enabeledMode == UserKeys.Mode_Rule {
-        ACLPath = generateAclFile()
+    if enabeledMode == UserKeys.Mode_AclDirect {
+        ACLPath = NSHomeDirectory() + APP_SUPPORT_DIR + "gfwlist.acl"
+    } else if enabeledMode == UserKeys.Mode_AclProxy {
+        ACLPath = NSHomeDirectory() + APP_SUPPORT_DIR + "chn.acl"
     }
     
     if ACLPath != nil {
@@ -359,7 +361,7 @@ func InstallHaproxy() {
     generateHaproxyLauchAgentPlist()
 }
 
-func writeHaproxyConfFile(type:String) {
+func writeHaproxyConfFile() {
     do {
         let defaults = UserDefaults.standard
         let bundle = Bundle.main
@@ -367,113 +369,22 @@ func writeHaproxyConfFile(type:String) {
         var example = try String(contentsOfFile: examplePath!, encoding: .utf8)
         example = example.replacingOccurrences(of: "{port}", with: defaults.string(forKey: UserKeys.LoadbalancePort)!)
         var data: Data = Data.init()
-        if type == UserKeys.Mode_Loadbalance {
-            example = example.replacingOccurrences(of: "{balance strategy}", with: "balance \(defaults.string(forKey: UserKeys.LoadbalanceStrategy)!)")
-            example = example.replacingOccurrences(of: "{use_backend strategy}", with: "")
-            var profiles: [ServerProfile]
-            if UserDefaults.standard.bool(forKey: UserKeys.LoadbalanceEnableAllNodes) {
-                profiles = LoadBalance.getLoadBalanceGroup()!.serverProfiles
-            } else {
-                profiles = LoadBalance.getLoadBalanceProfiles()
-            }
-            var servers: String = ""
-            for item in profiles {
-                servers.append(contentsOf: "server \(item.serverHost)-\(UUID().hashValue) \(item.serverHost):\(item.serverPort) check\n    ")
-            }
-            example = example.replacingOccurrences(of: "{backend_default}", with: servers)
-            data = example.data(using: .utf8) ?? Data.init()
-        } else if type == UserKeys.Mode_Rule {
-            example = example.replacingOccurrences(of: "{balance strategy}", with: "")
-            let defaultProfile = ServerProfileManager.activeProfile
-            let defaultProxy =  "server \(defaultProfile!.serverHost)-\(UUID().hashValue) \(defaultProfile!.serverHost):\(defaultProfile!.serverPort)"
-            example = example.replacingOccurrences(of: "{backend_default}", with: defaultProxy)
-            
-            var acls = ""
-            var backends = ""
-            let ruleConfigs = RuleManager.getRuleConfigs().filter({$0.enable && $0.profile != nil && $0.profile.groupId == defaultProfile!.groupId})
-            for item in ruleConfigs {
-                let backendName = "\(item.name ?? "ruleName")-\(UUID().hashValue)"
-                var acl = "use_backend \(backendName) if { dst "
-                var needAdd = false
-                let rules = item.rules.components(separatedBy: .newlines)
-                for rule in rules {
-                    if rule.starts(with: "#") || rule.trimmingCharacters(in: .whitespaces) == "" {
-                        continue
-                    }
-                    acl.append(String(rule))
-                    acl.append(" ")
-                    needAdd = true
-                }
-                acl.append("}\n    ")
-                if needAdd {
-                    acls.append(acl)
-                    backends.append("backend \(backendName)\n    server \(item.profile.serverHost) \(item.profile.serverHost):\(item.profile.serverPort)\n")
-                }
-            }
-            example = example.replacingOccurrences(of: "{use_backend strategy}", with: acls)
-            data = example.data(using: .utf8) ?? Data.init()
-            data.append(contentsOf: backends.utf8)
+        example = example.replacingOccurrences(of: "{balance strategy}", with: "balance \(defaults.string(forKey: UserKeys.LoadbalanceStrategy)!)")
+        var profiles: [ServerProfile]
+        if UserDefaults.standard.bool(forKey: UserKeys.LoadbalanceEnableAllNodes) {
+            profiles = LoadBalance.getLoadBalanceGroup()!.serverProfiles
+        } else {
+            profiles = LoadBalance.getLoadBalanceProfiles()
         }
+        var servers: String = ""
+        for item in profiles {
+            servers.append(contentsOf: "server \(item.serverHost)-\(UUID().hashValue) \(item.serverHost):\(item.serverPort) check\n    ")
+        }
+        example = example.replacingOccurrences(of: "{backend_default}", with: servers)
+        data = example.data(using: .utf8) ?? Data.init()
         let filepath = NSHomeDirectory() + APP_SUPPORT_DIR + "haproxy.cfg"
         try data.write(to: URL(fileURLWithPath: filepath), options: .atomic)
     } catch {
         NSLog("Write haproxy file failed.")
-    }
-}
-
-func generateAclFile() -> String {
-    let defaultProfile = ServerProfileManager.activeProfile
-    let rules = RuleManager.getRuleConfigs().filter({$0.enable && $0.profile != nil && $0.profile.groupId == defaultProfile!.groupId}).map({$0.rules})
-    var ruleArr:[String] = []
-    for item in rules {
-        let ruleItems = item!.components(separatedBy: .newlines)
-        for rule in ruleItems {
-            if rule.starts(with: "#") || rule.trimmingCharacters(in: .whitespaces) == "" {
-                continue
-            }
-            ruleArr.append(rule)
-        }
-    }
-    if UserDefaults.standard.string(forKey: UserKeys.RuleDefaultFlow) == "direct" {
-        let aclPath = Bundle.main.path(forResource: "gfwlist", ofType: "acl")
-        var aclContent = try! String(contentsOfFile: aclPath!, encoding: .utf8)
-        for item in ruleArr {
-            aclContent.append("\n")
-            aclContent.append(item)
-        }
-        let filePath = NSHomeDirectory() + APP_SUPPORT_DIR + "gfwlist.acl"
-        do {
-            try FileManager.default.removeItem(atPath: filePath)
-        } catch _ {
-            NSLog("remove gfwlist failed")
-        }
-        try! aclContent.data(using: .utf8)?.write(to: URL(fileURLWithPath: filePath), options: .atomic)
-        return filePath
-    } else {
-        let aclPath = Bundle.main.path(forResource: "chn", ofType: "acl")
-        let aclContent = try! String(contentsOfFile: aclPath!, encoding: .utf8)
-        var acls = aclContent.components(separatedBy: .newlines)
-        ruleArr = ruleArr.map({
-            if let index = $0.firstIndex(of: "/") {
-                return String($0.prefix(upTo: index))
-            }
-            return $0
-        })
-        for (idx, item) in acls.enumerated() {
-            if let index = item.firstIndex(of: "/") {
-                let itemOnlyIP = String(item.prefix(upTo: index))
-                if ruleArr.contains(itemOnlyIP) {
-                    acls[idx] = ""
-                }
-            }
-        }
-        let filePath = NSHomeDirectory() + APP_SUPPORT_DIR + "chn.acl"
-        do {
-            try FileManager.default.removeItem(atPath: filePath)
-        } catch _ {
-            NSLog("remove chn failed")
-        }
-        try! acls.joined(separator: "\n").data(using: .utf8)?.write(to: URL(fileURLWithPath: filePath), options: .atomic)
-        return filePath
     }
 }

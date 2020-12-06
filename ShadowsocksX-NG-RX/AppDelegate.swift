@@ -19,7 +19,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     var dnsPreferencesWinCtrl: DNSPreferencesController!
     var subscribePreferenceWinCtrl: SubscribePreferenceWindowController!
     var loadBalancePreferenceController: LoadBalancePreferenceController!
-    var ruleConfigPreferenceController: RuleConfigPreferenceController!
     
     var statusItem: NSStatusItem!
     var keys: [String : String] = [:]
@@ -59,11 +58,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             UserKeys.ShowSpeed: false,
             UserKeys.LaunchAtLogin: false,
             UserKeys.Language: "en",
-            UserKeys.LoadbalanceEnableAllNodes: true,
+            UserKeys.LoadbalanceEnableAllNodes: false,
             UserKeys.OrderRemark: false,
             UserKeys.OrderAddress: true,
             UserKeys.DNSEnable: false,
-            UserKeys.RuleDefaultFlow: "direct",
             ])
 
         cleanLogs()
@@ -409,13 +407,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         dnsPreferencesWinCtrl.window?.makeKeyAndOrderFront(self)
     }
     
-    @IBAction func ruleConfigPreferences(_ sender: NSObject) {
-        ruleConfigPreferenceController = RuleConfigPreferenceController(windowNibName: "RuleConfigPreferenceController")
-        ruleConfigPreferenceController.showWindow(self)
-        NSApp.activate(ignoringOtherApps: true)
-        ruleConfigPreferenceController.window?.makeKeyAndOrderFront(self)
-    }
-    
     @IBAction func doPingTest(_ sender: AnyObject) {
         PingServers.instance.ping()
     }
@@ -495,12 +486,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let gIndex = sender.parent!.tag
         let newProfile = ServerGroupManager.serverGroups[gIndex].serverProfiles[index]
         ServerProfileManager.setActiveProfile(newProfile)
-        if mode == UserKeys.Mode_Rule {
-            RuleManager.enableRuleFlow()
-        } else if mode == UserKeys.Mode_Manual || mode == UserKeys.Mode_Global {
-            writeSSLocalConfFile(newProfile.toJsonConfig())
-            ReloadConfSSLocal()
-        }
+        writeSSLocalConfFile(newProfile.toJsonConfig())
+        ReloadConfSSLocal()
         updateServersMenu()
         updateServerMenuItemState()
     }
@@ -546,6 +533,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         }
         let mode = UserDefaults.standard.string(forKey: UserKeys.ShadowsocksXRunningMode)
         if mode == UserKeys.Mode_Loadbalance {
+            if LoadBalance.getLoadBalanceGroup() == nil {
+                return
+            }
             for item in serversMenuItem.submenu!.items {
                 if item.accessibilityIdentifier() == "server" {
                     if item.accessibilityValueDescription() == LoadBalance.getLoadBalanceGroup()?.groupId {
@@ -573,61 +563,30 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             let nodesSelected = String(UserDefaults.standard.bool(forKey: UserKeys.LoadbalanceEnableAllNodes) ? LoadBalance.getLoadBalanceGroup()!.serverProfiles.count : LoadBalance.getLoadBalanceProfiles().count)
             statusMenu!.insertItem(withTitle: "Load Balance - ".localized + LoadBalance.strategies.first(where: {$0.0 == UserDefaults.standard.string(forKey: UserKeys.LoadbalanceStrategy)})!.1.localized + " (\(nodesSelected)" + " Nodes Selected".localized + ")", action: nil, keyEquivalent: "", at: 3).setAccessibilityIdentifier("active")
         } else if let profile = ServerProfileManager.activeProfile {
-            if mode == UserKeys.Mode_Rule {
-                let ruleConfigValidIds = RuleManager.getRuleConfigs().filter({$0.enable && $0.profile != nil && $0.profile.groupId == profile.groupId}).map({$0.profile.getValidId()})
-                for item in serversMenuItem.submenu!.items {
-                    if item.accessibilityIdentifier() == "server" {
-                        if item.accessibilityValueDescription() == profile.groupId {
-                            item.state = NSControl.StateValue(1)
-                            for subItem in item.submenu!.items {
-                                let needEnable = profile.getValidId() == subItem.accessibilityValueDescription() || ruleConfigValidIds.contains(subItem.accessibilityValueDescription()!)
-                                subItem.state = NSControl.StateValue(needEnable ? 1 : 0)
-                            }
-                        } else {
-                            item.state = NSControl.StateValue(0)
-                            for subItem in item.submenu!.items {
-                                subItem.state = NSControl.StateValue(0)
-                            }
+            for item in serversMenuItem.submenu!.items {
+                if item.accessibilityIdentifier() == "server" {
+                    if item.accessibilityValueDescription() == profile.groupId {
+                        item.state = NSControl.StateValue(1)
+                        for subItem in item.submenu!.items {
+                            subItem.state = NSControl.StateValue(profile.getValidId() == subItem.accessibilityValueDescription() ? 1 : 0)
+                        }
+                    } else {
+                        item.state = NSControl.StateValue(0)
+                        for subItem in item.submenu!.items {
+                            subItem.state = NSControl.StateValue(0)
                         }
                     }
                 }
-                let separator = NSMenuItem.separator()
-                separator.setAccessibilityIdentifier("active")
-                statusMenu!.insertItem(separator, at: 1)
-                let activeGroupTitle = "Active Group: ".localized + ServerGroupManager.getServerGroupByGroupId(profile.groupId)!.groupName + " ({nums} rules effective)".localized.replacingOccurrences(of: "{nums}", with: String(ruleConfigValidIds.count))
-                statusMenu!.insertItem(withTitle: activeGroupTitle, action: nil, keyEquivalent: "", at: 2).setAccessibilityIdentifier("active")
-                statusMenu!.insertItem(withTitle: "Default Node: ".localized + (ServerGroupManager.getServerGroupByGroupId(profile.groupId)?.serverProfiles.first(where: {$0.getValidId() == profile.getValidId()})!.titleForActive())!, action: nil, keyEquivalent: "", at: 3).setAccessibilityIdentifier("active")
-                DispatchQueue.global().async {
-                    let location = PingServers.instance.getLocation()
-                    let latency = PingServers.instance.pingCurrent()
-                    self.statusMenu!.insertItem(withTitle: "\("Actually Location: ".localized)\(location)   \("Latency: ".localized)\(latency ?? "-")ms", action: #selector(AppDelegate.refreshLocationAndLatency), keyEquivalent: "", at: 4).setAccessibilityIdentifier("active")
-                }
-            } else {
-                for item in serversMenuItem.submenu!.items {
-                    if item.accessibilityIdentifier() == "server" {
-                        if item.accessibilityValueDescription() == profile.groupId {
-                            item.state = NSControl.StateValue(1)
-                            for subItem in item.submenu!.items {
-                                subItem.state = NSControl.StateValue(profile.getValidId() == subItem.accessibilityValueDescription() ? 1 : 0)
-                            }
-                        } else {
-                            item.state = NSControl.StateValue(0)
-                            for subItem in item.submenu!.items {
-                                subItem.state = NSControl.StateValue(0)
-                            }
-                        }
-                    }
-                }
-                let separator = NSMenuItem.separator()
-                separator.setAccessibilityIdentifier("active")
-                statusMenu!.insertItem(separator, at: 1)
-                statusMenu!.insertItem(withTitle: "Active Group: ".localized + ServerGroupManager.getServerGroupByGroupId(profile.groupId)!.groupName, action: nil, keyEquivalent: "", at: 2).setAccessibilityIdentifier("active")
-                statusMenu!.insertItem(withTitle: "Active Node: ".localized + (ServerGroupManager.getServerGroupByGroupId(profile.groupId)?.serverProfiles.first(where: {$0.getValidId() == profile.getValidId()})!.titleForActive())!, action: nil, keyEquivalent: "", at: 3).setAccessibilityIdentifier("active")
-                DispatchQueue.global().async {
-                    let location = PingServers.instance.getLocation()
-                    let latency = PingServers.instance.pingCurrent()
-                    self.statusMenu!.insertItem(withTitle: "\("Actually Location: ".localized)\(location)   \("Latency: ".localized)\(latency ?? "-")ms", action: #selector(AppDelegate.refreshLocationAndLatency), keyEquivalent: "", at: 4).setAccessibilityIdentifier("active")
-                }
+            }
+            let separator = NSMenuItem.separator()
+            separator.setAccessibilityIdentifier("active")
+            statusMenu!.insertItem(separator, at: 1)
+            statusMenu!.insertItem(withTitle: "Active Group: ".localized + ServerGroupManager.getServerGroupByGroupId(profile.groupId)!.groupName, action: nil, keyEquivalent: "", at: 2).setAccessibilityIdentifier("active")
+            statusMenu!.insertItem(withTitle: "Active Node: ".localized + (ServerGroupManager.getServerGroupByGroupId(profile.groupId)?.serverProfiles.first(where: {$0.getValidId() == profile.getValidId()})!.titleForActive())!, action: nil, keyEquivalent: "", at: 3).setAccessibilityIdentifier("active")
+            DispatchQueue.global().async {
+                let location = PingServers.instance.getLocation()
+                let latency = PingServers.instance.pingCurrent()
+                self.statusMenu!.insertItem(withTitle: "\("Actually Location: ".localized)\(location)   \("Latency: ".localized)\(latency ?? "-")ms", action: #selector(AppDelegate.refreshLocationAndLatency), keyEquivalent: "", at: 4).setAccessibilityIdentifier("active")
             }
         }
     }
