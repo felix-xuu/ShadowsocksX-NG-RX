@@ -2,9 +2,15 @@
 
 This project just toy for self.
 
-`Current version is 2.2.1`
+`Current version is 2.2.2`
 
 ## Release Note
+
+### 2.2.2
+
+- update menu
+- remove pac mode
+- other improvements
 
 ### 2.2.1
 
