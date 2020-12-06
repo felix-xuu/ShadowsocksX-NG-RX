@@ -602,9 +602,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     func setUpMenuBar() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         let defaults = UserDefaults.standard
-        let image = defaults.bool(forKey: UserKeys.ShadowsocksXOn) ? NSImage(named: "menu_icon_" + defaults.string(forKey: UserKeys.ShadowsocksXRunningMode)!)! : NSImage(named: "menu_icon_disabled")!
+        
+        let image = defaults.bool(forKey: UserKeys.ShadowsocksXOn) ? NSImage(named: "menu_icon_" + defaults.string(forKey: UserKeys.ShadowsocksXRunningMode)!) ?? NSImage(named: "menu_icon_manual") : NSImage(named: "menu_icon_disabled")!
         statusItem.menu = statusMenu
-        image.isTemplate = true
+        image?.isTemplate = true
         statusItem.button?.image = image
         statusItem.button?.imagePosition = NSControl.ImagePosition.imageRight
         if defaults.bool(forKey: UserKeys.ShowSpeed) {
