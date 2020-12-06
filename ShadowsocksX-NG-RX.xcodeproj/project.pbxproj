@@ -67,6 +67,9 @@
 		DCD0B28722FC901800B9A47E /* libev.4.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DCD0B28122FC900800B9A47E /* libev.4.dylib */; };
 		DCD0B28822FC901800B9A47E /* libmbedcrypto.3.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DCD0B28222FC900800B9A47E /* libmbedcrypto.3.dylib */; };
 		DCF8F58A22F4AFAB00636EF1 /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8F58922F4AFAB00636EF1 /* UserKeys.swift */; };
+		DCF983D7257CB90E002FFF79 /* libmbedcrypto.2.24.0.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DC5159E02577716D0007737C /* libmbedcrypto.2.24.0.dylib */; };
+		DCF983D8257CB90E002FFF79 /* libmbedcrypto.2.16.2.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DCD0B28C22FC952D00B9A47E /* libmbedcrypto.2.16.2.dylib */; };
+		DCF983DA257CB95C002FFF79 /* libmbedcrypto.5.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DCF983D9257CB95C002FFF79 /* libmbedcrypto.5.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -156,6 +159,7 @@
 		DCD0B28C22FC952D00B9A47E /* libmbedcrypto.2.16.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmbedcrypto.2.16.2.dylib; sourceTree = "<group>"; };
 		DCF8F58822F4AEC500636EF1 /* ShadowsocksX-NG-RX-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShadowsocksX-NG-RX-Bridging-Header.h"; sourceTree = "<group>"; };
 		DCF8F58922F4AFAB00636EF1 /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
+		DCF983D9257CB95C002FFF79 /* libmbedcrypto.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmbedcrypto.5.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +203,7 @@
 				DC5159E22577716D0007737C /* killPing.sh */,
 				DC5159E12577716D0007737C /* networksetup.sh */,
 				DC3BE8CD2309863000F7332D /* clean_logs.sh */,
+				DCF983D9257CB95C002FFF79 /* libmbedcrypto.5.dylib */,
 				DC5159E02577716D0007737C /* libmbedcrypto.2.24.0.dylib */,
 				DCD0B28C22FC952D00B9A47E /* libmbedcrypto.2.16.2.dylib */,
 				DC0CDC3923053A810033CEA3 /* libpcre.1.dylib */,
@@ -403,6 +408,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCF983DA257CB95C002FFF79 /* libmbedcrypto.5.dylib in Resources */,
+				DCF983D7257CB90E002FFF79 /* libmbedcrypto.2.24.0.dylib in Resources */,
+				DCF983D8257CB90E002FFF79 /* libmbedcrypto.2.16.2.dylib in Resources */,
 				DC5159E82577716E0007737C /* httping in Resources */,
 				DC053F18234C8A5C00491A50 /* install.sh in Resources */,
 				DC5159D2257771220007737C /* DNSPreferencesController.xib in Resources */,
