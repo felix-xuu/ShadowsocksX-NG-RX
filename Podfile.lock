@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.4.0)
+  - Alamofire (5.4.1)
   - Sparkle (1.24.0)
 
 DEPENDENCIES:
@@ -12,7 +12,7 @@ SPEC REPOS:
     - Sparkle
 
 SPEC CHECKSUMS:
-  Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
+  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   Sparkle: 270cd27377bf04e9c128af06e3a22d0f572d6ee3
 
 PODFILE CHECKSUM: 2f2b72d4142f6d7b0d7b57485f153c37a01fbebf
