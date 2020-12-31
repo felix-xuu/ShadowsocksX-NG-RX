@@ -2,9 +2,13 @@
 
 This project just toy for self.
 
-`Current version is 2.2.2`
+`Current version is 2.2.3`
 
 ## Release Note
+
+### 2.2.3
+
+- fix bug for update subscriptions
 
 ### 2.2.2
 
