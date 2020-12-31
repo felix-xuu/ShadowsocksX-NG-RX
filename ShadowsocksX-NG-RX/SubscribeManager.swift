@@ -14,13 +14,14 @@ class SubscribeManager:NSObject{
     static var queryCount = 0
     
     static func updateAllServerFromSubscribe() {
+        queryCount = 0
         let subscribes = ServerGroupManager.getSubscriptions()
         DispatchQueue.global().async {
             subscribes.forEach{ value in
                 SubscribeManager.updateServerFromSubscription(value)
             }
             while queryCount < subscribes.count {
-                usleep(100000)
+                usleep(1000000)
             }
             DispatchQueue.main.async {
                 ServerGroupManager.serverGroups.removeAll(where: {$0.isSubscription})
