@@ -2,9 +2,13 @@
 
 This project just toy for self.
 
-`Current version is 2.2.4`
+`Current version is 2.2.5`
 
 ## Release Note
+
+### 2.2.5
+
+- fix: missing lib
 
 ### 2.2.4
 
