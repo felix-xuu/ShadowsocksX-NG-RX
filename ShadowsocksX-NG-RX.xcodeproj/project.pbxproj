@@ -58,6 +58,8 @@
 		DC90A2C92302CC920000509D /* ServerGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC90A2C82302CC920000509D /* ServerGroup.swift */; };
 		DC90A2CB2302CD2E0000509D /* ServerGroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC90A2CA2302CD2E0000509D /* ServerGroupManager.swift */; };
 		DCA7BB2B23070515008F2F87 /* LoadBalancePreferenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA7BB2A23070515008F2F87 /* LoadBalancePreferenceController.swift */; };
+		DCB8A48525F90E7800188707 /* libmbedcrypto.6.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DCB8A48125F90E3200188707 /* libmbedcrypto.6.dylib */; };
+		DCB8A48C25F90F2600188707 /* libmbedcrypto.2.25.0.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DCB8A48A25F90F1400188707 /* libmbedcrypto.2.25.0.dylib */; };
 		DCCA780C22FC4BD8009E5ECC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA780B22FC4BD8009E5ECC /* AppDelegate.swift */; };
 		DCCA781022FC4BD9009E5ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCCA780F22FC4BD9009E5ECC /* Assets.xcassets */; };
 		DCCA781322FC4BD9009E5ECC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCCA781122FC4BD9009E5ECC /* Main.storyboard */; };
@@ -146,6 +148,8 @@
 		DC90A2C82302CC920000509D /* ServerGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerGroup.swift; sourceTree = "<group>"; };
 		DC90A2CA2302CD2E0000509D /* ServerGroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerGroupManager.swift; sourceTree = "<group>"; };
 		DCA7BB2A23070515008F2F87 /* LoadBalancePreferenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadBalancePreferenceController.swift; sourceTree = "<group>"; };
+		DCB8A48125F90E3200188707 /* libmbedcrypto.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmbedcrypto.6.dylib; sourceTree = "<group>"; };
+		DCB8A48A25F90F1400188707 /* libmbedcrypto.2.25.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmbedcrypto.2.25.0.dylib; sourceTree = "<group>"; };
 		DCCA780922FC4BD8009E5ECC /* LaunchHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LaunchHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCCA780B22FC4BD8009E5ECC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCCA780F22FC4BD9009E5ECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -203,6 +207,8 @@
 				DC5159E22577716D0007737C /* killPing.sh */,
 				DC5159E12577716D0007737C /* networksetup.sh */,
 				DC3BE8CD2309863000F7332D /* clean_logs.sh */,
+				DCB8A48125F90E3200188707 /* libmbedcrypto.6.dylib */,
+				DCB8A48A25F90F1400188707 /* libmbedcrypto.2.25.0.dylib */,
 				DCF983D9257CB95C002FFF79 /* libmbedcrypto.5.dylib */,
 				DC5159E02577716D0007737C /* libmbedcrypto.2.24.0.dylib */,
 				DCD0B28C22FC952D00B9A47E /* libmbedcrypto.2.16.2.dylib */,
@@ -408,6 +414,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCB8A48C25F90F2600188707 /* libmbedcrypto.2.25.0.dylib in Resources */,
+				DCB8A48525F90E7800188707 /* libmbedcrypto.6.dylib in Resources */,
 				DCF983DA257CB95C002FFF79 /* libmbedcrypto.5.dylib in Resources */,
 				DCF983D7257CB90E002FFF79 /* libmbedcrypto.2.24.0.dylib in Resources */,
 				DCF983D8257CB90E002FFF79 /* libmbedcrypto.2.16.2.dylib in Resources */,
