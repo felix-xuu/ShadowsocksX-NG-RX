@@ -4,8 +4,7 @@
 "Agent Mode" = "Agent Mode";
 "Global Mode" = "Global Mode";
 "Manual Mode" = "Manual Mode";
-"Acl Direct" = "ACL Direct";
-"Acl Proxy" = "ACL Proxy";
+"Acl Mode" = "ACL Mode";
 
 "Servers" = "Servers";
 "Edit Subscriptions" = "Edit Subscriptions";
@@ -119,3 +118,6 @@
 "Enable" = "Enable";
 "split with comma or newline" = "split with comma or newline";
 "Invalid IP Address" = "Invalid IP Address";
+
+"Bypass Rules" = "Bypass Rules";
+"Rule Preference" = "Rule Preference";
