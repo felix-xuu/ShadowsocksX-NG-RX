@@ -2,9 +2,13 @@
 
 This project just toy for self.
 
-`Current version is 2.2.5`
+`Current version is 2.2.6`
 
 ## Release Note
+
+### 2.2.6
+
+- chore: upgrade
 
 ### 2.2.5
 
