@@ -16,3 +16,4 @@ forward-socks5 / {socks5} .
 forward         192.168.*.*/     .
 forward         10.*.*.*/        .
 forward         127.*.*.*/       .
+forward         localhost/       .
