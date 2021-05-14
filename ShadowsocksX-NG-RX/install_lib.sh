@@ -19,6 +19,3 @@ cp -f libmbedcrypto.2.24.0.dylib "$HOME/Library/Application Support/ShadowsocksX
 cp -f libmbedcrypto.5.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
 cp -f libmbedcrypto.2.25.0.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
 cp -f libmbedcrypto.6.dylib "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
-
-cp -f chn.acl "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"
-cp -f gfwlist.acl "$HOME/Library/Application Support/ShadowsocksX-NG-RX/"

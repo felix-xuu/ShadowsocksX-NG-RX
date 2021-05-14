@@ -66,14 +66,14 @@ func setupProxy() {
         defaults.bool(forKey: UserKeys.FollowGlobal) ? enableGlobalProxy() : disableProxy()
     } else {
         StopHaproxy()
-        if [UserKeys.Mode_AclProxy, UserKeys.Mode_AclDirect].contains(mode) {
+        if UserKeys.Mode_AclMode == mode {
             generateSSLocalLauchAgentPlist()
         }
         if ServerProfileManager.activeProfile != nil {
             writeSSLocalConfFile(ServerProfileManager.activeProfile!.toJsonConfig())
             ReloadConfSSLocal()
         }
-        [UserKeys.Mode_Global, UserKeys.Mode_AclProxy, UserKeys.Mode_AclDirect].contains(mode) ? enableGlobalProxy() : disableProxy()
+        [UserKeys.Mode_Global, UserKeys.Mode_AclMode].contains(mode) ? enableGlobalProxy() : disableProxy()
     }
     if defaults.bool(forKey: UserKeys.HTTPOn) {
         writePrivoxyConfFile()

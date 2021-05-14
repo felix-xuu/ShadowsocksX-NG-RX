@@ -46,7 +46,9 @@ class UserKeys: NSObject {
     
     public static let Mode_Manual = "manual"
     public static let Mode_Global = "global"
-    public static let Mode_AclDirect = "aclDirect"
-    public static let Mode_AclProxy = "aclProxy"
+    public static let Mode_AclMode = "aclProxy"
     public static let Mode_Loadbalance = "loadbalance"
+    
+    public static let BypassRules = "rule.bypass"
+    public static let BypassRulesText = "rule.bypass.text"
 }

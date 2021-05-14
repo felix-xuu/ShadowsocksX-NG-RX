@@ -13,7 +13,6 @@
 		086A31451F1AF797004C7285 /* SubscribePreferenceWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086A31471F1AF797004C7285 /* SubscribePreferenceWindowController.xib */; };
 		0877D6571EF1E82400126865 /* SubscribePreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877D6551EF1E82400126865 /* SubscribePreferenceWindowController.swift */; };
 		08F162BE1EBEDF0100C52869 /* chn.acl in Resources */ = {isa = PBXBuildFile; fileRef = 08F162BD1EBEDF0100C52869 /* chn.acl */; };
-		08F162C21EBEEC0F00C52869 /* gfwlist.acl in Resources */ = {isa = PBXBuildFile; fileRef = 08F162C11EBEEC0F00C52869 /* gfwlist.acl */; };
 		9B07EFA71D048BBB0052D9DF /* ss-local in Resources */ = {isa = PBXBuildFile; fileRef = 9B07EFA61D048BBB0052D9DF /* ss-local */; };
 		9B0BFFE91D0460A70040E62B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0BFFE81D0460A70040E62B /* AppDelegate.swift */; };
 		9B0BFFEB1D0460A70040E62B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B0BFFEA1D0460A70040E62B /* Assets.xcassets */; };
@@ -68,6 +67,9 @@
 		DCD0B28622FC901800B9A47E /* libcares.2.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DCD0B28022FC900700B9A47E /* libcares.2.dylib */; };
 		DCD0B28722FC901800B9A47E /* libev.4.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DCD0B28122FC900800B9A47E /* libev.4.dylib */; };
 		DCD0B28822FC901800B9A47E /* libmbedcrypto.3.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DCD0B28222FC900800B9A47E /* libmbedcrypto.3.dylib */; };
+		DCE00DA5262ABC1F00624E89 /* RuleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE00DA4262ABC1F00624E89 /* RuleController.swift */; };
+		DCE00DA9262ABC6300624E89 /* RuleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCE00DA8262ABC6300624E89 /* RuleController.xib */; };
+		DCE00DAD262AD30E00624E89 /* RuleHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE00DAC262AD30E00624E89 /* RuleHandler.swift */; };
 		DCF8F58A22F4AFAB00636EF1 /* UserKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8F58922F4AFAB00636EF1 /* UserKeys.swift */; };
 		DCF983D7257CB90E002FFF79 /* libmbedcrypto.2.24.0.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DC5159E02577716D0007737C /* libmbedcrypto.2.24.0.dylib */; };
 		DCF983D8257CB90E002FFF79 /* libmbedcrypto.2.16.2.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DCD0B28C22FC952D00B9A47E /* libmbedcrypto.2.16.2.dylib */; };
@@ -94,7 +96,6 @@
 		08635C761EF750FA00F1D25E /* SubscribeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribeManager.swift; sourceTree = "<group>"; };
 		0877D6551EF1E82400126865 /* SubscribePreferenceWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribePreferenceWindowController.swift; sourceTree = "<group>"; };
 		08F162BD1EBEDF0100C52869 /* chn.acl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chn.acl; sourceTree = "<group>"; };
-		08F162C11EBEEC0F00C52869 /* gfwlist.acl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gfwlist.acl; sourceTree = "<group>"; };
 		18BDCDD91C3E0BC968A1835A /* Pods-ShadowsocksX-NG-RX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShadowsocksX-NG-RX.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShadowsocksX-NG-RX/Pods-ShadowsocksX-NG-RX.release.xcconfig"; sourceTree = "<group>"; };
 		4A6D9D671CD4564500F85A9B /* Pods-ShadowsocksX-NG-RX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShadowsocksX-NG-RX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShadowsocksX-NG-RX/Pods-ShadowsocksX-NG-RX.debug.xcconfig"; sourceTree = "<group>"; };
 		880C68997DA78C41BEF1D115 /* Pods_ShadowsocksX_NG_RX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShadowsocksX_NG_RX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +162,9 @@
 		DCD0B28122FC900800B9A47E /* libev.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libev.4.dylib; sourceTree = "<group>"; };
 		DCD0B28222FC900800B9A47E /* libmbedcrypto.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmbedcrypto.3.dylib; sourceTree = "<group>"; };
 		DCD0B28C22FC952D00B9A47E /* libmbedcrypto.2.16.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmbedcrypto.2.16.2.dylib; sourceTree = "<group>"; };
+		DCE00DA4262ABC1F00624E89 /* RuleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleController.swift; sourceTree = "<group>"; };
+		DCE00DA8262ABC6300624E89 /* RuleController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RuleController.xib; sourceTree = "<group>"; };
+		DCE00DAC262AD30E00624E89 /* RuleHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleHandler.swift; sourceTree = "<group>"; };
 		DCF8F58822F4AEC500636EF1 /* ShadowsocksX-NG-RX-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShadowsocksX-NG-RX-Bridging-Header.h"; sourceTree = "<group>"; };
 		DCF8F58922F4AFAB00636EF1 /* UserKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserKeys.swift; sourceTree = "<group>"; };
 		DCF983D9257CB95C002FFF79 /* libmbedcrypto.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmbedcrypto.5.dylib; sourceTree = "<group>"; };
@@ -224,7 +228,6 @@
 				DC5496962306DBA600EB1968 /* haproxy.cfg.example */,
 				C6D429981DA76FBC002A5711 /* privoxy.config.example */,
 				08F162BD1EBEDF0100C52869 /* chn.acl */,
-				08F162C11EBEEC0F00C52869 /* gfwlist.acl */,
 			);
 			name = "Support Files";
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				083BF8341D82742200831C68 /* NetWorkMonitor.swift */,
 				083BF8351D82742200831C68 /* PingServer.swift */,
 				9B3FFF131D0705810019A709 /* Notifications.swift */,
+				DCE00DAC262AD30E00624E89 /* RuleHandler.swift */,
 				9B3FFF0C1D05FEB30019A709 /* Utils.swift */,
 				DC8FFD702340B77E00C902B1 /* Tools.swift */,
 				DCF8F58922F4AFAB00636EF1 /* UserKeys.swift */,
@@ -283,6 +287,8 @@
 		9B3FFF0B1D05D8B80019A709 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				DCE00DA4262ABC1F00624E89 /* RuleController.swift */,
+				DCE00DA8262ABC6300624E89 /* RuleController.xib */,
 				DC5159DA257771490007737C /* DNSPreferencesController.swift */,
 				DC5159CA257771210007737C /* DNSPreferencesController.xib */,
 				DCA7BB2A23070515008F2F87 /* LoadBalancePreferenceController.swift */,
@@ -437,8 +443,8 @@
 				DC053F1B234C8A5C00491A50 /* stop.sh in Resources */,
 				C6D429941DA75988002A5711 /* privoxy in Resources */,
 				C6D429991DA76FBC002A5711 /* privoxy.config.example in Resources */,
+				DCE00DA9262ABC6300624E89 /* RuleController.xib in Resources */,
 				DC053F1A234C8A5C00491A50 /* reload_conf.sh in Resources */,
-				08F162C21EBEEC0F00C52869 /* gfwlist.acl in Resources */,
 				DC053F19234C8A5C00491A50 /* start.sh in Resources */,
 				9B0BFFEB1D0460A70040E62B /* Assets.xcassets in Resources */,
 				9B2491B71D0ACC3E003BBECC /* AdvPreferencesWindowController.xib in Resources */,
@@ -509,8 +515,10 @@
 				9B3FFF321D08CEE40019A709 /* SWBQRCodeWindowController.m in Sources */,
 				DCA7BB2B23070515008F2F87 /* LoadBalancePreferenceController.swift in Sources */,
 				DC3BE8CC230941D200F7332D /* LoadBalance.swift in Sources */,
+				DCE00DA5262ABC1F00624E89 /* RuleController.swift in Sources */,
 				DCF8F58A22F4AFAB00636EF1 /* UserKeys.swift in Sources */,
 				DC5159DC257771490007737C /* DNSPreferencesController.swift in Sources */,
+				DCE00DAD262AD30E00624E89 /* RuleHandler.swift in Sources */,
 				DC90A2CB2302CD2E0000509D /* ServerGroupManager.swift in Sources */,
 				083BF8371D82742200831C68 /* PingServer.swift in Sources */,
 				083BF8361D82742200831C68 /* NetWorkMonitor.swift in Sources */,

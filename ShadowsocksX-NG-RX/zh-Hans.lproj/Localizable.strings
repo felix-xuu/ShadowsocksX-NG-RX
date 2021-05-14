@@ -4,8 +4,7 @@
 "Agent Mode" = "代理模式";
 "Global Mode" = "全局模式";
 "Manual Mode" = "手动模式";
-"Acl Direct" = "ACL直连";
-"Acl Proxy" = "ACL代理";
+"Acl Mode" = "ACL模式";
 
 "Servers" = "服务器";
 "Edit Subscriptions" = "编辑订阅";
@@ -119,3 +118,6 @@
 "Enable" = "启用";
 "split with comma or newline" = "使用逗号或换行分隔";
 "Invalid IP Address" = "无效的IP地址";
+
+"Bypass Rules" = "直连规则";
+"Rule Preference" = "规则设置";

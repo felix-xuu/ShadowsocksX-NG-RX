@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     var dnsPreferencesWinCtrl: DNSPreferencesController!
     var subscribePreferenceWinCtrl: SubscribePreferenceWindowController!
     var loadBalancePreferenceController: LoadBalancePreferenceController!
+    var rulePreferenceController: RuleController!
     
     var statusItem: NSStatusItem!
     var keys: [String : String] = [:]
@@ -416,6 +417,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         loadBalancePreferenceController.showWindow(self)
         NSApp.activate(ignoringOtherApps: true)
         loadBalancePreferenceController.window?.makeKeyAndOrderFront(self)
+    }
+    
+    @IBAction func rulePreference(_ sender: AnyObject) {
+        rulePreferenceController = RuleController(windowNibName: "RuleController")
+        rulePreferenceController.showWindow(self)
+        NSApp.activate(ignoringOtherApps: true)
+        rulePreferenceController.window?.makeKeyAndOrderFront(self)
     }
     
     @IBAction func showSpeedTap(_ sender: NSMenuItem) {

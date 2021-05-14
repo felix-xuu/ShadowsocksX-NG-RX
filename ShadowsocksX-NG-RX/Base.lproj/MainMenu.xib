@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -43,11 +43,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <accessibility identifier="manual"/>
                             </menuItem>
-                            <menuItem title="Acl Direct" id="hGB-Ij-5ja">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <accessibility identifier="aclDirect"/>
-                            </menuItem>
-                            <menuItem title="Acl Proxy" id="Z0g-Eb-2gr">
+                            <menuItem title="Acl Mode" id="Z0g-Eb-2gr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <accessibility identifier="aclProxy"/>
                             </menuItem>
@@ -118,10 +114,16 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Preference" id="YZp-bf-L40">
                         <items>
-                            <menuItem title="Load Balance Preference" id="CZ1-6S-0Fo">
+                            <menuItem title="Rule Preference" id="CZ1-6S-0Fo">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="loadbalancePreference:" target="Voe-Tx-rLC" id="1Db-TM-d6t"/>
+                                    <action selector="rulePreference:" target="Voe-Tx-rLC" id="RmP-m1-DcN"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Load Balance Preference" id="zdS-zI-p6E">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="loadbalancePreference:" target="Voe-Tx-rLC" id="NrO-j8-cnP"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="DNS Preference" id="sbx-yz-3lO" userLabel="DNS Preference">
