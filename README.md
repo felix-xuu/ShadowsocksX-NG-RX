@@ -2,9 +2,19 @@
 
 This project just toy for self.
 
-`Current version is 2.2.6`
+`Current version is 2.3.1`
 
 ## Release Note
+
+### 2.3.1
+
+- http proxy bypass localhost address
+- chore: upgrade
+
+### 2.3.0
+
+- use acl mode instead of acl direct and acl proxy, this mode use proxy by default but have inner passby rules
+- you can add custom bypass rules at rule perference
 
 ### 2.2.6
 
