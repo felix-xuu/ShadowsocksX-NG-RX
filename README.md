@@ -6,6 +6,12 @@ This project just toy for self.
 
 ## Release Note
 
+### 2.3.2
+
+- DNS setting improve, can use # to comment now
+- move httping menu
+- chore: upgrade
+
 ### 2.3.1
 
 - http proxy bypass localhost address
