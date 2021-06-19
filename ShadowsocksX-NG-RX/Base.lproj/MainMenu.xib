@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -95,6 +95,12 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="hW7-qK-7dd"/>
+                            <menuItem title="Ping Servers" id="zfR-Jt-GmS">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="doPingTest:" target="Voe-Tx-rLC" id="rRs-7S-tvD"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Server Preference" id="M5r-E7-44f">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -103,12 +109,6 @@
                             </menuItem>
                         </items>
                     </menu>
-                </menuItem>
-                <menuItem title="Ping Servers" id="zfR-Jt-GmS">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="doPingTest:" target="Voe-Tx-rLC" id="rRs-7S-tvD"/>
-                    </connections>
                 </menuItem>
                 <menuItem title="Preference" id="diI-fB-Rss">
                     <modifierMask key="keyEquivalentModifierMask"/>

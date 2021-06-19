@@ -13,7 +13,7 @@
 "Scan QR Code" = "扫描二维码";
 "Import From Pasteboard" = "剪切板导入";
 "Server Preference" = "服务器设置";
-"Ping Servers" = "服务器延迟测试";
+"Ping Servers" = "延迟测试";
 "Load Balance" = "负载均衡";
 "Load Balance Preference" = "负载均衡设置";
 
