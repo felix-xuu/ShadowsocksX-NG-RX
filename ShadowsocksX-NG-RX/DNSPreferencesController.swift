@@ -62,7 +62,7 @@ class DNSPreferencesController: NSWindowController {
         let serverArr = dnsServersView.string.components(separatedBy: [",", "\n"])
         for item in serverArr {
             let str = item.trimmingCharacters(in: .whitespacesAndNewlines)
-            if str != "" && !validateIpAddress(ipToValidate: str) {
+            if str != "" && !str.starts(with: "#") && !validateIpAddress(ipToValidate: str) {
                 let alert = NSAlert.init()
                 alert.alertStyle = NSAlert.Style.warning
                 alert.addButton(withTitle: "OK".localized)

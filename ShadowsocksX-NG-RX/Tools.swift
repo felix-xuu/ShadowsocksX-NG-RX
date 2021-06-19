@@ -145,22 +145,21 @@ func ParseSSRURL(urlString: String) -> [String : AnyObject] {
 }
 
 func DNSServersChange() {
-    if !UserDefaults.standard.bool(forKey: UserKeys.DNSEnable) {
-        return
-    }
     var args = "Empty"
-    var servers: [String] = []
-    if let dnsServers = UserDefaults.standard.string(forKey: UserKeys.DNSServers) {
-        let serverArr = dnsServers.components(separatedBy: [",", "\n"])
-        for item in serverArr {
-            let str = item.trimmingCharacters(in: .whitespaces)
-            if str != "" && validateIpAddress(ipToValidate: str) {
-                servers.append(str)
+    if UserDefaults.standard.bool(forKey: UserKeys.DNSEnable) {
+        var servers: [String] = []
+        if let dnsServers = UserDefaults.standard.string(forKey: UserKeys.DNSServers) {
+            let serverArr = dnsServers.components(separatedBy: [",", "\n"])
+            for item in serverArr {
+                let str = item.trimmingCharacters(in: .whitespaces)
+                if str != "" && !str.starts(with: "#") && validateIpAddress(ipToValidate: str) {
+                    servers.append(str)
+                }
             }
         }
-    }
-    if servers.count > 0 {
-        args = servers.joined(separator: " ")
+        if servers.count > 0 {
+            args = servers.joined(separator: " ")
+        }
     }
     let shPath = Bundle.main.path(forResource: "networksetup", ofType: "sh")
     let task = Process.launchedProcess(launchPath: shPath!, arguments: ["-setdnsservers", args])
