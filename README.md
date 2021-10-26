@@ -2,9 +2,14 @@
 
 This project just toy for self.
 
-`Current version is 2.3.1`
+`Current version is 2.3.3`
 
 ## Release Note
+
+### 2.3.3
+
+- Adapt to Monterey
+- chore: upgrade
 
 ### 2.3.2
 
