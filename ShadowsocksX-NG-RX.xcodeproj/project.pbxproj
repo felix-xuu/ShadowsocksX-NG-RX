@@ -38,6 +38,8 @@
 		DC053F1B234C8A5C00491A50 /* stop.sh in Resources */ = {isa = PBXBuildFile; fileRef = DC053F17234C8A5C00491A50 /* stop.sh */; };
 		DC0CDC38230534AD0033CEA3 /* libsodium.23.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DC0CDC36230533D40033CEA3 /* libsodium.23.dylib */; };
 		DC0CDC3B23053A8C0033CEA3 /* libpcre.1.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DC0CDC3923053A810033CEA3 /* libpcre.1.dylib */; };
+		DC215A6927282FCC0012134E /* libmbedcrypto.2.27.0.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DC215A6527282FA20012134E /* libmbedcrypto.2.27.0.dylib */; };
+		DC215A6A27282FCC0012134E /* libmbedcrypto.7.dylib in Resources */ = {isa = PBXBuildFile; fileRef = DC215A6627282FA20012134E /* libmbedcrypto.7.dylib */; };
 		DC3BE8CC230941D200F7332D /* LoadBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3BE8CB230941D200F7332D /* LoadBalance.swift */; };
 		DC3BE8CE2309863000F7332D /* clean_logs.sh in Resources */ = {isa = PBXBuildFile; fileRef = DC3BE8CD2309863000F7332D /* clean_logs.sh */; };
 		DC5159D2257771220007737C /* DNSPreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC5159CA257771210007737C /* DNSPreferencesController.xib */; };
@@ -129,6 +131,8 @@
 		DC0674E122EEA2AB0082FA8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AdvPreferencesWindowController.xib; sourceTree = "<group>"; };
 		DC0CDC36230533D40033CEA3 /* libsodium.23.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libsodium.23.dylib; sourceTree = "<group>"; };
 		DC0CDC3923053A810033CEA3 /* libpcre.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libpcre.1.dylib; sourceTree = "<group>"; };
+		DC215A6527282FA20012134E /* libmbedcrypto.2.27.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmbedcrypto.2.27.0.dylib; sourceTree = "<group>"; };
+		DC215A6627282FA20012134E /* libmbedcrypto.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libmbedcrypto.7.dylib; sourceTree = "<group>"; };
 		DC3BE8CB230941D200F7332D /* LoadBalance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadBalance.swift; sourceTree = "<group>"; };
 		DC3BE8CD2309863000F7332D /* clean_logs.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = clean_logs.sh; sourceTree = "<group>"; };
 		DC5159CB257771210007737C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DNSPreferencesController.xib; sourceTree = "<group>"; };
@@ -214,6 +218,8 @@
 				DCB8A48125F90E3200188707 /* libmbedcrypto.6.dylib */,
 				DCB8A48A25F90F1400188707 /* libmbedcrypto.2.25.0.dylib */,
 				DCF983D9257CB95C002FFF79 /* libmbedcrypto.5.dylib */,
+				DC215A6527282FA20012134E /* libmbedcrypto.2.27.0.dylib */,
+				DC215A6627282FA20012134E /* libmbedcrypto.7.dylib */,
 				DC5159E02577716D0007737C /* libmbedcrypto.2.24.0.dylib */,
 				DCD0B28C22FC952D00B9A47E /* libmbedcrypto.2.16.2.dylib */,
 				DC0CDC3923053A810033CEA3 /* libpcre.1.dylib */,
@@ -420,6 +426,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC215A6927282FCC0012134E /* libmbedcrypto.2.27.0.dylib in Resources */,
+				DC215A6A27282FCC0012134E /* libmbedcrypto.7.dylib in Resources */,
 				DCB8A48C25F90F2600188707 /* libmbedcrypto.2.25.0.dylib in Resources */,
 				DCB8A48525F90E7800188707 /* libmbedcrypto.6.dylib in Resources */,
 				DCF983DA257CB95C002FFF79 /* libmbedcrypto.5.dylib in Resources */,
