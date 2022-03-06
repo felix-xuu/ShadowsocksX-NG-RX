@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -177,7 +177,7 @@
                             <menuItem title="Check for update" id="tfD-Hg-2QB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="checkForUpdates:" target="XvM-r9-8RE" id="pQR-ju-XW9"/>
+                                    <action selector="checkForUpdates:" target="gWl-vG-kPP" id="XpT-y1-DQ8"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Show Logs" id="Jfy-sf-Fhl">
@@ -204,6 +204,6 @@
             </items>
             <point key="canvasLocation" x="-26" y="106"/>
         </menu>
-        <customObject id="XvM-r9-8RE" customClass="SUUpdater"/>
+        <customObject id="gWl-vG-kPP" customClass="SPUStandardUpdaterController"/>
     </objects>
 </document>
