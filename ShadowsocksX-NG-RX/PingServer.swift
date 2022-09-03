@@ -196,7 +196,6 @@ class PingServers:NSObject {
     func ipLocation(url: String) -> String? {
         let defaults = UserDefaults.standard
         let op = runCommand(cmd: "/usr/bin/curl", args: "-m", "5", "--socks5", defaults.string(forKey: UserKeys.Socks5_ListenAddress)!+":"+defaults.string(forKey: UserKeys.Socks5_ListenPort)!, url).output.joined()
-        print(op)
         var location: String?
         if let json = try? JSONSerialization.jsonObject(with: Data(op.utf8), options: []) as? [String:Any] {
             if let city = json["city"] as? String {
