@@ -74,11 +74,11 @@ class RuleController: NSWindowController {
                 validRules.append(str)
             }
         }
-        writeRules(rules: validRules)
         let defaults = UserDefaults.standard
         defaults.set(rulesView.string, forKey: UserKeys.BypassRulesText)
         defaults.set(validRules, forKey: UserKeys.BypassRules)
         defaults.synchronize()
+        writeRules()
         ReloadConfSSLocal()
         window?.performClose(self)
     }

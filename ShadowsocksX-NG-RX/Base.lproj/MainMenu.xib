@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -114,10 +114,16 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Preference" id="YZp-bf-L40">
                         <items>
-                            <menuItem title="Rule Preference" id="CZ1-6S-0Fo">
+                            <menuItem title="Update ACL" id="CZ1-6S-0Fo">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="rulePreference:" target="Voe-Tx-rLC" id="RmP-m1-DcN"/>
+                                    <action selector="updateACL:" target="Voe-Tx-rLC" id="Yuy-6z-K2U"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Rule Preference" id="chJ-fc-9E1">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="rulePreference:" target="Voe-Tx-rLC" id="FVZ-2w-j4p"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Load Balance Preference" id="zdS-zI-p6E">

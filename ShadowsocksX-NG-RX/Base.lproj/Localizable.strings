@@ -121,3 +121,8 @@
 
 "Bypass Rules" = "Bypass Rules";
 "Rule Preference" = "Rule Preference";
+"Update ACL" = "Update ACL File";
+
+"ACL Update Failed Title" = "ACL file update failed";
+"ACL Update Succeed Title" = "ACL file update succeed";
+"ACL is Updating Title" = "ACL file is updating";

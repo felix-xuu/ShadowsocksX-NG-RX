@@ -668,5 +668,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         signal(SIGPIPE, signalExceptionHandler)
         signal(SIGTRAP, signalExceptionHandler)
     }
+    
+    @IBAction func updateACL(_ sender: NSMenuItem) {
+        writeRules(url: "https://raw.githubusercontent.com/Hackl0us/GeoIP2-CN/release/CN-ip-cidr.txt")
+    }
 }
 

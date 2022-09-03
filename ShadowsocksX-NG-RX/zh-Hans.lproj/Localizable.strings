@@ -121,3 +121,8 @@
 
 "Bypass Rules" = "直连规则";
 "Rule Preference" = "规则设置";
+"Update ACL" = "更新ACL文件";
+
+"ACL Update Failed Title" = "ACL文件更新失败";
+"ACL Update Succeed Title" = "ACL文件更新成功";
+"ACL is Updating Title" = "ACL文件正在更新";

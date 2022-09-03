@@ -70,15 +70,14 @@ func generateSSLocalLauchAgentPlist() {
     if enableVerboseMode {
         arguments.append("-v")
     }
-    var ACLPath: String?
+
     if enabeledMode == UserKeys.Mode_AclMode {
-        writeRules(rules: defaults.stringArray(forKey: UserKeys.BypassRules) ?? [])
-        ACLPath = NSHomeDirectory() + APP_SUPPORT_DIR + "chn.acl"
-    }
-    
-    if ACLPath != nil {
+        let ACLPath = NSHomeDirectory() + APP_SUPPORT_DIR + "chn.acl"
+        if !fileMgr.fileExists(atPath: ACLPath) {
+            try! fileMgr.copyItem(atPath: Bundle.main.path(forResource: "chn", ofType: "acl")!, toPath: ACLPath)
+        }
         arguments.append("--acl")
-        arguments.append(ACLPath!)
+        arguments.append(ACLPath)
     }
     
     let dict: NSMutableDictionary = [
