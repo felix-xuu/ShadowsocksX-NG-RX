@@ -586,15 +586,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                     }
                 }
             }
-            let separator = NSMenuItem.separator()
-            separator.setAccessibilityIdentifier("active")
-            statusMenu!.insertItem(separator, at: 1)
-            statusMenu!.insertItem(withTitle: "Active Group: ".localized + ServerGroupManager.getServerGroupByGroupId(profile.groupId)!.groupName, action: nil, keyEquivalent: "", at: 2).setAccessibilityIdentifier("active")
-            statusMenu!.insertItem(withTitle: "Active Node: ".localized + (ServerGroupManager.getServerGroupByGroupId(profile.groupId)?.serverProfiles.first(where: {$0.getValidId() == profile.getValidId()})!.titleForActive())!, action: nil, keyEquivalent: "", at: 3).setAccessibilityIdentifier("active")
-            DispatchQueue.global().async {
-                let location = PingServers.instance.getLocation()
-                let latency = PingServers.instance.pingCurrent()
-                self.statusMenu!.insertItem(withTitle: "\("Actually Location: ".localized)\(location)   \("Latency: ".localized)\(latency ?? "-")ms", action: #selector(AppDelegate.refreshLocationAndLatency), keyEquivalent: "", at: 4).setAccessibilityIdentifier("active")
+            let activeGroupName = ServerGroupManager.getServerGroupByGroupId(profile.groupId)?.groupName
+            let activeServerName = (ServerGroupManager.getServerGroupByGroupId(profile.groupId)?.serverProfiles.first(where: {$0.getValidId() == profile.getValidId()})?.titleForActive())
+            if activeGroupName != nil && activeServerName != nil {
+                let separator = NSMenuItem.separator()
+                separator.setAccessibilityIdentifier("active")
+                statusMenu!.insertItem(separator, at: 1)
+                statusMenu!.insertItem(withTitle: "Active Group: ".localized + ServerGroupManager.getServerGroupByGroupId(profile.groupId)!.groupName, action: nil, keyEquivalent: "", at: 2).setAccessibilityIdentifier("active")
+                statusMenu!.insertItem(withTitle: "Active Node: ".localized + (ServerGroupManager.getServerGroupByGroupId(profile.groupId)?.serverProfiles.first(where: {$0.getValidId() == profile.getValidId()})!.titleForActive())!, action: nil, keyEquivalent: "", at: 3).setAccessibilityIdentifier("active")
+                DispatchQueue.global().async {
+                    let location = PingServers.instance.getLocation()
+                    let latency = PingServers.instance.pingCurrent()
+                    self.statusMenu!.insertItem(withTitle: "\("Actually Location: ".localized)\(location)   \("Latency: ".localized)\(latency ?? "-")ms", action: #selector(AppDelegate.refreshLocationAndLatency), keyEquivalent: "", at: 4).setAccessibilityIdentifier("active")
+                }
             }
         }
     }
