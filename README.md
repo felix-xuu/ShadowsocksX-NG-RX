@@ -2,9 +2,14 @@
 
 This project just toy for self.
 
-`Current version is 2.3.4`
+`Current version is 2.3.5`
 
 ## Release Note
+
+### 2.3.5
+
+- add acl file update
+- chore: upgrade
 
 ### 2.3.4
 
