@@ -595,16 +595,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
                 statusMenu!.insertItem(withTitle: "Active Group: ".localized + ServerGroupManager.getServerGroupByGroupId(profile.groupId)!.groupName, action: nil, keyEquivalent: "", at: 2).setAccessibilityIdentifier("active")
                 statusMenu!.insertItem(withTitle: "Active Node: ".localized + (ServerGroupManager.getServerGroupByGroupId(profile.groupId)?.serverProfiles.first(where: {$0.getValidId() == profile.getValidId()})!.titleForActive())!, action: nil, keyEquivalent: "", at: 3).setAccessibilityIdentifier("active")
                 DispatchQueue.global().async {
-                    var ps: String?
+                    var latency: String?
                     for _ in 1...5 {
                         usleep(useconds_t(1000 * 1000))
-                        ps = PingServers.instance.pingCurrent()
-                        if ps != nil {
+                        latency = PingServers.instance.pingCurrent()
+                        if latency != nil {
                             break
                         }
                     }
                     let location = PingServers.instance.getLocation()
-                    let latency = PingServers.instance.pingCurrent()
                     self.statusMenu!.insertItem(withTitle: "\("Actually Location: ".localized)\(location)   \("Latency: ".localized)\(latency ?? "-")ms", action: #selector(AppDelegate.refreshLocationAndLatency), keyEquivalent: "", at: 4).setAccessibilityIdentifier("active")
                 }
             }
