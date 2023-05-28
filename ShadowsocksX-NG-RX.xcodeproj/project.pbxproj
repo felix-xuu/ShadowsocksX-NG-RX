@@ -401,7 +401,7 @@
 				};
 			};
 			buildConfigurationList = 9B0BFFE01D0460A70040E62B /* Build configuration list for PBXProject "ShadowsocksX-NG-RX" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -784,7 +784,7 @@
 					"$(PROJECT_DIR)/ShadowsocksX-NG-RX",
 					"$(PROJECT_DIR)",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.felix.xu.ShadowsocksX-NG-RX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShadowsocksX-NG-RX/ShadowsocksX-NG-RX-Bridging-Header.h";
@@ -814,7 +814,7 @@
 					"$(PROJECT_DIR)/ShadowsocksX-NG-RX",
 					"$(PROJECT_DIR)",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.felix.xu.ShadowsocksX-NG-RX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ShadowsocksX-NG-RX/ShadowsocksX-NG-RX-Bridging-Header.h";

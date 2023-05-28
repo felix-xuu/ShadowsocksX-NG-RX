@@ -634,7 +634,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         }
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .right
-        let fontAttributes = [NSAttributedString.Key.font: NSFont.systemFont(ofSize:CGFloat(9)), NSAttributedString.Key.paragraphStyle: paragraph, NSAttributedString.Key.baselineOffset: NSNumber(-5.6)]
+        paragraph.maximumLineHeight = 11
+        let fontAttributes = [NSAttributedString.Key.font: NSFont.systemFont(ofSize:CGFloat(9)), NSAttributedString.Key.paragraphStyle: paragraph, NSAttributedString.Key.baselineOffset: NSNumber(-5)]
         statusItem.button?.attributedTitle = NSAttributedString(string: "\n\(outbound) ↑\n\(inbound) ↓", attributes: fontAttributes)
     }
     
