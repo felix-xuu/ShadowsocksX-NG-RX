@@ -6,6 +6,10 @@ This project just toy for self.
 
 ## Release Note
 
+### 2.3.6
+
+- chore: upgrade
+
 ### 2.3.5
 
 - add acl file update
